@@ -65,6 +65,10 @@ impl SearchProvider for PhetProvider {
             .and_then(|i| i.as_ref().map(|c| c.updated_at.clone()))
     }
 
+    async fn load_index(&self, ctx: &SearchContext) -> Result<Option<common::CachedIndex>> {
+        Ok(Some(Self::fetch(ctx).await?))
+    }
+
     async fn search(
         &self,
         ctx: &SearchContext,

@@ -28,22 +28,18 @@ export default function App() {
   }, [loadSettings, loadFavorites, loadHistory]);
 
   useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        const win = getCurrentWebviewWindow();
-        if (mounted) setIsWorkspace(win.label.startsWith("workspace-"));
-      } catch {
-        if (mounted) {
-          setIsWorkspace(
-            new URLSearchParams(window.location.search).get("route") === "workspace"
-          );
-        }
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
+    // Web build: the workspace is a separate tab opened with ?workspace=1.
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("workspace") === "1" || params.get("route") === "workspace") {
+      setIsWorkspace(true);
+      return;
+    }
+    // Desktop build: the workspace is a local window labelled workspace-*.
+    try {
+      setIsWorkspace(getCurrentWebviewWindow().label.startsWith("workspace-"));
+    } catch {
+      setIsWorkspace(false);
+    }
   }, []);
 
   useEffect(() => installShortcuts(), []);

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "mathinsight",
+    "name": "Math Insight",
+    "homepage": "https://mathinsight.org/",
+    "experimental": false,
+    "count": 447,
+    "updated_at": "2026-09-28",
+    "file": "mathinsight.json"
+  },
+  {
+    "id": "falstad",
+    "name": "Falstad",
+    "homepage": "https://falstad.com/mathphysics.html",
+    "experimental": false,
+    "count": 85,
+    "updated_at": "2026-09-28",
+    "file": "falstad.json"
+  },
+  {
+    "id": "phet",
+    "name": "PhET",
+    "homepage": "https://phet.colorado.edu/",
+    "experimental": false,
+    "count": 120,
+    "updated_at": "2026-09-28",
+    "file": "phet.json"
+  },
+  {
+    "id": "betterexplained",
+    "name": "BetterExplained",
+    "homepage": "https://betterexplained.com/",
+    "experimental": false,
+    "count": 144,
+    "updated_at": "2026-09-28",
+    "file": "betterexplained.json"
+  },
+  {
+    "id": "physicsfundamentals",
+    "name": "Physics Fundamentals",
+    "homepage": "https://physicsfundamentalsinfo.com/labs/",
+    "experimental": false,
+    "count": 134,
+    "updated_at": "2026-09-28",
+    "file": "physicsfundamentals.json"
+  },
+  {
+    "id": "physicstuff",
+    "name": "PhysicStuff",
+    "homepage": "https://physicstuff.com/lab",
+    "experimental": true,
+    "count": 52,
+    "updated_at": "2026-09-28",
+    "file": "physicstuff.json"
+  },
+  {
+    "id": "maotian",
+    "name": "猫田の物理",
+    "homepage": "https://maotian.nomaki.jp/",
+    "experimental": true,
+    "count": 93,
+    "updated_at": "2026-09-28",
+    "file": "maotian.json"
+  }
+]

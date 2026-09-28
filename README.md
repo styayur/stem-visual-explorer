@@ -10,13 +10,19 @@ a multi-pane workspace, favorites and history.
 > 这是一个“聚合搜索 + 多网页预览”的桌面客户端：同时检索多个数学/物理交互网站，
 > 把结果汇总到一个界面里，支持混合结果流、来源筛选、行内/分栏预览、多窗口、多标签、
 > 收藏、搜索历史与快捷键。它不做 AI 排序，不需要登录，也不依赖任何云端数据库。
+## Live web version
 
-> **Screenshot placeholder.** Capture the running app and save it to
-> `docs/screenshot.png`, then replace this block with:
->
-> ```markdown
-> ![STEM Visual Explorer](docs/screenshot.png)
-> ```
+A fully static build runs in the browser — no server, no API keys:
+
+**https://styayur.github.io/stem-visual-explorer/**
+
+The desktop app queries the sites live through Rust. The web version instead
+ships a pre-generated snapshot of every provider's index
+(`public/index/*.json`, ~1075 entries) and runs the same deterministic query
+parser, synonym expander and ranking algorithm in the browser, so search is
+instant and works offline after the first page load.
+
+![STEM Visual Explorer — searching “gradient” across Math Insight, Falstad, PhET, BetterExplained and more](docs/screenshot.png)
 
 ---
 
@@ -223,6 +229,10 @@ source automatically. **No frontend changes are required.**
 
 ## Installation
 
+### Use it in a browser
+
+**https://styayur.github.io/stem-visual-explorer/** — nothing to install.
+
 ### Prebuilt binaries
 
 Download the latest `stem-visual-explorer.exe` (Windows) from the
@@ -263,10 +273,40 @@ The compiled binary is written to
 
 ```bash
 npm install
-npm run tauri dev      # hot-reloading app
-npm run dev            # frontend only; runs in a browser with a small mock dataset
-npm run build          # type-check + production frontend build
+npm run tauri dev      # hot-reloading desktop app
+npm run build          # type-check + production frontend build (for Tauri)
+npm run build:web      # static web build for GitHub Pages (base = /stem-visual-explorer/)
+npm run preview -- --mode web   # serve the web build at http://localhost:4173/stem-visual-explorer/
 ```
+
+### Static index (web dataset)
+
+The web build reads `public/index/*.json` — a snapshot of every provider's local
+index — so the browser never has to call the upstream sites (which would be
+blocked by CORS). Regenerate it with:
+
+```bash
+cd src-tauri
+cargo run --no-default-features --example dump_web_index   # writes ../public/index
+```
+
+Commit the regenerated JSON to refresh the published site. The browser caches the
+indexes in `localStorage` and re-validates them whenever `updated_at` changes.
+
+### Web smoke test
+
+```bash
+python scripts/web_smoke_test.py   # via the webapp-testing with_server helper
+```
+
+It drives the real UI headlessly: searches `curl` / `旋度` / `standing wave`,
+checks `site:` filtering and the sidebar source filter, verifies Chinese synonym
+expansion, and refreshes `docs/screenshot.png`.
+
+### Deployment
+
+`.github/workflows/deploy-pages.yml` builds the site with `npm run build:web` and
+publishes it with GitHub Pages (Actions source). Every push to `main` redeploys.
 
 Rust checks:
 
@@ -295,12 +335,14 @@ cargo run --no-default-features --example probe
 through the real concurrent search pipeline and prints per-source result counts,
 so you can confirm that the adapters still parse correctly.
 
-### Mock mode
+### Running in a browser
 
-Running the frontend with plain `npm run dev` (outside Tauri) uses a small built-in
-mock result set so the UI is fully explorable without network access. In the Tauri
-app, `Settings → Mock mode` toggles this. It never fabricates results in normal
-operation — the app always talks to the real sites.
+When the frontend runs outside Tauri (`npm run dev`, or the deployed GitHub Pages
+site) it transparently switches to the **static-index backend**: search runs
+entirely client-side against the pre-generated JSON indexes, favorites/history/
+settings use `localStorage`, and “open in new window” becomes a normal browser tab.
+The desktop app keeps using the live Rust backend. Either way the search logic is
+the same deterministic algorithm — there is no mock or fabricated data.
 
 ---
 
@@ -367,6 +409,9 @@ measures.
 - **Embedded previews** can be blocked by a site's `X-Frame-Options` / CSP. The
   preview pane keeps working and always offers “Open in new window” and
   “Open in system browser” as escape hatches.
+- **The web build searches a snapshot.** `styayur.github.io/stem-visual-explorer`
+  searches the committed `public/index/*.json` (regenerate with
+  `dump_web_index`); the desktop app queries the source sites live on every search.
 - **Live per-provider progress** is shown as a single in-flight state per provider;
   the backend returns all providers' results together once the concurrent search
   completes (so results can be ranked uniformly across sources).

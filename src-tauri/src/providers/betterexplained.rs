@@ -77,6 +77,10 @@ impl SearchProvider for BetterExplainedProvider {
             .and_then(|i| i.as_ref().map(|c| c.updated_at.clone()))
     }
 
+    async fn load_index(&self, ctx: &SearchContext) -> Result<Option<common::CachedIndex>> {
+        Ok(Some(Self::fetch_archive(ctx).await?))
+    }
+
     async fn search(
         &self,
         ctx: &SearchContext,

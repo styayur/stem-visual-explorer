@@ -10,22 +10,21 @@ export default function Workspace() {
     () => localStorage.getItem("sve-workspace-notes") ?? ""
   );
   const [reload, setReload] = useState(0);
-  const [label, setLabel] = useState<string>("");
 
   useEffect(() => {
     let mounted = true;
     (async () => {
+      let label = "";
       try {
-        const win = getCurrentWebviewWindow();
-        const l = win.label;
-        setLabel(l);
-        const items = await cmd.getWorkspaceItems(l);
+        label = getCurrentWebviewWindow().label;
+      } catch {
+        label = "";
+      }
+      try {
+        const items = await cmd.getWorkspaceItems(label);
         if (mounted) setUrls(items);
       } catch {
-        // Browser fallback for `vite dev`.
-        const params = new URLSearchParams(window.location.search);
-        const raw = params.get("items");
-        if (raw) setUrls(JSON.parse(decodeURIComponent(raw)));
+        /* ignore */
       }
     })();
     return () => {
@@ -37,14 +36,7 @@ export default function Workspace() {
     localStorage.setItem("sve-workspace-notes", notes);
   }, [notes]);
 
-  const gridClass =
-    urls.length <= 1
-      ? "grid-cols-1"
-      : urls.length === 2
-        ? "grid-cols-2"
-        : urls.length === 3
-          ? "grid-cols-2"
-          : "grid-cols-2";
+  const gridClass = urls.length <= 1 ? "grid-cols-1" : "grid-cols-2";
 
   return (
     <div className="flex h-screen flex-col bg-zinc-900 text-zinc-100">
@@ -65,6 +57,12 @@ export default function Workspace() {
         >
           Open all externally
         </button>
+        <a
+          href="?"
+          className="rounded px-2 py-1 text-[12px] text-zinc-300 hover:bg-zinc-700"
+        >
+          New search
+        </a>
       </div>
 
       <div className={cn("grid min-h-0 flex-1 gap-px bg-zinc-700", gridClass)}>
@@ -97,9 +95,7 @@ function Pane({ url, index, reload }: { url: string; index: number; reload: numb
   return (
     <div className="flex min-h-0 flex-col bg-zinc-900">
       <div className="flex items-center gap-1 border-b border-zinc-800 px-2 py-1">
-        <span className="min-w-0 flex-1 truncate text-[11px] text-zinc-400">
-          {host}
-        </span>
+        <span className="min-w-0 flex-1 truncate text-[11px] text-zinc-400">{host}</span>
         <button
           type="button"
           title="Reload pane"

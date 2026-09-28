@@ -63,6 +63,13 @@ pub trait SearchProvider: Send + Sync {
         query: &NormalizedQuery,
         opts: &SearchOptions,
     ) -> Result<Vec<SearchResult>>;
+
+    /// Build the provider's local index. Used to generate the static dataset
+    /// that powers the web (GitHub Pages) build. Returns `None` for providers
+    /// that have no local index.
+    async fn load_index(&self, _ctx: &SearchContext) -> Result<Option<common::CachedIndex>> {
+        Ok(None)
+    }
 }
 
 /// Central registry. Adding a new provider is a single `.register(...)` call.
