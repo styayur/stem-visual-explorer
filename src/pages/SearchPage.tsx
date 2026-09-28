@@ -9,8 +9,10 @@ import { useSearchStore } from "../stores/searchStore";
 import { useSettingsStore } from "../stores/settingsStore";
 import { useWorkspaceStore } from "../stores/workspaceStore";
 import { cn } from "../lib/cn";
+import { useT } from "../lib/i18n";
 
 export default function SearchPage() {
+  const t = useT();
   const previewMode = useSettingsStore((s) => s.settings.preview_mode);
   const expandedTerms = useSearchStore((s) => s.expandedTerms);
   const workspaceSelected = useWorkspaceStore((s) => s.selected);
@@ -29,7 +31,7 @@ export default function SearchPage() {
           title={
             workspaceSelected.length === 0
               ? "Select results to build a workspace"
-              : `Open workspace (${workspaceSelected.length} selected)`
+              : `${t("workspace.title")} (${workspaceSelected.length})`
           }
           className={cn(
             "flex shrink-0 items-center gap-1.5 rounded-md border px-2.5 py-2 text-[12px] font-medium transition-colors",
@@ -39,7 +41,7 @@ export default function SearchPage() {
           )}
         >
           <LayoutGrid className="h-4 w-4" />
-          <span className="hidden md:inline">Workspace</span>
+          <span className="hidden md:inline">{t("workspace.title")}</span>
           {workspaceSelected.length > 0 && (
             <span className="rounded bg-indigo-500 px-1.5 text-[10px] font-bold text-white">
               {workspaceSelected.length}
@@ -51,7 +53,7 @@ export default function SearchPage() {
       {expandedTerms.length > 0 && (
         <div className="flex items-center gap-1.5 overflow-x-auto border-b border-edge-light bg-canvas-light px-3 py-1.5 dark:border-edge-dark dark:bg-canvas-dark">
           <span className="shrink-0 text-[10px] uppercase tracking-wide text-zinc-400">
-            expanded
+            {t("search.expanded")}
           </span>
           {expandedTerms.slice(0, 12).map((t) => (
             <span

@@ -1,15 +1,17 @@
 import { useSearchStore, type TypeFilter } from "../stores/searchStore";
-import { RESULT_TYPE_LABELS, RESULT_TYPES } from "../lib/types";
+import { RESULT_TYPES } from "../lib/types";
+import { useT, typeLabelKey } from "../lib/i18n";
 import { cn } from "../lib/cn";
 
 export default function FilterBar() {
+  const t = useT();
   const typeFilter = useSearchStore((s) => s.typeFilter);
   const setTypeFilter = useSearchStore((s) => s.setTypeFilter);
   const total = useSearchStore((s) => s.response?.total ?? 0);
 
   const chips: Array<{ value: TypeFilter; label: string }> = [
-    { value: "all", label: "All" },
-    ...RESULT_TYPES.map((t) => ({ value: t as TypeFilter, label: RESULT_TYPE_LABELS[t] })),
+    { value: "all", label: t("filter.all") },
+    ...RESULT_TYPES.map((rt) => ({ value: rt as TypeFilter, label: t(typeLabelKey(rt)) })),
   ];
 
   return (
@@ -30,7 +32,7 @@ export default function FilterBar() {
         </button>
       ))}
       <span className="ml-auto shrink-0 text-[11px] text-zinc-400">
-        {total} results
+        {t("filter.count", { n: total })}
       </span>
     </div>
   );

@@ -3,9 +3,10 @@ import { ExternalLink, Search, Star } from "lucide-react";
 import { useSearchStore } from "../stores/searchStore";
 import * as cmd from "../lib/commands";
 import { Badge } from "../components/ui";
-import { RESULT_TYPE_LABELS } from "../lib/types";
+import { useT, typeLabelKey } from "../lib/i18n";
 
 export default function FavoritesPage() {
+  const t = useT();
   const favorites = useSearchStore((s) => s.favorites);
   const toggleFavorite = useSearchStore((s) => s.toggleFavorite);
   const [q, setQ] = useState("");
@@ -34,7 +35,7 @@ export default function FavoritesPage() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search favorites…"
+            placeholder={t("fav.searchPlaceholder")}
             className="h-8 w-full bg-transparent text-sm outline-none placeholder:text-zinc-400 dark:text-zinc-100"
           />
         </div>
@@ -43,20 +44,20 @@ export default function FavoritesPage() {
           onChange={(e) => setSource(e.target.value)}
           className="h-8 rounded-md border border-edge-light bg-white px-2 text-[12px] text-zinc-600 dark:border-edge-dark dark:bg-surface-dark dark:text-zinc-300"
         >
-          <option value="all">All sources</option>
+          <option value="all">{t("fav.allSources")}</option>
           {sources.map((s) => (
             <option key={s} value={s}>
               {s}
             </option>
           ))}
         </select>
-        <span className="ml-auto text-[12px] text-zinc-400">{filtered.length} saved</span>
+        <span className="ml-auto text-[12px] text-zinc-400">{t("fav.saved", { n: filtered.length })}</span>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto">
         {filtered.length === 0 && (
           <div className="flex h-full items-center justify-center text-sm text-zinc-400">
-            No favorites yet. Use the star on a result or press Ctrl+D.
+            {t("fav.empty")}
           </div>
         )}
         {filtered.map((f) => (
@@ -69,7 +70,7 @@ export default function FavoritesPage() {
                 <span className="text-[12px] font-semibold text-zinc-500 dark:text-zinc-400">
                   {f.result.source_name}
                 </span>
-                <Badge tone="muted">{RESULT_TYPE_LABELS[f.result.result_type]}</Badge>
+                <Badge tone="muted">{t(typeLabelKey(f.result.result_type))}</Badge>
               </div>
               <div className="truncate text-[14px] font-medium text-zinc-800 dark:text-zinc-100">
                 {f.result.title}
@@ -78,7 +79,7 @@ export default function FavoritesPage() {
             </div>
             <button
               type="button"
-              title="Open in new window"
+              title={t("row.openWindow")}
               className="rounded p-1.5 text-zinc-400 hover:bg-zinc-200 hover:text-indigo-500 dark:hover:bg-zinc-700"
               onClick={() => cmd.openWindow(f.result.url, `${f.result.title} — ${f.result.source_name}`)}
             >
@@ -86,7 +87,7 @@ export default function FavoritesPage() {
             </button>
             <button
               type="button"
-              title="Remove favorite"
+              title={t("row.unfavorite")}
               className="rounded p-1.5 text-amber-500 hover:bg-zinc-200 dark:hover:bg-zinc-700"
               onClick={() => toggleFavorite(f.result)}
             >

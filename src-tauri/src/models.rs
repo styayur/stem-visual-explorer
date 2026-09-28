@@ -125,6 +125,28 @@ pub struct Settings {
     pub preview_mode: String,
     pub enabled_providers: Vec<String>,
     pub mock_mode: bool,
+    /// UI language: "en" | "zh-CN" | "zh-TW".
+    #[serde(default = "default_ui_locale")]
+    pub ui_locale: String,
+    /// Translation target language for content/pages (e.g. "zh-CN", "ja").
+    #[serde(default = "default_translate_target")]
+    pub translate_target: String,
+    /// Translate search result titles/descriptions in the UI.
+    #[serde(default)]
+    pub translate_results: bool,
+    /// Optional user-supplied page-translation proxy template. Supports the
+    /// `{url}` and `{lang}` placeholders, e.g.
+    /// `https://my-proxy.example/?url={url}&lang={lang}`.
+    #[serde(default)]
+    pub page_translate_proxy: String,
+}
+
+fn default_ui_locale() -> String {
+    "en".to_string()
+}
+
+fn default_translate_target() -> String {
+    "zh-CN".to_string()
 }
 
 impl Default for Settings {
@@ -142,6 +164,10 @@ impl Default for Settings {
                 "maotian".into(),
             ],
             mock_mode: false,
+            ui_locale: default_ui_locale(),
+            translate_target: default_translate_target(),
+            translate_results: false,
+            page_translate_proxy: String::new(),
         }
     }
 }

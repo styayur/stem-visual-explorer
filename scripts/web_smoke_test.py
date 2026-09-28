@@ -52,6 +52,8 @@ def main() -> int:
                 "Refused to display",
                 "frame-ancestors",
                 "Failed to load resource",
+                "requestStorageAccess",
+                "sandboxed",
             ):
                 if noise in text:
                     return
@@ -118,6 +120,40 @@ def main() -> int:
 
         page.screenshot(path=str(SHOT))
         print(f"screenshot written to {SHOT}")
+
+        # 6. i18n: switch the UI to Simplified Chinese.
+        lang_btn = page.locator("button:has(svg.lucide-languages)").first
+        lang_btn.click()
+        page.get_by_role("button", name="简体中文").click()
+        page.wait_for_timeout(700)
+        assert page.get_by_text("搜索", exact=True).first.is_visible(), "Chinese nav missing"
+        assert page.get_by_text("全部来源").first.is_visible(), "Chinese sidebar missing"
+        print("i18n zh-CN          -> UI switched to Chinese")
+
+        # 7. Content translation: the popover is still open, so enable it now.
+        page.locator('div.absolute input[type="checkbox"]').first.check()
+        page.wait_for_timeout(300)
+        lang_btn.click()  # close the popover
+        # Clear the source filter left over from step 5, otherwise the query
+        # would only run against Math Insight.
+        page.locator("aside").first.get_by_text("全部来源").click()
+        page.wait_for_timeout(200)
+        box = page.locator('input[placeholder*="搜索数学"]')
+        box.click()
+        box.fill("fourier")
+        box.press("Enter")
+        page.wait_for_timeout(7000)
+        assert rows(page).count() > 0, "no rows after the Chinese search"
+        texts = [rows(page).nth(i).inner_text() for i in range(min(rows(page).count(), 6))]
+        translated = [x for x in texts if any("\u4e00" <= ch <= "\u9fff" for ch in x)]
+        print(f"translated results  -> {len(translated)}/{len(texts)} rows contain Chinese")
+        if texts:
+            print("   sample: " + texts[0].replace("\\n", " | ")[:110])
+        assert translated, "no translated result text found (is MyMemory reachable?)"
+
+        zh_shot = REPO / "docs" / "screenshot-zh.png"
+        page.screenshot(path=str(zh_shot))
+        print(f"screenshot written to {zh_shot}")
 
         browser.close()
 

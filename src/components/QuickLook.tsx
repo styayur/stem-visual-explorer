@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { ExternalLink, Maximize2, X } from "lucide-react";
 import { useSearchStore } from "../stores/searchStore";
 import * as cmd from "../lib/commands";
+import { useT } from "../lib/i18n";
 
 export default function QuickLook() {
+  const t = useT();
   const quickLook = useSearchStore((s) => s.quickLook);
   const setQuickLook = useSearchStore((s) => s.setQuickLook);
 
@@ -34,7 +36,7 @@ export default function QuickLook() {
           </div>
           <button
             type="button"
-            title="Open in new window"
+            title={t("quicklook.openWindow")}
             className="rounded p-1.5 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-100"
             onClick={() => cmd.openWindow(quickLook.url, `${quickLook.title} — ${quickLook.source_name}`)}
           >
@@ -42,7 +44,7 @@ export default function QuickLook() {
           </button>
           <button
             type="button"
-            title="Open in system browser"
+            title={t("quicklook.browser")}
             className="rounded p-1.5 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-100"
             onClick={() => cmd.openExternal(quickLook.url)}
           >
@@ -50,7 +52,7 @@ export default function QuickLook() {
           </button>
           <button
             type="button"
-            title="Close"
+            title={t("quicklook.close")}
             className="rounded p-1.5 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-100"
             onClick={() => setQuickLook(null)}
           >

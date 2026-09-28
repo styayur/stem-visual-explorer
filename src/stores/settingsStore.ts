@@ -26,6 +26,10 @@ const DEFAULTS: Settings = {
     "maotian",
   ],
   mock_mode: false,
+  ui_locale: "en",
+  translate_target: "zh-CN",
+  translate_results: false,
+  page_translate_proxy: "",
 };
 
 function applyTheme(theme: Settings["theme"]) {

@@ -200,11 +200,17 @@ pub fn open_external(state: State<'_, AppState>, url: String) -> std::result::Re
 #[tauri::command]
 pub fn open_window(
     app: tauri::AppHandle,
+    state: State<'_, AppState>,
     url: String,
     title: String,
 ) -> std::result::Result<String, String> {
     let url = validate_http_url(&url).map_err(to_err)?;
-    windows::open_browser_window(&app, url, &title).map_err(to_err)
+    let target = state
+        .settings
+        .lock()
+        .map(|s| s.translate_target.clone())
+        .unwrap_or_else(|_| "zh-CN".to_string());
+    windows::open_browser_window(&app, url, &title, &target).map_err(to_err)
 }
 
 #[tauri::command]

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { useSearchStore } from "../stores/searchStore";
+import { useT } from "../lib/i18n";
 import { cn } from "../lib/cn";
 
 const SUGGESTIONS = [
@@ -27,6 +28,7 @@ export default function SearchBar() {
   const setQuery = useSearchStore((s) => s.setQuery);
   const runSearch = useSearchStore((s) => s.runSearch);
   const history = useSearchStore((s) => s.history);
+  const t = useT();
   const [focused, setFocused] = useState(false);
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -101,7 +103,7 @@ export default function SearchBar() {
               setOpen(false);
             }
           }}
-          placeholder="Search math & physics visually — try curl, 旋度, standing wave…"
+          placeholder={t("search.placeholder")}
           className="h-10 w-full bg-transparent text-sm text-zinc-800 outline-none placeholder:text-zinc-400 dark:text-zinc-100"
           spellCheck={false}
         />

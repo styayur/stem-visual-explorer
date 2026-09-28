@@ -66,12 +66,46 @@ export interface HistoryEntry {
   created_at: number;
 }
 
+export type UiLocale = "en" | "zh-CN" | "zh-TW";
+
 export interface Settings {
   theme: "system" | "light" | "dark";
   preview_mode: "side" | "inline" | "off";
   enabled_providers: string[];
   mock_mode: boolean;
+  /** App UI language. */
+  ui_locale: UiLocale;
+  /** Target language for content / page translation. */
+  translate_target: string;
+  /** Translate search result titles & descriptions in the UI. */
+  translate_results: boolean;
+  /** Optional custom page-translation proxy template ({url} / {lang}). */
+  page_translate_proxy: string;
 }
+
+/** Target languages offered by the translation layer. */
+export const TARGET_LANGUAGES: Array<{ code: string; label: string }> = [
+  { code: "zh-CN", label: "简体中文" },
+  { code: "zh-TW", label: "繁體中文" },
+  { code: "en", label: "English" },
+  { code: "ja", label: "日本語" },
+  { code: "ko", label: "한국어" },
+  { code: "es", label: "Español" },
+  { code: "fr", label: "Français" },
+  { code: "de", label: "Deutsch" },
+  { code: "ru", label: "Русский" },
+  { code: "pt", label: "Português" },
+  { code: "it", label: "Italiano" },
+  { code: "ar", label: "العربية" },
+  { code: "hi", label: "हिन्दी" },
+  { code: "th", label: "ไทย" },
+  { code: "vi", label: "Tiếng Việt" },
+  { code: "id", label: "Bahasa Indonesia" },
+  { code: "tr", label: "Türkçe" },
+  { code: "nl", label: "Nederlands" },
+  { code: "pl", label: "Polski" },
+  { code: "uk", label: "Українська" },
+];
 
 export const RESULT_TYPE_LABELS: Record<ResultType, string> = {
   article: "ARTICLE",

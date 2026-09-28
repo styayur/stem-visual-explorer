@@ -1,9 +1,11 @@
 import { memo, useRef, useState } from "react";
-import { ExternalLink, LayoutPanelTop, MoreHorizontal, Star } from "lucide-react";
+import { ExternalLink, LayoutPanelTop, Star } from "lucide-react";
 import type { SearchResult } from "../lib/types";
-import { RESULT_TYPE_LABELS } from "../lib/types";
 import { useSearchStore } from "../stores/searchStore";
+import { useSettingsStore } from "../stores/settingsStore";
 import { useWorkspaceStore } from "../stores/workspaceStore";
+import { useT, typeLabelKey } from "../lib/i18n";
+import { useTranslatedText } from "../lib/translate/useTranslatedText";
 import * as cmd from "../lib/commands";
 import { cn } from "../lib/cn";
 import { Badge } from "./ui";
@@ -21,12 +23,21 @@ const ResultRow = memo(function ResultRow({
   selected: boolean;
   onSelect: (index: number) => void;
 }) {
+  const t = useT();
   const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
   const rowRef = useRef<HTMLDivElement>(null);
   const isFav = useSearchStore((s) => s.favoriteIds.has(result.id));
   const toggleFavorite = useSearchStore((s) => s.toggleFavorite);
-  const setQuickLook = useSearchStore((s) => s.setQuickLook);
   const toggleWorkspace = useWorkspaceStore((s) => s.toggle);
+
+  const translateOn = useSettingsStore((s) => s.settings.translate_results);
+  const target = useSettingsStore((s) => s.settings.translate_target);
+  const titleT = useTranslatedText(result.title, translateOn, target);
+  const descT = useTranslatedText(result.description, translateOn, target);
+
+  const title = titleT?.text ?? result.title;
+  const description = descT?.text ?? result.description;
+  const translated = Boolean(titleT && titleT.text !== result.title);
 
   const openWindow = () => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`);
 
@@ -59,10 +70,11 @@ const ResultRow = memo(function ResultRow({
         <span className="shrink-0 text-[12px] font-semibold text-zinc-500 dark:text-zinc-400">
           {result.source_name}
         </span>
-        <Badge tone="muted">{RESULT_TYPE_LABELS[result.result_type]}</Badge>
+        <Badge tone="muted">{t(typeLabelKey(result.result_type))}</Badge>
+        {translated && <Badge tone="accent">{t("common.translated")}</Badge>}
         <button
           type="button"
-          title={isFav ? "Remove favorite" : "Add favorite"}
+          title={isFav ? t("row.unfavorite") : t("row.favorite")}
           onClick={(e) => {
             e.stopPropagation();
             toggleFavorite(result);
@@ -78,7 +90,7 @@ const ResultRow = memo(function ResultRow({
         </button>
         <button
           type="button"
-          title="Add to workspace"
+          title={t("row.workspace")}
           onClick={(e) => {
             e.stopPropagation();
             toggleWorkspace(result);
@@ -89,7 +101,7 @@ const ResultRow = memo(function ResultRow({
         </button>
         <button
           type="button"
-          title="Open in new window"
+          title={t("row.openWindow")}
           onClick={(e) => {
             e.stopPropagation();
             openWindow();
@@ -100,31 +112,32 @@ const ResultRow = memo(function ResultRow({
         </button>
       </div>
 
-      <div className="mt-0.5 line-clamp-2 text-[14px] font-medium leading-snug text-zinc-800 dark:text-zinc-100">
-        {result.title}
+      <div
+        title={translated ? result.title : undefined}
+        className="mt-0.5 line-clamp-2 text-[14px] font-medium leading-snug text-zinc-800 dark:text-zinc-100"
+      >
+        {title}
       </div>
-      {result.description && (
-        <div className="line-clamp-1 text-[12px] text-zinc-500 dark:text-zinc-400">
-          {result.description}
+      {description && (
+        <div
+          title={translated ? result.description ?? undefined : undefined}
+          className="line-clamp-1 text-[12px] text-zinc-500 dark:text-zinc-400"
+        >
+          {description}
         </div>
       )}
       {result.tags.length > 0 && (
         <div className="mt-0.5 flex items-center gap-1 overflow-hidden text-[11px] text-zinc-400 dark:text-zinc-500">
-          {result.tags.slice(0, 4).map((t) => (
-            <span key={t} className="truncate">
-              {t}
+          {result.tags.slice(0, 4).map((tag) => (
+            <span key={tag} className="truncate">
+              {tag}
             </span>
           ))}
         </div>
       )}
 
       {menu && (
-        <ResultMenu
-          x={menu.x}
-          y={menu.y}
-          result={result}
-          onClose={() => setMenu(null)}
-        />
+        <ResultMenu x={menu.x} y={menu.y} result={result} onClose={() => setMenu(null)} />
       )}
     </div>
   );
@@ -141,23 +154,43 @@ function ResultMenu({
   result: SearchResult;
   onClose: () => void;
 }) {
+  const t = useT();
   const toggleFavorite = useSearchStore((s) => s.toggleFavorite);
   const isFav = useSearchStore((s) => s.favoriteIds.has(result.id));
 
   const items: Array<{ label: string; run: () => void }> = [
-    { label: "Open", run: () => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`) },
-    { label: "Open in New Window", run: () => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`) },
-    { label: "Open in System Browser", run: () => cmd.openExternal(result.url) },
-    { label: "Copy URL", run: () => navigator.clipboard?.writeText(result.url) },
-    { label: isFav ? "Remove Favorite" : "Favorite", run: () => toggleFavorite(result) },
+    {
+      label: t("ctx.open"),
+      run: () => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`),
+    },
+    {
+      label: t("ctx.openWindow"),
+      run: () => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`),
+    },
+    { label: t("ctx.openBrowser"), run: () => cmd.openExternal(result.url) },
+    { label: t("ctx.copyUrl"), run: () => navigator.clipboard?.writeText(result.url) },
+    {
+      label: isFav ? t("ctx.unfavorite") : t("ctx.favorite"),
+      run: () => toggleFavorite(result),
+    },
   ];
 
   return (
     <>
-      <div className="fixed inset-0 z-40" onClick={onClose} onContextMenu={(e) => { e.preventDefault(); onClose(); }} />
+      <div
+        className="fixed inset-0 z-40"
+        onClick={onClose}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          onClose();
+        }}
+      />
       <div
         className="fixed z-50 min-w-[190px] rounded-lg border border-edge-light bg-white py-1 shadow-xl dark:border-edge-dark dark:bg-surface-dark"
-        style={{ left: Math.min(x, window.innerWidth - 210), top: Math.min(y, window.innerHeight - 220) }}
+        style={{
+          left: Math.min(x, window.innerWidth - 210),
+          top: Math.min(y, window.innerHeight - 220),
+        }}
       >
         {items.map((item) => (
           <button

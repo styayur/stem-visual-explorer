@@ -24,6 +24,10 @@ instant and works offline after the first page load.
 
 ![STEM Visual Explorer — searching “gradient” across Math Insight, Falstad, PhET, BetterExplained and more](docs/screenshot.png)
 
+*The same app in 简体中文 with result translation enabled:*
+
+![STEM Visual Explorer 中文界面](docs/screenshot-zh.png)
+
 ---
 
 ## Features
@@ -37,6 +41,10 @@ instant and works offline after the first page load.
   (Math Insight, Falstad, PhET, Physics Fundamentals, PhysicStuff, 猫田の物理).
 - **Deterministic relevance scoring** — exact title match, token matches, tag
   matches and a small interactive bonus. No ML, no black box.
+- **Built-in translation** — UI in English / 简体中文 / 繁體中文, machine
+  translation of result titles & descriptions into 20+ languages (keyless
+  MyMemory API + offline STEM glossary), and native-page translation
+  (in-place in the desktop app).
 - **Bilingual query normalizer** — a local Chinese ↔ English synonym dictionary
   (`梯度 → gradient`, `旋度 → curl`, `驻波 → standing wave`, …). A query like
   `旋度 curl` expands both ways.
@@ -79,6 +87,35 @@ and may need parser updates if the sites change.
 
 ---
 
+## Translation
+
+### The app's own content
+
+- **Interface languages:** English, 简体中文, 繁體中文 — switch from the globe
+  menu in the header or *Settings → Language & translation*. English is the
+  per-key fallback, so adding a locale only needs one dictionary
+  (`src/lib/i18n/dict.ts`).
+- **Search results:** enable *Translate result titles & descriptions* to
+  machine-translate English results into the selected target language (20+
+  options: 简体中文, 繁體中文, English, 日本語, 한국어, Español, Français, Deutsch,
+  Русский, Português, Italiano, العربية, हिन्दी, ไทย, Tiếng Việt, Bahasa
+  Indonesia, Türkçe, Nederlands, Polski, Українська …).
+- **Pipeline:** in-memory + `localStorage` cache → offline STEM glossary
+  (~70 terms, instant, no network) → **MyMemory** machine translation
+  (free, keyless, CORS-enabled). Requests are queued (3 concurrent, rate
+  limited) so bulk translation stays inside the free quota. A translated row
+  shows a small “译文 / Translated” badge and keeps the original as a tooltip.
+
+### Native web pages
+
+| Where | How it works |
+| --- | --- |
+| **Desktop app** | External windows get an in-place **A/文** button in the floating toolbar. It walks the page's text nodes, translates them with MyMemory, and swaps the text directly in the DOM; press it again to restore the original. This is a *real* full-page translation of the native site. |
+| **Web version** | Browsers forbid a page from scripting a cross-origin iframe, so the preview cannot rewrite the embedded site's DOM. The preview's **Original / Translated** toggle therefore shows the translated title + summary and offers **Open translated page**; if you configure a **custom page-translation proxy** (settings → *Custom page-translation proxy*, using `{url}` / `{lang}`), the preview embeds the translated page directly. |
+
+Translation requires network access to the third-party MyMemory service. It is
+off by default, and the app is fully usable without it (the offline glossary
+still glosses STEM terms).
 ## Architecture
 
 ```
@@ -301,7 +338,20 @@ python scripts/web_smoke_test.py   # via the webapp-testing with_server helper
 
 It drives the real UI headlessly: searches `curl` / `旋度` / `standing wave`,
 checks `site:` filtering and the sidebar source filter, verifies Chinese synonym
-expansion, and refreshes `docs/screenshot.png`.
+expansion, switches the interface to 简体中文, enables result translation and
+asserts that Chinese translations appear, then refreshes `docs/screenshot.png`
+and `docs/screenshot-zh.png`.
+
+### Logic unit tests
+
+```bash
+node --experimental-strip-types scripts/unit_test.mjs         # offline (20 checks)
+node --experimental-strip-types scripts/unit_test.mjs --live  # + one real MyMemory call
+```
+
+Covers the offline glossary, the query parser, synonym expansion,
+matching/ranking and the translation URL helpers. Runs directly on Node's
+TypeScript type stripping — no test framework required.
 
 ### Deployment
 
@@ -386,6 +436,10 @@ STEM Visual Explorer is a **local-first** tool:
 - Network requests go **directly** from your machine to the source websites — there
   is no proxy or middle server.
 - No AI/LLM ranking: relevance scores are computed from a fixed, transparent formula.
+- Translation is **off by default**. When you enable it, only the text you are
+  translating (a result title/description, or a page's text nodes in the desktop
+  app) is sent to the third-party **MyMemory** translation API. Terms already in
+  the offline glossary are translated locally and never leave your machine.
 
 The app is a polite HTTP client: it sends a descriptive `User-Agent`
 (`STEMVisualExplorer/<version>`), uses a small number of concurrent requests with
@@ -406,6 +460,12 @@ measures.
 
 ## Known limitations
 
+- **Browser previews cannot be rewritten.** In the web build a cross-origin
+  iframe is off-limits to scripts, so native pages are translated by opening the
+  translated page (or via your own proxy template) rather than editing the
+  embedded DOM. In-place native-page translation is available in the desktop app.
+- **Machine translation needs the network** (MyMemory). The offline glossary still
+  works without it, but only covers STEM terms.
 - **Embedded previews** can be blocked by a site's `X-Frame-Options` / CSP. The
   preview pane keeps working and always offers “Open in new window” and
   “Open in system browser” as escape hatches.

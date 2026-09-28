@@ -3,6 +3,7 @@ import { Sparkles } from "lucide-react";
 import { useSearchStore, visibleResults } from "../stores/searchStore";
 import type { SearchResult } from "../lib/types";
 import ResultRow, { RESULT_ROW_HEIGHT } from "./SearchResultRow";
+import { useT } from "../lib/i18n";
 
 const SUGGESTED = [
   "Gradient",
@@ -16,6 +17,7 @@ const SUGGESTED = [
 ];
 
 export default function SearchResults() {
+  const t = useT();
   const response = useSearchStore((s) => s.response);
   const query = useSearchStore((s) => s.query);
   const loading = useSearchStore((s) => s.loading);
@@ -34,7 +36,7 @@ export default function SearchResults() {
   if (loading) {
     return (
       <div className="flex h-full items-center justify-center text-sm text-zinc-400">
-        Searching across sources…
+        {t("results.searching")}
       </div>
     );
   }
@@ -46,7 +48,7 @@ export default function SearchResults() {
   if (results.length === 0) {
     return (
       <div className="flex h-full items-center justify-center text-sm text-zinc-400">
-        No results match the current filters.
+        {t("results.filteredOut")}
       </div>
     );
   }
@@ -61,16 +63,17 @@ export default function SearchResults() {
 }
 
 function EmptyState({ query, onPick }: { query: string; onPick: (q: string) => void }) {
+  const t = useT();
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4 px-8 text-center">
       <Sparkles className="h-8 w-8 text-indigo-400" />
       <div className="text-lg font-semibold text-zinc-700 dark:text-zinc-200">
-        Explore visually
+        {t("results.explore")}
       </div>
       <div className="max-w-sm text-sm text-zinc-500 dark:text-zinc-400">
         {query.length > 0
-          ? "No results for that query. Try one of the suggestions below."
-          : "Search mathematics and physics resources from multiple interactive sites."}
+          ? t("results.noResults")
+          : t("results.emptyHint")}
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
         {SUGGESTED.map((s) => (

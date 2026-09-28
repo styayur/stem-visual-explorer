@@ -1,9 +1,20 @@
-import { useEffect, useState } from "react";
-import { BookMarked, Moon, Search, Settings, Sun, SunMoon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import {
+  BookMarked,
+  Check,
+  Languages,
+  Moon,
+  Search,
+  Settings,
+  Sun,
+  SunMoon,
+} from "lucide-react";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { useSettingsStore, type Page } from "./stores/settingsStore";
 import { useSearchStore } from "./stores/searchStore";
 import { installShortcuts } from "./lib/shortcuts";
+import { useT, UI_LOCALES } from "./lib/i18n";
+import { TARGET_LANGUAGES, type UiLocale } from "./lib/types";
 import { cn } from "./lib/cn";
 import { IconButton } from "./components/ui";
 import Workspace from "./components/Workspace";
@@ -12,9 +23,11 @@ import FavoritesPage from "./pages/FavoritesPage";
 import SettingsPage from "./pages/SettingsPage";
 
 export default function App() {
+  const t = useT();
   const page = useSettingsStore((s) => s.page);
   const setPage = useSettingsStore((s) => s.setPage);
   const theme = useSettingsStore((s) => s.settings.theme);
+  const locale = useSettingsStore((s) => s.settings.ui_locale);
   const update = useSettingsStore((s) => s.update);
   const loadSettings = useSettingsStore((s) => s.load);
   const loadFavorites = useSearchStore((s) => s.loadFavorites);
@@ -28,13 +41,15 @@ export default function App() {
   }, [loadSettings, loadFavorites, loadHistory]);
 
   useEffect(() => {
-    // Web build: the workspace is a separate tab opened with ?workspace=1.
+    document.documentElement.lang = locale;
+  }, [locale]);
+
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("workspace") === "1" || params.get("route") === "workspace") {
       setIsWorkspace(true);
       return;
     }
-    // Desktop build: the workspace is a local window labelled workspace-*.
     try {
       setIsWorkspace(getCurrentWebviewWindow().label.startsWith("workspace-"));
     } catch {
@@ -55,21 +70,40 @@ export default function App() {
           </div>
           <div className="leading-tight">
             <div className="text-[13px] font-semibold">STEM Visual Explorer</div>
-            <div className="hidden text-[10px] text-zinc-400 sm:block">
-              Visual search for mathematics and physics.
-            </div>
+            <div className="hidden text-[10px] text-zinc-400 sm:block">{t("app.subtitle")}</div>
           </div>
         </div>
 
         <nav className="flex items-center gap-1">
-          <NavButton active={page === "search"} onClick={() => setPage("search")} icon={<Search className="h-3.5 w-3.5" />} label="Search" />
-          <NavButton active={page === "favorites"} onClick={() => setPage("favorites")} icon={<BookMarked className="h-3.5 w-3.5" />} label="Favorites" />
-          <NavButton active={page === "settings"} onClick={() => setPage("settings")} icon={<Settings className="h-3.5 w-3.5" />} label="Settings" />
+          <NavButton
+            active={page === "search"}
+            onClick={() => setPage("search")}
+            icon={<Search className="h-3.5 w-3.5" />}
+            label={t("nav.search")}
+          />
+          <NavButton
+            active={page === "favorites"}
+            onClick={() => setPage("favorites")}
+            icon={<BookMarked className="h-3.5 w-3.5" />}
+            label={t("nav.favorites")}
+          />
+          <NavButton
+            active={page === "settings"}
+            onClick={() => setPage("settings")}
+            icon={<Settings className="h-3.5 w-3.5" />}
+            label={t("nav.settings")}
+          />
         </nav>
 
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-1">
+          <LanguageMenu />
           <ThemeButton
             theme={theme}
+            label={t("theme.tooltip", {
+              theme: t(
+                theme === "system" ? "theme.system" : theme === "light" ? "theme.light" : "theme.dark"
+              ),
+            })}
             onCycle={() => {
               const next = theme === "system" ? "light" : theme === "light" ? "dark" : "system";
               update({ theme: next });
@@ -115,7 +149,102 @@ function NavButton({
   );
 }
 
-function ThemeButton({ theme, onCycle }: { theme: string; onCycle: () => void }) {
-  const icon = theme === "system" ? <SunMoon className="h-4 w-4" /> : theme === "light" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />;
-  return <IconButton title={`Theme: ${theme}`} onClick={onCycle}>{icon}</IconButton>;
+function ThemeButton({
+  theme,
+  label,
+  onCycle,
+}: {
+  theme: string;
+  label: string;
+  onCycle: () => void;
+}) {
+  const icon =
+    theme === "system" ? (
+      <SunMoon className="h-4 w-4" />
+    ) : theme === "light" ? (
+      <Sun className="h-4 w-4" />
+    ) : (
+      <Moon className="h-4 w-4" />
+    );
+  return (
+    <IconButton title={label} onClick={onCycle}>
+      {icon}
+    </IconButton>
+  );
+}
+
+/** Header popover: UI language + content translation settings. */
+function LanguageMenu() {
+  const t = useT();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const settings = useSettingsStore((s) => s.settings);
+  const update = useSettingsStore((s) => s.update);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    window.addEventListener("mousedown", onClick);
+    return () => window.removeEventListener("mousedown", onClick);
+  }, [open]);
+
+  return (
+    <div className="relative" ref={ref}>
+      <IconButton title={t("settings.translation")} active={open} onClick={() => setOpen((v) => !v)}>
+        <Languages className="h-4 w-4" />
+      </IconButton>
+      {open && (
+        <div className="absolute right-0 top-9 z-50 w-[268px] rounded-lg border border-edge-light bg-white p-3 text-[13px] shadow-xl dark:border-edge-dark dark:bg-surface-dark">
+          <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
+            {t("settings.uiLanguage")}
+          </div>
+          <div className="mb-3 space-y-1">
+            {UI_LOCALES.map((l) => (
+              <button
+                key={l.code}
+                type="button"
+                onClick={() => update({ ui_locale: l.code as UiLocale })}
+                className={cn(
+                  "flex w-full items-center justify-between rounded-md px-2 py-1.5 text-left",
+                  settings.ui_locale === l.code
+                    ? "bg-indigo-500/10 text-indigo-600 dark:text-indigo-300"
+                    : "hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                )}
+              >
+                <span>{l.label}</span>
+                {settings.ui_locale === l.code && <Check className="h-3.5 w-3.5" />}
+              </button>
+            ))}
+          </div>
+
+          <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-400">
+            {t("settings.targetLanguage")}
+          </div>
+          <select
+            value={settings.translate_target}
+            onChange={(e) => update({ translate_target: e.target.value })}
+            className="mb-3 w-full rounded-md border border-edge-light bg-white px-2 py-1.5 text-[12px] dark:border-edge-dark dark:bg-surface-dark dark:text-zinc-200"
+          >
+            {TARGET_LANGUAGES.map((l) => (
+              <option key={l.code} value={l.code}>
+                {l.label}
+              </option>
+            ))}
+          </select>
+
+          <label className="flex cursor-pointer items-start gap-2">
+            <input
+              type="checkbox"
+              checked={settings.translate_results}
+              onChange={(e) => update({ translate_results: e.target.checked })}
+              className="mt-0.5 h-3.5 w-3.5 accent-indigo-500"
+            />
+            <span className="text-[12px] leading-snug">{t("settings.translateResults")}</span>
+          </label>
+        </div>
+      )}
+    </div>
+  );
 }

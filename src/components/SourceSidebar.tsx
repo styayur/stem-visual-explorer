@@ -4,6 +4,7 @@ import { useSearchStore } from "../stores/searchStore";
 import { useSettingsStore } from "../stores/settingsStore";
 import * as cmd from "../lib/commands";
 import { cn } from "../lib/cn";
+import { useT } from "../lib/i18n";
 import type { ProviderStatus } from "../lib/types";
 
 const PROVIDER_CATEGORY: Record<string, string> = {
@@ -25,10 +26,15 @@ export default function SourceSidebar() {
   const siteFilter = useSearchStore((s) => s.siteFilter);
   const setSiteFilter = useSearchStore((s) => s.setSiteFilter);
   const loading = useSearchStore((s) => s.loading);
+  const t = useT();
   const settings = useSettingsStore((s) => s.settings);
   const update = useSettingsStore((s) => s.update);
 
-  const groups = ["Mathematics", "Mathematics & Physics", "Physics"];
+  const groups = [
+    { key: "cat.math", name: "Mathematics" },
+    { key: "cat.mathphys", name: "Mathematics & Physics" },
+    { key: "cat.phys", name: "Physics" },
+  ];
 
   const toggleProvider = async (id: string, enabled: boolean) => {
     const next = enabled
@@ -51,18 +57,18 @@ export default function SourceSidebar() {
               : "text-zinc-600 hover:bg-zinc-200/60 dark:text-zinc-300 dark:hover:bg-zinc-800"
           )}
         >
-          All sources
+          {t("sources.all")}
         </button>
       </div>
 
       {groups.map((group) => {
         const providers = Object.keys(PROVIDER_CATEGORY).filter(
-          (id) => PROVIDER_CATEGORY[id] === group
+          (id) => PROVIDER_CATEGORY[id] === group.name
         );
         return (
-          <div key={group} className="px-3 pb-2">
+          <div key={group.key} className="px-3 pb-2">
             <div className="px-1 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
-              {group}
+              {t(group.key)}
             </div>
             {providers.map((id) => (
               <SourceRow

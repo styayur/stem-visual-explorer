@@ -3,8 +3,10 @@ import { ExternalLink, RotateCw } from "lucide-react";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import * as cmd from "../lib/commands";
 import { cn } from "../lib/cn";
+import { useT } from "../lib/i18n";
 
 export default function Workspace() {
+  const t = useT();
   const [urls, setUrls] = useState<string[]>([]);
   const [notes, setNotes] = useState(
     () => localStorage.getItem("sve-workspace-notes") ?? ""
@@ -41,27 +43,27 @@ export default function Workspace() {
   return (
     <div className="flex h-screen flex-col bg-zinc-900 text-zinc-100">
       <div className="flex items-center gap-3 border-b border-zinc-700 px-3 py-2">
-        <span className="text-[13px] font-semibold">Workspace</span>
-        <span className="text-[11px] text-zinc-400">{urls.length} panes</span>
+        <span className="text-[13px] font-semibold">{t("workspace.title")}</span>
+        <span className="text-[11px] text-zinc-400">{t("workspace.panes", { n: urls.length })}</span>
         <button
           type="button"
           className="ml-auto rounded px-2 py-1 text-[12px] text-zinc-300 hover:bg-zinc-700"
           onClick={() => setReload((r) => r + 1)}
         >
-          Reload all
+          {t("workspace.reloadAll")}
         </button>
         <button
           type="button"
           className="rounded px-2 py-1 text-[12px] text-zinc-300 hover:bg-zinc-700"
           onClick={() => urls.forEach((u) => cmd.openExternal(u))}
         >
-          Open all externally
+          {t("workspace.openAll")}
         </button>
         <a
           href="?"
           className="rounded px-2 py-1 text-[12px] text-zinc-300 hover:bg-zinc-700"
         >
-          New search
+          {t("workspace.newSearch")}
         </a>
       </div>
 
@@ -71,7 +73,7 @@ export default function Workspace() {
         ))}
         {urls.length === 0 && (
           <div className="flex items-center justify-center bg-zinc-900 text-sm text-zinc-500">
-            No items. Select results and choose “Open Workspace”.
+            {t("workspace.empty")}
           </div>
         )}
       </div>
@@ -80,7 +82,7 @@ export default function Workspace() {
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="Notes for this workspace…"
+          placeholder={t("workspace.notes")}
           className="h-20 w-full resize-none rounded bg-zinc-800 p-2 text-[12px] text-zinc-100 outline-none placeholder:text-zinc-500"
         />
       </div>
