@@ -282,6 +282,19 @@ cargo test --no-default-features                   # parser/query/ranking unit t
 the pure logic (no GUI/webview runtime needed). The 21 unit tests cover every
 provider parser plus the query parser, synonym normalizer and ranking rules.
 
+To verify the **live** providers against the real websites (network required):
+
+```bash
+cd src-tauri
+cargo run --no-default-features --example probe
+```
+
+`examples/probe.rs` runs every acceptance query (`gradient`, `curl`,
+`divergence`, `standing wave`, `harmonic oscillator`,
+`electromagnetic induction`, `quantum`, `Fourier`, `梯度`, `旋度`, `驻波`)
+through the real concurrent search pipeline and prints per-source result counts,
+so you can confirm that the adapters still parse correctly.
+
 ### Mock mode
 
 Running the frontend with plain `npm run dev` (outside Tauri) uses a small built-in
