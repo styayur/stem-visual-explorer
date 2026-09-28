@@ -10,12 +10,14 @@ the source filter, verifies Chinese synonym expansion, and captures a screenshot
 into docs/screenshot.png.
 """
 
+import os
 import sys
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-BASE = "http://localhost:4173/stem-visual-explorer/"
+DEFAULT_BASE = "http://localhost:4173/stem-visual-explorer/"
+BASE = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("SVE_BASE", DEFAULT_BASE)
 REPO = Path(__file__).resolve().parent.parent
 SHOT = REPO / "docs" / "screenshot.png"
 
