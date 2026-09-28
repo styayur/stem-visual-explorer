@@ -1,0 +1,4 @@
+# Use the self-contained lld linker for the windows-gnu target. This avoids
+# depending on a matching MinGW gcc installation and its runtime DLLs.
+[target.x86_64-pc-windows-gnu]
+linker = "rust-lld"
