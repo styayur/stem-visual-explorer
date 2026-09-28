@@ -24,3 +24,6 @@ npm-debug.log*
 *.sw?
 # cache generated at runtime
 src-tauri/cache
+# release packaging output
+dist-release
+
