@@ -72,6 +72,15 @@ fn synonym_groups() -> Vec<(&'static str, &'static str)> {
         ("加速度", "acceleration"),
         ("速度", "velocity"),
         ("位移", "displacement"),
+        ("駐波", "standing wave"),
+        ("簡諧振動", "harmonic oscillator"),
+        ("電磁感應", "electromagnetic induction"),
+        ("電場", "electric field"),
+        ("磁場", "magnetic field"),
+        ("傅里葉", "fourier"),
+        ("傅立葉", "fourier"),
+        ("導數", "derivative"),
+        ("積分", "integral"),
     ]
 }
 
@@ -88,6 +97,18 @@ pub fn expand(parsed: &ParsedQuery) -> NormalizedQuery {
     for phrase in &parsed.phrases {
         let lower = phrase.to_lowercase();
         add_with_synonyms(&lower, &mut set);
+    }
+
+    for size in 2..=4 {
+        for terms in parsed.terms.windows(size) {
+            let phrase = terms.join(" ").to_lowercase();
+            if synonym_groups()
+                .iter()
+                .any(|(from, to)| *from == phrase || *to == phrase)
+            {
+                add_with_synonyms(&phrase, &mut set);
+            }
+        }
     }
 
     NormalizedQuery {
@@ -110,11 +131,7 @@ fn add_with_synonyms(term: &str, set: &mut BTreeSet<String>) {
     // Add all synonym targets. We iterate rather than recurse to keep the
     // expansion bounded and deterministic.
     let mut queue: Vec<String> = vec![trimmed.to_string()];
-    let mut depth = 0;
     while let Some(current) = queue.pop() {
-        if depth > 8 {
-            break;
-        }
         for (from, to) in synonym_groups() {
             if current == *from || current == from.to_lowercase() {
                 for part in to.split_whitespace() {
@@ -135,7 +152,6 @@ fn add_with_synonyms(term: &str, set: &mut BTreeSet<String>) {
                 }
             }
         }
-        depth += 1;
     }
 }
 

@@ -24,7 +24,14 @@ impl BetterExplainedProvider {
     }
 
     async fn fetch_archive(ctx: &SearchContext) -> Result<CachedIndex> {
-        let body = ctx.client.get(ARCHIVE_URL).send().await?.text().await?;
+        let body = ctx
+            .client
+            .get(ARCHIVE_URL)
+            .send()
+            .await?
+            .error_for_status()?
+            .text()
+            .await?;
         let entries = parse_archive(&body)?;
         if entries.is_empty() {
             return Err(AppError::Parse(
@@ -77,6 +84,12 @@ impl SearchProvider for BetterExplainedProvider {
             .and_then(|i| i.as_ref().map(|c| c.updated_at.clone()))
     }
 
+    fn clear_index(&self) {
+        if let Ok(mut index) = self.index.lock() {
+            *index = None;
+        }
+    }
+
     async fn load_index(&self, ctx: &SearchContext) -> Result<Option<common::CachedIndex>> {
         Ok(Some(Self::fetch_archive(ctx).await?))
     }
@@ -87,45 +100,51 @@ impl SearchProvider for BetterExplainedProvider {
         query: &NormalizedQuery,
         opts: &SearchOptions,
     ) -> Result<Vec<SearchResult>> {
-        // Ensure the local archive index is loaded (background refresh if stale).
-        {
-            let need_fetch = {
-                let lock = self
-                    .index
-                    .lock()
-                    .map_err(|_| AppError::Other("lock poisoned".into()))?;
-                lock.as_ref()
-                    .map(|c| c.is_stale(common::STALE_AFTER_DAYS) || opts.force_refresh)
-                    .unwrap_or(true)
-            };
-            if need_fetch {
-                if let Ok(fresh) = Self::fetch_archive(ctx).await {
-                    let mut lock = self
-                        .index
-                        .lock()
-                        .map_err(|_| AppError::Other("lock poisoned".into()))?;
-                    *lock = Some(fresh);
-                }
-            }
+        let index = common::cached_index(
+            ctx,
+            self.id(),
+            &self.index,
+            opts.force_refresh,
+            Self::fetch_archive(ctx),
+        )
+        .await;
+        if opts.force_refresh {
+            index.as_ref().map_err(|e| AppError::Other(e.to_string()))?;
         }
-
-        let local = {
-            let lock = self
-                .index
-                .lock()
-                .map_err(|_| AppError::Other("lock poisoned".into()))?;
-            let entries = lock.as_ref().map(|c| c.entries.as_slice()).unwrap_or(&[]);
-            common::search_entries(self.id(), self.name(), entries, query)
-        };
-
-        // Live WordPress search results (best-effort; failures are non-fatal).
-        let mut results = local;
-        if !query.raw.trim().is_empty() {
-            if let Ok(native) = Self::native_search(ctx, &query.raw).await {
-                for e in native {
-                    results.push(common::to_result(self.id(), self.name(), &e));
+        let mut results = index
+            .as_ref()
+            .map(|c| common::search_entries(self.id(), self.name(), &c.entries, query))
+            .unwrap_or_default();
+        let parsed = crate::search::query::parse(&query.raw);
+        let native_query = parsed
+            .terms
+            .iter()
+            .chain(parsed.phrases.iter())
+            .cloned()
+            .collect::<Vec<_>>()
+            .join(" ");
+        if !native_query.is_empty() {
+            let native = tokio::time::timeout(
+                std::time::Duration::from_secs(5),
+                Self::native_search(ctx, &native_query),
+            )
+            .await;
+            match native {
+                Ok(Ok(entries)) => results.extend(common::search_entries(
+                    self.id(),
+                    self.name(),
+                    &entries,
+                    query,
+                )),
+                _ if index.is_err() => {
+                    return Err(AppError::Other(
+                        "BetterExplained archive and native search are unavailable".into(),
+                    ))
                 }
+                _ => {}
             }
+        } else {
+            index?;
         }
 
         // Deduplicate by URL, preserving first occurrence.

@@ -57,6 +57,8 @@ pub trait SearchProvider: Send + Sync {
         None
     }
 
+    fn clear_index(&self) {}
+
     async fn search(
         &self,
         ctx: &SearchContext,

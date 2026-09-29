@@ -91,14 +91,22 @@ impl Database {
     }
 
     pub fn add_history(&self, query: &str, result_count: usize, created_at: i64) -> Result<()> {
-        let conn = self
+        let query = query.trim();
+        if query.is_empty() {
+            return Ok(());
+        }
+        let mut conn = self
             .conn
             .lock()
             .map_err(|_| AppError::Other("lock poisoned".into()))?;
-        conn.execute(
+        let tx = conn.transaction()?;
+        tx.execute("DELETE FROM history WHERE query = ?1", params![query])?;
+        tx.execute(
             "INSERT INTO history (query, result_count, created_at) VALUES (?1, ?2, ?3)",
             params![query, result_count as i64, created_at],
         )?;
+        tx.execute("DELETE FROM history WHERE id NOT IN (SELECT id FROM history ORDER BY created_at DESC, id DESC LIMIT 200)", [])?;
+        tx.commit()?;
         Ok(())
     }
 

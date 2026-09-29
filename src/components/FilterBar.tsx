@@ -1,4 +1,4 @@
-import { useSearchStore, type TypeFilter } from "../stores/searchStore";
+import { useSearchStore, visibleResults, type TypeFilter } from "../stores/searchStore";
 import { RESULT_TYPES } from "../lib/types";
 import { useT, typeLabelKey } from "../lib/i18n";
 import { cn } from "../lib/cn";
@@ -7,7 +7,7 @@ export default function FilterBar() {
   const t = useT();
   const typeFilter = useSearchStore((s) => s.typeFilter);
   const setTypeFilter = useSearchStore((s) => s.setTypeFilter);
-  const total = useSearchStore((s) => s.response?.total ?? 0);
+  const total = useSearchStore(() => visibleResults().length);
 
   const chips: Array<{ value: TypeFilter; label: string }> = [
     { value: "all", label: t("filter.all") },
@@ -21,6 +21,7 @@ export default function FilterBar() {
           key={chip.value}
           type="button"
           onClick={() => setTypeFilter(chip.value)}
+          aria-pressed={typeFilter === chip.value}
           className={cn(
             "whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors",
             typeFilter === chip.value

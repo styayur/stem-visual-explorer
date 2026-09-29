@@ -20,8 +20,9 @@ export default function PreviewPane() {
   const isFav = useSearchStore((s) => (result ? s.favoriteIds.has(result.id) : false));
   const toggleFavorite = useSearchStore((s) => s.toggleFavorite);
 
-  const titleT = useTranslatedText(result?.title, true, target);
-  const descT = useTranslatedText(result?.description, true, target);
+  const translateOn = useSettingsStore((s) => s.settings.translate_results);
+  const titleT = useTranslatedText(result?.title, translateOn || view === "translated", target);
+  const descT = useTranslatedText(result?.description, view === "translated", target);
 
   const embeddable = useMemo(
     () => (result ? buildEmbeddableTranslatedUrl(result.url, target, proxy) : null),
@@ -47,10 +48,10 @@ export default function PreviewPane() {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-2 border-b border-edge-light px-3 py-2 dark:border-edge-dark">
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <span className="text-[12px] font-semibold text-zinc-500 dark:text-zinc-400">
+      <div className="flex flex-wrap items-center gap-1 border-b border-edge-light px-3 py-2 dark:border-edge-dark">
+        <div className="min-w-0 basis-full pb-1">
+          <div className="flex items-center gap-2 overflow-hidden">
+            <span className="truncate text-[12px] font-semibold text-zinc-500 dark:text-zinc-400">
               {result.source_name}
             </span>
             <Badge tone="muted">{t(typeLabelKey(result.result_type))}</Badge>
@@ -87,7 +88,7 @@ export default function PreviewPane() {
         >
           <Star className="h-4 w-4" fill={isFav ? "currentColor" : "none"} />
         </IconButton>
-        <IconButton title={t("preview.copy")} onClick={() => navigator.clipboard?.writeText(result.url)}>
+        <IconButton title={t("preview.copy")} onClick={() => cmd.copyUrl(result.url)}>
           <Copy className="h-4 w-4" />
         </IconButton>
         <IconButton title={t("preview.reload")} onClick={() => setReloadKey((k) => k + 1)}>
@@ -104,7 +105,7 @@ export default function PreviewPane() {
         </IconButton>
       </div>
 
-      {view === "translated" && translatedDesc && (
+      {view === "translated" && (
         <div className="border-b border-edge-light bg-indigo-500/5 px-3 py-2 text-[12px] text-zinc-600 dark:border-edge-dark dark:text-zinc-300">
           <div className="mb-1 flex items-center gap-2">
             <Badge tone="accent">{t("common.translated")}</Badge>
@@ -116,7 +117,7 @@ export default function PreviewPane() {
               {t("preview.openTranslated")}
             </button>
           </div>
-          <p className="line-clamp-3">{translatedDesc}</p>
+          {translatedDesc && <p className="line-clamp-3">{translatedDesc}</p>}
         </div>
       )}
 

@@ -9,6 +9,7 @@ export interface TranslationResult {
   text: string;
   provider: TranslationProvider;
 }
+const pending = new Map<string, { request: Promise<TranslationResult>; controller: AbortController; users: Set<symbol> }>();
 
 /** Synchronous, offline path (glossary + cache). Returns null when unknown. */
 export function translateInstant(text: string, target: string): TranslationResult | null {
@@ -26,7 +27,8 @@ export function translateInstant(text: string, target: string): TranslationResul
 export async function translateText(
   text: string,
   target: string,
-  source?: string
+  source?: string,
+  signal?: AbortSignal
 ): Promise<TranslationResult> {
   const trimmed = text.trim();
   if (!trimmed) return { text, provider: "cache" };
@@ -37,9 +39,34 @@ export async function translateText(
   const from = source ?? guessSourceLanguage(trimmed);
   if (from === target) return { text: trimmed, provider: "cache" };
 
-  const out = await enqueue(() => mymemoryTranslate(trimmed, from, target));
-  cacheSet(target, trimmed, out);
-  return { text: out, provider: "mymemory" };
+  const key = JSON.stringify([from, target, trimmed]);
+  if (signal?.aborted) throw new DOMException("Translation cancelled", "AbortError");
+  let entry = pending.get(key);
+  if (!entry || entry.controller.signal.aborted) {
+    const controller = new AbortController();
+    const request = enqueue(async () => {
+      if (controller.signal.aborted) throw new DOMException("Translation cancelled", "AbortError");
+      const out = await mymemoryTranslate(trimmed, from, target, controller.signal);
+      cacheSet(target, trimmed, out);
+      return { text: out, provider: "mymemory" as const };
+    }, controller.signal);
+    entry = { request, controller, users: new Set() };
+    pending.set(key, entry);
+  }
+  const active = entry;
+  const user = Symbol();
+  active.users.add(user);
+  const release = () => {
+    active.users.delete(user);
+    if (!active.users.size) active.controller.abort();
+  };
+  signal?.addEventListener("abort", release, { once: true });
+  try { return await active.request; }
+  finally {
+    signal?.removeEventListener("abort", release);
+    release();
+    if (pending.get(key) === active) pending.delete(key);
+  }
 }
 
 /** Translate with an offline fallback (never throws). */

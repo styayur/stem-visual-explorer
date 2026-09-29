@@ -22,7 +22,14 @@ impl MaotianProvider {
     }
 
     async fn fetch(ctx: &SearchContext) -> Result<CachedIndex> {
-        let body = ctx.client.get(INDEX_URL).send().await?.text().await?;
+        let body = ctx
+            .client
+            .get(INDEX_URL)
+            .send()
+            .await?
+            .error_for_status()?
+            .text()
+            .await?;
         let entries = parse_home(&body)?;
         if entries.is_empty() {
             return Err(AppError::Parse("maotian homepage had no entries".into()));
@@ -60,6 +67,12 @@ impl SearchProvider for MaotianProvider {
             .and_then(|i| i.as_ref().map(|c| c.updated_at.clone()))
     }
 
+    fn clear_index(&self) {
+        if let Ok(mut index) = self.index.lock() {
+            *index = None;
+        }
+    }
+
     async fn load_index(&self, ctx: &SearchContext) -> Result<Option<common::CachedIndex>> {
         Ok(Some(Self::fetch(ctx).await?))
     }
@@ -70,44 +83,18 @@ impl SearchProvider for MaotianProvider {
         query: &NormalizedQuery,
         opts: &SearchOptions,
     ) -> Result<Vec<SearchResult>> {
-        let need_fetch = {
-            let lock = self
-                .index
-                .lock()
-                .map_err(|_| AppError::Other("lock poisoned".into()))?;
-            lock.as_ref()
-                .map(|c| c.is_stale(common::STALE_AFTER_DAYS) || opts.force_refresh)
-                .unwrap_or(true)
-        };
-        if need_fetch {
-            match Self::fetch(ctx).await {
-                Ok(fresh) => {
-                    let mut lock = self
-                        .index
-                        .lock()
-                        .map_err(|_| AppError::Other("lock poisoned".into()))?;
-                    *lock = Some(fresh);
-                }
-                Err(e) => {
-                    let lock = self
-                        .index
-                        .lock()
-                        .map_err(|_| AppError::Other("lock poisoned".into()))?;
-                    if lock.is_none() {
-                        return Err(e);
-                    }
-                }
-            }
-        }
-        let lock = self
-            .index
-            .lock()
-            .map_err(|_| AppError::Other("lock poisoned".into()))?;
-        let entries = lock.as_ref().map(|c| c.entries.as_slice()).unwrap_or(&[]);
+        let index = common::cached_index(
+            ctx,
+            self.id(),
+            &self.index,
+            opts.force_refresh,
+            Self::fetch(ctx),
+        )
+        .await?;
         Ok(common::search_entries(
             self.id(),
             self.name(),
-            entries,
+            &index.entries,
             query,
         ))
     }

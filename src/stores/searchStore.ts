@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import * as cmd from "../lib/commands";
+import { attempt, reportError } from "./noticeStore";
 import type {
   Favorite,
   HistoryEntry,
@@ -37,8 +38,20 @@ interface SearchState {
   toggleFavorite: (r: SearchResult) => Promise<void>;
   isFavorite: (id: string) => boolean;
   loadHistory: () => Promise<void>;
+  clearHistory: () => Promise<void>;
   openSelectedInWindow: () => Promise<void>;
   openSelectedExternal: () => Promise<void>;
+}
+
+let searchVersion = 0;
+let favoriteQueue = Promise.resolve();
+
+function filterResults(response: SearchResponse | null, site: string | null, type: TypeFilter) {
+  return (response?.results ?? []).filter((r) => (!site || r.source_id === site) && (type === "all" || r.result_type === type));
+}
+
+function firstSelection(results: SearchResult[]) {
+  return { selectedId: results[0]?.id ?? null, selectedIndex: results.length ? 0 : -1 };
 }
 
 export const useSearchStore = create<SearchState>((set, get) => ({
@@ -59,31 +72,34 @@ export const useSearchStore = create<SearchState>((set, get) => ({
   setQuery: (q) => set({ query: q }),
 
   runSearch: async (q, forceRefresh = false) => {
+    const version = ++searchVersion;
     const query = (q ?? get().query).trim();
     if (query.length === 0) {
-      set({ response: null, loading: false, selectedId: null, selectedIndex: -1 });
+      set({ query, response: null, error: null, expandedTerms: [], quickLook: null, loading: false, selectedId: null, selectedIndex: -1 });
       return;
     }
-    set({ loading: true, error: null, query });
+    set({ loading: true, error: null, query, quickLook: null, selectedId: null, selectedIndex: -1 });
     try {
       const response = await cmd.runSearch(query, forceRefresh);
+      if (version !== searchVersion) return;
       set({
         response,
         loading: false,
         expandedTerms: response.expanded_terms,
-        selectedId: response.results[0]?.id ?? null,
-        selectedIndex: response.results.length > 0 ? 0 : -1,
+        ...firstSelection(filterResults(response, get().siteFilter, get().typeFilter)),
       });
-      await cmd.addHistory(query, response.total);
-      await get().loadHistory();
+      await attempt(async () => {
+        await cmd.addHistory(query, response.total);
+        await get().loadHistory();
+      });
     } catch (e) {
-      set({ loading: false, error: String(e) });
+      if (version === searchVersion) set({ response: null, expandedTerms: [], loading: false, error: String(e) });
     }
   },
 
-  setSiteFilter: (id) => set({ siteFilter: id, selectedIndex: -1, selectedId: null }),
+  setSiteFilter: (id) => set({ siteFilter: id, quickLook: null, ...firstSelection(filterResults(get().response, id, get().typeFilter)) }),
 
-  setTypeFilter: (t) => set({ typeFilter: t, selectedIndex: -1, selectedId: null }),
+  setTypeFilter: (t) => set({ typeFilter: t, quickLook: null, ...firstSelection(filterResults(get().response, get().siteFilter, t)) }),
 
   select: (index) => {
     const results = visibleResults();
@@ -94,7 +110,7 @@ export const useSearchStore = create<SearchState>((set, get) => ({
   selectById: (id) => {
     const results = visibleResults();
     const idx = results.findIndex((r) => r.id === id);
-    set({ selectedId: id, selectedIndex: idx });
+    set({ selectedId: idx >= 0 ? id : null, selectedIndex: idx });
   },
 
   setQuickLook: (r) => set({ quickLook: r }),
@@ -116,13 +132,12 @@ export const useSearchStore = create<SearchState>((set, get) => ({
   },
 
   toggleFavorite: async (r) => {
-    const isFav = get().favoriteIds.has(r.id);
-    if (isFav) {
-      await cmd.removeFavorite(r.id);
-    } else {
-      await cmd.addFavorite(r);
-    }
-    await get().loadFavorites();
+    favoriteQueue = favoriteQueue.then(async () => {
+      if (get().favoriteIds.has(r.id)) await cmd.removeFavorite(r.id);
+      else await cmd.addFavorite(r);
+      await get().loadFavorites();
+    }).catch(reportError);
+    await favoriteQueue;
   },
 
   isFavorite: (id) => get().favoriteIds.has(id),
@@ -131,6 +146,8 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     const history = await cmd.listHistory();
     set({ history });
   },
+
+  clearHistory: async () => { await attempt(async () => { await cmd.clearHistory(); set({ history: [] }); }); },
 
   openSelectedInWindow: async () => {
     const r = selectedResult();
@@ -146,15 +163,11 @@ export const useSearchStore = create<SearchState>((set, get) => ({
 // Helpers attached to the store prototype for reuse across components.
 export function visibleResults(): SearchResult[] {
   const { response, siteFilter, typeFilter } = useSearchStore.getState();
-  if (!response) return [];
-  let results = response.results;
-  if (siteFilter) results = results.filter((r) => r.source_id === siteFilter);
-  if (typeFilter !== "all") results = results.filter((r) => r.result_type === typeFilter);
-  return results;
+  return filterResults(response, siteFilter, typeFilter);
 }
 
 export function selectedResult(): SearchResult | null {
   const { selectedId, response } = useSearchStore.getState();
   if (!response || !selectedId) return null;
-  return response.results.find((r) => r.id === selectedId) ?? null;
+  return visibleResults().find((r) => r.id === selectedId) ?? null;
 }

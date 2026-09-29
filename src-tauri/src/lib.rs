@@ -51,3 +51,5 @@ pub fn run() {
 /// --no-default-features` for the pure-logic test suite).
 #[cfg(not(feature = "tauri"))]
 pub fn run() {}
+#[cfg(test)]
+mod regression_tests;

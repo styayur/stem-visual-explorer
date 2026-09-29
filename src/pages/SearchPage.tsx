@@ -1,4 +1,5 @@
 import { LayoutGrid } from "lucide-react";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import FilterBar from "../components/FilterBar";
 import SourceSidebar from "../components/SourceSidebar";
@@ -17,6 +18,13 @@ export default function SearchPage() {
   const expandedTerms = useSearchStore((s) => s.expandedTerms);
   const workspaceSelected = useWorkspaceStore((s) => s.selected);
   const openWorkspace = useWorkspaceStore((s) => s.open);
+  const [wide, setWide] = useState(() => window.matchMedia("(min-width: 1024px)").matches);
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const update = () => setWide(media.matches);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   return (
     <div className="flex h-full flex-col">
@@ -30,7 +38,7 @@ export default function SearchPage() {
           disabled={workspaceSelected.length === 0}
           title={
             workspaceSelected.length === 0
-              ? "Select results to build a workspace"
+              ? t("workspace.select")
               : `${t("workspace.title")} (${workspaceSelected.length})`
           }
           className={cn(
@@ -67,7 +75,7 @@ export default function SearchPage() {
       )}
 
       <div className="flex min-h-0 flex-1">
-        <aside className="w-[210px] shrink-0">
+        <aside className="w-[130px] shrink-0 sm:w-[210px]">
           <SourceSidebar />
         </aside>
 
@@ -78,7 +86,7 @@ export default function SearchPage() {
           </div>
         </section>
 
-        {previewMode === "side" && (
+        {previewMode === "side" && wide && (
           <aside className="hidden w-[38%] min-w-[320px] shrink-0 border-l border-edge-light bg-white dark:border-edge-dark dark:bg-surface-dark lg:block">
             <PreviewPane />
           </aside>
@@ -86,6 +94,7 @@ export default function SearchPage() {
       </div>
 
       {previewMode === "inline" && <InlinePreview />}
+      {previewMode === "side" && !wide && <div className="h-[38%] min-h-0 border-t border-edge-light dark:border-edge-dark"><PreviewPane /></div>}
       <QuickLook />
     </div>
   );

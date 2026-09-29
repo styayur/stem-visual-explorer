@@ -17,12 +17,28 @@ pub fn score(query: &NormalizedQuery, result: &SearchResult) -> f32 {
         .unwrap_or_default()
         .to_lowercase();
 
-    let raw = query.raw.to_lowercase();
+    let parsed = super::query::parse(&query.raw);
+    let raw = parsed
+        .terms
+        .iter()
+        .chain(parsed.phrases.iter())
+        .cloned()
+        .collect::<Vec<_>>()
+        .join(" ")
+        .to_lowercase();
+    let title_contains_all = !(parsed.terms.is_empty() && parsed.phrases.is_empty())
+        && parsed.terms.iter().all(|term| {
+            super::normalize::expand(&super::query::parse(term))
+                .tokens
+                .iter()
+                .any(|t| title.contains(t.as_str()))
+        })
+        && parsed.phrases.iter().all(|p| title.contains(p.as_str()));
     let mut score = 0.0_f32;
 
     if !raw.is_empty() && title.trim() == raw.trim() {
         score += 100.0;
-    } else if !query.tokens.is_empty() && query.tokens.iter().all(|t| title.contains(t.as_str())) {
+    } else if title_contains_all {
         score += 60.0;
     } else if query.tokens.iter().any(|t| title.contains(t.as_str())) {
         score += 30.0;
@@ -68,6 +84,7 @@ pub fn rank(query: &NormalizedQuery, mut results: Vec<SearchResult>) -> Vec<Sear
             .unwrap_or(std::cmp::Ordering::Equal)
             .then_with(|| a.source_name.cmp(&b.source_name))
             .then_with(|| a.title.to_lowercase().cmp(&b.title.to_lowercase()))
+            .then_with(|| a.id.cmp(&b.id))
     });
     results
 }

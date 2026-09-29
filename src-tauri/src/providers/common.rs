@@ -1,10 +1,74 @@
+use super::SearchContext;
+use crate::cache;
+use crate::error::{AppError, Result};
 use crate::models::{NormalizedQuery, ResultType, SearchResult};
 use serde::{Deserialize, Serialize};
+use std::future::Future;
+use std::sync::Mutex;
 
 pub const CACHE_VERSION: u32 = 1;
 /// How many days before a cached index is considered stale and refreshed in
 /// the background. Stale caches remain searchable.
 pub const STALE_AFTER_DAYS: i64 = 7;
+
+/// Load the durable cache first. Failed automatic refreshes retain usable data;
+/// explicit refreshes report their failure so the settings UI cannot claim success.
+pub async fn cached_index<F>(
+    ctx: &SearchContext,
+    id: &str,
+    memory: &Mutex<Option<CachedIndex>>,
+    force: bool,
+    fetch: F,
+) -> Result<CachedIndex>
+where
+    F: Future<Output = Result<CachedIndex>>,
+{
+    let path = cache::cache_path(&ctx.cache_dir, id);
+    let cached = {
+        let mut lock = memory
+            .lock()
+            .map_err(|_| AppError::Other("lock poisoned".into()))?;
+        if lock.is_none() {
+            *lock = cache::read_json::<CachedIndex>(&path)
+                .ok()
+                .flatten()
+                .filter(|c| c.version == CACHE_VERSION && !c.entries.is_empty());
+        }
+        lock.clone()
+    };
+    if !force {
+        if let Some(c) = &cached {
+            if !c.is_stale(STALE_AFTER_DAYS) {
+                return Ok(c.clone());
+            }
+        }
+    }
+    let outcome = tokio::time::timeout(std::time::Duration::from_secs(8), fetch)
+        .await
+        .unwrap_or_else(|_| Err(AppError::Other(format!("{id} index refresh timed out"))));
+    match outcome {
+        Ok(fresh) => {
+            if fresh.entries.is_empty() {
+                return Err(AppError::Parse(format!("{id} index is empty")));
+            }
+            *memory
+                .lock()
+                .map_err(|_| AppError::Other("lock poisoned".into()))? = Some(fresh.clone());
+            if let Err(e) = cache::write_json(&path, &fresh) {
+                log::warn!("Cannot persist {id} index: {e}");
+            }
+            Ok(fresh)
+        }
+        Err(error) => {
+            if !force {
+                if let Some(c) = cached {
+                    return Ok(c);
+                }
+            }
+            Err(error)
+        }
+    }
+}
 
 /// One row in a locally-indexed provider.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -83,6 +147,9 @@ pub fn search_entries(
 
     let mut out = Vec::new();
     for entry in entries {
+        if crate::util::validate_http_url(&entry.url).is_err() {
+            continue;
+        }
         let hay = normalize_ws(&format!(
             "{} {} {} {}",
             entry.title,

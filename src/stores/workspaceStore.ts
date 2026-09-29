@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import * as cmd from "../lib/commands";
 import type { SearchResult } from "../lib/types";
+import { reportError } from "./noticeStore";
 
 interface WorkspaceState {
   selected: SearchResult[];
@@ -28,7 +29,9 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
   open: async () => {
     const selected = get().selected;
     if (selected.length === 0) return;
-    await cmd.openWorkspace(selected.map((r) => r.url));
-    set({ selected: [] });
+    try {
+      await cmd.openWorkspace(selected.map((r) => r.url));
+      set({ selected: [] });
+    } catch (e) { reportError(e); }
   },
 }));

@@ -95,6 +95,15 @@ const SYNONYMS: Array<[string, string]> = [
   ["加速度", "acceleration"],
   ["速度", "velocity"],
   ["位移", "displacement"],
+  ["駐波", "standing wave"],
+  ["簡諧振動", "harmonic oscillator"],
+  ["電磁感應", "electromagnetic induction"],
+  ["電場", "electric field"],
+  ["磁場", "magnetic field"],
+  ["傅里葉", "fourier"],
+  ["傅立葉", "fourier"],
+  ["導數", "derivative"],
+  ["積分", "integral"],
 ];
 
 function parseResultType(s: string): ResultType | null {
@@ -129,7 +138,7 @@ export function parseQuery(raw: string): ParsedQuery {
         phrase += s[i++];
       }
       if (i < s.length) i++;
-      if (phrase.trim()) out.phrases.push(phrase.trim().toLowerCase());
+      if (phrase.trim()) out.phrases.push(whitespace(phrase).toLowerCase());
       continue;
     }
     let start = i;
@@ -158,8 +167,7 @@ function addWithSynonyms(term: string, set: Set<string>): void {
   set.add(trimmed);
 
   const queue: string[] = [trimmed];
-  let depth = 0;
-  while (queue.length > 0 && depth <= 8) {
+  while (queue.length > 0) {
     const current = queue.pop() as string;
     for (const [from, to] of SYNONYMS) {
       const fromL = from.toLowerCase();
@@ -184,7 +192,6 @@ function addWithSynonyms(term: string, set: Set<string>): void {
         }
       }
     }
-    depth++;
   }
 }
 
@@ -192,6 +199,13 @@ export function expand(parsed: ParsedQuery): NormalizedQuery {
   const set = new Set<string>();
   for (const t of parsed.terms) addWithSynonyms(t.toLowerCase(), set);
   for (const p of parsed.phrases) addWithSynonyms(p.toLowerCase(), set);
+  // Match multiword English concepts even when the query is not quoted.
+  for (let start = 0; start < parsed.terms.length; start++) {
+    for (let size = 2; size <= 4 && start + size <= parsed.terms.length; size++) {
+      const phrase = parsed.terms.slice(start, start + size).join(" ").toLowerCase();
+      if (SYNONYMS.some(([from, to]) => from === phrase || to === phrase)) addWithSynonyms(phrase, set);
+    }
+  }
   return {
     raw: parsed.raw,
     tokens: Array.from(set).sort(),
@@ -225,10 +239,11 @@ export function matchEntries(
   sourceName: string,
   query: NormalizedQuery
 ): SearchResult[] {
-  if (query.tokens.length === 0 && query.phrases.length === 0) return [];
+  if (query.tokens.length === 0 && query.phrases.length === 0 && !query.siteFilter && !query.typeFilter) return [];
 
   const out: SearchResult[] = [];
   for (const e of entries) {
+    try { if (!["http:", "https:"].includes(new URL(e.url).protocol)) continue; } catch { continue; }
     const hay = whitespace(
       `${e.title} ${e.tags.join(" ")} ${e.description ?? ""} ${e.url}`
     ).toLowerCase();
@@ -260,12 +275,16 @@ export function scoreResult(query: NormalizedQuery, r: SearchResult): number {
   const title = r.title.toLowerCase();
   const tags = r.tags.map((t) => t.toLowerCase());
   const desc = (r.description ?? "").toLowerCase();
-  const raw = query.raw.toLowerCase();
+  const parsed = parseQuery(query.raw);
+  const raw = [...parsed.terms, ...parsed.phrases].join(" ").toLowerCase();
+  const titleContainsAll = parsed.terms.length + parsed.phrases.length > 0 &&
+    parsed.terms.every((term) => expand(parseQuery(term)).tokens.some((t) => title.includes(t))) &&
+    parsed.phrases.every((phrase) => title.includes(phrase));
 
   let score = 0;
   if (raw && title.trim() === raw.trim()) {
     score += 100;
-  } else if (query.tokens.length > 0 && query.tokens.every((t) => title.includes(t))) {
+  } else if (titleContainsAll) {
     score += 60;
   } else if (query.tokens.some((t) => title.includes(t))) {
     score += 30;
@@ -291,6 +310,6 @@ export function rankResults(query: NormalizedQuery, results: SearchResult[]): Se
     if (a.source_name !== b.source_name) return a.source_name < b.source_name ? -1 : 1;
     const at = a.title.toLowerCase();
     const bt = b.title.toLowerCase();
-    return at < bt ? -1 : at > bt ? 1 : 0;
+    return at < bt ? -1 : at > bt ? 1 : a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
   });
 }

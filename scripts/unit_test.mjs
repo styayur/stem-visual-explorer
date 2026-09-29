@@ -7,7 +7,8 @@
 import assert from "node:assert/strict";
 
 import { glossaryLookup, glossarySize } from "../src/lib/translate/glossary.ts";
-import { guessSourceLanguage, mymemoryTranslate } from "../src/lib/translate/mymemory.ts";
+import { chunk, guessSourceLanguage, mymemoryTranslate } from "../src/lib/translate/mymemory.ts";
+import { httpUrl, workspaceUrls } from "../src/lib/urls.ts";
 import {
   buildEmbeddableTranslatedUrl,
   buildTranslatedPageUrl,
@@ -124,6 +125,59 @@ test("only a proxy template is embeddable", () => {
   assert.equal(buildEmbeddableTranslatedUrl("https://a.test/", "zh-CN", ""), null);
   assert.ok(buildEmbeddableTranslatedUrl("https://a.test/", "zh-CN", "https://p.test/?u={url}"));
 });
+
+console.log("regressions");
+test("traditional glossary and reverse lookup", () => {
+  assert.equal(glossaryLookup("standing wave", "zh-TW"), "駐波");
+  assert.equal(glossaryLookup("harmonic oscillator", "zh-TW"), "簡諧振動");
+  assert.equal(glossaryLookup("電場", "en"), "electric field");
+});
+test("multiword English and traditional query expansion", () => {
+  assert.ok(expand(parseQuery("standing wave")).tokens.includes("驻波"));
+  assert.ok(expand(parseQuery("電磁感應")).tokens.includes("electromagnetic induction"));
+});
+test("exact title still ranks first with source syntax", () => {
+  const q = expand(parseQuery("site:test curl"));
+  const ranked = rankResults(q, matchEntries(entries, "test", "Test", q));
+  assert.equal(ranked[0].title, "curl"); assert.ok(ranked[0].score >= 100);
+});
+test("filter-only query browses the index", () => {
+  assert.equal(matchEntries(entries, "test", "Test", expand(parseQuery("site:test"))).length, entries.length);
+});
+test("exact phrase normalizes whitespace and excludes unrelated rows", () => {
+  const q = expand(parseQuery('"vector   field"'));
+  assert.deepEqual(q.phrases, ["vector field"]);
+  assert.equal(matchEntries(entries, "test", "Test", q).length, 2);
+});
+test("ranking has a deterministic final tie-breaker", () => {
+  const q = expand(parseQuery("curl"));
+  const a = matchEntries(entries.slice(0, 1), "test", "Test", q)[0];
+  assert.deepEqual(rankResults(q, [{...a, id:"z"}, {...a, id:"a"}]).map((r) => r.id), ["a", "z"]);
+});
+test("external URLs and workspace payloads are validated", () => {
+  assert.equal(httpUrl("https://example.com"), "https://example.com/");
+  for (const url of ["javascript:alert(1)", "data:text/html,x", "file:///C:/x"]) assert.throws(() => httpUrl(url));
+  assert.throws(() => workspaceUrls({}));
+  assert.throws(() => workspaceUrls(Array(5).fill("https://example.com")));
+  assert.deepEqual(workspaceUrls(["https://example.com", "https://example.com/"]), ["https://example.com/"]);
+});
+test("unsafe translation proxies cannot be embedded", () => {
+  assert.equal(buildEmbeddableTranslatedUrl("https://example.com", "en", "javascript:{url}"), null);
+  assert.ok(buildTranslatedPageUrl("https://example.com", "en", "data:{url}").startsWith("https://translate.google.com"));
+});
+test("Unicode translation chunks preserve code points and byte limits", () => {
+  const input = "驻波🌊".repeat(180);
+  const pieces = chunk(input, 450);
+  assert.equal(pieces.join(""), input);
+  assert.ok(pieces.every((p) => Buffer.byteLength(p) <= 450));
+  assert.ok(!pieces.some((p) => /[\uD800-\uDBFF]$/.test(p)));
+});
+const realFetch = globalThis.fetch;
+try {
+  globalThis.fetch = async () => ({ ok: true, json: async () => ({ responseStatus: 403, responseData: { translatedText: "quota exhausted" } }) });
+  await assert.rejects(mymemoryTranslate("some text", "en", "zh-CN"), /403/);
+  passed++; console.log("  ok  translation service errors are not cached as translations");
+} finally { globalThis.fetch = realFetch; }
 
 if (process.argv.includes("--live")) {
   console.log("live MyMemory (network)");

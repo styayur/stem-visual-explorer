@@ -103,25 +103,29 @@ pub fn set_provider_enabled(
     id: String,
     enabled: bool,
 ) -> std::result::Result<(), String> {
-    {
-        let mut settings = state
-            .settings
-            .lock()
-            .map_err(|_| "lock poisoned".to_string())?;
-        if enabled {
-            if !settings.enabled_providers.contains(&id) {
-                settings.enabled_providers.push(id);
-            }
-        } else {
-            settings.enabled_providers.retain(|p| p != &id);
-        }
+    if state.registry.get(&id).is_none() {
+        return Err(format!("unknown provider {id}"));
     }
-    state.save_settings().map_err(to_err)
+    state
+        .update_settings(|settings| {
+            if enabled {
+                if !settings.enabled_providers.contains(&id) {
+                    settings.enabled_providers.push(id);
+                }
+            } else {
+                settings.enabled_providers.retain(|p| p != &id);
+            }
+        })
+        .map_err(to_err)
 }
 
 #[tauri::command]
 pub fn clear_cache(state: State<'_, AppState>) -> std::result::Result<usize, String> {
-    cache::clear_all(&state.cache_dir).map_err(to_err)
+    let removed = cache::clear_all(&state.cache_dir).map_err(to_err)?;
+    for provider in state.registry.all() {
+        provider.clear_index();
+    }
+    Ok(removed)
 }
 
 #[tauri::command]
@@ -138,14 +142,9 @@ pub fn save_settings(
     state: State<'_, AppState>,
     settings: Settings,
 ) -> std::result::Result<(), String> {
-    {
-        let mut current = state
-            .settings
-            .lock()
-            .map_err(|_| "lock poisoned".to_string())?;
-        *current = settings;
-    }
-    state.save_settings().map_err(to_err)
+    state
+        .update_settings(|current| *current = settings)
+        .map_err(to_err)
 }
 
 #[tauri::command]
@@ -198,7 +197,8 @@ pub fn open_external(state: State<'_, AppState>, url: String) -> std::result::Re
 }
 
 #[tauri::command]
-pub fn open_window(
+// WebView2 window creation must run outside the synchronous command handler.
+pub async fn open_window(
     app: tauri::AppHandle,
     state: State<'_, AppState>,
     url: String,
@@ -224,10 +224,14 @@ pub fn toggle_pin(app: tauri::AppHandle, label: String) -> std::result::Result<b
 }
 
 #[tauri::command]
-pub fn open_workspace(
+// Keep this asynchronous to avoid WebView2 deadlocking on Windows.
+pub async fn open_workspace(
     app: tauri::AppHandle,
     urls: Vec<String>,
 ) -> std::result::Result<String, String> {
+    if urls.is_empty() || urls.len() > 4 {
+        return Err("A workspace requires one to four pages".into());
+    }
     let mut valid = Vec::with_capacity(urls.len());
     for u in urls {
         valid.push(validate_http_url(&u).map_err(to_err)?.to_string());

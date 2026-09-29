@@ -40,7 +40,13 @@ pub fn parse(raw: &str) -> ParsedQuery {
                 i += 1; // closing quote
             }
             if !phrase.trim().is_empty() {
-                q.phrases.push(phrase.trim().to_lowercase());
+                q.phrases.push(
+                    phrase
+                        .split_whitespace()
+                        .collect::<Vec<_>>()
+                        .join(" ")
+                        .to_lowercase(),
+                );
             }
             continue;
         }
@@ -56,13 +62,21 @@ pub fn parse(raw: &str) -> ParsedQuery {
         if let Some(rest_of) = lower.strip_prefix("site:") {
             if !rest_of.is_empty() {
                 q.site_filter = Some(rest_of.to_string());
+            } else {
+                rest.push(token);
             }
         } else if let Some(rest_of) = lower.strip_prefix("source:") {
             if !rest_of.is_empty() {
                 q.site_filter = Some(rest_of.to_string());
+            } else {
+                rest.push(token);
             }
         } else if let Some(rest_of) = lower.strip_prefix("type:") {
-            q.type_filter = parse_result_type(rest_of);
+            if !rest_of.is_empty() {
+                q.type_filter = parse_result_type(rest_of);
+            } else {
+                rest.push(token);
+            }
         } else {
             rest.push(token);
         }

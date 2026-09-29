@@ -1,13 +1,20 @@
 {
   "name": "stem-visual-explorer",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "build:web": "tsc && vite build --mode web",
     "preview": "vite preview",
+    "test": "node --experimental-strip-types scripts/unit_test.mjs",
+    "test:web": "node scripts/web_regression.mjs",
+    "test:web:build": "npm run build:web && node scripts/web_build_smoke.mjs",
+    "test:desktop": "node scripts/desktop_regression.mjs",
     "tauri": "tauri"
   },
   "dependencies": {
@@ -21,14 +28,12 @@
     "@tauri-apps/cli": "^2.1.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
     "autoprefixer": "^10.4.20",
+    "playwright": "^1.62.1",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3",
-    "vite": "^5.4.10"
-  },
-  "allowScripts": {
-    "esbuild@0.21.5": true
+    "vite": "^8.3.1"
   }
 }

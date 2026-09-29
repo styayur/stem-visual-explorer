@@ -2,6 +2,8 @@ use crate::error::{AppError, Result};
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicU64, Ordering};
+static WRITE_ID: AtomicU64 = AtomicU64::new(0);
 
 /// Read a JSON cache file. Returns `None` when the file does not exist and
 /// `Err` only for genuine parse failures (never for a missing file).
@@ -20,10 +22,17 @@ pub fn write_json<T: Serialize>(path: &Path, value: &T) -> Result<()> {
     if let Some(parent) = path.parent() {
         std::fs::create_dir_all(parent)?;
     }
-    let tmp = path.with_extension("json.tmp");
+    let tmp = path.with_extension(format!(
+        "json.{}.{}.tmp",
+        std::process::id(),
+        WRITE_ID.fetch_add(1, Ordering::Relaxed)
+    ));
     let bytes = serde_json::to_vec_pretty(value)?;
     std::fs::write(&tmp, bytes)?;
-    std::fs::rename(&tmp, path)?;
+    if let Err(error) = std::fs::rename(&tmp, path) {
+        let _ = std::fs::remove_file(&tmp);
+        return Err(error.into());
+    }
     Ok(())
 }
 
@@ -36,9 +45,8 @@ pub fn clear_all(dir: &Path) -> Result<usize> {
     for entry in std::fs::read_dir(dir)? {
         let entry = entry?;
         let p = entry.path();
-        if p.extension().and_then(|e| e.to_str()) == Some("json")
-            && std::fs::remove_file(&p).is_ok()
-        {
+        if p.extension().and_then(|e| e.to_str()) == Some("json") {
+            std::fs::remove_file(&p)?;
             removed += 1;
         }
     }

@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ExternalLink, Search, Star } from "lucide-react";
 import { useSearchStore } from "../stores/searchStore";
 import * as cmd from "../lib/commands";
 import { Badge } from "../components/ui";
 import { useT, typeLabelKey } from "../lib/i18n";
+import { attempt } from "../stores/noticeStore";
 
 export default function FavoritesPage() {
   const t = useT();
@@ -16,11 +17,12 @@ export default function FavoritesPage() {
     () => Array.from(new Set(favorites.map((f) => f.result.source_id))),
     [favorites]
   );
+  useEffect(() => { if (source !== "all" && !sources.includes(source)) setSource("all"); }, [sources, source]);
 
   const filtered = useMemo(() => {
     const query = q.trim().toLowerCase();
     return favorites.filter((f) => {
-      const hay = `${f.result.title} ${f.result.source_name} ${f.result.tags.join(" ")}`.toLowerCase();
+      const hay = `${f.result.title} ${f.result.description ?? ""} ${f.result.source_name} ${f.result.tags.join(" ")}`.toLowerCase();
       const matchesQ = query.length === 0 || hay.includes(query);
       const matchesS = source === "all" || f.result.source_id === source;
       return matchesQ && matchesS;
@@ -40,6 +42,7 @@ export default function FavoritesPage() {
           />
         </div>
         <select
+          aria-label={t("fav.allSources")}
           value={source}
           onChange={(e) => setSource(e.target.value)}
           className="h-8 rounded-md border border-edge-light bg-white px-2 text-[12px] text-zinc-600 dark:border-edge-dark dark:bg-surface-dark dark:text-zinc-300"
@@ -47,7 +50,7 @@ export default function FavoritesPage() {
           <option value="all">{t("fav.allSources")}</option>
           {sources.map((s) => (
             <option key={s} value={s}>
-              {s}
+              {favorites.find((f) => f.result.source_id === s)?.result.source_name ?? s}
             </option>
           ))}
         </select>
@@ -81,7 +84,7 @@ export default function FavoritesPage() {
               type="button"
               title={t("row.openWindow")}
               className="rounded p-1.5 text-zinc-400 hover:bg-zinc-200 hover:text-indigo-500 dark:hover:bg-zinc-700"
-              onClick={() => cmd.openWindow(f.result.url, `${f.result.title} — ${f.result.source_name}`)}
+              onClick={() => attempt(() => cmd.openWindow(f.result.url, `${f.result.title} — ${f.result.source_name}`))}
             >
               <ExternalLink className="h-4 w-4" />
             </button>

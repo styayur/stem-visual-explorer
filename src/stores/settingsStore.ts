@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import * as cmd from "../lib/commands";
 import type { Settings } from "../lib/types";
+import { reportError } from "./noticeStore";
 
 export type Page = "search" | "favorites" | "settings";
 
@@ -13,24 +14,8 @@ interface SettingsState {
   setPage: (page: Page) => void;
 }
 
-const DEFAULTS: Settings = {
-  theme: "system",
-  preview_mode: "side",
-  enabled_providers: [
-    "mathinsight",
-    "falstad",
-    "phet",
-    "betterexplained",
-    "physicsfundamentals",
-    "physicstuff",
-    "maotian",
-  ],
-  mock_mode: false,
-  ui_locale: "en",
-  translate_target: "zh-CN",
-  translate_results: false,
-  page_translate_proxy: "",
-};
+let saves = Promise.resolve();
+let revision = 0;
 
 function applyTheme(theme: Settings["theme"]) {
   const root = document.documentElement;
@@ -43,21 +28,33 @@ function applyTheme(theme: Settings["theme"]) {
 }
 
 export const useSettingsStore = create<SettingsState>((set, get) => ({
-  settings: DEFAULTS,
+  settings: cmd.defaultSettings(),
   page: "search",
   loaded: false,
 
   load: async () => {
-    const settings = await cmd.getSettings();
-    set({ settings, loaded: true });
-    applyTheme(settings.theme);
+    const started = revision;
+    try {
+      const settings = await cmd.getSettings();
+      if (started === revision) { set({ settings }); applyTheme(settings.theme); }
+    } catch (e) { reportError(e); }
+    finally { set({ loaded: true }); }
   },
 
   update: async (patch) => {
-    const next = { ...get().settings, ...patch };
+    const version = ++revision;
+    const previous = get().settings;
+    const next = cmd.normalizeSettings({ ...previous, ...patch });
     set({ settings: next });
     applyTheme(next.theme);
-    await cmd.saveSettings(next);
+    saves = saves.then(async () => {
+      try { await cmd.saveSettings(next); }
+      catch (error) {
+        if (revision === version) { set({ settings: previous }); applyTheme(previous.theme); }
+        reportError(error);
+      }
+    });
+    await saves;
   },
 
   setPage: (page) => set({ page }),

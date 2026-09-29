@@ -40,13 +40,15 @@ impl AppState {
         })
     }
 
-    pub fn save_settings(&self) -> Result<()> {
-        let settings = self
+    pub fn update_settings(&self, update: impl FnOnce(&mut Settings)) -> Result<()> {
+        let mut settings = self
             .settings
             .lock()
             .map_err(|_| AppError::Other("lock poisoned".into()))?;
-        let bytes = serde_json::to_vec_pretty(&*settings)?;
-        std::fs::write(&self.settings_path, bytes)?;
+        let mut next = settings.clone();
+        update(&mut next);
+        crate::cache::write_json(&self.settings_path, &next)?;
+        *settings = next;
         Ok(())
     }
 

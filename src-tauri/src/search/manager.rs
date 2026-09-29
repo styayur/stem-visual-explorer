@@ -49,12 +49,14 @@ pub async fn run_search(
 
     // Concurrent search: each provider runs in its own task with a timeout.
     let mut set: JoinSet<(String, Result<Vec<SearchResult>>)> = JoinSet::new();
+    let mut tasks = HashMap::new();
     for provider in selected.iter() {
         let provider = Arc::clone(provider);
         let ctx = ctx.clone();
         let query = query.clone();
         let opts = SearchOptions { force_refresh };
-        set.spawn(async move {
+        let task_provider = provider.id().to_string();
+        let task = set.spawn(async move {
             let id = provider.id().to_string();
             let result = tokio::time::timeout(
                 std::time::Duration::from_secs(PROVIDER_TIMEOUT_SECS),
@@ -69,6 +71,7 @@ pub async fn run_search(
             });
             (id, result)
         });
+        tasks.insert(task.id(), task_provider);
     }
 
     let mut results: Vec<SearchResult> = Vec::new();
@@ -76,7 +79,13 @@ pub async fn run_search(
     while let Some(res) = set.join_next().await {
         let (id, outcome) = match res {
             Ok(t) => t,
-            Err(e) => ("unknown".to_string(), Err(AppError::Other(e.to_string()))),
+            Err(e) => (
+                tasks
+                    .get(&e.id())
+                    .cloned()
+                    .unwrap_or_else(|| "unknown".into()),
+                Err(AppError::Other(e.to_string())),
+            ),
         };
         match outcome {
             Ok(mut r) => results.append(&mut r),

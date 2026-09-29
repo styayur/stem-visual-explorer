@@ -8,6 +8,7 @@ import {
   type IndexEntryLike,
 } from "./searchEngine";
 import type { ProviderInfo, ProviderStatus, SearchResponse, SearchResult } from "./types";
+import { httpUrl } from "./urls";
 
 export interface ManifestEntry {
   id: string;
@@ -33,6 +34,36 @@ const STORAGE_KEY = "sve.webIndex.v1";
 
 let manifest: ManifestEntry[] | null = null;
 const loaded = new Map<string, ProviderIndex>();
+let generation = 0;
+let manifestRequest: Promise<ManifestEntry[]> | null = null;
+const pending = new Map<string, Promise<ProviderIndex | null>>();
+
+async function fetchJson(url: string): Promise<unknown> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15000);
+  try {
+    const res = await fetch(url, { cache: "no-cache", signal: controller.signal });
+    if (!res.ok) throw new Error(`Failed to load index (${res.status})`);
+    return await res.json();
+  } finally { clearTimeout(timer); }
+}
+
+function validManifest(value: unknown): value is ManifestEntry[] {
+  return Array.isArray(value) && value.every((v) => v && typeof v.id === "string" &&
+    typeof v.name === "string" && typeof v.homepage === "string" && typeof v.updated_at === "string" &&
+    typeof v.file === "string" && /^[\w-]+\.json$/.test(v.file) && Number.isFinite(v.count));
+}
+
+function validIndex(value: unknown, entry: ManifestEntry): value is ProviderIndex {
+  const v = value as ProviderIndex | null;
+  return !!v && v.source_id === entry.id && v.updated_at === entry.updated_at &&
+    typeof v.source_name === "string" && Array.isArray(v.entries) && v.entries.every((e) => {
+      try { httpUrl(e.url); } catch { return false; }
+      return typeof e.title === "string" && typeof e.result_type === "string" &&
+        Array.isArray(e.tags) && e.tags.every((t) => typeof t === "string") &&
+        (e.description === null || typeof e.description === "string");
+    });
+}
 
 function indexUrl(file: string): string {
   return `${base.replace(/\/$/, "")}/index/${file}`;
@@ -40,16 +71,37 @@ function indexUrl(file: string): string {
 
 export async function loadManifest(): Promise<ManifestEntry[]> {
   if (manifest) return manifest;
-  const res = await fetch(`${base.replace(/\/$/, "")}/index/manifest.json`, {
-    cache: "no-cache",
-  });
-  if (!res.ok) throw new Error(`failed to load index manifest (${res.status})`);
-  manifest = (await res.json()) as ManifestEntry[];
-  return manifest;
+  if (manifestRequest) return manifestRequest;
+  const version = generation;
+  const request = (async () => {
+    let value: unknown;
+    try {
+      value = await fetchJson(indexUrl("manifest.json"));
+      if (!validManifest(value)) throw new Error("Invalid index manifest");
+      if (version === generation) {
+        try { localStorage.setItem(`${STORAGE_KEY}:manifest`, JSON.stringify(value)); } catch { /* optional cache */ }
+      }
+    } catch (error) {
+      try { value = JSON.parse(localStorage.getItem(`${STORAGE_KEY}:manifest`) ?? "null"); } catch { /* unavailable */ }
+      if (!validManifest(value)) throw error;
+    }
+    if (version === generation) manifest = value as ManifestEntry[];
+    return value as ManifestEntry[];
+  })();
+  manifestRequest = request;
+  try { return await request; } finally { if (manifestRequest === request) manifestRequest = null; }
 }
 
 async function loadProvider(id: string): Promise<ProviderIndex | null> {
   if (loaded.has(id)) return loaded.get(id) as ProviderIndex;
+  if (pending.has(id)) return pending.get(id)!;
+  const request = fetchProvider(id);
+  pending.set(id, request);
+  try { return await request; } finally { if (pending.get(id) === request) pending.delete(id); }
+}
+
+async function fetchProvider(id: string): Promise<ProviderIndex | null> {
+  const version = generation;
   const m = (await loadManifest()).find((x) => x.id === id);
   if (!m) return null;
 
@@ -57,22 +109,26 @@ async function loadProvider(id: string): Promise<ProviderIndex | null> {
   try {
     const cached = localStorage.getItem(`${STORAGE_KEY}:${m.updated_at}:${id}`);
     if (cached) {
-      const parsed = JSON.parse(cached) as ProviderIndex;
-      loaded.set(id, parsed);
-      return parsed;
+      const parsed: unknown = JSON.parse(cached);
+      if (validIndex(parsed, m)) {
+        if (version === generation) loaded.set(id, parsed);
+        return parsed;
+      }
     }
   } catch {
     /* ignore */
   }
 
-  const res = await fetch(indexUrl(m.file));
-  if (!res.ok) throw new Error(`failed to load ${m.file} (${res.status})`);
-  const parsed = (await res.json()) as ProviderIndex;
-  loaded.set(id, parsed);
-  try {
-    localStorage.setItem(`${STORAGE_KEY}:${m.updated_at}:${id}`, JSON.stringify(parsed));
-  } catch {
-    /* quota exceeded — memory cache is enough */
+  const parsed = await fetchJson(indexUrl(m.file));
+  if (!validIndex(parsed, m)) throw new Error(`Invalid index: ${id}`);
+  if (version === generation) {
+    loaded.set(id, parsed);
+    try {
+      for (const key of Object.keys(localStorage)) {
+        if (key.startsWith(`${STORAGE_KEY}:`) && key.endsWith(`:${id}`)) localStorage.removeItem(key);
+      }
+      localStorage.setItem(`${STORAGE_KEY}:${m.updated_at}:${id}`, JSON.stringify(parsed));
+    } catch { /* quota exceeded — memory cache is enough */ }
   }
   return parsed;
 }
@@ -92,8 +148,10 @@ export async function webProviders(enabled: string[]): Promise<ProviderInfo[]> {
 
 export async function webSearch(
   rawQuery: string,
-  enabled: string[]
+  enabled: string[],
+  forceRefresh = false
 ): Promise<SearchResponse> {
+  if (forceRefresh) await clearWebCache();
   const q = parseAndExpand(rawQuery);
   const m = await loadManifest();
 
@@ -122,7 +180,7 @@ export async function webSearch(
           indexed_items: entry.count,
           last_updated: entry.updated_at,
           experimental: entry.experimental,
-          enabled: true,
+          enabled: enabled.includes(entry.id),
         });
       } catch (e) {
         statuses.push({
@@ -135,7 +193,7 @@ export async function webSearch(
           indexed_items: entry.count,
           last_updated: entry.updated_at,
           experimental: entry.experimental,
-          enabled: true,
+          enabled: enabled.includes(entry.id),
         });
       }
     })
@@ -145,6 +203,7 @@ export async function webSearch(
   if (q.typeFilter) filtered = filtered.filter((r) => r.result_type === q.typeFilter);
 
   const ranked = rankResults(q, filtered);
+  for (const status of statuses) status.count = ranked.filter((r) => r.source_id === status.id).length;
 
   // Include disabled providers as idle so the sidebar can show every source.
   const all = await loadManifest();
@@ -177,6 +236,10 @@ export async function webSearch(
 
 /** Force a re-fetch of one provider index (used by "Refresh index"). */
 export async function refreshWebProvider(id: string): Promise<void> {
+  generation++;
+  manifest = null;
+  manifestRequest = null;
+  pending.clear();
   loaded.delete(id);
   const m = await loadManifest();
   const entry = m.find((x) => x.id === id);
@@ -186,25 +249,25 @@ export async function refreshWebProvider(id: string): Promise<void> {
     } catch {
       /* ignore */
     }
-  }
+  } else throw new Error(`Unknown provider: ${id}`);
   await loadProvider(id);
 }
 
 /** Drop every cached index (memory + localStorage). */
 export async function clearWebCache(): Promise<number> {
-  const m = await loadManifest();
+  generation++;
+  manifest = null;
+  manifestRequest = null;
+  pending.clear();
   let removed = 0;
-  for (const x of m) {
-    try {
-      const key = `${STORAGE_KEY}:${x.updated_at}:${x.id}`;
-      if (localStorage.getItem(key)) {
+  try {
+    for (const key of Object.keys(localStorage)) {
+      if (key.startsWith(`${STORAGE_KEY}:`)) {
         localStorage.removeItem(key);
         removed++;
       }
-    } catch {
-      /* ignore */
     }
-  }
+  } catch { /* memory cache can still be cleared */ }
   loaded.clear();
   return removed;
 }

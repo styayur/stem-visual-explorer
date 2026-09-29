@@ -1,0 +1,267 @@
+// Real Chromium regression suite. External pages and translation are fixtures;
+// application assets and all seven provider indexes are served by the real app.
+import assert from "node:assert/strict";
+import { spawn } from "node:child_process";
+import { mkdir, readFile } from "node:fs/promises";
+import { chromium } from "playwright";
+
+const base = process.env.SVE_BASE || "http://127.0.0.1:1421/";
+const server = process.env.SVE_BASE ? null : spawn(process.execPath,
+  ["node_modules/vite/bin/vite.js", "--host", "127.0.0.1", "--port", "1421", "--strictPort"], { stdio: "pipe" });
+let browser;
+const errors = [];
+let checks = 0;
+const ok = (name) => { checks++; console.log(`ok ${checks} - ${name}`); };
+try {
+  for (let i = 0; ; i++) {
+    try { if ((await fetch(base)).ok) break; } catch { /* starting */ }
+    if (i > 100) throw new Error("Vite did not start");
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  browser = await chromium.launch({ headless: true, ...(process.env.SVE_CHROMIUM ? { executablePath: process.env.SVE_CHROMIUM } : {}) });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  let translations = 0;
+  await context.route("**/*", async (route) => {
+    const url = route.request().url();
+    if (url.startsWith(base)) return route.continue();
+    if (url.startsWith("https://api.mymemory.translated.net/")) {
+      translations++;
+      return route.fulfill({ json: { responseStatus: 200, responseData: { translatedText: `译文 ${new URL(url).searchParams.get("q")}` } } });
+    }
+    return route.fulfill({ contentType: "text/html", body: "<!doctype html><title>Preview fixture</title><p>Embedded page</p>" });
+  });
+  context.on("page", (p) => p.on("pageerror", (e) => errors.push(e.message)));
+  const page = await context.newPage();
+  await page.goto(base);
+  await page.waitForLoadState("networkidle");
+  assert.equal(await page.locator("aside").first().getByRole("checkbox").count(), 7);
+  ok("all seven source adapters appear");
+  const rows = page.locator('div[role="option"]');
+  const state = () => page.evaluate(async () => {
+    const { useSearchStore, visibleResults } = await import("/src/stores/searchStore.ts");
+    const s = useSearchStore.getState();
+    return { query: s.query, response: s.response, selectedId: s.selectedId, selectedIndex: s.selectedIndex, visible: visibleResults(), error: s.error, loading: s.loading, history: s.history };
+  });
+  const search = async (q) => {
+    await page.locator("#search-input").fill(q);
+    await page.locator("#search-input").press("Enter");
+    await page.waitForFunction(async (query) => {
+      const { useSearchStore } = await import("/src/stores/searchStore.ts");
+      const s = useSearchStore.getState(); return !s.loading && (query ? s.response?.query === query : !s.response);
+    }, q);
+  };
+  await search("curl");
+  assert.ok((await state()).response.total >= 3);
+  assert.equal(context.pages().length, 1, "search Enter must not open a stale result");
+  assert.equal(translations, 0, "translation is opt-in, including the preview");
+  ok("English search, no accidental popups or background translation");
+  await search("旋度"); assert.ok((await state()).response.expanded_terms.includes("curl"));
+  await search("駐波"); assert.ok((await state()).response.expanded_terms.includes("standing wave"));
+  await search("standing wave"); assert.ok((await state()).response.expanded_terms.includes("驻波"));
+  ok("simplified/traditional Chinese and multiword English synonyms");
+  await search('site:falstad "standing wave"');
+  assert.ok((await state()).response.results.every((r) => r.source_id === "falstad"));
+  await search("site:phet"); assert.ok((await state()).response.total > 0);
+  await search("type:simulation wave");
+  const typed = (await state()).response;
+  assert.ok(typed.results.length > 0 && typed.results.every((r) => r.result_type === "simulation"));
+  assert.equal(typed.providers.reduce((sum, p) => sum + p.count, 0), typed.total);
+  ok("source, exact phrase, filter-only queries and provider counts");
+  await search("wave");
+  await page.locator("aside").first().getByRole("button", { name: "PhET", exact: true }).click();
+  await search("energy");
+  let s = await state(); assert.equal(s.selectedId, s.visible[0]?.id); assert.equal(s.selectedIndex, 0);
+  assert.ok(s.visible.every((r) => r.source_id === "phet"));
+  await page.locator("aside").first().getByRole("button", { name: "All sources", exact: true }).click();
+  const falstad = page.locator("aside").first().getByRole("checkbox", { name: /Falstad/ });
+  await falstad.uncheck();
+  await page.waitForFunction(async () => !(await import("/src/stores/searchStore.ts")).useSearchStore.getState().loading);
+  s = await state(); assert.ok(!s.response.results.some((r) => r.source_id === "falstad"));
+  assert.ok(s.visible.length > 0, "checkbox must not set the source filter");
+  await falstad.check();
+  ok("filters keep selection aligned and toggles refresh without selecting a source");
+  await search("curl");
+  await rows.first().getByTitle("Add favorite", { exact: true }).click();
+  await page.getByRole("navigation").getByRole("button", { name: "Favorites" }).click();
+  await page.getByTitle("Remove favorite", { exact: true }).waitFor();
+  await page.keyboard.press("ArrowDown");
+  assert.equal((await state()).selectedIndex, 0, "favorites page cannot move hidden search selection");
+  await page.reload(); await page.waitForLoadState("networkidle");
+  await page.getByRole("navigation").getByRole("button", { name: "Favorites" }).click();
+  await page.getByTitle("Remove favorite", { exact: true }).waitFor();
+  await page.getByTitle("Remove favorite", { exact: true }).click();
+  await page.getByText("No favorites yet", { exact: false }).waitFor();
+  ok("favorites persist across reload and can be removed");
+  await page.keyboard.press("Control+k");
+  await page.locator("#search-input").waitFor();
+  assert.equal(await page.locator("#search-input").evaluate((e) => e === document.activeElement), true);
+  await search("curl");
+  await rows.first().click(); await page.keyboard.press("ArrowDown");
+  assert.equal((await state()).selectedIndex, 1);
+  await page.keyboard.press("Space"); await page.getByRole("dialog").waitFor();
+  await page.keyboard.press("Escape"); assert.equal(await page.getByRole("dialog").count(), 0);
+  await rows.first().click({ button: "right" }); await page.getByRole("menu").waitFor();
+  await page.keyboard.press("Escape"); assert.equal(await page.getByRole("menu").count(), 0);
+  ok("global search focus, arrow navigation, Quick Look and context menu");
+  await context.grantPermissions(["clipboard-read", "clipboard-write"], { origin: new URL(base).origin });
+  await page.getByRole("button", { name: "Copy URL", exact: true }).click();
+  s = await state();
+  assert.equal(await page.evaluate(() => navigator.clipboard.readText()), s.visible.find((r) => r.id === s.selectedId).url);
+  const oldFrame = await page.locator("iframe").elementHandle();
+  await page.getByRole("button", { name: "Reload preview", exact: true }).click();
+  assert.equal(await oldFrame.evaluate((frame) => frame.isConnected), false);
+  await rows.first().click();
+  const popup = context.waitForEvent("page");
+  await page.keyboard.press("Control+Enter");
+  const external = await popup; await external.waitForLoadState("domcontentloaded");
+  assert.equal(external.url(), (await state()).visible[0].url); await external.close();
+  ok("copy URL, reload preview and open selected result in a new window");
+  await search("wave");
+  for (let i = 0; i < 4; i++) await rows.nth(i).getByTitle("Add to workspace", { exact: true }).click();
+  assert.equal(await rows.nth(4).getByTitle("Maximum four pages", { exact: true }).isDisabled(), true);
+  const workspacePromise = context.waitForEvent("page");
+  await page.getByRole("button", { name: /Workspace 4/ }).click();
+  const workspace = await workspacePromise;
+  await workspace.waitForLoadState("networkidle");
+  assert.equal(await workspace.locator("iframe").count(), 4);
+  await workspace.locator("textarea").fill("Saved workspace notes");
+  await workspace.reload(); await workspace.waitForLoadState("networkidle");
+  assert.equal(await workspace.locator("textarea").inputValue(), "Saved workspace notes");
+  await workspace.getByRole("link").click(); await workspace.locator("#search-input").waitFor();
+  await workspace.close();
+  ok("four-pane workspace, capacity, notes persistence and return to search");
+  await page.getByRole("navigation").getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Dark", exact: true }).click();
+  assert.ok(await page.locator("html").evaluate((e) => e.classList.contains("dark")));
+  await page.getByRole("button", { name: "Inline", exact: true }).click();
+  await page.getByRole("navigation").getByRole("button", { name: "Search", exact: true }).click();
+  assert.equal(await page.locator("iframe").count(), 1);
+  await page.getByRole("navigation").getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("button", { name: "Off", exact: true }).click();
+  await page.getByRole("navigation").getByRole("button", { name: "Search", exact: true }).click();
+  assert.equal(await page.locator("iframe").count(), 0);
+  ok("theme and inline/off preview modes");
+  await page.getByRole("navigation").getByRole("button", { name: "Settings" }).click();
+  await page.getByRole("switch").click();
+  await page.getByRole("button", { name: "简体中文", exact: true }).click();
+  await page.getByRole("navigation").getByRole("button", { name: "搜索", exact: true }).click();
+  await search("fourier");
+  await page.waitForFunction(() => document.querySelector('[role="option"]')?.textContent?.includes("译文"));
+  assert.ok(translations > 0);
+  assert.equal(await page.locator("html").getAttribute("lang"), "zh-CN");
+  ok("interface language and opt-in result translation");
+  await page.getByRole("navigation").getByRole("button", { name: "设置", exact: true }).click();
+  await page.getByRole("button", { name: "清空历史", exact: true }).click();
+  await page.getByText("暂无搜索历史。", { exact: true }).waitFor();
+  await page.getByRole("button", { name: "English", exact: true }).click();
+  await page.getByRole("button", { name: "Clear cache", exact: true }).click();
+  await page.getByRole("status").filter({ hasText: "Index cache cleared" }).waitFor();
+  ok("history management and cache clearing feedback");
+  await page.evaluate(async () => {
+    const { useSearchStore } = await import("/src/stores/searchStore.ts");
+    const s = useSearchStore.getState();
+    await Promise.all([s.runSearch("curl"), s.runSearch("gradient")]);
+  });
+  assert.equal((await state()).response.query, "gradient");
+  await page.evaluate(async () => {
+    const { useSearchStore } = await import("/src/stores/searchStore.ts");
+    await Promise.all([useSearchStore.getState().runSearch("wave", true), useSearchStore.getState().runSearch("")]);
+  });
+  s = await state(); assert.equal(s.response, null); assert.equal(s.loading, false); assert.equal(s.error, null);
+  ok("latest search wins; clearing cancels stale responses");
+  await page.evaluate(() => localStorage.setItem("sve.settings", JSON.stringify({ theme: "dark" })));
+  await page.reload(); await page.waitForLoadState("networkidle");
+  await search("curl"); assert.ok((await state()).response.total > 0);
+  ok("partial legacy settings migrate without breaking search");
+  await page.evaluate(async () => { await (await import("/src/lib/webIndex.ts")).clearWebCache(); });
+  await page.route("**/index/manifest.json", (route) => route.fulfill({ status: 503, body: "offline" }));
+  await page.locator("#search-input").fill("gradient"); await page.locator("#search-input").press("Enter");
+  await page.getByRole("alert").filter({ hasText: "503" }).waitFor();
+  await page.unroute("**/index/manifest.json");
+  await page.getByRole("button", { name: "Retry", exact: true }).click();
+  await rows.first().waitFor();
+  ok("manifest failure is visible and retry recovers");
+  await page.evaluate(async () => {
+    const cmd = await import("/src/lib/commands.ts");
+    for (const value of ["javascript:alert(1)", "file:///C:/secret", "data:text/html,test"]) {
+      let rejected = false;
+      try { await cmd.openExternal(value); } catch { rejected = true; }
+      if (!rejected) throw new Error("Unsafe URL accepted");
+    }
+    const settings = cmd.normalizeSettings({ enabled_providers: [], translate_results: "false", theme: "bad" });
+    if (settings.theme !== "system" || settings.translate_results || settings.enabled_providers.length) throw new Error("Invalid settings migration");
+    const index = await import("/src/lib/webIndex.ts");
+    const saved = JSON.parse(localStorage.getItem("sve.webIndex.v1:manifest"));
+    await index.clearWebCache();
+    for (const p of saved) localStorage.setItem(`sve.webIndex.v1:${p.updated_at}:${p.id}`, '{"entries":null}');
+    const response = await index.webSearch("wave", saved.map((p) => p.id));
+    if (!response.total || response.providers.some((p) => p.error)) throw new Error("Corrupt index did not recover");
+  });
+  ok("malformed settings, unsafe URLs and corrupt index recovery");
+  const offline = await context.newPage();
+  await offline.route("**/index/**", (route) => route.abort());
+  await offline.goto(base); await offline.waitForLoadState("networkidle");
+  await offline.locator("#search-input").fill("wave"); await offline.locator("#search-input").press("Enter");
+  await offline.locator('div[role="option"]').first().waitFor();
+  await offline.close();
+  ok("cached manifest and indexes remain searchable when index requests fail");
+  await page.evaluate(async () => {
+    const { useSettingsStore } = await import("/src/stores/settingsStore.ts");
+    const original = Storage.prototype.setItem;
+    const before = useSettingsStore.getState().settings.theme;
+    Storage.prototype.setItem = () => { throw new DOMException("Storage quota reached", "QuotaExceededError"); };
+    try {
+      await useSettingsStore.getState().update({ theme: before === "dark" ? "light" : "dark" });
+      if (useSettingsStore.getState().settings.theme !== before) throw new Error("Failed save was not rolled back");
+    } finally { Storage.prototype.setItem = original; }
+  });
+  await page.getByRole("alert").filter({ hasText: "Storage quota reached" }).waitFor();
+  await page.getByRole("button", { name: "Dismiss", exact: true }).click();
+  ok("storage failure is visible and settings rollback");
+  const beforeCancellation = translations;
+  await page.evaluate(async () => {
+    const { translateText } = await import("/src/lib/translate/engine.ts");
+    const controller = new AbortController();
+    const requests = Array.from({ length: 20 }, (_, i) => translateText(`Queued unique text ${i}`, "zh-CN", undefined, controller.signal));
+    const settled = Promise.allSettled(requests);
+    controller.abort();
+    await settled;
+  });
+  assert.ok(translations <= beforeCancellation + 1, "cancelled queue must not keep sending content");
+  ok("translation cancellation removes queued network work");
+  await mkdir("dist-release", { recursive: true });
+  await page.screenshot({ path: "dist-release/audit-desktop.png" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: "dist-release/audit-mobile.png" });
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "mobile must not overflow horizontally");
+  ok("narrow-screen layout");
+  const native = await context.newPage();
+  const originalText = "A long description about electromagnetic induction. ".repeat(25) + "END_OF_TEXT";
+  await native.goto("https://fixture.test/");
+  await native.setContent(`<p id="text">${originalText}</p><pre>Code must stay unchanged</pre>`);
+  const translatedChunks = [];
+  await native.route("https://api.mymemory.translated.net/**", (route) => {
+    translatedChunks.push(new URL(route.request().url()).searchParams.get("q"));
+    return route.fulfill({ json: { responseStatus: 200, responseData: { translatedText: "译文" } } });
+  });
+  const toolbar = (await readFile("src-tauri/src/windows/toolbar.js", "utf8")).replace("__SVE_TARGET__", "zh-CN");
+  await native.addScriptTag({ content: toolbar });
+  await native.getByRole("button", { name: "Translate page", exact: true }).click();
+  await native.waitForFunction(() => document.querySelector("#sve-translate").title === "Restore original");
+  assert.equal(translatedChunks.join(""), originalText);
+  assert.ok(translatedChunks.every((s) => Buffer.byteLength(s) <= 450));
+  assert.equal(await native.locator("pre").textContent(), "Code must stay unchanged");
+  await native.locator("#sve-translate").click();
+  assert.equal(await native.locator("#text").textContent(), originalText);
+  await native.locator("#sve-translate").click();
+  await native.locator("#sve-translate").click();
+  await native.waitForTimeout(350); // Allow the cancelled fixture response to arrive.
+  assert.equal(await native.locator("#text").textContent(), originalText);
+  await native.close();
+  ok("desktop toolbar: complete long-text translation, restore and cancellation");
+  assert.deepEqual(errors, []);
+  console.log(`WEB REGRESSION: ${checks} groups passed; no uncaught page errors`);
+} finally {
+  await browser?.close();
+  server?.kill();
+}

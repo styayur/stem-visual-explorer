@@ -13,8 +13,8 @@ export default defineConfig(({ mode }) => ({
     port: 1420,
     strictPort: true,
     watch: {
-      // Tell vite to ignore watching `src-tauri`
-      ignored: ["**/src-tauri/**"],
+      // Exclude Rust output and local artifacts, including locked WebView2 profiles.
+      ignored: ["**/src-tauri/**", "**/dist-release/**"],
     },
   },
 }));

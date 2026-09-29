@@ -18,7 +18,29 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Unit tests (search + translation logic)
-        run: node --experimental-strip-types scripts/unit_test.mjs
+        run: npm test
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+      - name: Browser regression tests
+        run: npm run test:web
+      - name: Pages build smoke test
+        run: npm run test:web:build
+
+  desktop:
+    name: Windows desktop compile
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - run: npm ci
+      - run: npm run build
+      - name: Check Tauri windows and commands
+        working-directory: src-tauri
+        run: cargo check --locked
 
   core:
     name: Core logic (Rust tests + clippy)

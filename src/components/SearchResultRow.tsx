@@ -1,4 +1,5 @@
-import { memo, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { ExternalLink, LayoutPanelTop, Star } from "lucide-react";
 import type { SearchResult } from "../lib/types";
 import { useSearchStore } from "../stores/searchStore";
@@ -9,8 +10,9 @@ import { useTranslatedText } from "../lib/translate/useTranslatedText";
 import * as cmd from "../lib/commands";
 import { cn } from "../lib/cn";
 import { Badge } from "./ui";
+import { attempt } from "../stores/noticeStore";
 
-export const RESULT_ROW_HEIGHT = 92;
+export const RESULT_ROW_HEIGHT = 112;
 
 const ResultRow = memo(function ResultRow({
   result,
@@ -29,6 +31,8 @@ const ResultRow = memo(function ResultRow({
   const isFav = useSearchStore((s) => s.favoriteIds.has(result.id));
   const toggleFavorite = useSearchStore((s) => s.toggleFavorite);
   const toggleWorkspace = useWorkspaceStore((s) => s.toggle);
+  const inWorkspace = useWorkspaceStore((s) => s.selected.some((r) => r.id === result.id));
+  const workspaceFull = useWorkspaceStore((s) => s.selected.length >= 4);
 
   const translateOn = useSettingsStore((s) => s.settings.translate_results);
   const target = useSettingsStore((s) => s.settings.translate_target);
@@ -39,7 +43,7 @@ const ResultRow = memo(function ResultRow({
   const description = descT?.text ?? result.description;
   const translated = Boolean(titleT && titleT.text !== result.title);
 
-  const openWindow = () => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`);
+  const openWindow = () => attempt(() => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`));
 
   return (
     <div
@@ -47,7 +51,7 @@ const ResultRow = memo(function ResultRow({
       role="option"
       aria-selected={selected}
       onClick={() => onSelect(index)}
-      onDoubleClick={openWindow}
+      onDoubleClick={(e) => { if (!(e.target as Element).closest("button")) void openWindow(); }}
       onAuxClick={(e) => {
         if (e.button === 1) {
           e.preventDefault();
@@ -56,6 +60,7 @@ const ResultRow = memo(function ResultRow({
       }}
       onContextMenu={(e) => {
         e.preventDefault();
+        onSelect(index);
         setMenu({ x: e.clientX, y: e.clientY });
       }}
       className={cn(
@@ -67,7 +72,7 @@ const ResultRow = memo(function ResultRow({
       style={{ height: RESULT_ROW_HEIGHT }}
     >
       <div className="flex items-center gap-2">
-        <span className="shrink-0 text-[12px] font-semibold text-zinc-500 dark:text-zinc-400">
+        <span className="min-w-0 truncate text-[12px] font-semibold text-zinc-500 dark:text-zinc-400">
           {result.source_name}
         </span>
         <Badge tone="muted">{t(typeLabelKey(result.result_type))}</Badge>
@@ -83,19 +88,21 @@ const ResultRow = memo(function ResultRow({
             "ml-auto rounded p-1 transition-colors",
             isFav
               ? "text-amber-500"
-              : "text-zinc-300 opacity-0 hover:text-amber-500 group-hover:opacity-100 dark:text-zinc-600"
+              : "text-zinc-400 hover:text-amber-500 dark:text-zinc-500"
           )}
         >
           <Star className="h-3.5 w-3.5" fill={isFav ? "currentColor" : "none"} />
         </button>
         <button
           type="button"
-          title={t("row.workspace")}
+          title={t(inWorkspace ? "row.removeWorkspace" : workspaceFull ? "workspace.limit" : "row.workspace")}
+          aria-pressed={inWorkspace}
+          disabled={!inWorkspace && workspaceFull}
           onClick={(e) => {
             e.stopPropagation();
             toggleWorkspace(result);
           }}
-          className="rounded p-1 text-zinc-300 opacity-0 hover:text-indigo-500 group-hover:opacity-100 dark:text-zinc-600"
+          className={cn("rounded p-1 text-zinc-400 hover:text-indigo-500 disabled:opacity-30", inWorkspace && "bg-indigo-500/15 text-indigo-500")}
         >
           <LayoutPanelTop className="h-3.5 w-3.5" />
         </button>
@@ -106,7 +113,7 @@ const ResultRow = memo(function ResultRow({
             e.stopPropagation();
             openWindow();
           }}
-          className="rounded p-1 text-zinc-300 opacity-0 hover:text-indigo-500 group-hover:opacity-100 dark:text-zinc-600"
+          className="rounded p-1 text-zinc-400 hover:text-indigo-500"
         >
           <ExternalLink className="h-3.5 w-3.5" />
         </button>
@@ -136,9 +143,9 @@ const ResultRow = memo(function ResultRow({
         </div>
       )}
 
-      {menu && (
+      {menu && createPortal(
         <ResultMenu x={menu.x} y={menu.y} result={result} onClose={() => setMenu(null)} />
-      )}
+      , document.body)}
     </div>
   );
 });
@@ -157,8 +164,13 @@ function ResultMenu({
   const t = useT();
   const toggleFavorite = useSearchStore((s) => s.toggleFavorite);
   const isFav = useSearchStore((s) => s.favoriteIds.has(result.id));
+  useEffect(() => {
+    const close = (e: KeyboardEvent) => { if (e.key === "Escape") { e.preventDefault(); onClose(); } };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [onClose]);
 
-  const items: Array<{ label: string; run: () => void }> = [
+  const items: Array<{ label: string; run: () => unknown }> = [
     {
       label: t("ctx.open"),
       run: () => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`),
@@ -168,7 +180,7 @@ function ResultMenu({
       run: () => cmd.openWindow(result.url, `${result.title} — ${result.source_name}`),
     },
     { label: t("ctx.openBrowser"), run: () => cmd.openExternal(result.url) },
-    { label: t("ctx.copyUrl"), run: () => navigator.clipboard?.writeText(result.url) },
+    { label: t("ctx.copyUrl"), run: () => cmd.copyUrl(result.url) },
     {
       label: isFav ? t("ctx.unfavorite") : t("ctx.favorite"),
       run: () => toggleFavorite(result),
@@ -186,19 +198,21 @@ function ResultMenu({
         }}
       />
       <div
+        role="menu"
         className="fixed z-50 min-w-[190px] rounded-lg border border-edge-light bg-white py-1 shadow-xl dark:border-edge-dark dark:bg-surface-dark"
         style={{
-          left: Math.min(x, window.innerWidth - 210),
-          top: Math.min(y, window.innerHeight - 220),
+          left: Math.max(0, Math.min(x, window.innerWidth - 210)),
+          top: Math.max(0, Math.min(y, window.innerHeight - 220)),
         }}
       >
         {items.map((item) => (
           <button
             key={item.label}
+            role="menuitem"
             type="button"
             className="block w-full px-3 py-1.5 text-left text-[13px] text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
             onClick={() => {
-              item.run();
+              void attempt(async () => item.run());
               onClose();
             }}
           >

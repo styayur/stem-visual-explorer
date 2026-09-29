@@ -15,7 +15,7 @@ export function useTranslatedText(
   enabled: boolean,
   target: string
 ): TranslatedText | null {
-  const [state, setState] = useState<TranslatedText | null>(null);
+  const [state, setState] = useState<{ original: string; target: string; result: TranslatedText } | null>(null);
 
   useEffect(() => {
     if (!enabled || !text || !text.trim()) {
@@ -24,21 +24,23 @@ export function useTranslatedText(
     }
     const instant = translateInstant(text, target);
     if (instant) {
-      setState(instant);
+      setState({ original: text, target, result: instant });
       return;
     }
     let cancelled = false;
-    translateText(text, target)
+    const controller = new AbortController();
+    translateText(text, target, undefined, controller.signal)
       .then((r) => {
-        if (!cancelled) setState(r);
+        if (!cancelled) setState({ original: text, target, result: r });
       })
       .catch(() => {
         if (!cancelled) setState(null);
       });
     return () => {
       cancelled = true;
+      controller.abort();
     };
   }, [text, enabled, target]);
 
-  return state;
+  return enabled && state && state.original === text && state.target === target ? state.result : null;
 }

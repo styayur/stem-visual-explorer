@@ -19,8 +19,8 @@ const SUGGESTED = [
 export default function SearchResults() {
   const t = useT();
   const response = useSearchStore((s) => s.response);
-  const query = useSearchStore((s) => s.query);
   const loading = useSearchStore((s) => s.loading);
+  const error = useSearchStore((s) => s.error);
   const siteFilter = useSearchStore((s) => s.siteFilter);
   const typeFilter = useSearchStore((s) => s.typeFilter);
   const selectedIndex = useSearchStore((s) => s.selectedIndex);
@@ -41,8 +41,10 @@ export default function SearchResults() {
     );
   }
 
+  if (error) return <div role="alert" className="p-6 text-sm text-red-600"><p>{error}</p><button type="button" className="mt-3 underline" onClick={() => runSearch()}>{t("common.retry")}</button></div>;
+
   if (!response || response.results.length === 0) {
-    return <EmptyState query={query} onPick={runSearch} />;
+    return <EmptyState query={response?.query ?? ""} onPick={runSearch} />;
   }
 
   if (results.length === 0) {
@@ -130,11 +132,14 @@ function VirtualResults({
     if (top < el.scrollTop) el.scrollTop = top;
     else if (bottom > el.scrollTop + el.clientHeight)
       el.scrollTop = bottom - el.clientHeight;
-  }, [selectedIndex]);
+  }, [selectedIndex, results]);
 
   return (
     <div
       ref={containerRef}
+      role="listbox"
+      aria-label="Search results"
+      tabIndex={0}
       className="h-full overflow-y-auto"
       onScroll={(e) => setScrollTop((e.target as HTMLDivElement).scrollTop)}
     >

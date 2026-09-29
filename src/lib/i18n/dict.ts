@@ -350,6 +350,31 @@ export const DICTS: Record<UiLocale, Dict> = {
   "zh-TW": zhTW,
 };
 
+Object.assign(en, {
+  "common.close": "Dismiss", "cat.other": "Other sources", "history.title": "Search history",
+  "history.clear": "Clear history", "history.empty": "No search history yet.",
+  "settings.refreshed": "Index refreshed.", "settings.cleared": "Index cache cleared.",
+  "row.removeWorkspace": "Remove from workspace", "workspace.limit": "Maximum four pages",
+  "workspace.select": "Select up to four results to build a workspace",
+  "preview.mode.side": "Side", "preview.mode.inline": "Inline", "preview.mode.off": "Off",
+});
+Object.assign(zhCN, {
+  "common.close": "关闭提示", "cat.other": "其他来源", "history.title": "搜索历史",
+  "history.clear": "清空历史", "history.empty": "暂无搜索历史。",
+  "settings.refreshed": "索引已刷新。", "settings.cleared": "索引缓存已清除。",
+  "row.removeWorkspace": "从工作区移除", "workspace.limit": "最多选择四个页面",
+  "workspace.select": "选择最多四条结果创建工作区",
+  "preview.mode.side": "分栏", "preview.mode.inline": "底部", "preview.mode.off": "关闭",
+});
+Object.assign(zhTW, {
+  "common.close": "關閉提示", "cat.other": "其他來源", "history.title": "搜尋歷史",
+  "history.clear": "清空歷史", "history.empty": "暫無搜尋歷史。",
+  "settings.refreshed": "索引已重新整理。", "settings.cleared": "索引快取已清除。",
+  "row.removeWorkspace": "從工作區移除", "workspace.limit": "最多選擇四個頁面",
+  "workspace.select": "選擇最多四筆結果建立工作區",
+  "preview.mode.side": "分欄", "preview.mode.inline": "底部", "preview.mode.off": "關閉",
+});
+
 export const UI_LOCALES: Array<{ code: UiLocale; label: string }> = [
   { code: "en", label: "English" },
   { code: "zh-CN", label: "简体中文" },

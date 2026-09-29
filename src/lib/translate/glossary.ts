@@ -71,12 +71,23 @@ const EN_ZH: Record<string, string> = {
 const ZH_EN: Record<string, string> = Object.fromEntries(
   Object.entries(EN_ZH).map(([k, v]) => [v, k])
 );
+const TRADITIONAL: Record<string, string> = {
+  驻: "駐", 谐: "諧", 动: "動", 电: "電", 应: "應", 场: "場", 学: "學", 变: "變", 换: "換",
+  热: "熱", 对: "對", 论: "論", 导: "導", 数: "數", 积: "積", 矩: "矩", 阵: "陣", 单: "單",
+  势: "勢", 频: "頻", 长: "長", 统: "統", 计: "計", 扑: "撲", 体: "體",
+  简: "簡", 征: "徵", 拟: "擬", 视: "視",
+};
+function traditional(text: string): string { return [...text].map((c) => TRADITIONAL[c] ?? c).join(""); }
+for (const [en, zh] of Object.entries(EN_ZH)) ZH_EN[traditional(zh)] = en;
 
 /** Instant glossary lookup; returns null when the term is unknown. */
 export function glossaryLookup(text: string, target: string): string | null {
   const key = text.trim().toLowerCase();
   if (!key) return null;
-  if (target.startsWith("zh")) return EN_ZH[key] ?? null;
+  if (target.startsWith("zh")) {
+    const result = EN_ZH[key];
+    return result ? (target === "zh-TW" ? traditional(result) : result) : null;
+  }
   if (target === "en") return ZH_EN[text.trim()] ?? null;
   return null;
 }

@@ -1,26 +1,21 @@
 // MyMemory translation API client (free, keyless, CORS-enabled).
 // Docs: https://mymemory.translated.net/doc/spec.php
 const ENDPOINT = "https://api.mymemory.translated.net/get";
-const CHUNK = 450; // anonymous requests are limited to ~500 chars
+const CHUNK = 450; // Stay below the service's 500-byte UTF-8 query limit.
 
 export class TranslationError extends Error {}
 
-function chunk(text: string, size: number): string[] {
+export function chunk(text: string, size: number): string[] {
   const out: string[] = [];
   let current = "";
-  for (const token of text.split(/(\s+)/)) {
-    if ((current + token).length > size && current.trim()) {
-      out.push(current.trim());
-      current = token;
-    } else {
-      current += token;
-    }
-    while (current.length > size) {
-      out.push(current.slice(0, size));
-      current = current.slice(size);
-    }
+  let bytes = 0;
+  const encoder = new TextEncoder();
+  for (const character of text) {
+    const length = encoder.encode(character).length;
+    if (bytes + length > size && current) { out.push(current); current = ""; bytes = 0; }
+    current += character; bytes += length;
   }
-  if (current.trim()) out.push(current.trim());
+  if (current) out.push(current);
   return out.length > 0 ? out : [text];
 }
 
@@ -39,17 +34,24 @@ export function languagePairLabel(from: string, to: string): string {
 export async function mymemoryTranslate(
   text: string,
   from: string,
-  to: string
+  to: string,
+  signal?: AbortSignal
 ): Promise<string> {
   const trimmed = text.trim();
   if (!trimmed) return text;
 
   const parts: string[] = [];
   for (const piece of chunk(trimmed, CHUNK)) {
+    if (signal?.aborted) throw new DOMException("Translation cancelled", "AbortError");
     const url = `${ENDPOINT}?q=${encodeURIComponent(piece)}&langpair=${encodeURIComponent(
       languagePairLabel(from, to)
-    )}&de=stem-visual-explorer@users.noreply.github.com`;
-    const res = await fetch(url, { headers: { Accept: "application/json" } });
+    )}`;
+    const controller = new AbortController();
+    const cancel = () => controller.abort();
+    signal?.addEventListener("abort", cancel, { once: true });
+    const timer = setTimeout(() => controller.abort(), 12000);
+    try {
+    const res = await fetch(url, { headers: { Accept: "application/json" }, signal: controller.signal });
     if (!res.ok) {
       throw new TranslationError(`translation request failed (${res.status})`);
     }
@@ -58,6 +60,9 @@ export async function mymemoryTranslate(
       responseStatus?: number | string;
     };
     const out = data.responseData?.translatedText;
+    if (data.responseStatus != null && Number(data.responseStatus) !== 200) {
+      throw new TranslationError(`Translation service error (${data.responseStatus})`);
+    }
     if (!out || typeof out !== "string") {
       throw new TranslationError("translation service returned no text");
     }
@@ -65,6 +70,7 @@ export async function mymemoryTranslate(
       throw new TranslationError(out);
     }
     parts.push(out);
+    } finally { clearTimeout(timer); signal?.removeEventListener("abort", cancel); }
   }
   return parts.join(" ");
 }

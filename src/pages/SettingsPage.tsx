@@ -6,6 +6,8 @@ import { TARGET_LANGUAGES, type UiLocale } from "../lib/types";
 import * as cmd from "../lib/commands";
 import type { ProviderInfo } from "../lib/types";
 import { cn } from "../lib/cn";
+import { useSearchStore } from "../stores/searchStore";
+import { reportError } from "../stores/noticeStore";
 
 export default function SettingsPage() {
   const t = useT();
@@ -13,13 +15,16 @@ export default function SettingsPage() {
   const update = useSettingsStore((s) => s.update);
   const [providers, setProviders] = useState<ProviderInfo[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
+  const [message, setMessage] = useState("");
+  const history = useSearchStore((s) => s.history);
+  const clearHistory = useSearchStore((s) => s.clearHistory);
 
   const reload = async () => {
     setProviders(await cmd.providersInfo());
   };
 
   useEffect(() => {
-    reload().catch(() => {});
+    reload().catch(reportError);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -28,6 +33,8 @@ export default function SettingsPage() {
     try {
       await cmd.refreshProviderIndex(id);
       await reload();
+      setMessage(t("settings.refreshed"));
+    } catch (e) { reportError(e);
     } finally {
       setBusy(null);
     }
@@ -37,24 +44,28 @@ export default function SettingsPage() {
     setBusy("cache");
     try {
       await cmd.clearCache();
+      await reload();
+      setMessage(t("settings.cleared"));
+    } catch (e) { reportError(e);
     } finally {
       setBusy(null);
     }
   };
 
   const toggle = async (id: string, enabled: boolean) => {
-    const next = enabled
-      ? [...settings.enabled_providers, id]
-      : settings.enabled_providers.filter((p) => p !== id);
+    const current = useSettingsStore.getState().settings.enabled_providers;
+    const next = enabled ? [...new Set([...current, id])] : current.filter((p) => p !== id);
     await update({ enabled_providers: next });
-    await cmd.setProviderEnabled(id, enabled);
-    await reload();
+    const search = useSearchStore.getState();
+    if (!enabled && search.siteFilter === id) search.setSiteFilter(null);
+    if (search.response) await search.runSearch(search.response.query);
   };
 
   return (
     <div className="h-full overflow-y-auto">
       <div className="mx-auto max-w-3xl px-6 py-6">
         <h2 className="text-lg font-semibold">{t("settings.title")}</h2>
+        {message && <p role="status" className="my-2 text-sm text-indigo-500">{message}</p>}
 
         <Section title={t("settings.translation")}>
           <SettingRow label={t("settings.uiLanguage")}>
@@ -79,6 +90,7 @@ export default function SettingsPage() {
 
           <SettingRow label={t("settings.targetLanguage")}>
             <select
+              aria-label={t("settings.targetLanguage")}
               value={settings.translate_target}
               onChange={(e) => update({ translate_target: e.target.value })}
               className="w-[190px] rounded-md border border-edge-light bg-white px-2 py-1 text-[12px] dark:border-edge-dark dark:bg-surface-dark dark:text-zinc-200"
@@ -93,6 +105,7 @@ export default function SettingsPage() {
 
           <SettingRow label={t("settings.translateResults")}>
             <Toggle
+              label={t("settings.translateResults")}
               on={settings.translate_results}
               onToggle={() => update({ translate_results: !settings.translate_results })}
             />
@@ -105,6 +118,7 @@ export default function SettingsPage() {
             {t("settings.pageProxy")}
           </div>
           <input
+            aria-label={t("settings.pageProxy")}
             value={settings.page_translate_proxy}
             onChange={(e) => update({ page_translate_proxy: e.target.value })}
             placeholder="https://your-proxy/?url={url}&lang={lang}"
@@ -150,18 +164,12 @@ export default function SettingsPage() {
                       : "border-edge-light text-zinc-500 dark:border-edge-dark dark:text-zinc-400"
                   )}
                 >
-                  {m}
+                  {t(`preview.mode.${m}`)}
                 </button>
               ))}
             </div>
           </SettingRow>
 
-          <SettingRow label={t("settings.mockMode")}>
-            <Toggle
-              on={settings.mock_mode}
-              onToggle={() => update({ mock_mode: !settings.mock_mode })}
-            />
-          </SettingRow>
         </Section>
 
         <Section title={t("settings.sources")}>
@@ -174,7 +182,8 @@ export default function SettingsPage() {
               >
                 <input
                   type="checkbox"
-                  checked={p.enabled}
+                  aria-label={p.name}
+                  checked={settings.enabled_providers.includes(p.id)}
                   onChange={(e) => toggle(p.id, e.target.checked)}
                   className="h-4 w-4 accent-indigo-500"
                 />
@@ -196,7 +205,7 @@ export default function SettingsPage() {
                 <button
                   type="button"
                   title={t("settings.refreshIndex")}
-                  disabled={busy === p.id}
+                  disabled={busy !== null}
                   className="rounded p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-indigo-500 disabled:opacity-40 dark:hover:bg-zinc-800"
                   onClick={() => refresh(p.id)}
                 >
@@ -209,6 +218,7 @@ export default function SettingsPage() {
             <button
               type="button"
               onClick={clear}
+              disabled={busy !== null}
               className="flex items-center gap-1.5 rounded-md border border-edge-light px-2.5 py-1.5 text-[12px] text-zinc-600 hover:bg-zinc-100 dark:border-edge-dark dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
               <Trash2 className="h-3.5 w-3.5" /> {t("settings.clearCache")}
@@ -217,6 +227,18 @@ export default function SettingsPage() {
               <AlertTriangle className="h-3.5 w-3.5" />
               {t("settings.cacheNote")}
             </span>
+          </div>
+        </Section>
+
+        <Section title={t("history.title")}>
+          <button type="button" onClick={clearHistory} disabled={!history.length} className="mb-3 rounded border border-edge-light px-3 py-1 text-sm disabled:opacity-40 dark:border-edge-dark">{t("history.clear")}</button>
+          {!history.length && <p className="text-sm text-zinc-400">{t("history.empty")}</p>}
+          <div className="max-h-56 overflow-y-auto">
+            {history.map((h) => <button type="button" key={h.id} onClick={() => {
+              useSettingsStore.getState().setPage("search");
+              const search = useSearchStore.getState(); search.setSiteFilter(null); search.setTypeFilter("all");
+              void search.runSearch(h.query);
+            }} className="flex w-full justify-between gap-3 rounded px-2 py-1 text-left text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"><span className="truncate">{h.query}</span><span className="shrink-0 text-zinc-400">{t("filter.count", { n: h.result_count })}</span></button>)}
           </div>
         </Section>
 
@@ -229,10 +251,13 @@ export default function SettingsPage() {
   );
 }
 
-function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
+function Toggle({ on, onToggle, label }: { on: boolean; onToggle: () => void; label: string }) {
   return (
     <button
       type="button"
+      role="switch"
+      aria-label={label}
+      aria-checked={on}
       onClick={onToggle}
       className={cn(
         "relative h-5 w-9 rounded-full transition-colors",

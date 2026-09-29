@@ -21,6 +21,7 @@ import Workspace from "./components/Workspace";
 import SearchPage from "./pages/SearchPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import SettingsPage from "./pages/SettingsPage";
+import { reportError, useNoticeStore } from "./stores/noticeStore";
 
 export default function App() {
   const t = useT();
@@ -33,11 +34,13 @@ export default function App() {
   const loadFavorites = useSearchStore((s) => s.loadFavorites);
   const loadHistory = useSearchStore((s) => s.loadHistory);
   const [isWorkspace, setIsWorkspace] = useState(false);
+  const notice = useNoticeStore((s) => s.error);
+  const clearNotice = useNoticeStore((s) => s.clear);
 
   useEffect(() => {
-    loadSettings().catch(() => {});
-    loadFavorites().catch(() => {});
-    loadHistory().catch(() => {});
+    loadSettings().catch(reportError);
+    loadFavorites().catch(reportError);
+    loadHistory().catch(reportError);
   }, [loadSettings, loadFavorites, loadHistory]);
 
   useEffect(() => {
@@ -46,6 +49,7 @@ export default function App() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    if (params.get("route") === "search") return;
     if (params.get("workspace") === "1" || params.get("route") === "workspace") {
       setIsWorkspace(true);
       return;
@@ -57,7 +61,7 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => installShortcuts(), []);
+  useEffect(() => isWorkspace ? undefined : installShortcuts(), [isWorkspace]);
 
   if (isWorkspace) return <Workspace />;
 
@@ -113,6 +117,10 @@ export default function App() {
       </header>
 
       <main className="min-h-0 flex-1">
+        {notice && <div role="alert" className="fixed bottom-4 left-4 right-4 z-[60] flex items-center gap-3 rounded-lg border border-red-400 bg-white p-3 text-sm text-red-700 shadow-lg dark:bg-zinc-900 dark:text-red-300">
+          <span className="min-w-0 flex-1 break-words">{notice}</span>
+          <button type="button" onClick={clearNotice} aria-label={t("common.close")}>×</button>
+        </div>}
         {page === "search" && <SearchPage />}
         {page === "favorites" && <FavoritesPage />}
         {page === "settings" && <SettingsPage />}
@@ -136,6 +144,8 @@ function NavButton({
     <button
       type="button"
       onClick={onClick}
+      aria-label={label}
+      aria-current={active ? "page" : undefined}
       className={cn(
         "flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[12px] font-medium transition-colors",
         active

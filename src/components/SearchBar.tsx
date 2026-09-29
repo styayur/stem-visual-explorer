@@ -31,13 +31,14 @@ export default function SearchBar() {
   const t = useT();
   const [focused, setFocused] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const suggestions = useMemo(() => {
     const q = query.trim().toLowerCase();
     const pool = [
-      ...SUGGESTIONS,
       ...history.map((h) => h.query),
+      ...SUGGESTIONS,
     ];
     const seen = new Set<string>();
     const out: string[] = [];
@@ -52,20 +53,11 @@ export default function SearchBar() {
     return out;
   }, [query, history]);
 
-  useEffect(() => {
-    const focus = () => inputRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "l")) {
-        e.preventDefault();
-        inputRef.current?.focus();
-        inputRef.current?.select();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    // expose focus for external callers
-    (window as unknown as { __sveFocusSearch?: () => void }).__sveFocusSearch = focus;
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  useEffect(() => setActive(-1), [query]);
+
+  const submit = (value = query) => {
+    void runSearch(value); setOpen(false); setActive(-1); inputRef.current?.blur();
+  };
 
   return (
     <div className="relative">
@@ -77,8 +69,15 @@ export default function SearchBar() {
             : "border-edge-light dark:border-edge-dark"
         )}
       >
-        <Search className="h-4 w-4 shrink-0 text-zinc-400" />
+        <button type="button" aria-label={t("nav.search")} onClick={() => submit()} className="shrink-0 text-zinc-400 hover:text-indigo-500"><Search className="h-4 w-4" /></button>
         <input
+          id="search-input"
+          role="combobox"
+          aria-label={t("nav.search")}
+          aria-autocomplete="list"
+          aria-expanded={open && suggestions.length > 0}
+          aria-controls="search-suggestions"
+          aria-activedescendant={active >= 0 && open ? `suggestion-${active}` : undefined}
           ref={inputRef}
           value={query}
           onChange={(e) => {
@@ -94,11 +93,13 @@ export default function SearchBar() {
             setTimeout(() => setOpen(false), 150);
           }}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
+            if (e.nativeEvent.isComposing) return;
+            if ((e.key === "ArrowDown" || e.key === "ArrowUp") && suggestions.length) {
+              e.preventDefault(); setOpen(true);
+              setActive((a) => (a + (e.key === "ArrowDown" ? 1 : -1) + suggestions.length) % suggestions.length);
+            } else if (e.key === "Enter") {
               e.preventDefault();
-              runSearch();
-              setOpen(false);
-              inputRef.current?.blur();
+              submit(open && active >= 0 ? suggestions[active] : query);
             } else if (e.key === "Escape") {
               setOpen(false);
             }
@@ -110,18 +111,19 @@ export default function SearchBar() {
       </div>
 
       {open && suggestions.length > 0 && (
-        <div className="absolute left-0 right-0 top-11 z-30 overflow-hidden rounded-lg border border-edge-light bg-white shadow-lg dark:border-edge-dark dark:bg-surface-dark">
-          {suggestions.map((s) => (
+        <div id="search-suggestions" role="listbox" className="absolute left-0 right-0 top-11 z-30 overflow-hidden rounded-lg border border-edge-light bg-white shadow-lg dark:border-edge-dark dark:bg-surface-dark">
+          {suggestions.map((s, i) => (
             <button
               key={s}
+              id={`suggestion-${i}`}
+              role="option"
+              aria-selected={i === active}
               type="button"
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => {
-                setQuery(s);
-                runSearch(s);
-                setOpen(false);
+                submit(s);
               }}
-              className="block w-full px-3 py-2 text-left text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              className={cn("block w-full px-3 py-2 text-left text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800", i === active && "bg-indigo-500/10")}
             >
               {s}
             </button>

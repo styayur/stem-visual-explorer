@@ -88,7 +88,10 @@ pub struct NormalizedQuery {
 
 impl NormalizedQuery {
     pub fn is_empty(&self) -> bool {
-        self.tokens.is_empty() && self.phrases.is_empty()
+        self.tokens.is_empty()
+            && self.phrases.is_empty()
+            && self.site_filter.is_none()
+            && self.type_filter.is_none()
     }
 }
 
@@ -120,6 +123,7 @@ pub struct HistoryEntry {
 
 /// User preferences persisted as JSON.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Settings {
     pub theme: String,
     pub preview_mode: String,

@@ -5,11 +5,8 @@ export function buildTranslatedPageUrl(
   proxyTemplate?: string
 ): string {
   const tpl = (proxyTemplate ?? "").trim();
-  if (tpl.includes("{url}")) {
-    return tpl
-      .split("{url}").join(encodeURIComponent(url))
-      .split("{lang}").join(encodeURIComponent(lang));
-  }
+  const proxy = buildEmbeddableTranslatedUrl(url, lang, tpl);
+  if (proxy) return proxy;
   return `https://translate.google.com/translate?sl=auto&tl=${encodeURIComponent(
     lang
   )}&u=${encodeURIComponent(url)}`;
@@ -27,7 +24,9 @@ export function buildEmbeddableTranslatedUrl(
 ): string | null {
   const tpl = (proxyTemplate ?? "").trim();
   if (!tpl.includes("{url}")) return null;
-  return tpl
+  const result = tpl
     .split("{url}").join(encodeURIComponent(url))
     .split("{lang}").join(encodeURIComponent(lang));
+  try { return ["http:", "https:"].includes(new URL(result).protocol) ? result : null; }
+  catch { return null; }
 }
