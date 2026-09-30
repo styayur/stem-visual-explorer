@@ -1,18 +1,27 @@
-name: Build Windows release
+name: Release Windows
 
 on:
   push:
-    tags: ['v*']
+    tags: ['v*.*.*']
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag, for example v0.2.0
+        required: true
+        type: string
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   windows:
     runs-on: windows-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -25,8 +34,12 @@ jobs:
       - name: Package portable application and checksums
         shell: pwsh
         run: |
+          $tag = '${{ inputs.tag }}'
+          if (-not $tag) { $tag = '${{ github.ref_name }}' }
+          if ($tag -notmatch '^v\d+\.\d+\.\d+$') { throw "Tag must use vX.Y.Z: $tag" }
           $version = (Get-Content package.json | ConvertFrom-Json).version
-          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne "v$version") { throw 'Tag and package version do not match' }
+          if ($tag -ne "v$version") { throw 'Tag and package version do not match' }
+          git describe --exact-match --tags HEAD
           New-Item -ItemType Directory release-assets
           Compress-Archive -Path src-tauri/target/release/stem-visual-explorer.exe,README.md,README.en.md,LICENSE -DestinationPath "release-assets/stem-visual-explorer_${version}_windows-x64.zip"
           Copy-Item src-tauri/target/release/bundle/nsis/*.exe "release-assets/stem-visual-explorer_${version}_x64-setup.exe"
@@ -34,6 +47,14 @@ jobs:
             $hash = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
             "$hash  $($_.Name)"
           } | Set-Content release-assets/SHA256SUMS.txt
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+        with:
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            release-assets/*
       - uses: actions/upload-artifact@v4
         with:
           name: windows-release
