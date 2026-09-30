@@ -184,6 +184,10 @@ provider's results are still shown.
 
 ---
 
+## Product boundary and provider contract
+
+**The core domain is STEM resource discovery, comparison, and learning context, not a general-purpose browser.** WebViewer supports inspection of the selected resource; it does not become a tabbed browser or bypass CSP/X-Frame-Options through a proxy. New providers must follow [the provider extension contract](docs/provider-extension.md) and pass metadata, host-policy, PreviewCapability, and parser-fixture contract tests.
+
 ## Provider architecture
 
 The central abstraction is:
@@ -547,6 +551,14 @@ measures.
   at any time; parser failures are reported per-provider and never crash the app.
 
 ---
+
+## Community
+
+- GitHub Issues for reproducible bugs and scoped feature requests.
+- Discord for informal feedback and early discussion: https://discord.gg/wA2xy6VPK. It is not an SLA support channel.
+- Security reports must use [SECURITY.md](SECURITY.md), not a public issue.
+- Development and provider rules are in [CONTRIBUTING.md](CONTRIBUTING.md).
+- Releases use `vX.Y.Z` tags; maintainers build portable/installer assets and publish SHA-256 checksums.
 
 ## License
 

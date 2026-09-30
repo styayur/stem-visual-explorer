@@ -276,9 +276,31 @@ fn longest_concept_and_exact_filters_survive_normalization() {
 
 #[test]
 fn all_providers_declare_conservative_preview_policy() {
+    #[derive(serde::Deserialize)]
+    struct Policy {
+        id: String,
+        capability: PreviewCapability,
+        hosts: Vec<String>,
+    }
+
     let registry = ProviderRegistry::new();
-    assert_eq!(registry.all().len(), 7);
-    for p in registry.all() {
+    let providers = registry.all();
+    assert_eq!(providers.len(), 7);
+    let ids: std::collections::BTreeSet<_> = providers.iter().map(|p| p.id()).collect();
+    assert_eq!(ids.len(), providers.len(), "provider IDs must be unique");
+
+    let policies: Vec<Policy> =
+        serde_json::from_str(include_str!("../../src/lib/previewCapabilities.json"))
+            .expect("preview policy JSON must deserialize");
+    let policy_ids: std::collections::BTreeSet<_> =
+        policies.iter().map(|p| p.id.as_str()).collect();
+    assert_eq!(
+        policy_ids.len(),
+        policies.len(),
+        "preview policy IDs must be unique"
+    );
+
+    for p in providers {
         let expected = match p.id() {
             "falstad" => PreviewCapability::Embed,
             "maotian" => PreviewCapability::ExternalOnly,
@@ -286,6 +308,16 @@ fn all_providers_declare_conservative_preview_policy() {
         };
         assert_eq!(p.preview_capability(), expected);
         assert!(serde_json::to_string(&p.preview_capability()).is_ok());
+        let policy = policies
+            .iter()
+            .find(|policy| policy.id == p.id())
+            .unwrap_or_else(|| panic!("missing preview policy for provider {}", p.id()));
+        assert!(
+            !policy.hosts.is_empty(),
+            "provider {} needs an explicit host policy",
+            p.id()
+        );
+        assert_eq!(policy.capability, expected);
     }
     assert_eq!(preview_capability("unknown"), PreviewCapability::NativeCard);
 }

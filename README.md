@@ -82,6 +82,10 @@
 
 工作区在保存 URL 的同时传递资源元数据，刷新后仍保留摘要和标签。旧版仅含 URL 的工作区链接仍可打开，缺失元数据时显示 URL 卡片。
 
+## 产品边界与 Provider 扩展
+
+**核心领域是 STEM 资源发现、比较和学习上下文，不是通用浏览器。** WebViewer 只支持查看当前选中的外部资源，不扩展为标签页浏览器或绕过 CSP/X-Frame-Options 的代理。新增 Provider 必须遵守 [Provider extension contract](docs/provider-extension.md)，并通过 registry metadata、host policy、PreviewCapability 和 parser fixture 契约测试。
+
 ## 跨语言概念归一化
 
 查询层使用 `src/lib/concepts.json` 中的 STEM 术语词典与概念图，无需 LLM、翻译 API 或网络。每个概念都有稳定的 `id`、英文 `en`、简中 `zh_cn`、繁中 `zh_tw`、同义词 `synonyms`、别名 `aliases`、相关概念 `related` 和先修概念 `prerequisites`。
@@ -140,6 +144,14 @@ cargo run --no-default-features --example probe
 无需账号，无遥测、分析或云端数据库。收藏、历史、设置和索引缓存在本机保存。桌面搜索直接访问来源网站；启用机器翻译后，待翻译文本会发送给 MyMemory。打开外部翻译页面或设置自定义代理时，也会向相应服务发送请求。
 
 应用只接受 HTTP/HTTPS 外部地址。独立外部网页没有应用 IPC 权限；主窗口和工作区使用限定的 Tauri 能力。
+
+## 社区与治理
+
+- GitHub Issues：可复现 bug 与范围明确的功能请求。
+- Discord：[加入社区](https://discord.gg/wA2xy6VPK)，用于快速交流、设计讨论和早期反馈；不是 SLA 支持渠道。
+- Security：按 [SECURITY.md](SECURITY.md) 私下报告，不要开公开 Issue。
+- Contributing：开发、Provider 契约与架构边界见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+- Release：使用 `vX.Y.Z` tag；Windows 发布包含便携包、安装包和 SHA-256 清单，维护者负责发布。
 
 ## 许可证
 

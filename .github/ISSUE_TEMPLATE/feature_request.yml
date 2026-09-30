@@ -1,0 +1,35 @@
+name: Feature request
+description: Propose a scoped provider, search, preview, or workspace improvement.
+title: '[Feature]: '
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Learning or discovery problem
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: dropdown
+    id: boundary
+    attributes:
+      label: Primary boundary
+      options:
+        - Search, ranking, or multilingual concepts
+        - Provider/index extension
+        - PreviewCapability or WebViewer
+        - Workspace or desktop UX
+        - Web/GitHub Pages parity
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Contract and security impact
+      description: Explain provider URLs, preview capability, CSP/X-Frame-Options behavior, tests, locale parity, and scope boundaries.
+    validations:
+      required: true
