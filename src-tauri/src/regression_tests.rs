@@ -188,3 +188,113 @@ async fn provider_panic_is_attributed_to_its_source() {
     assert_eq!(status.state, ProviderState::Error);
     assert!(status.error.is_some());
 }
+
+#[test]
+fn concept_dictionary_edges_and_aliases_are_valid() {
+    let concepts = search::normalize::concepts();
+    let ids: std::collections::BTreeSet<_> = concepts.iter().map(|c| c.id.as_str()).collect();
+    assert_eq!(ids.len(), concepts.len());
+    for c in concepts {
+        assert!(!c.en.is_empty() && !c.zh_cn.is_empty() && !c.zh_tw.is_empty());
+        for edge in c.related.iter().chain(&c.prerequisites) {
+            assert!(ids.contains(edge.as_str()), "missing {edge}");
+        }
+    }
+}
+
+#[test]
+fn concept_variants_have_weights_and_deduplicate() {
+    let q = search::normalize::expand(&search::query::parse("旋度 curl rot"));
+    assert_eq!(q.concept_ids, ["curl"]);
+    let keys: std::collections::BTreeSet<_> = q
+        .variants
+        .iter()
+        .map(|v| (&v.concept_id, &v.text))
+        .collect();
+    assert_eq!(keys.len(), q.variants.len());
+    let q = search::normalize::expand(&search::query::parse("旋度"));
+    for (text, weight) in [
+        ("旋度", 1.0),
+        ("curl", 0.95),
+        ("rotation of a vector field", 0.9),
+        ("rot", 0.75),
+        ("divergence", 0.35),
+    ] {
+        assert_eq!(
+            q.variants.iter().find(|v| v.text == text).unwrap().weight,
+            weight
+        );
+    }
+    assert!(!q.variants.iter().any(|v| v.text == "gradient")); // no recursive graph traversal
+    assert!(!q.variants.iter().any(|v| v.text == "partial derivative")); // prerequisites are not synonyms
+}
+
+#[test]
+fn weighted_ranking_prefers_direct_concepts_without_alias_inflation() {
+    let q = search::normalize::expand(&search::query::parse("旋度"));
+    for (title, expected) in [
+        ("curl", 57.0),
+        ("rotation of a vector field", 54.0),
+        ("rot", 45.0),
+        ("divergence", 10.5),
+    ] {
+        assert_eq!(
+            search::ranking::score(&q, &common::to_result("test", "Test", &entry(title))),
+            expected
+        );
+    }
+    let one = common::to_result("test", "Test", &entry("curl"));
+    let mut many = one.clone();
+    many.title = "curl rot rotation of a vector field".into();
+    assert_eq!(
+        search::ranking::score(&q, &one),
+        search::ranking::score(&q, &many)
+    );
+}
+
+#[test]
+fn longest_concept_and_exact_filters_survive_normalization() {
+    let q = search::normalize::expand(&search::query::parse(
+        "source:falstad type:applet partial derivative",
+    ));
+    assert_eq!(q.concept_ids, ["partial-derivative"]);
+    assert_eq!(q.site_filter.as_deref(), Some("falstad"));
+    assert_eq!(q.type_filter, Some(ResultType::Applet));
+    let q = search::normalize::expand(&search::query::parse("\"standing wave\""));
+    let matches = common::search_entries(
+        "test",
+        "Test",
+        &[
+            entry("standing wave"),
+            entry("stationary wave"),
+            entry("驻波"),
+        ],
+        &q,
+    );
+    assert_eq!(matches.len(), 1);
+}
+
+#[test]
+fn all_providers_declare_conservative_preview_policy() {
+    let registry = ProviderRegistry::new();
+    assert_eq!(registry.all().len(), 7);
+    for p in registry.all() {
+        let expected = match p.id() {
+            "falstad" => PreviewCapability::Embed,
+            "maotian" => PreviewCapability::ExternalOnly,
+            _ => PreviewCapability::NativeCard,
+        };
+        assert_eq!(p.preview_capability(), expected);
+        assert!(serde_json::to_string(&p.preview_capability()).is_ok());
+    }
+    assert_eq!(preview_capability("unknown"), PreviewCapability::NativeCard);
+}
+
+#[test]
+fn webviewer_labels_never_receive_application_ipc() {
+    assert!(util::is_app_window("main"));
+    assert!(util::is_app_window("workspace-12"));
+    for label in ["browser-1", "workspace-", "workspace-evil", "main-1", ""] {
+        assert!(!util::is_app_window(label));
+    }
+}

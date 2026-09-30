@@ -5,6 +5,19 @@ import type { UiLocale } from "../types";
 export type Dict = Record<string, string>;
 
 const en: Dict = {
+  "preview.translationExternal": "Page translation opens externally. The resource preview keeps its declared capability.",
+  "resource.unmapped": "Not mapped",
+  "resource.useCard": "Preview unavailable? Show resource card",
+  "resource.noSummary": "No summary supplied by this source.",
+  "resource.tags": "Tags",
+  "resource.concepts": "Concepts",
+  "resource.related": "Related concepts",
+  "resource.prerequisites": "Prerequisite concepts",
+  "resource.graphNote": "Concept links are suggestions from the local STEM dictionary.",
+  "resource.externalOnly": "This provider is opened in a separate viewer or browser.",
+  "resource.nativeCard": "This provider uses a native resource card; no embedded page is requested.",
+  "workspace.openViewers": "Open all in WebViewers",
+
   "app.subtitle": "Visual search for mathematics and physics.",
   "nav.search": "Search",
   "nav.favorites": "Favorites",
@@ -108,7 +121,7 @@ const en: Dict = {
     "Uses a free machine-translation service (MyMemory) with an offline STEM glossary fallback. Cached locally.",
   "settings.pageProxy": "Custom page-translation proxy",
   "settings.pageProxyHint":
-    "Optional. Use {url} and {lang} placeholders, e.g. https://your-proxy/?url={url}&lang={lang}. When set, the preview can embed translated pages directly.",
+    "Optional. Use {url} and {lang} placeholders, e.g. https://your-proxy/?url={url}&lang={lang}. Used only when opening a translated page externally; never bypasses embedding restrictions.",
   "settings.engineNote":
     "Translations are produced by the third-party MyMemory API and require network access. Stem-term glosses come from the built-in offline glossary.",
 
@@ -119,6 +132,19 @@ const en: Dict = {
 };
 
 const zhCN: Dict = {
+  "preview.translationExternal": "网页翻译将在外部打开，资源预览仍遵循来源的能力声明。",
+  "resource.unmapped": "暂无映射",
+  "resource.useCard": "预览不可用？显示资源卡片",
+  "resource.noSummary": "来源未提供摘要。",
+  "resource.tags": "标签",
+  "resource.concepts": "概念",
+  "resource.related": "相关概念",
+  "resource.prerequisites": "先修概念",
+  "resource.graphNote": "概念关系来自本地 STEM 词典，仅供学习参考。",
+  "resource.externalOnly": "此来源请在独立窗口或浏览器中打开。",
+  "resource.nativeCard": "此来源使用原生资源卡片，不请求嵌入网页。",
+  "workspace.openViewers": "全部在独立窗口打开",
+
   "app.subtitle": "数学与物理可视化搜索。",
   "nav.search": "搜索",
   "nav.favorites": "收藏",
@@ -221,7 +247,7 @@ const zhCN: Dict = {
     "使用免费机器翻译服务（MyMemory），并以内置 STEM 术语表作为离线兜底，结果会本地缓存。",
   "settings.pageProxy": "自定义网页翻译代理",
   "settings.pageProxyHint":
-    "可选。支持 {url} 与 {lang} 占位符，例如 https://your-proxy/?url={url}&lang={lang}。设置后预览可直接内嵌翻译后的页面。",
+    "可选。支持 {url} 与 {lang} 占位符，例如 https://your-proxy/?url={url}&lang={lang}。仅用于在外部打开翻译页面，不用于绕过网页嵌入限制。",
   "settings.engineNote":
     "翻译由第三方 MyMemory API 提供，需要联网；专业术语来自内置离线词表。",
 
@@ -232,6 +258,19 @@ const zhCN: Dict = {
 };
 
 const zhTW: Dict = {
+  "preview.translationExternal": "網頁翻譯將在外部開啟，資源預覽仍遵循來源的能力宣告。",
+  "resource.unmapped": "暫無映射",
+  "resource.useCard": "預覽不可用？顯示資源卡片",
+  "resource.noSummary": "來源未提供摘要。",
+  "resource.tags": "標籤",
+  "resource.concepts": "概念",
+  "resource.related": "相關概念",
+  "resource.prerequisites": "先修概念",
+  "resource.graphNote": "概念關係來自本地 STEM 詞典，僅供學習參考。",
+  "resource.externalOnly": "此來源請在獨立視窗或瀏覽器中開啟。",
+  "resource.nativeCard": "此來源使用原生資源卡片，不請求嵌入網頁。",
+  "workspace.openViewers": "全部在獨立視窗開啟",
+
   "app.subtitle": "數學與物理視覺化搜尋。",
   "nav.search": "搜尋",
   "nav.favorites": "收藏",
@@ -334,7 +373,7 @@ const zhTW: Dict = {
     "使用免費機器翻譯服務（MyMemory），並以內建 STEM 詞彙表作為離線備援，結果會快取於本機。",
   "settings.pageProxy": "自訂網頁翻譯代理",
   "settings.pageProxyHint":
-    "選填。支援 {url} 與 {lang} 佔位符，例如 https://your-proxy/?url={url}&lang={lang}。設定後預覽可直接嵌入翻譯後的頁面。",
+    "選填。支援 {url} 與 {lang} 佔位符，例如 https://your-proxy/?url={url}&lang={lang}。僅用於在外部開啟翻譯頁面，不用於繞過網頁嵌入限制。",
   "settings.engineNote":
     "翻譯由第三方 MyMemory API 提供，需要網路連線；專業術語來自內建離線詞彙表。",
 

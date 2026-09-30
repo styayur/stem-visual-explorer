@@ -21,12 +21,15 @@ export interface SearchResult {
   thumbnail: string | null;
 }
 
+export type PreviewCapability = "Embed" | "NativeCard" | "ExternalOnly";
+
 export type ProviderState = "idle" | "loading" | "done" | "error";
 
 export interface ProviderStatus {
   id: string;
   name: string;
   homepage: string;
+  preview_capability?: PreviewCapability;
   state: ProviderState;
   count: number;
   error: string | null;
@@ -48,6 +51,7 @@ export interface ProviderInfo {
   id: string;
   name: string;
   homepage: string;
+  preview_capability?: PreviewCapability;
   experimental: boolean;
   indexed_items: number | null;
   last_updated: string | null;

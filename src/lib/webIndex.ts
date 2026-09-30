@@ -8,6 +8,7 @@ import {
   type IndexEntryLike,
 } from "./searchEngine";
 import type { ProviderInfo, ProviderStatus, SearchResponse, SearchResult } from "./types";
+import { providerCapability } from "./previewPolicy";
 import { httpUrl } from "./urls";
 
 export interface ManifestEntry {
@@ -139,6 +140,7 @@ export async function webProviders(enabled: string[]): Promise<ProviderInfo[]> {
     id: x.id,
     name: x.name,
     homepage: x.homepage,
+    preview_capability: providerCapability(x.id),
     experimental: x.experimental,
     indexed_items: x.count,
     last_updated: x.updated_at,
@@ -174,6 +176,7 @@ export async function webSearch(
           id: entry.id,
           name: entry.name,
           homepage: entry.homepage,
+          preview_capability: providerCapability(entry.id),
           state: "done",
           count: found.length,
           error: null,
@@ -187,6 +190,7 @@ export async function webSearch(
           id: entry.id,
           name: entry.name,
           homepage: entry.homepage,
+          preview_capability: providerCapability(entry.id),
           state: "error",
           count: 0,
           error: String(e),
@@ -214,6 +218,7 @@ export async function webSearch(
       id: x.id,
       name: x.name,
       homepage: x.homepage,
+    preview_capability: providerCapability(x.id),
       state: "idle",
       count: 0,
       error: null,

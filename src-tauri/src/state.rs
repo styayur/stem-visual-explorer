@@ -13,7 +13,7 @@ pub struct AppState {
     pub cache_dir: PathBuf,
     pub settings_path: PathBuf,
     pub settings: Mutex<Settings>,
-    pub workspace_payloads: Mutex<HashMap<String, Vec<String>>>,
+    pub workspace_payloads: Mutex<HashMap<String, crate::models::WorkspacePayload>>,
 }
 
 impl AppState {

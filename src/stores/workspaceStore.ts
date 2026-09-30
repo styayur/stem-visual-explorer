@@ -30,7 +30,7 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
     const selected = get().selected;
     if (selected.length === 0) return;
     try {
-      await cmd.openWorkspace(selected.map((r) => r.url));
+      await cmd.openWorkspace(selected.map((r) => r.url), selected);
       set({ selected: [] });
     } catch (e) { reportError(e); }
   },

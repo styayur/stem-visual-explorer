@@ -21,6 +21,7 @@ try {
   browser = await chromium.launch({ headless: true, ...(process.env.SVE_CHROMIUM ? { executablePath: process.env.SVE_CHROMIUM } : {}) });
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   let translations = 0;
+  const externalRequests = [];
   await context.route("**/*", async (route) => {
     const url = route.request().url();
     if (url.startsWith(base)) return route.continue();
@@ -28,6 +29,7 @@ try {
       translations++;
       return route.fulfill({ json: { responseStatus: 200, responseData: { translatedText: `译文 ${new URL(url).searchParams.get("q")}` } } });
     }
+    externalRequests.push(url);
     return route.fulfill({ contentType: "text/html", body: "<!doctype html><title>Preview fixture</title><p>Embedded page</p>" });
   });
   context.on("page", (p) => p.on("pageerror", (e) => errors.push(e.message)));
@@ -50,6 +52,32 @@ try {
       const s = useSearchStore.getState(); return !s.loading && (query ? s.response?.query === query : !s.response);
     }, q);
   };
+  await search("site:mathinsight gradient");
+  const card = page.getByTestId("resource-card");
+  await card.waitFor();
+  assert.equal(await page.locator("iframe").count(), 0);
+  assert.equal(externalRequests.length, 0, "NativeCard must never try a blocked iframe");
+  for (const label of ["Related concepts", "Prerequisite concepts", "Tags"]) assert.ok((await card.textContent()).includes(label));
+  await rows.first().click(); await page.keyboard.press("Space");
+  assert.equal(await page.getByRole("dialog").locator("iframe").count(), 0);
+  await page.getByRole("dialog").getByTestId("resource-card").waitFor();
+  await page.keyboard.press("Escape");
+  await page.evaluate(async () => { const {useSettingsStore} = await import("/src/stores/settingsStore.ts"); await useSettingsStore.getState().update({page_translate_proxy:"https://proxy.example/?url={url}&lang={lang}"}); });
+  await page.getByTitle("Translate page", {exact:true}).click();
+  assert.equal(await page.locator("iframe").count(), 0);
+  assert.ok(!externalRequests.some((url) => url.startsWith("https://proxy.example")));
+  await page.getByTitle("Translate page", {exact:true}).click();
+  await page.evaluate(async () => { const {useSettingsStore} = await import("/src/stores/settingsStore.ts"); await useSettingsStore.getState().update({page_translate_proxy:""}); });
+  await search("site:maotian");
+  await page.locator('[data-preview-capability="ExternalOnly"]').waitFor();
+  assert.equal(await page.locator("iframe").count(), 0);
+  await search("site:falstad wave");
+  await page.locator("iframe").waitFor();
+  await page.getByRole("button", { name: "Preview unavailable? Show resource card", exact: true }).click();
+  await page.getByTestId("resource-card").waitFor();
+  assert.equal(await page.locator("iframe").count(), 0);
+  ok("explicit provider preview policies, concept cards, Quick Look and embed fallback");
+  translations = 0;
   await search("curl");
   assert.ok((await state()).response.total >= 3);
   assert.equal(context.pages().length, 1, "search Enter must not open a stale result");
@@ -107,6 +135,7 @@ try {
   await page.getByRole("button", { name: "Copy URL", exact: true }).click();
   s = await state();
   assert.equal(await page.evaluate(() => navigator.clipboard.readText()), s.visible.find((r) => r.id === s.selectedId).url);
+  await search("site:falstad curl");
   const oldFrame = await page.locator("iframe").elementHandle();
   await page.getByRole("button", { name: "Reload preview", exact: true }).click();
   assert.equal(await oldFrame.evaluate((frame) => frame.isConnected), false);
@@ -123,7 +152,13 @@ try {
   await page.getByRole("button", { name: /Workspace 4/ }).click();
   const workspace = await workspacePromise;
   await workspace.waitForLoadState("networkidle");
-  assert.equal(await workspace.locator("iframe").count(), 4);
+  assert.equal(await workspace.locator("[data-preview-capability]").count(), 4);
+  const workspaceMetadata = await workspace.evaluate(async () => (await import("/src/lib/commands.ts")).getWorkspaceResources(""));
+  assert.equal(workspaceMetadata.length, 4);
+  assert.ok(workspaceMetadata.every((r) => r.title && r.source_id));
+  await workspace.evaluate(() => { window.__opened = []; window.open = (url) => { window.__opened.push(url); return null; }; });
+  await workspace.getByRole("button", { name: "Open all in WebViewers", exact: true }).click();
+  assert.equal(await workspace.evaluate(() => window.__opened.length), 4);
   await workspace.locator("textarea").fill("Saved workspace notes");
   await workspace.reload(); await workspace.waitForLoadState("networkidle");
   assert.equal(await workspace.locator("textarea").inputValue(), "Saved workspace notes");
@@ -135,7 +170,7 @@ try {
   assert.ok(await page.locator("html").evaluate((e) => e.classList.contains("dark")));
   await page.getByRole("button", { name: "Inline", exact: true }).click();
   await page.getByRole("navigation").getByRole("button", { name: "Search", exact: true }).click();
-  assert.equal(await page.locator("iframe").count(), 1);
+  assert.equal(await page.locator("[data-preview-capability]").count(), 1);
   await page.getByRole("navigation").getByRole("button", { name: "Settings" }).click();
   await page.getByRole("button", { name: "Off", exact: true }).click();
   await page.getByRole("navigation").getByRole("button", { name: "Search", exact: true }).click();

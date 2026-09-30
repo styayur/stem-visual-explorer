@@ -3,10 +3,10 @@ use crate::models::{NormalizedQuery, ResultType, SearchResult};
 /// Transparent, deterministic relevance scoring.
 ///
 /// - Exact title match: +100
-/// - Title contains all tokens: +60
-/// - Title contains at least one token: +30
-/// - Tag match (per matched tag): +20
-/// - Description match: +10
+/// - All direct concept groups in title: 60 * weakest group weight
+/// - Otherwise title: 30 * strongest matching variant
+/// - Tags: 20 * strongest matching variant (capped across aliases)
+/// - Description: 10 * strongest matching variant
 /// - Interactive / simulation / applet / visualization bonus: +5
 pub fn score(query: &NormalizedQuery, result: &SearchResult) -> f32 {
     let title = result.title.to_lowercase();
@@ -26,38 +26,40 @@ pub fn score(query: &NormalizedQuery, result: &SearchResult) -> f32 {
         .collect::<Vec<_>>()
         .join(" ")
         .to_lowercase();
-    let title_contains_all = !(parsed.terms.is_empty() && parsed.phrases.is_empty())
-        && parsed.terms.iter().all(|term| {
-            super::normalize::expand(&super::query::parse(term))
-                .tokens
-                .iter()
-                .any(|t| title.contains(t.as_str()))
-        })
-        && parsed.phrases.iter().all(|p| title.contains(p.as_str()));
-    let mut score = 0.0_f32;
-
-    if !raw.is_empty() && title.trim() == raw.trim() {
-        score += 100.0;
-    } else if title_contains_all {
-        score += 60.0;
-    } else if query.tokens.iter().any(|t| title.contains(t.as_str())) {
-        score += 30.0;
+    let best = |text: &str, variants: &[&crate::models::QueryVariant]| -> f32 {
+        variants
+            .iter()
+            .filter(|v| text.contains(&v.text))
+            .map(|v| v.weight)
+            .fold(0.0, f32::max)
+    };
+    let variants: Vec<_> = query.variants.iter().collect();
+    let mut groups: std::collections::BTreeMap<String, Vec<&crate::models::QueryVariant>> =
+        std::collections::BTreeMap::new();
+    for v in &query.variants {
+        if v.kind != "related" {
+            groups
+                .entry(v.concept_id.clone().unwrap_or_else(|| v.text.clone()))
+                .or_default()
+                .push(v);
+        }
     }
-
-    let tag_matches = tags
-        .iter()
-        .filter(|tag| {
-            query
-                .tokens
-                .iter()
-                .any(|t| t == *tag || tag.contains(t.as_str()))
-        })
-        .count();
-    score += 20.0 * tag_matches as f32;
-
-    if query.tokens.iter().any(|t| desc.contains(t.as_str())) {
-        score += 10.0;
-    }
+    let all_weight = if !groups.is_empty() && query.phrases.iter().all(|p| title.contains(p)) {
+        groups
+            .values()
+            .map(|vs| best(&title, vs))
+            .fold(1.0, f32::min)
+    } else {
+        0.0
+    };
+    let mut score = if !raw.is_empty() && title.trim() == raw.trim() {
+        100.0
+    } else if all_weight > 0.0 {
+        60.0 * all_weight
+    } else {
+        30.0 * best(&title, &variants)
+    };
+    score += 20.0 * best(&tags.join(" "), &variants) + 10.0 * best(&desc, &variants);
 
     if matches!(
         result.result_type,
@@ -69,7 +71,7 @@ pub fn score(query: &NormalizedQuery, result: &SearchResult) -> f32 {
         score += 5.0;
     }
 
-    score
+    (score * 1000.0).round() / 1000.0
 }
 
 /// Rank and sort results by descending score, using source name and title as
@@ -95,13 +97,7 @@ mod tests {
     use crate::models::ResultType;
 
     fn q(terms: &[&str]) -> NormalizedQuery {
-        NormalizedQuery {
-            raw: terms.join(" "),
-            tokens: terms.iter().map(|s| s.to_string()).collect(),
-            phrases: vec![],
-            site_filter: None,
-            type_filter: None,
-        }
+        super::super::normalize::expand(&super::super::query::parse(&terms.join(" ")))
     }
 
     fn result(title: &str, tags: &[&str], desc: &str, rt: ResultType) -> SearchResult {

@@ -32,6 +32,36 @@ depends on the browser's asset cache; this is not an installable offline PWA.
 
 ---
 
+## Capability-aware previews and concept search
+
+Providers declare `Embed`, `NativeCard` or `ExternalOnly` in the shared
+`src/lib/previewCapabilities.json`. Only Falstad currently opts into embedding;
+Math Insight, PhET, BetterExplained, Physics Fundamentals and PhysicStuff use
+native resource cards, and Maotian uses external-only access. Unknown or
+mismatched origins default to cards. These are conservative product policies,
+not claims that every listed site blocks frames. Cards include resource metadata
+and dictionary-derived related/prerequisite concepts, with explicit missing-data
+labels and independent viewer / browser actions. Preview, Quick Look and Workspace
+share the policy. No proxy strips CSP/X-Frame-Options; translation proxies are
+never used as an embedding fallback. A manual card fallback handles newly blocked
+Embed sources that cross-origin browser APIs cannot reliably detect.
+
+Windows WebViewers provide Back, Forward, Reload, Copy URL, Open External,
+Always on Top and Close. Results and workspace panes can open multiple viewers.
+Popup windows use the same validated HTTP/HTTPS path. Viewer labels are denied
+application commands even after navigating to a local app URL. Workspace metadata
+is preserved while legacy URL-only payloads remain supported.
+
+`src/lib/concepts.json` is the single offline dictionary/graph used by TypeScript
+and Rust: stable concept IDs, English/Simplified/Traditional labels, synonyms,
+aliases, related concepts and prerequisites. Longest-term matching resolves
+multiword concepts in either language. Variants have weights original **1.0**,
+canonical **0.95**, synonym **0.9**, alternate **0.75**, related **0.35**. Expansion
+is deduplicated by concept and text; related edges are followed only once and
+prerequisites are explanatory metadata. Exact quoted phrases and source/type
+filters retain their semantics. Ranking uses weighted, capped field matches and
+stable tie-breakers, without any LLM or network normalization dependency.
+
 ## Features
 
 - **Unified mixed search** — all enabled sources are queried concurrently in Rust,
@@ -115,7 +145,7 @@ and may need parser updates if the sites change.
 | Where | How it works |
 | --- | --- |
 | **Desktop app** | External windows get an in-place **A/文** button in the floating toolbar. It walks the page's text nodes, translates them with MyMemory, and swaps the text directly in the DOM; press it again to restore the original. This is a *real* full-page translation of the native site. |
-| **Web version** | Browsers forbid a page from scripting a cross-origin iframe, so the preview cannot rewrite the embedded site's DOM. The preview's **Original / Translated** toggle therefore shows the translated title + summary and offers **Open translated page**; if you configure a **custom page-translation proxy** (settings → *Custom page-translation proxy*, using `{url}` / `{lang}`), the preview embeds the translated page directly. |
+| **Web version** | Browsers forbid a page from scripting a cross-origin iframe, so the preview cannot rewrite the embedded site's DOM. The preview's **Original / Translated** toggle therefore shows the translated title + summary and offers **Open translated page**; if you configure a **custom page-translation proxy** (settings → *Custom page-translation proxy*, using `{url}` / `{lang}`), the proxy URL is opened externally, never used to bypass an embedding policy. |
 
 Translation requires network access to the third-party MyMemory service. It is
 off by default, and the app is fully usable without it (the offline glossary
@@ -373,7 +403,7 @@ and `docs/screenshot-zh.png`.
 ### Logic unit tests
 
 ```bash
-npm test                                                    # offline (30 checks)
+npm test                                                    # offline (36 checks)
 node --experimental-strip-types scripts/unit_test.mjs --live  # + one real MyMemory call
 ```
 
@@ -397,7 +427,7 @@ cargo test --no-default-features                   # parser/query/ranking unit t
 ```
 
 `--no-default-features` disables the `tauri` feature so the test suite links only
-the pure logic (no GUI/webview runtime needed). The 28 tests cover every provider
+the pure logic (no GUI/webview runtime needed). The 34 tests cover every provider
 parser, query normalization/ranking, URL validation, database persistence, cache
 recovery and provider failure isolation. CI also checks desktop compilation on Windows.
 

@@ -1,0 +1,737 @@
+[
+  {
+    "id": "gradient",
+    "en": "gradient",
+    "zh_cn": "梯度",
+    "zh_tw": "梯度",
+    "synonyms": [
+      "spatial gradient"
+    ],
+    "aliases": [
+      "grad"
+    ],
+    "related": [
+      "directional-derivative",
+      "divergence",
+      "curl"
+    ],
+    "prerequisites": [
+      "derivative",
+      "vector",
+      "partial-derivative"
+    ]
+  },
+  {
+    "id": "curl",
+    "en": "curl",
+    "zh_cn": "旋度",
+    "zh_tw": "旋度",
+    "synonyms": [
+      "rotation of a vector field"
+    ],
+    "aliases": [
+      "rot"
+    ],
+    "related": [
+      "divergence",
+      "stokes-theorem"
+    ],
+    "prerequisites": [
+      "vector",
+      "partial-derivative"
+    ]
+  },
+  {
+    "id": "divergence",
+    "en": "divergence",
+    "zh_cn": "散度",
+    "zh_tw": "散度",
+    "synonyms": [],
+    "aliases": [
+      "div"
+    ],
+    "related": [
+      "gradient",
+      "curl",
+      "divergence-theorem"
+    ],
+    "prerequisites": [
+      "vector",
+      "partial-derivative"
+    ]
+  },
+  {
+    "id": "standing-wave",
+    "en": "standing wave",
+    "zh_cn": "驻波",
+    "zh_tw": "駐波",
+    "synonyms": [
+      "stationary wave"
+    ],
+    "aliases": [
+      "standing waves"
+    ],
+    "related": [
+      "interference",
+      "resonance"
+    ],
+    "prerequisites": [
+      "wave",
+      "frequency",
+      "wavelength"
+    ]
+  },
+  {
+    "id": "harmonic-oscillator",
+    "en": "harmonic oscillator",
+    "zh_cn": "谐振子",
+    "zh_tw": "諧振子",
+    "synonyms": [
+      "简谐振动",
+      "簡諧振動",
+      "简谐振子",
+      "簡諧振子"
+    ],
+    "aliases": [],
+    "related": [
+      "simple-harmonic-motion",
+      "resonance"
+    ],
+    "prerequisites": [
+      "differential-equation"
+    ]
+  },
+  {
+    "id": "divergence-theorem",
+    "en": "divergence theorem",
+    "zh_cn": "散度定理",
+    "zh_tw": "散度定理",
+    "synonyms": [
+      "gauss theorem",
+      "gauss divergence theorem",
+      "高斯定理"
+    ],
+    "aliases": [
+      "gauss's theorem"
+    ],
+    "related": [
+      "stokes-theorem"
+    ],
+    "prerequisites": [
+      "divergence",
+      "integral"
+    ]
+  },
+  {
+    "id": "stokes-theorem",
+    "en": "stokes theorem",
+    "zh_cn": "斯托克斯定理",
+    "zh_tw": "斯托克斯定理",
+    "synonyms": [
+      "stokes' theorem",
+      "斯托克斯定理",
+      "斯托克斯"
+    ],
+    "aliases": [
+      "stokes"
+    ],
+    "related": [
+      "divergence-theorem"
+    ],
+    "prerequisites": [
+      "curl",
+      "integral"
+    ]
+  },
+  {
+    "id": "directional-derivative",
+    "en": "directional derivative",
+    "zh_cn": "方向导数",
+    "zh_tw": "方向導數",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "electromagnetic-induction",
+    "en": "electromagnetic induction",
+    "zh_cn": "电磁感应",
+    "zh_tw": "電磁感應",
+    "synonyms": [
+      "faraday induction"
+    ],
+    "aliases": [
+      "faraday's law"
+    ],
+    "related": [
+      "electric-field",
+      "magnetic-field"
+    ],
+    "prerequisites": [
+      "magnetic-field",
+      "current"
+    ]
+  },
+  {
+    "id": "electromagnetic-wave",
+    "en": "electromagnetic wave",
+    "zh_cn": "电磁波",
+    "zh_tw": "電磁波",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "electromagnetic-field",
+    "en": "electromagnetic field",
+    "zh_cn": "电磁场",
+    "zh_tw": "電磁場",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "electric-field",
+    "en": "electric field",
+    "zh_cn": "电场",
+    "zh_tw": "電場",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "magnetic-field",
+    "en": "magnetic field",
+    "zh_cn": "磁场",
+    "zh_tw": "磁場",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "quantum-mechanics",
+    "en": "quantum mechanics",
+    "zh_cn": "量子力学",
+    "zh_tw": "量子力學",
+    "synonyms": [],
+    "aliases": [
+      "QM"
+    ],
+    "related": [
+      "quantum",
+      "wave-equation"
+    ],
+    "prerequisites": [
+      "probability"
+    ]
+  },
+  {
+    "id": "quantum",
+    "en": "quantum",
+    "zh_cn": "量子",
+    "zh_tw": "量子",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "fourier",
+    "en": "fourier",
+    "zh_cn": "傅里叶",
+    "zh_tw": "傅里葉",
+    "synonyms": [
+      "傅立叶",
+      "傅立葉"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "wave-equation",
+    "en": "wave equation",
+    "zh_cn": "波动方程",
+    "zh_tw": "波動方程",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "thermodynamics",
+    "en": "thermodynamics",
+    "zh_cn": "热力学",
+    "zh_tw": "熱力學",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "mechanics",
+    "en": "mechanics",
+    "zh_cn": "力学",
+    "zh_tw": "力學",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "optics",
+    "en": "optics",
+    "zh_cn": "光学",
+    "zh_tw": "光學",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "relativity",
+    "en": "relativity",
+    "zh_cn": "相对论",
+    "zh_tw": "相對論",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "derivative",
+    "en": "derivative",
+    "zh_cn": "导数",
+    "zh_tw": "導數",
+    "synonyms": [],
+    "aliases": [
+      "differentiation"
+    ],
+    "related": [
+      "integral",
+      "partial-derivative"
+    ],
+    "prerequisites": []
+  },
+  {
+    "id": "integral",
+    "en": "integral",
+    "zh_cn": "积分",
+    "zh_tw": "積分",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "vector",
+    "en": "vector",
+    "zh_cn": "向量",
+    "zh_tw": "向量",
+    "synonyms": [
+      "矢量"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "matrix",
+    "en": "matrix",
+    "zh_cn": "矩阵",
+    "zh_tw": "矩陣",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "eigenvalue",
+    "en": "eigenvalue",
+    "zh_cn": "特征值",
+    "zh_tw": "特徵值",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "differential-equation",
+    "en": "differential equation",
+    "zh_cn": "微分方程",
+    "zh_tw": "微分方程",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "partial-derivative",
+    "en": "partial derivative",
+    "zh_cn": "偏导数",
+    "zh_tw": "偏導數",
+    "synonyms": [],
+    "aliases": [],
+    "related": [
+      "gradient"
+    ],
+    "prerequisites": [
+      "derivative"
+    ]
+  },
+  {
+    "id": "multiple-integral",
+    "en": "multiple integral",
+    "zh_cn": "多重积分",
+    "zh_tw": "多重積分",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "fourier-transform",
+    "en": "fourier transform",
+    "zh_cn": "傅里叶变换",
+    "zh_tw": "傅里葉變換",
+    "synonyms": [
+      "傅立叶变换",
+      "傅立葉變換"
+    ],
+    "aliases": [
+      "FT"
+    ],
+    "related": [
+      "wave",
+      "frequency"
+    ],
+    "prerequisites": [
+      "integral"
+    ]
+  },
+  {
+    "id": "simple-harmonic-motion",
+    "en": "simple harmonic motion",
+    "zh_cn": "简谐运动",
+    "zh_tw": "簡諧運動",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "pendulum",
+    "en": "pendulum",
+    "zh_cn": "单摆",
+    "zh_tw": "單擺",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "wave",
+    "en": "wave",
+    "zh_cn": "波",
+    "zh_tw": "波",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "interference",
+    "en": "interference",
+    "zh_cn": "干涉",
+    "zh_tw": "干涉",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "diffraction",
+    "en": "diffraction",
+    "zh_cn": "衍射",
+    "zh_tw": "衍射",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "refraction",
+    "en": "refraction",
+    "zh_cn": "折射",
+    "zh_tw": "折射",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "reflection",
+    "en": "reflection",
+    "zh_cn": "反射",
+    "zh_tw": "反射",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "momentum",
+    "en": "momentum",
+    "zh_cn": "动量",
+    "zh_tw": "動量",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "energy",
+    "en": "energy",
+    "zh_cn": "能量",
+    "zh_tw": "能量",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "entropy",
+    "en": "entropy",
+    "zh_cn": "熵",
+    "zh_tw": "熵",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "electric-potential",
+    "en": "electric potential",
+    "zh_cn": "电势",
+    "zh_tw": "電勢",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "circuit",
+    "en": "circuit",
+    "zh_cn": "电路",
+    "zh_tw": "電路",
+    "synonyms": [
+      "electric circuit"
+    ],
+    "aliases": [],
+    "related": [
+      "current",
+      "voltage",
+      "resistance"
+    ],
+    "prerequisites": [
+      "current"
+    ]
+  },
+  {
+    "id": "capacitor",
+    "en": "capacitor",
+    "zh_cn": "电容",
+    "zh_tw": "電容",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "inductor",
+    "en": "inductor",
+    "zh_cn": "电感",
+    "zh_tw": "電感",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "resistance",
+    "en": "resistance",
+    "zh_cn": "电阻",
+    "zh_tw": "電阻",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "current",
+    "en": "current",
+    "zh_cn": "电流",
+    "zh_tw": "電流",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "voltage",
+    "en": "voltage",
+    "zh_cn": "电压",
+    "zh_tw": "電壓",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "frequency",
+    "en": "frequency",
+    "zh_cn": "频率",
+    "zh_tw": "頻率",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "wavelength",
+    "en": "wavelength",
+    "zh_cn": "波长",
+    "zh_tw": "波長",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "amplitude",
+    "en": "amplitude",
+    "zh_cn": "振幅",
+    "zh_tw": "振幅",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "probability",
+    "en": "probability",
+    "zh_cn": "概率",
+    "zh_tw": "概率",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "statistics",
+    "en": "statistics",
+    "zh_cn": "统计",
+    "zh_tw": "統計",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "topology",
+    "en": "topology",
+    "zh_cn": "拓扑",
+    "zh_tw": "拓撲",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "fluid",
+    "en": "fluid",
+    "zh_cn": "流体",
+    "zh_tw": "流體",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "wave-motion",
+    "en": "wave motion",
+    "zh_cn": "波动",
+    "zh_tw": "波動",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "oscillation",
+    "en": "oscillation",
+    "zh_cn": "振动",
+    "zh_tw": "振動",
+    "synonyms": [
+      "振荡"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "resonance",
+    "en": "resonance",
+    "zh_cn": "谐振",
+    "zh_tw": "諧振",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "speed-of-light",
+    "en": "speed of light",
+    "zh_cn": "光速",
+    "zh_tw": "光速",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "acceleration",
+    "en": "acceleration",
+    "zh_cn": "加速度",
+    "zh_tw": "加速度",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "velocity",
+    "en": "velocity",
+    "zh_cn": "速度",
+    "zh_tw": "速度",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  },
+  {
+    "id": "displacement",
+    "en": "displacement",
+    "zh_cn": "位移",
+    "zh_tw": "位移",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": []
+  }
+]

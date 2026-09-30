@@ -42,6 +42,10 @@ pub trait SearchProvider: Send + Sync {
     fn name(&self) -> &'static str;
     fn homepage(&self) -> &'static str;
 
+    fn preview_capability(&self) -> crate::models::PreviewCapability {
+        preview_capability(self.id())
+    }
+
     /// True when the source cannot be parsed reliably yet.
     fn experimental(&self) -> bool {
         false
@@ -125,4 +129,23 @@ pub fn http_client() -> reqwest::Client {
         .redirect(reqwest::redirect::Policy::limited(5))
         .build()
         .expect("failed to build HTTP client")
+}
+
+/// Shared with the browser build. No header rewriting or proxy fallback.
+pub fn preview_capability(id: &str) -> crate::models::PreviewCapability {
+    #[derive(serde::Deserialize)]
+    struct Policy {
+        id: String,
+        capability: crate::models::PreviewCapability,
+    }
+    static POLICIES: std::sync::OnceLock<Vec<Policy>> = std::sync::OnceLock::new();
+    POLICIES
+        .get_or_init(|| {
+            serde_json::from_str(include_str!("../../../src/lib/previewCapabilities.json"))
+                .expect("valid preview policies")
+        })
+        .iter()
+        .find(|p| p.id == id)
+        .map(|p| p.capability)
+        .unwrap_or_default()
 }

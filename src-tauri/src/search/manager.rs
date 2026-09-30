@@ -139,6 +139,7 @@ fn statuses_for(
             id: p.id().to_string(),
             name: p.name().to_string(),
             homepage: p.homepage().to_string(),
+            preview_capability: p.preview_capability(),
             state,
             count,
             error,

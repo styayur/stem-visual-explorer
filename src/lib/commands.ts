@@ -195,16 +195,16 @@ export async function togglePin(label: string): Promise<boolean> {
   return invoke<boolean>("toggle_pin", { label });
 }
 
-export async function openWorkspace(urls: string[]): Promise<string> {
+export async function openWorkspace(urls: string[], resources: SearchResult[] = []): Promise<string> {
   urls = workspaceUrls(urls);
   if (!urls.length) throw new Error("Select at least one page");
   if (!IS_TAURI) {
-    const payload = btoa(unescape(encodeURIComponent(JSON.stringify(urls))));
+    const payload = btoa(unescape(encodeURIComponent(JSON.stringify({ urls, resources }))));
     const url = `${window.location.pathname}?workspace=1&items=${encodeURIComponent(payload)}`;
     window.open(url, "_blank", "noopener,noreferrer");
     return "workspace";
   }
-  return invoke<string>("open_workspace", { urls });
+  return invoke<string>("open_workspace", { urls, resources });
 }
 
 export async function getWorkspaceItems(label: string): Promise<string[]> {
@@ -212,12 +212,23 @@ export async function getWorkspaceItems(label: string): Promise<string[]> {
   return invoke<string[]>("get_workspace_items", { label });
 }
 
+export async function getWorkspaceResources(label: string): Promise<SearchResult[]> {
+  if (IS_TAURI) return invoke<SearchResult[]>("get_workspace_resources", { label });
+  try {
+    const raw = new URLSearchParams(window.location.search).get("items");
+    const data = raw ? JSON.parse(decodeURIComponent(escape(atob(raw)))) : null;
+    const urls = workspaceItemsFromUrl();
+    return Array.isArray(data?.resources) ? data.resources.filter((r: unknown) => isSearchResult(r) && urls.includes(r.url)).slice(0, 4) : [];
+  } catch { return []; }
+}
+
 function workspaceItemsFromUrl(): string[] {
   const params = new URLSearchParams(window.location.search);
   const raw = params.get("items");
   if (!raw) return [];
   try {
-    return workspaceUrls(JSON.parse(decodeURIComponent(escape(atob(raw)))));
+    const payload = JSON.parse(decodeURIComponent(escape(atob(raw))));
+    return workspaceUrls(Array.isArray(payload) ? payload : payload.urls);
   } catch {
     return [];
   }
@@ -228,6 +239,7 @@ function isSearchResult(value: unknown): value is SearchResult {
   const r = value as SearchResult;
   try { httpUrl(r.url); } catch { return false; }
   return [r.id, r.source_id, r.source_name, r.title, r.result_type].every((v) => typeof v === "string")
+    && (r.description === null || typeof r.description === "string")
     && Array.isArray(r.tags) && r.tags.every((t) => typeof t === "string");
 }
 

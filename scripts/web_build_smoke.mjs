@@ -30,7 +30,7 @@ try {
   const workspace = await opened;
   await workspace.waitForLoadState("networkidle");
   assert.ok(workspace.url().startsWith(base));
-  assert.equal(await workspace.locator("iframe").count(), 1);
+  assert.equal(await workspace.locator("[data-preview-capability]").count(), 1);
   await workspace.getByRole("link").click(); await workspace.locator("#search-input").waitFor();
   assert.deepEqual(errors, []);
   console.log("PAGES BUILD: search, index URLs and workspace navigation passed");

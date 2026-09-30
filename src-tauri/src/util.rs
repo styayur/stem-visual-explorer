@@ -18,3 +18,11 @@ pub fn validate_http_url(input: &str) -> Result<Url> {
     }
     Ok(url)
 }
+
+/// WebViewer labels are intentionally excluded even after navigation to a local URL.
+pub fn is_app_window(label: &str) -> bool {
+    label == "main"
+        || label
+            .strip_prefix("workspace-")
+            .is_some_and(|suffix| !suffix.is_empty() && suffix.chars().all(|c| c.is_ascii_digit()))
+}

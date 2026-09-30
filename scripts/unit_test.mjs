@@ -5,6 +5,8 @@
 //
 // Without --live it never touches the network.
 import assert from "node:assert/strict";
+import { concepts, normalizeConcepts, resourceConcepts } from "../src/lib/concepts.ts";
+import { providerCapability, previewCapability } from "../src/lib/previewPolicy.ts";
 
 import { glossaryLookup, glossarySize } from "../src/lib/translate/glossary.ts";
 import { chunk, guessSourceLanguage, mymemoryTranslate } from "../src/lib/translate/mymemory.ts";
@@ -26,6 +28,42 @@ function test(name, fn) {
   passed++;
   console.log(`  ok  ${name}`);
 }
+
+test("concept dictionary edges are valid", () => {
+  const ids = new Set(concepts.map((c) => c.id));
+  assert.equal(ids.size, concepts.length);
+  for (const c of concepts) for (const id of [...c.related, ...c.prerequisites]) assert.ok(ids.has(id));
+});
+test("concept variants preserve all five weights", () => {
+  const q = normalizeConcepts(["旋度"]);
+  for (const [text, weight] of [["旋度",1],["curl",.95],["rotation of a vector field",.9],["rot",.75],["divergence",.35]])
+    assert.equal(q.variants.find((v) => v.text === text).weight, weight);
+  assert.ok(!q.variants.some((v) => v.text === "gradient" || v.text === "partial derivative"));
+});
+test("concept IDs deduplicate across languages and longest phrases", () => {
+  assert.deepEqual(normalizeConcepts(["curl", "旋度", "rot"]).concept_ids, ["curl"]);
+  assert.deepEqual(normalizeConcepts(["partial", "derivative"]).concept_ids, ["partial-derivative"]);
+  assert.deepEqual(normalizeConcepts(["駐波"]).concept_ids, ["standing-wave"]);
+  assert.deepEqual(normalizeConcepts(["unknownterm"]).variants.map((v) => v.weight), [1]);
+});
+test("weighted ranking does not reward redundant concept aliases", () => {
+  const q = expand(parseQuery("旋度"));
+  const make = (title) => ({ id:title, source_id:"test", source_name:"Test", title, description:null, url:"https://example.com/", result_type:"article", tags:[], thumbnail:null, score:0 });
+  for (const [title, score] of [["curl",57],["rotation of a vector field",54],["rot",45],["divergence",10.5],["curl rot rotation of a vector field",57]])
+    assert.equal(rankResults(q,[make(title)])[0].score, score);
+});
+test("resource graph annotations include related and prerequisite concepts", () => {
+  const graph = resourceConcepts("Gradient", []);
+  assert.ok(graph.related.some((c) => c.id === "curl"));
+  assert.ok(graph.prerequisites.some((c) => c.id === "derivative"));
+});
+test("preview policies never embed unknown or mismatched origins", () => {
+  assert.equal(providerCapability("falstad"),"Embed");
+  assert.equal(providerCapability("maotian"),"ExternalOnly");
+  assert.equal(previewCapability({source_id:"falstad",url:"https://falstad.com/vector/"}),"Embed");
+  for (const url of ["https://evil.test/", "https://falstad.com.evil.test/", "file:///a"])
+    assert.equal(previewCapability({source_id:"falstad",url}),"NativeCard");
+});
 
 console.log("glossary");
 test("en -> zh", () => {

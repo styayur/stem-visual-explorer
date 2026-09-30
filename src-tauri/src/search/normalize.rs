@@ -1,157 +1,145 @@
-use crate::models::{NormalizedQuery, ParsedQuery};
-use std::collections::BTreeSet;
+use crate::models::{NormalizedQuery, ParsedQuery, QueryVariant};
+use serde::Deserialize;
+use std::collections::{BTreeMap, BTreeSet};
+use std::sync::OnceLock;
 
-/// A deterministic bilingual (Chinese <-> English) synonym dictionary.
-///
-/// Keys are lowercased source terms; values are the expanded token set. No
-/// machine learning is involved: this is pure local synonym expansion.
-fn synonym_groups() -> Vec<(&'static str, &'static str)> {
-    vec![
-        ("梯度", "gradient"),
-        ("旋度", "curl"),
-        ("散度", "divergence"),
-        ("驻波", "standing wave"),
-        ("简谐振动", "harmonic oscillator"),
-        ("高斯定理", "gauss theorem"),
-        ("高斯定理", "divergence theorem"),
-        ("斯托克斯", "stokes theorem"),
-        ("方向导数", "directional derivative"),
-        ("电磁感应", "electromagnetic induction"),
-        ("电磁波", "electromagnetic wave"),
-        ("电磁场", "electromagnetic field"),
-        ("电场", "electric field"),
-        ("磁场", "magnetic field"),
-        ("量子力学", "quantum mechanics"),
-        ("量子", "quantum"),
-        ("傅里叶", "fourier"),
-        ("傅立叶", "fourier"),
-        ("波动方程", "wave equation"),
-        ("热力学", "thermodynamics"),
-        ("力学", "mechanics"),
-        ("光学", "optics"),
-        ("相对论", "relativity"),
-        ("导数", "derivative"),
-        ("积分", "integral"),
-        ("向量", "vector"),
-        ("矢量", "vector"),
-        ("矩阵", "matrix"),
-        ("特征值", "eigenvalue"),
-        ("微分方程", "differential equation"),
-        ("偏导数", "partial derivative"),
-        ("多重积分", "multiple integral"),
-        ("傅里叶变换", "fourier transform"),
-        ("简谐运动", "simple harmonic motion"),
-        ("单摆", "pendulum"),
-        ("波", "wave"),
-        ("干涉", "interference"),
-        ("衍射", "diffraction"),
-        ("折射", "refraction"),
-        ("反射", "reflection"),
-        ("动量", "momentum"),
-        ("能量", "energy"),
-        ("熵", "entropy"),
-        ("电势", "electric potential"),
-        ("电路", "circuit"),
-        ("电容", "capacitor"),
-        ("电感", "inductor"),
-        ("电阻", "resistance"),
-        ("电流", "current"),
-        ("电压", "voltage"),
-        ("频率", "frequency"),
-        ("波长", "wavelength"),
-        ("振幅", "amplitude"),
-        ("概率", "probability"),
-        ("统计", "statistics"),
-        ("拓扑", "topology"),
-        ("流体", "fluid"),
-        ("波动", "wave motion"),
-        ("振动", "oscillation"),
-        ("振荡", "oscillation"),
-        ("谐振", "resonance"),
-        ("光速", "speed of light"),
-        ("加速度", "acceleration"),
-        ("速度", "velocity"),
-        ("位移", "displacement"),
-        ("駐波", "standing wave"),
-        ("簡諧振動", "harmonic oscillator"),
-        ("電磁感應", "electromagnetic induction"),
-        ("電場", "electric field"),
-        ("磁場", "magnetic field"),
-        ("傅里葉", "fourier"),
-        ("傅立葉", "fourier"),
-        ("導數", "derivative"),
-        ("積分", "integral"),
-    ]
+#[derive(Debug, Deserialize)]
+pub struct Concept {
+    pub id: String,
+    pub en: String,
+    pub zh_cn: String,
+    pub zh_tw: String,
+    pub synonyms: Vec<String>,
+    pub aliases: Vec<String>,
+    pub related: Vec<String>,
+    pub prerequisites: Vec<String>,
 }
 
-/// Expand a raw parsed query into normalized tokens. English and Chinese are
-/// both preserved, and every known synonym is added to the token set.
+pub fn concepts() -> &'static [Concept] {
+    static DATA: OnceLock<Vec<Concept>> = OnceLock::new();
+    DATA.get_or_init(|| {
+        serde_json::from_str(include_str!("../../../src/lib/concepts.json"))
+            .expect("valid STEM concept dictionary")
+    })
+}
+fn term(s: &str) -> String {
+    s.split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ")
+        .to_lowercase()
+}
+fn lookup(s: &str) -> Option<&'static Concept> {
+    let s = term(s);
+    concepts().iter().find(|c| {
+        [&c.id, &c.en, &c.zh_cn, &c.zh_tw]
+            .into_iter()
+            .chain(c.synonyms.iter())
+            .chain(c.aliases.iter())
+            .any(|n| term(n) == s)
+    })
+}
+fn add(
+    out: &mut BTreeMap<(String, String), QueryVariant>,
+    text: &str,
+    id: Option<&str>,
+    kind: &str,
+    weight: f32,
+) {
+    let text = term(text);
+    if text.is_empty() {
+        return;
+    }
+    let key = (id.unwrap_or_default().to_string(), text.clone());
+    if out.get(&key).map_or(true, |v| v.weight < weight) {
+        out.insert(
+            key,
+            QueryVariant {
+                text,
+                concept_id: id.map(str::to_string),
+                kind: kind.into(),
+                weight,
+            },
+        );
+    }
+}
+
+/// Offline, longest-match concept normalization. Expansion stops after one related edge.
 pub fn expand(parsed: &ParsedQuery) -> NormalizedQuery {
-    let mut set: BTreeSet<String> = BTreeSet::new();
-
-    for term in &parsed.terms {
-        let lower = term.to_lowercase();
-        add_with_synonyms(&lower, &mut set);
+    let mut out = BTreeMap::new();
+    let mut ids = BTreeSet::new();
+    let mut originals = Vec::new();
+    let max_words = concepts()
+        .iter()
+        .flat_map(|c| {
+            [&c.id, &c.en, &c.zh_cn, &c.zh_tw]
+                .into_iter()
+                .chain(c.synonyms.iter())
+                .chain(c.aliases.iter())
+        })
+        .map(|n| n.split_whitespace().count())
+        .max()
+        .unwrap_or(1);
+    let mut start = 0;
+    while start < parsed.terms.len() {
+        let mut size = max_words.min(parsed.terms.len() - start);
+        while size > 1 && lookup(&parsed.terms[start..start + size].join(" ")).is_none() {
+            size -= 1;
+        }
+        originals.push(parsed.terms[start..start + size].join(" "));
+        start += size;
     }
-
-    for phrase in &parsed.phrases {
-        let lower = phrase.to_lowercase();
-        add_with_synonyms(&lower, &mut set);
+    originals.extend(parsed.phrases.clone());
+    for original in originals {
+        let c = lookup(&original);
+        if let Some(c) = c {
+            ids.insert(c.id.clone());
+        }
+        add(
+            &mut out,
+            &original,
+            c.map(|c| c.id.as_str()),
+            "original",
+            1.0,
+        );
     }
-
-    for size in 2..=4 {
-        for terms in parsed.terms.windows(size) {
-            let phrase = terms.join(" ").to_lowercase();
-            if synonym_groups()
+    for id in &ids {
+        let c = concepts().iter().find(|c| &c.id == id).unwrap();
+        for n in [&c.en, &c.zh_cn, &c.zh_tw] {
+            add(&mut out, n, Some(id), "canonical", 0.95);
+        }
+        for n in &c.synonyms {
+            add(&mut out, n, Some(id), "synonym", 0.9);
+        }
+        for n in &c.aliases {
+            add(&mut out, n, Some(id), "alternate", 0.75);
+        }
+        for related in &c.related {
+            if ids.contains(related) {
+                continue;
+            }
+            let c = concepts()
                 .iter()
-                .any(|(from, to)| *from == phrase || *to == phrase)
-            {
-                add_with_synonyms(&phrase, &mut set);
+                .find(|c| &c.id == related)
+                .expect("valid concept edge");
+            for n in [&c.en, &c.zh_cn, &c.zh_tw] {
+                add(&mut out, n, Some(related), "related", 0.35);
             }
         }
     }
-
+    let variants: Vec<_> = out.into_values().collect();
+    let mut tokens = BTreeSet::new();
+    for v in &variants {
+        tokens.insert(v.text.clone());
+        tokens.extend(v.text.split_whitespace().map(str::to_string));
+    }
     NormalizedQuery {
         raw: parsed.raw.clone(),
-        tokens: set.into_iter().collect(),
+        tokens: tokens.into_iter().collect(),
+        variants,
+        concept_ids: ids.into_iter().collect(),
         phrases: parsed.phrases.clone(),
         site_filter: parsed.site_filter.clone(),
         type_filter: parsed.type_filter,
-    }
-}
-
-fn add_with_synonyms(term: &str, set: &mut BTreeSet<String>) {
-    let trimmed = term.trim();
-    if trimmed.is_empty() {
-        return;
-    }
-    // Always keep the original token.
-    set.insert(trimmed.to_string());
-
-    // Add all synonym targets. We iterate rather than recurse to keep the
-    // expansion bounded and deterministic.
-    let mut queue: Vec<String> = vec![trimmed.to_string()];
-    while let Some(current) = queue.pop() {
-        for (from, to) in synonym_groups() {
-            if current == *from || current == from.to_lowercase() {
-                for part in to.split_whitespace() {
-                    let p = part.to_lowercase();
-                    if set.insert(p.clone()) {
-                        queue.push(p);
-                    }
-                }
-                let full = to.to_lowercase();
-                if set.insert(full.clone()) {
-                    queue.push(full);
-                }
-            }
-            if current == *to || current == to.to_lowercase() {
-                let full = from.to_lowercase();
-                if set.insert(full.clone()) {
-                    queue.push(full);
-                }
-            }
-        }
     }
 }
 

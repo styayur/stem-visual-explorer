@@ -1,0 +1,51 @@
+[
+  {
+    "id": "mathinsight",
+    "capability": "NativeCard",
+    "hosts": [
+      "mathinsight.org"
+    ]
+  },
+  {
+    "id": "falstad",
+    "capability": "Embed",
+    "hosts": [
+      "falstad.com"
+    ]
+  },
+  {
+    "id": "phet",
+    "capability": "NativeCard",
+    "hosts": [
+      "phet.colorado.edu"
+    ]
+  },
+  {
+    "id": "betterexplained",
+    "capability": "NativeCard",
+    "hosts": [
+      "betterexplained.com"
+    ]
+  },
+  {
+    "id": "physicsfundamentals",
+    "capability": "NativeCard",
+    "hosts": [
+      "physicsfundamentalsinfo.com"
+    ]
+  },
+  {
+    "id": "physicstuff",
+    "capability": "NativeCard",
+    "hosts": [
+      "physicstuff.com"
+    ]
+  },
+  {
+    "id": "maotian",
+    "capability": "ExternalOnly",
+    "hosts": [
+      "maotian.nomaki.jp"
+    ]
+  }
+]

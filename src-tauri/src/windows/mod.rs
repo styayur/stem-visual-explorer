@@ -44,10 +44,24 @@ pub fn open_browser_window(
     let handle = app.clone();
     let label_for_nav = label.clone();
     let script = toolbar_script(target_lang);
+    let popup_app = app.clone();
+    let popup_target = target_lang.to_string();
 
     WebviewWindowBuilder::new(app, &label, WebviewUrl::External(url))
         .title(title)
         .initialization_script(script)
+        .on_new_window(move |url, _features| {
+            // Never let an external page create an unguarded WebView or inherit
+            // app capabilities. Windows requires window creation off this callback.
+            if let Ok(url) = validate_http_url(url.as_str()) {
+                let app = popup_app.clone();
+                let target = popup_target.clone();
+                std::thread::spawn(move || {
+                    let _ = open_browser_window(&app, url, "WebViewer", &target);
+                });
+            }
+            tauri::webview::NewWindowResponse::Deny
+        })
         .on_navigation(move |url| handle_sve_navigation(&handle, &label_for_nav, url))
         .build()
         .map_err(|e| AppError::Other(format!("failed to open window: {e}")))?;
@@ -57,7 +71,10 @@ pub fn open_browser_window(
 
 /// Create a workspace window (a local app window that loads the main bundle
 /// with the workspace route). Payload is stored in Rust state keyed by label.
-pub fn open_workspace_window(app: &AppHandle, payload: Vec<String>) -> Result<String> {
+pub fn open_workspace_window(
+    app: &AppHandle,
+    payload: crate::models::WorkspacePayload,
+) -> Result<String> {
     let label = format!("workspace-{}", next_id());
     let state = app.state::<crate::state::AppState>();
     state
@@ -102,7 +119,7 @@ pub fn open_workspace_window(app: &AppHandle, payload: Vec<String>) -> Result<St
 /// cancels the navigation so no error page is shown.
 fn handle_sve_navigation(app: &AppHandle, label: &str, url: &Url) -> bool {
     if url.scheme() != "sve" {
-        return matches!(url.scheme(), "http" | "https");
+        return validate_http_url(url.as_str()).is_ok();
     }
     match url.host_str() {
         Some("open-external") => {

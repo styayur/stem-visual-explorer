@@ -4,9 +4,10 @@ import { selectedResult, useSearchStore } from "../stores/searchStore";
 import { useSettingsStore } from "../stores/settingsStore";
 import { useT, typeLabelKey } from "../lib/i18n";
 import { useTranslatedText } from "../lib/translate/useTranslatedText";
-import { buildEmbeddableTranslatedUrl, buildTranslatedPageUrl } from "../lib/translate/pageUrl";
+import { buildTranslatedPageUrl } from "../lib/translate/pageUrl";
 import * as cmd from "../lib/commands";
 import { Badge, IconButton } from "./ui";
+import ResourcePreview from "./ResourcePreview";
 import { cn } from "../lib/cn";
 
 export default function PreviewPane() {
@@ -24,11 +25,6 @@ export default function PreviewPane() {
   const titleT = useTranslatedText(result?.title, translateOn || view === "translated", target);
   const descT = useTranslatedText(result?.description, view === "translated", target);
 
-  const embeddable = useMemo(
-    () => (result ? buildEmbeddableTranslatedUrl(result.url, target, proxy) : null),
-    [result, target, proxy]
-  );
-
   const iframeKey = useMemo(
     () => (result ? `${result.id}:${view}:${reloadKey}` : "none"),
     [result, view, reloadKey]
@@ -42,7 +38,6 @@ export default function PreviewPane() {
     );
   }
 
-  const src = view === "translated" && embeddable ? embeddable : result.url;
   const translatedTitle = titleT?.text ?? result.title;
   const translatedDesc = descT?.text ?? result.description;
 
@@ -122,19 +117,12 @@ export default function PreviewPane() {
       )}
 
       <div className="relative min-h-0 flex-1 bg-white dark:bg-zinc-900">
-        <iframe
-          key={iframeKey}
-          title={translatedTitle}
-          src={src}
-          className="h-full w-full border-0"
-          sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
-          referrerPolicy="no-referrer"
-        />
+        <ResourcePreview key={result.id} result={result} reloadKey={iframeKey} />
       </div>
 
       <div className="border-t border-edge-light px-3 py-1.5 text-[11px] text-zinc-400 dark:border-edge-dark">
-        {view === "translated" && !embeddable
-          ? `${t("preview.translateFailed")} `
+        {view === "translated"
+          ? `${t("preview.translationExternal")} `
           : ""}
         {t("preview.embedNote")}
       </div>

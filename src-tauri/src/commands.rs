@@ -49,6 +49,7 @@ pub fn providers_info(
             id: p.id().to_string(),
             name: p.name().to_string(),
             homepage: p.homepage().to_string(),
+            preview_capability: p.preview_capability(),
             experimental: p.experimental(),
             indexed_items: p.indexed_items(),
             last_updated: p.last_updated(),
@@ -72,6 +73,8 @@ pub async fn refresh_provider_index(
     let empty = NormalizedQuery {
         raw: String::new(),
         tokens: vec![],
+        variants: vec![],
+        concept_ids: vec![],
         phrases: vec![],
         site_filter: None,
         type_filter: None,
@@ -90,6 +93,7 @@ pub async fn refresh_provider_index(
         id: provider.id().to_string(),
         name: provider.name().to_string(),
         homepage: provider.homepage().to_string(),
+        preview_capability: provider.preview_capability(),
         experimental: provider.experimental(),
         indexed_items: provider.indexed_items(),
         last_updated: provider.last_updated(),
@@ -228,6 +232,7 @@ pub fn toggle_pin(app: tauri::AppHandle, label: String) -> std::result::Result<b
 pub async fn open_workspace(
     app: tauri::AppHandle,
     urls: Vec<String>,
+    resources: Option<Vec<SearchResult>>,
 ) -> std::result::Result<String, String> {
     if urls.is_empty() || urls.len() > 4 {
         return Err("A workspace requires one to four pages".into());
@@ -236,7 +241,26 @@ pub async fn open_workspace(
     for u in urls {
         valid.push(validate_http_url(&u).map_err(to_err)?.to_string());
     }
-    windows::open_workspace_window(&app, valid).map_err(to_err)
+    let mut resources = resources.unwrap_or_default();
+    if resources.len() > 4 {
+        return Err("Too many workspace resources".into());
+    }
+    for resource in &mut resources {
+        resource.url = validate_http_url(&resource.url)
+            .map_err(to_err)?
+            .to_string();
+        if !valid.contains(&resource.url) {
+            return Err("Workspace resource URL does not match".into());
+        }
+    }
+    windows::open_workspace_window(
+        &app,
+        crate::models::WorkspacePayload {
+            urls: valid,
+            resources,
+        },
+    )
+    .map_err(to_err)
 }
 
 #[tauri::command]
@@ -249,6 +273,20 @@ pub fn get_workspace_items(
         .lock()
         .map_err(|_| "lock poisoned".to_string())?
         .get(&label)
-        .cloned()
+        .map(|payload| payload.urls.clone())
+        .ok_or_else(|| "workspace payload not found".to_string())
+}
+
+#[tauri::command]
+pub fn get_workspace_resources(
+    state: State<'_, AppState>,
+    label: String,
+) -> std::result::Result<Vec<SearchResult>, String> {
+    state
+        .workspace_payloads
+        .lock()
+        .map_err(|_| "lock poisoned".to_string())?
+        .get(&label)
+        .map(|payload| payload.resources.clone())
         .ok_or_else(|| "workspace payload not found".to_string())
 }

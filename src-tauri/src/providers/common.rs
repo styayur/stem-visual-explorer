@@ -165,7 +165,7 @@ pub fn search_entries(
         }
 
         let token_ok =
-            query.tokens.is_empty() || query.tokens.iter().any(|t| hay.contains(t.as_str()));
+            query.tokens.is_empty() || query.variants.iter().any(|v| hay.contains(&v.text));
         if token_ok {
             out.push(to_result(source_id, source_name, entry));
         }

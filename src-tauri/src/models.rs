@@ -29,6 +29,21 @@ pub struct SearchResult {
     pub thumbnail: Option<String>,
 }
 
+/// Conservative provider policy; absent/unknown declarations never imply iframe support.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub enum PreviewCapability {
+    Embed,
+    #[default]
+    NativeCard,
+    ExternalOnly,
+}
+
+#[derive(Debug, Clone)]
+pub struct WorkspacePayload {
+    pub urls: Vec<String>,
+    pub resources: Vec<SearchResult>,
+}
+
 /// Lifecycle state of a provider during a search.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
@@ -45,6 +60,8 @@ pub struct ProviderStatus {
     pub id: String,
     pub name: String,
     pub homepage: String,
+    #[serde(default)]
+    pub preview_capability: PreviewCapability,
     pub state: ProviderState,
     pub count: usize,
     pub error: Option<String>,
@@ -60,6 +77,8 @@ pub struct ProviderInfo {
     pub id: String,
     pub name: String,
     pub homepage: String,
+    #[serde(default)]
+    pub preview_capability: PreviewCapability,
     pub experimental: bool,
     pub indexed_items: Option<usize>,
     pub last_updated: Option<String>,
@@ -76,11 +95,21 @@ pub struct ParsedQuery {
     pub type_filter: Option<ResultType>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct QueryVariant {
+    pub text: String,
+    pub concept_id: Option<String>,
+    pub kind: String,
+    pub weight: f32,
+}
+
 /// A normalized query after synonym expansion.
 #[derive(Debug, Clone)]
 pub struct NormalizedQuery {
     pub raw: String,
     pub tokens: Vec<String>,
+    pub variants: Vec<QueryVariant>,
+    pub concept_ids: Vec<String>,
     pub phrases: Vec<String>,
     pub site_filter: Option<String>,
     pub type_filter: Option<ResultType>,

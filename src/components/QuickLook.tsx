@@ -3,6 +3,7 @@ import { ExternalLink, Maximize2, X } from "lucide-react";
 import { useSearchStore } from "../stores/searchStore";
 import * as cmd from "../lib/commands";
 import { useT } from "../lib/i18n";
+import ResourcePreview from "./ResourcePreview";
 import { attempt } from "../stores/noticeStore";
 
 export default function QuickLook() {
@@ -67,12 +68,7 @@ export default function QuickLook() {
             <X className="h-4 w-4" />
           </button>
         </div>
-        <iframe
-          title={quickLook.title}
-          src={quickLook.url}
-          className="min-h-0 flex-1 border-0 bg-white"
-          sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
-        />
+        <div className="min-h-0 flex-1"><ResourcePreview key={quickLook.id} result={quickLook} /></div>
       </div>
     </div>
   );

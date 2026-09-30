@@ -48,13 +48,29 @@ try {
   await invoke("clear_history"); assert.equal((await invoke("list_history")).length, 0);
   ok("SQLite favorites persistence, history deduplication and clearing");
   const createdWorkspace = context.waitForEvent("page", { timeout: 20000 });
-  const workspaceLabel = await invoke("open_workspace", { urls: ["https://example.com/one", "https://example.com/two"] });
+  const resources = ["one", "two"].map((part) => ({ ...saved, url: `https://example.com/${part}`, title: `Gradient ${part}`, description: "Workspace metadata summary" }));
+  const workspaceLabel = await invoke("open_workspace", { urls: resources.map((r) => r.url), resources });
   children.push(workspaceLabel);
   const workspace = await createdWorkspace;
   await workspace.waitForLoadState("networkidle");
   await workspace.locator("textarea").waitFor();
-  assert.equal(await workspace.locator("iframe").count(), 2);
+  assert.equal(await workspace.locator("iframe").count(), 0);
+  assert.equal(await workspace.getByTestId("resource-card").count(), 2);
   assert.deepEqual(await invoke("get_workspace_items", { label: workspaceLabel }), ["https://example.com/one", "https://example.com/two"]);
+  assert.equal((await invoke("get_workspace_resources", { label: workspaceLabel })).length, 2);
+  assert.ok((await workspace.getByTestId("resource-card").first().textContent()).includes("Workspace metadata summary"));
+  const initialPages = new Set(context.pages());
+  await workspace.getByRole("button", { name: "Open all in WebViewers", exact: true }).click();
+  const deadline = Date.now() + 15000;
+  while (context.pages().filter((p) => !initialPages.has(p)).length < 2) {
+    if (Date.now() > deadline) throw new Error("Workspace did not open two viewers");
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  for (const viewer of context.pages().filter((p) => !initialPages.has(p))) {
+    await viewer.locator("#sve-toolbar").waitFor();
+    const closed = viewer.waitForEvent("close");
+    await viewer.getByRole("button", { name: "Close window", exact: true }).click(); await closed;
+  }
   await workspace.locator("textarea").fill("Native workspace note");
   await workspace.reload(); await workspace.waitForLoadState("networkidle");
   assert.equal(await workspace.locator("textarea").inputValue(), "Native workspace note");
@@ -75,6 +91,18 @@ try {
     try { await window.__TAURI_INTERNALS__.invoke("get_settings"); return true; } catch { return false; }
   });
   assert.equal(remoteAccess, false, "External sites must not receive app IPC access");
+  await external.evaluate(() => { window.__copied = ""; Object.defineProperty(navigator, "clipboard", { configurable:true, value:{writeText:async (text) => { window.__copied = text; }} }); });
+  await external.getByRole("button", { name: "Copy URL", exact: true }).click();
+  assert.equal(await external.evaluate(() => window.__copied), "https://example.com/");
+  await external.getByRole("button", { name: "Pin / unpin window", exact: true }).click({ noWaitAfter: true });
+  await main.waitForTimeout(200);
+  assert.equal(await invoke("toggle_pin", { label: windowLabel }), false, "toolbar pin must set native always-on-top");
+  // WebView2 CDP leaves cancelled custom-scheme navigations pending; reload resets that observer state.
+  await external.reload(); await external.locator("#sve-toolbar").waitFor();
+  const childPromise = context.waitForEvent("page", {timeout:15000});
+  await external.evaluate(() => window.open("https://example.com/child", "_blank"));
+  const child = await childPromise; await child.locator("#sve-toolbar").waitFor();
+  const childClosed = child.waitForEvent("close"); await child.getByRole("button", {name:"Close window",exact:true}).click(); await childClosed;
   await external.getByRole("link", { name: "Next page" }).click();
   await external.waitForURL("https://example.com/next");
   await external.getByRole("button", { name: "Back", exact: true }).click();
@@ -88,6 +116,11 @@ try {
   assert.equal(await external.locator("#description").textContent(), "电磁感应演示");
   await external.locator("#sve-translate").click();
   assert.equal(await external.locator("#description").textContent(), "Electromagnetic induction demonstration.");
+  await external.goto("http://localhost:1420/");
+  const localAccess = await external.evaluate(async () => {
+    try { await window.__TAURI_INTERNALS__.invoke("get_settings"); return true; } catch { return false; }
+  });
+  assert.equal(localAccess, false, "Viewer must remain unprivileged on an app URL");
   const closed = external.waitForEvent("close");
   await external.getByRole("button", { name: "Close window", exact: true }).click();
   await closed;
@@ -95,6 +128,7 @@ try {
   for (const command of ["open_external", "open_window"]) {
     await assert.rejects(invoke(command, { url: "file:///C:/Windows/win.ini", title: "Rejected" }));
   }
+  await assert.rejects(invoke("open_workspace", { urls: ["https://example.com/"], resources: [{ ...saved, url: "file:///C:/test" }] }));
   await assert.rejects(invoke("open_workspace", { urls: Array(5).fill("https://example.com/") }));
   await invoke("clear_cache");
   assert.ok((await invoke("providers_info")).every((p) => p.indexed_items === null));

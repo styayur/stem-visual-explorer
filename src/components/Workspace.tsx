@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import { ExternalLink, RotateCw } from "lucide-react";
+import { ExternalLink, Maximize2, RotateCw } from "lucide-react";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import * as cmd from "../lib/commands";
+import type { SearchResult } from "../lib/types";
+import { resourceForUrl } from "../lib/previewPolicy";
+import ResourcePreview from "./ResourcePreview";
 import { cn } from "../lib/cn";
 import { useT } from "../lib/i18n";
 
 export default function Workspace() {
   const t = useT();
   const [urls, setUrls] = useState<string[]>([]);
+  const [resources, setResources] = useState<SearchResult[]>([]);
   const [notes, setNotes] = useState("");
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
@@ -24,8 +28,10 @@ export default function Workspace() {
       }
       try {
         const items = await cmd.getWorkspaceItems(label);
+        const metadata = await cmd.getWorkspaceResources(label);
         if (mounted) {
           setUrls(items);
+          setResources(metadata);
           try { setNotes(localStorage.getItem(notesKey(items)) ?? localStorage.getItem("sve-workspace-notes") ?? ""); }
           catch (e) { setError(String(e)); }
         }
@@ -58,6 +64,10 @@ export default function Workspace() {
         >
           {t("workspace.openAll")}
         </button>
+        <button type="button" className="rounded px-2 py-1 text-[12px] text-zinc-300 hover:bg-zinc-700"
+          onClick={() => Promise.all(urls.map((u) => cmd.openWindow(u, resources.find((r) => r.url === u)?.title ?? u))).catch((e) => setError(String(e)))}>
+          {t("workspace.openViewers")}
+        </button>
         <a
           href="?route=search"
           className="rounded px-2 py-1 text-[12px] text-zinc-300 hover:bg-zinc-700"
@@ -69,7 +79,7 @@ export default function Workspace() {
 
       <div className={cn("grid min-h-0 flex-1 gap-px bg-zinc-700", gridClass)}>
         {urls.map((u, i) => (
-          <Pane key={`${u}:${i}`} url={u} index={i} reload={reload} onError={setError} />
+          <Pane key={`${u}:${i}`} url={u} resource={resources.find((r) => r.url === u) ?? resourceForUrl(u)} index={i} reload={reload} onError={setError} />
         ))}
         {urls.length === 0 && (
           <div className="flex items-center justify-center bg-zinc-900 text-sm text-zinc-500">
@@ -95,7 +105,7 @@ export default function Workspace() {
   );
 }
 
-function Pane({ url, index, reload, onError }: { url: string; index: number; reload: number; onError: (error: string) => void }) {
+function Pane({ url, resource, index, reload, onError }: { url: string; resource: SearchResult; index: number; reload: number; onError: (error: string) => void }) {
   const t = useT();
   const [key, setKey] = useState(0);
   const host = useHost(url);
@@ -112,6 +122,8 @@ function Pane({ url, index, reload, onError }: { url: string; index: number; rel
         >
           <RotateCw className="h-3.5 w-3.5" />
         </button>
+        <button type="button" title={t("row.openWindow")} className="rounded p-1 text-zinc-400 hover:bg-zinc-700"
+          onClick={() => cmd.openWindow(url, resource.title).catch((e) => onError(String(e)))}><Maximize2 className="h-3.5 w-3.5" /></button>
         <button
           type="button"
           title={t("preview.browser")}
@@ -121,13 +133,7 @@ function Pane({ url, index, reload, onError }: { url: string; index: number; rel
           <ExternalLink className="h-3.5 w-3.5" />
         </button>
       </div>
-      <iframe
-        key={`${index}:${key}:${reload}`}
-        title={`Pane ${index + 1}`}
-        src={url}
-        className="min-h-0 flex-1 border-0 bg-white"
-        sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"
-      />
+      <div className="min-h-0 flex-1"><ResourcePreview key={resource.url} result={resource} reloadKey={`${index}:${key}:${reload}`} /></div>
     </div>
   );
 }

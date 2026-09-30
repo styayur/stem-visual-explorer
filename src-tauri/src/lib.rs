@@ -22,27 +22,38 @@ pub fn run() {
             app.manage(state);
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![
-            commands::search,
-            commands::providers_info,
-            commands::refresh_provider_index,
-            commands::set_provider_enabled,
-            commands::clear_cache,
-            commands::get_settings,
-            commands::save_settings,
-            commands::add_favorite,
-            commands::remove_favorite,
-            commands::list_favorites,
-            commands::add_history,
-            commands::list_history,
-            commands::clear_history,
-            commands::open_external,
-            commands::open_window,
-            commands::close_window,
-            commands::toggle_pin,
-            commands::open_workspace,
-            commands::get_workspace_items,
-        ])
+        .invoke_handler(|invoke| {
+            let webview = invoke.message.webview();
+            if !crate::util::is_app_window(webview.label()) {
+                invoke
+                    .resolver
+                    .reject("WebViewer has no application IPC access");
+                return true;
+            }
+            let handler: fn(tauri::ipc::Invoke<tauri::Wry>) -> bool = tauri::generate_handler![
+                commands::search,
+                commands::providers_info,
+                commands::refresh_provider_index,
+                commands::set_provider_enabled,
+                commands::clear_cache,
+                commands::get_settings,
+                commands::save_settings,
+                commands::add_favorite,
+                commands::remove_favorite,
+                commands::list_favorites,
+                commands::add_history,
+                commands::list_history,
+                commands::clear_history,
+                commands::open_external,
+                commands::open_window,
+                commands::close_window,
+                commands::toggle_pin,
+                commands::open_workspace,
+                commands::get_workspace_items,
+                commands::get_workspace_resources,
+            ];
+            handler(invoke)
+        })
         .run(tauri::generate_context!())
         .expect("error while running STEM Visual Explorer");
 }
