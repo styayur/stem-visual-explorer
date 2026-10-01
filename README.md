@@ -1,158 +1,578 @@
+<div align="center">
+
+<img src="docs/assets/brand/logo-mark.svg" width="84" alt="STEM Visual Explorer logo" />
+
 # STEM Visual Explorer
 
-数学与物理交互资源的聚合搜索工具。一次搜索七个来源，在同一界面中筛选、预览、收藏，并将最多四个页面放在工作区里对照学习。
+**Visual search and comparison for mathematics and physics resources.**
 
-[在线使用](https://styayur.github.io/stem-visual-explorer/) · [下载 Windows 版](https://github.com/styayur/stem-visual-explorer/releases/latest) · [English documentation](README.en.md)
+[Web App](https://styayur.github.io/stem-visual-explorer/) · [Windows](https://github.com/styayur/stem-visual-explorer/releases/latest) · [Documentation](docs/architecture.md) · [Releases](https://github.com/styayur/stem-visual-explorer/releases) · [Discussions](https://github.com/styayur/stem-visual-explorer/discussions)
 
-![中文界面](docs/screenshot-zh.png)
+[English](README.md) · [中文](README.zh-CN.md)
 
-## 快速开始
+[![release](https://img.shields.io/github/v/release/styayur/stem-visual-explorer)](https://github.com/styayur/stem-visual-explorer/releases/latest)
+[![CI](https://github.com/styayur/stem-visual-explorer/actions/workflows/ci.yml/badge.svg)](https://github.com/styayur/stem-visual-explorer/actions/workflows/ci.yml)
+[![license: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)]()
+[![Rust](https://img.shields.io/badge/Rust-black?logo=rust&logoColor=white)]()
+[![Tauri](https://img.shields.io/badge/Tauri-24C8D8?logo=tauri&logoColor=white)]()
 
-**直接使用网页版：** 打开[在线应用](https://styayur.github.io/stem-visual-explorer/)，输入 `梯度`、`curl` 或 `standing wave`。不需要注册、API Key 或部署服务。
+![STEM Visual Explorer search interface](docs/screenshot.png)
 
-**使用 Windows 桌面版：** 在 [Releases](https://github.com/styayur/stem-visual-explorer/releases/latest) 下载 Windows x64 安装程序，或下载 `windows-x64.zip`，解压后运行 `stem-visual-explorer.exe`。桌面版需要 Microsoft Edge WebView2 Runtime；安装程序会按配置处理缺失的运行时，便携版需使用系统已有的运行时。发布文件附带 `SHA256SUMS.txt` 校验值。
+</div>
 
-当前版本：**v0.2.0**。本次新增 Provider 预览能力、原生资源卡片、受控多窗口 WebViewer，以及离线跨语言概念图与带权查询归一化，详细验证记录见[功能检查报告](docs/functional-audit.md)。
+## Live web version
 
-## 可以做什么
+A fully static build runs in the browser — no server, no API keys:
 
-- **统一搜索：** 并发检索已启用的来源，按固定规则排序，支持来源和内容类型筛选。
-- **中英查询：** 内置数学、物理术语映射，支持常用繁体查询与多词英文概念。
-- **预览与多窗口：** 侧边或底部预览、空格 Quick Look，以及桌面独立网页窗口。
-- **学习工作区：** 选择最多四个结果并排浏览；笔记按页面组合分别保存。
-- **收藏与历史：** 本地保存收藏，查看、重搜或清空历史；历史去重并保留最近 200 条。
-- **翻译：** 支持简体中文、繁体中文、英文界面；可选结果翻译和桌面网页原位翻译。翻译默认关闭，术语优先使用本地词典。
-- **个性化：** 深色、浅色、跟随系统主题，预览模式和来源开关。
-- **缓存与错误恢复：** 缓存索引、请求超时、失败重试及明确的保存失败提示。
+**https://styayur.github.io/stem-visual-explorer/**
 
-## 来源
+The desktop app queries the sites live through Rust. The web version instead
+ships a pre-generated snapshot of every provider's index
+(`public/index/*.json`, ~1075 entries) and runs the same deterministic query
+parser, synonym expander and ranking algorithm in the browser, so search is
+instant. Previously loaded indexes and their manifest are cached locally and can
+be searched without index-server access. Loading the app itself offline still
+depends on the browser's asset cache; this is not an installable offline PWA.
 
-| 来源 | 主要内容 |
+![STEM Visual Explorer — searching “gradient” across Math Insight, Falstad, PhET, BetterExplained and more](docs/screenshot.png)
+
+*The same app in 简体中文 with result translation enabled:*
+
+![STEM Visual Explorer 中文界面](docs/screenshot-zh.png)
+
+---
+
+## Capability-aware previews and concept search
+
+Providers declare `Embed`, `NativeCard` or `ExternalOnly` in the shared
+`src/lib/previewCapabilities.json`. Only Falstad currently opts into embedding;
+Math Insight, PhET, BetterExplained, Physics Fundamentals and PhysicStuff use
+native resource cards, and Maotian uses external-only access. Unknown or
+mismatched origins default to cards. These are conservative product policies,
+not claims that every listed site blocks frames. Cards include resource metadata
+and dictionary-derived related/prerequisite concepts, with explicit missing-data
+labels and independent viewer / browser actions. Preview, Quick Look and Workspace
+share the policy. No proxy strips CSP/X-Frame-Options; translation proxies are
+never used as an embedding fallback. A manual card fallback handles newly blocked
+Embed sources that cross-origin browser APIs cannot reliably detect.
+
+Windows WebViewers provide Back, Forward, Reload, Copy URL, Open External,
+Always on Top and Close. Results and workspace panes can open multiple viewers.
+Popup windows use the same validated HTTP/HTTPS path. Viewer labels are denied
+application commands even after navigating to a local app URL. Workspace metadata
+is preserved while legacy URL-only payloads remain supported.
+
+`src/lib/concepts.json` is the single offline dictionary/graph used by TypeScript
+and Rust: stable concept IDs, English/Simplified/Traditional labels, synonyms,
+aliases, related concepts and prerequisites. Longest-term matching resolves
+multiword concepts in either language. Variants have weights original **1.0**,
+canonical **0.95**, synonym **0.9**, alternate **0.75**, related **0.35**. Expansion
+is deduplicated by concept and text; related edges are followed only once and
+prerequisites are explanatory metadata. Exact quoted phrases and source/type
+filters retain their semantics. Ranking uses weighted, capped field matches and
+stable tie-breakers, without any LLM or network normalization dependency.
+
+## Features
+
+- **Unified mixed search** — all enabled sources are queried concurrently in Rust,
+  then merged into one deterministically ranked stream.
+- **Source adapters, not hard-coded UI** — every website is an independent Rust
+  `SearchProvider`. The frontend never contains per-site logic.
+- **Two indexing strategies** — native site search where it exists
+  (BetterExplained), and a cached static directory index everywhere else
+  (Math Insight, Falstad, PhET, Physics Fundamentals, PhysicStuff, 猫田の物理).
+- **Deterministic relevance scoring** — exact title match, token matches, tag
+  matches and a small interactive bonus. No ML, no black box.
+- **Built-in translation** — UI in English / 简体中文 / 繁體中文, machine
+  translation of result titles & descriptions into 20+ languages (keyless
+  MyMemory API + offline STEM glossary), and native-page translation
+  (in-place in the desktop app).
+- **Bilingual query normalizer** — a local Chinese ↔ English synonym dictionary
+  (`梯度 → gradient`, `旋度 → curl`, `驻波 → standing wave`, …). A query like
+  `旋度 curl` expands both ways.
+- **Small query syntax** — `site:falstad wave`, `source:phet gradient`,
+  `type:interactive gradient`, `"standing wave"`.
+- **Preview modes** — `Side` (right pane), `Inline` (bottom pane) and `Off`.
+- **Real multi-window** — double-click (or `Ctrl/Cmd+Enter`) opens an independent
+  WebView window with its own Back / Forward / Reload / Copy URL / Open externally /
+  Pin / Close toolbar.
+- **Workspace mode** — select up to four results and open them in a 1/2/3/4-pane
+  grid, plus a notes pane.
+- **Quick Look** — press `Space` for a full-window overlay of the selected result.
+- **Favorites & history** — stored locally in SQLite on desktop and localStorage
+  in the browser. Settings includes history replay and clearing; repeated queries
+  are deduplicated and history is limited to 200 entries.
+- **Dark / light / system theme** — dark mode tuned for low-contrast, deep-grey
+  surfaces.
+- **Keyboard first** — the whole app is usable without a mouse.
+
+---
+
+## Supported sources
+
+| Source | Homepage | Adapter strategy | Result types |
+| --- | --- | --- | --- |
+| Math Insight | <https://mathinsight.org/> | Static directory index (`/page/list`, `/applet/list`, `/video/list`) enriched with titles/descriptions from `/index/general` | article, applet, video |
+| Falstad | <https://falstad.com/mathphysics.html> | Static applet directory index, grouped by section | applet |
+| PhET Interactive Simulations | <https://phet.colorado.edu/> | Full simulation metadata JSON (title, description, thumbnail, page URL) | simulation |
+| BetterExplained | <https://betterexplained.com/> | Live WordPress search (`?s=…`) **plus** a cached archive index parsed from `/articles/` | article, interactive |
+| Physics Fundamentals | <https://physicsfundamentalsinfo.com/labs/> | Static labs directory index | simulation |
+| PhysicStuff | <https://physicstuff.com/lab> | Static lab directory index | interactive |
+| 猫田の物理 | <https://maotian.nomaki.jp/> | Static homepage index (chapter + sub-visualization anchors) | visualization |
+
+PhysicStuff and 猫田の物理 are marked **experimental**: their markup is simplified
+and may need parser updates if the sites change.
+
+> **Note on Math Insight native search.** Math Insight *does* expose a search page
+> (`/search/?q=…`), but at the time of writing its server-side index returns
+> "No results found" for every query. The adapter therefore falls back to the
+> static directory index, which is complete and reliable. If Math Insight restores
+> its search backend, the native path can be re-enabled without touching the UI.
+
+---
+
+## Translation
+
+### The app's own content
+
+- **Interface languages:** English, 简体中文, 繁體中文 — switch from the globe
+  menu in the header or *Settings → Language & translation*. English is the
+  per-key fallback, so adding a locale only needs one dictionary
+  (`src/lib/i18n/dict.ts`).
+- **Search results:** enable *Translate result titles & descriptions* to
+  machine-translate English results into the selected target language (20+
+  options: 简体中文, 繁體中文, English, 日本語, 한국어, Español, Français, Deutsch,
+  Русский, Português, Italiano, العربية, हिन्दी, ไทย, Tiếng Việt, Bahasa
+  Indonesia, Türkçe, Nederlands, Polski, Українська …).
+- **Pipeline:** in-memory + `localStorage` cache → offline STEM glossary
+  (~70 terms, instant, no network) → **MyMemory** machine translation
+  (free, keyless, CORS-enabled). Requests are queued (3 concurrent, rate
+  limited) so bulk translation stays inside the free quota. A translated row
+  shows a small “译文 / Translated” badge and keeps the original as a tooltip.
+
+### Native web pages
+
+| Where | How it works |
 | --- | --- |
-| [Math Insight](https://mathinsight.org/) | 数学文章、交互示例、视频 |
-| [Falstad](https://falstad.com/mathphysics.html) | 数学与物理交互模拟 |
-| [PhET](https://phet.colorado.edu/) | 科学与数学仿真 |
-| [BetterExplained](https://betterexplained.com/) | 直观数学解释与交互文章 |
-| [Physics Fundamentals](https://physicsfundamentalsinfo.com/labs/) | 物理实验与模拟 |
-| [PhysicStuff](https://physicstuff.com/lab) | 物理交互实验，实验性适配 |
-| [猫田の物理](https://maotian.nomaki.jp/) | 物理可视化，实验性适配 |
+| **Desktop app** | External windows get an in-place **A/文** button in the floating toolbar. It walks the page's text nodes, translates them with MyMemory, and swaps the text directly in the DOM; press it again to restore the original. This is a *real* full-page translation of the native site. |
+| **Web version** | Browsers forbid a page from scripting a cross-origin iframe, so the preview cannot rewrite the embedded site's DOM. The preview's **Original / Translated** toggle therefore shows the translated title + summary and offers **Open translated page**; if you configure a **custom page-translation proxy** (settings → *Custom page-translation proxy*, using `{url}` / `{lang}`), the proxy URL is opened externally, never used to bypass an embedding policy. |
 
-网页版使用随项目发布的索引快照，目前约 **1,075 条**；桌面版通过 Rust 获取来源索引，并在适用时使用站点原生搜索。桌面索引缓存有效期为七天，自动刷新失败时继续使用可用旧缓存，手动刷新会报告失败。
+Translation requires network access to the third-party MyMemory service. It is
+off by default, and the app is fully usable without it (the offline glossary
+still glosses STEM terms).
+## Architecture
 
-## 搜索示例
-
-| 输入 | 用法 |
-| --- | --- |
-| `梯度` / `gradient` | 术语搜索与中英扩展 |
-| `"standing wave"` | 短语匹配 |
-| `site:falstad wave` | 限定来源 |
-| `source:phet` | 浏览指定来源的索引 |
-| `type:interactive gradient` | 限定内容类型 |
-
-点击结果打开预览；双击或 `Ctrl/Cmd + Enter` 打开独立窗口。`Ctrl/Cmd + K` 聚焦搜索，方向键选择，空格打开 Quick Look，`Esc` 关闭弹层。各结果旁的工作区按钮可切换选中状态。
-
-## 网页版与桌面版
-
-| 功能 | 网页版 | Windows 桌面版 |
-| --- | --- | --- |
-| 搜索数据 | 发布时的静态索引 | 来源索引与适用的实时搜索 |
-| 收藏、历史 | 浏览器 localStorage | 本机 SQLite |
-| 独立页面 | 浏览器标签页，受弹窗策略限制 | WebView2 窗口，支持置顶及工具栏 |
-| 工作区 | 浏览器内多窗格 | 独立工作区窗口 |
-| 外部网页翻译 | 打开翻译页面或自定义代理 | 可原位翻译、取消和还原 |
-| 离线搜索 | 已缓存的索引可用 | 已缓存的索引可用 |
-
-第三方网站可通过 CSP 或 X-Frame-Options 禁止嵌入，遇到这种情况可打开独立窗口或系统浏览器。离线索引不等于外部页面可以离线浏览；网页版也不是完整离线 PWA。MyMemory 翻译需要联网，受服务额度和可用性限制。
-
-## 预览能力与独立 WebViewer
-
-每个 Provider 通过共享的 `src/lib/previewCapabilities.json` 声明预览能力，Rust `SearchProvider` 和浏览器使用同一份策略，来源元数据也返回 `preview_capability`：
-
-| 能力 | 当前来源 | 行为 |
-| --- | --- | --- |
-| `Embed` | Falstad | 仅匹配已声明来源域名的 HTTP/HTTPS 页面可以加载 iframe；支持切换为资源卡片。 |
-| `NativeCard` | Math Insight、PhET、BetterExplained、Physics Fundamentals、PhysicStuff | 直接展示资源卡片，不先请求 iframe。 |
-| `ExternalOnly` | 猫田の物理 | 显示资源卡片和独立打开入口，不提供嵌入。 |
-
-未知来源、来源 ID 与网址域名不匹配的资源一律使用卡片。以上是保守的应用策略，不代表所有来源都必然发送禁止嵌入的响应头。卡片包含标题、摘要、类型、标签、相关概念、先修概念和独立窗口/浏览器打开按钮；没有摘要或概念映射时会明确说明。概念关系来自离线词典，不冒充来源作者给出的课程先修要求。
-
-预览、Quick Look 和工作区遵循同一策略。应用不通过代理移除或绕过 CSP / X-Frame-Options，也不会将翻译代理当作 iframe 回退。对于声明为 Embed 后发生策略变化的外站，跨域浏览器无法可靠检测所有拦截，因此保留“显示资源卡片”入口。
-
-桌面 WebViewer 支持 Back、Forward、Reload、Copy URL、Open External、Always on Top、Close；普通结果和工作区都可以打开多个窗口。新窗口及后续导航只允许 HTTP/HTTPS，网页弹出的新页面也通过同一 WebViewer 创建流程。`sve://` 仅用于当前窗口工具栏的有限控制，不用于获取应用数据。外部 WebViewer 不授予应用 IPC；即使导航到应用本地地址，窗口级校验仍拒绝访问主应用命令。
-
-工作区在保存 URL 的同时传递资源元数据，刷新后仍保留摘要和标签。旧版仅含 URL 的工作区链接仍可打开，缺失元数据时显示 URL 卡片。
-
-## 产品边界与 Provider 扩展
-
-**核心领域是 STEM 资源发现、比较和学习上下文，不是通用浏览器。** 完整边界见 [docs/architecture.md](docs/architecture.md)。 WebViewer 只支持查看当前选中的外部资源，不扩展为标签页浏览器或绕过 CSP/X-Frame-Options 的代理。新增 Provider 必须遵守 [Provider extension contract](docs/provider-extension.md)，并通过 registry metadata、host policy、PreviewCapability 和 parser fixture 契约测试。
-
-## 跨语言概念归一化
-
-查询层使用 `src/lib/concepts.json` 中的 STEM 术语词典与概念图，无需 LLM、翻译 API 或网络。每个概念都有稳定的 `id`、英文 `en`、简中 `zh_cn`、繁中 `zh_tw`、同义词 `synonyms`、别名 `aliases`、相关概念 `related` 和先修概念 `prerequisites`。
-
-归一化先按最长术语识别概念，例如 `partial derivative` 作为一个概念处理；中英、繁简和别名均可作为入口，按 `concept_id` 去重，而不是将中文简单翻译为英文。
-
-| 查询变体 | 权重 |
-| --- | --- |
-| 原始词 `original` | 1.0 |
-| 规范名称 `canonical`（英/简/繁） | 0.95 |
-| 同义词 `synonym` | 0.9 |
-| 别名 `alternate` | 0.75 |
-| 一层相关概念 `related` | 0.35 |
-
-同一概念的同一文本只保留最高权重。相关概念只展开一层，不递归；先修概念仅用于资源卡片，不作为同义词扩展。未知词保留原始权重；引号仍要求原始短语匹配，`site:` / `source:` / `type:` 不参与概念展开。
-
-排序保留精确标题优先和交互资源加分，其余标题、标签、摘要匹配使用变体权重。每个字段取最强匹配，避免堆叠别名增加分数；“全部匹配”以直接概念分组计算，相关概念不能冒充直接查询。排序使用来源、标题和结果 ID 作为稳定的同分规则，浏览器与 Rust 实现保持一致。
-
-## 本地开发
-
-技术栈：React 18、TypeScript、Vite 8、Tailwind CSS、Zustand、Tauri 2、Rust、SQLite。
-
-要求：**Node.js 22.12+**、npm；桌面开发另需 Rust、WebView2 及 Windows C++ 构建工具链。通常可使用 Visual Studio C++ Build Tools 与 Windows SDK；GNU 工具链需配套 MinGW 资源工具。
-
-```bash
-npm ci
-npm run dev             # 前端开发服务，端口 1420
-npm run tauri dev       # 桌面开发
-npm run build           # 桌面前端构建
-npm run build:web       # GitHub Pages 子路径构建
-npm run tauri build     # 桌面应用和安装包
+```
+stem-visual-explorer/
+├─ src/                     React + TypeScript + Vite frontend
+│  ├─ components/           SearchBar, SourceSidebar, SearchResults, PreviewPane,
+│  │                        QuickLook, FilterBar, Workspace, …
+│  ├─ stores/               Zustand stores (search, settings, workspace)
+│  ├─ lib/                  typed Tauri command wrappers, shortcuts, types
+│  └─ pages/                SearchPage, FavoritesPage, SettingsPage
+└─ src-tauri/               Rust backend
+   ├─ src/providers/        one module per website + shared index helpers
+   ├─ src/search/           query parser, synonym normalizer, ranking, manager
+   ├─ src/cache/            JSON index cache (versioned, 7-day TTL)
+   ├─ src/database/         SQLite favorites + history
+   ├─ src/windows/          multi-window browser + injected toolbar
+   ├─ src/commands.rs       Tauri command surface
+   └─ tests/fixtures/       HTML/JSON fixtures for parser unit tests
 ```
 
-### 验证
+### Data flow
+
+```
+SearchBar → Query Parser → Query Normalizer → Provider Manager
+          → concurrent provider search (tokio + per-provider timeout)
+          → unified SearchResult → deterministic scoring → merge + sort → UI
+```
+
+Each provider runs in its own task with a 15 s timeout. **A failing provider never
+fails the whole search** — its status is returned as `error` and every other
+provider's results are still shown.
+
+---
+
+## Product boundary and provider contract
+
+**The core domain is STEM resource discovery, comparison, and learning context, not a general-purpose browser.** See [docs/architecture.md](docs/architecture.md) for the full boundary contract. WebViewer supports inspection of the selected resource; it does not become a tabbed browser or bypass CSP/X-Frame-Options through a proxy. New providers must follow [the provider extension contract](docs/provider-extension.md) and pass metadata, host-policy, PreviewCapability, and parser-fixture contract tests.
+
+## Provider architecture
+
+The central abstraction is:
+
+```rust
+#[async_trait]
+pub trait SearchProvider: Send + Sync {
+    fn id(&self) -> &'static str;
+    fn name(&self) -> &'static str;
+    fn homepage(&self) -> &'static str;
+    fn experimental(&self) -> bool { false }
+    fn indexed_items(&self) -> Option<usize> { None }
+    fn last_updated(&self) -> Option<String> { None }
+    async fn search(&self, ctx: &SearchContext, query: &NormalizedQuery,
+                    opts: &SearchOptions) -> Result<Vec<SearchResult>>;
+}
+```
+
+Every source is converted into the same struct:
+
+```rust
+pub struct SearchResult {
+    pub id: String,
+    pub source_id: String,
+    pub source_name: String,
+    pub title: String,
+    pub description: Option<String>,
+    pub url: String,
+    pub result_type: ResultType, // article | interactive | simulation | applet
+                                 // | experiment | visualization | video | unknown
+    pub tags: Vec<String>,
+    pub score: f32,
+    pub thumbnail: Option<String>,
+}
+```
+
+Providers are registered in one place — `ProviderRegistry::new()` in
+`src-tauri/src/providers/mod.rs`:
+
+```rust
+ProviderRegistry::new()
+    .register(Arc::new(MathInsightProvider::new()))
+    .register(Arc::new(FalstadProvider::new()))
+    .register(Arc::new(PhetProvider::new()))
+    // …
+```
+
+There is no `if source == "falstad"` anywhere in the codebase.
+
+### Adding a new website
+
+1. Create `src-tauri/src/providers/example.rs`:
+
+   ```rust
+   use super::common::{self, CachedIndex, IndexEntry};
+   use super::{SearchContext, SearchOptions, SearchProvider};
+   use crate::error::Result;
+   use crate::models::{NormalizedQuery, ResultType, SearchResult};
+   use async_trait::async_trait;
+   use std::sync::Mutex;
+
+   pub struct ExampleProvider {
+       index: Mutex<Option<CachedIndex>>,
+   }
+
+   impl ExampleProvider {
+       pub fn new() -> Self { Self { index: Mutex::new(None) } }
+
+       async fn fetch(ctx: &SearchContext) -> Result<CachedIndex> {
+           let body = ctx.client.get("https://example.com/index").send().await?.text().await?;
+           // Parse `body` (scraper) into Vec<IndexEntry> with absolute URLs.
+           let entries: Vec<IndexEntry> = parse_index(&body)?;
+           Ok(CachedIndex::new(common::dedupe(entries)))
+       }
+   }
+
+   #[async_trait]
+   impl SearchProvider for ExampleProvider {
+       fn id(&self) -> &'static str { "example" }
+       fn name(&self) -> &'static str { "Example" }
+       fn homepage(&self) -> &'static str { "https://example.com/" }
+
+       async fn search(&self, ctx: &SearchContext, query: &NormalizedQuery,
+                       opts: &SearchOptions) -> Result<Vec<SearchResult>> {
+           let need = { /* stale or opts.force_refresh */ true };
+           if need {
+               if let Ok(fresh) = Self::fetch(ctx).await {
+                   *self.index.lock().unwrap() = Some(fresh);
+               }
+           }
+           let entries = self.index.lock().unwrap();
+           Ok(common::search_entries(self.id(), self.name(),
+               entries.as_ref().map(|c| c.entries.as_slice()).unwrap_or(&[]), query))
+       }
+   }
+   ```
+
+2. Register it in `src-tauri/src/providers/mod.rs`:
+
+   ```rust
+   pub mod example;
+   pub use example::ExampleProvider;
+   // and inside ProviderRegistry::new():
+   .register(Arc::new(ExampleProvider::new()))
+   ```
+
+3. Add a `#[cfg(test)]` parser test with an HTML fixture in
+   `src-tauri/tests/fixtures/`.
+
+That's it — the sidebar, filters, results, preview and windows all pick up the new
+source automatically. **No frontend changes are required.**
+
+---
+
+## Installation
+
+### Use it in a browser
+
+**https://styayur.github.io/stem-visual-explorer/** — nothing to install.
+
+### Prebuilt binaries
+
+Download the latest `stem-visual-explorer.exe` (Windows) from the
+[Releases](https://github.com/styayur/stem-visual-explorer/releases) page and run it.
+Windows needs the WebView2 runtime, which ships with Windows 10/11.
+
+### Build from source
+
+Prerequisites:
+
+- [Rust](https://rustup.rs/) (stable, 1.77+)
+- [Node.js](https://nodejs.org/) 22.12+ and npm
+- On Windows: the MSVC build tools **or** a MinGW-w64 toolchain with the
+  `x86_64-pc-windows-gnu` Rust target
+- Tauri system dependencies for your platform
+  (<https://tauri.app/start/prerequisites/>)
 
 ```bash
-npm test
+git clone https://github.com/styayur/stem-visual-explorer.git
+cd stem-visual-explorer
+npm install
+npm run tauri build          # or: npm run tauri dev
+```
+
+The compiled binary is written to
+`src-tauri/target/release/stem-visual-explorer(.exe)`.
+
+> **Windows GNU toolchain note.** If you build with
+> `x86_64-pc-windows-gnu`, this repository already configures the self-contained
+> `rust-lld` linker in `src-tauri/.cargo/config.toml`. Keep the
+> `…/rustlib/x86_64-pc-windows-gnu/bin` directory (which contains
+> `libgcc_s_seh-1.dll` and `libwinpthread-1.dll`) on your `PATH` so build scripts
+> can run. The full desktop build additionally requires MinGW's `windres` and
+> its preprocessing toolchain on `PATH`; the self-contained linker alone is
+> sufficient only for the pure Rust logic checks.
+
+---
+
+## Development
+
+```bash
+npm install
+npm run tauri dev      # hot-reloading desktop app
+npm run build          # type-check + production frontend build (for Tauri)
+npm run build:web      # static web build for GitHub Pages (base = /stem-visual-explorer/)
+npm run preview -- --mode web   # serve the web build at http://localhost:4173/stem-visual-explorer/
+```
+
+### Static index (web dataset)
+
+The web build reads `public/index/*.json` — a snapshot of every provider's local
+index — so the browser never has to call the upstream sites (which would be
+blocked by CORS). Regenerate it with:
+
+```bash
+cd src-tauri
+cargo run --no-default-features --example dump_web_index   # writes ../public/index
+```
+
+Commit the regenerated JSON to refresh the published site. The browser caches the
+indexes in `localStorage` and re-validates them whenever `updated_at` changes.
+
+### Web smoke test
+
+The deterministic regression suite starts its own Vite server and exercises
+search, filters, favorites, history, settings, previews, keyboard shortcuts,
+workspaces, translation, cache recovery and error handling:
+
+```bash
 npx playwright install chromium
 npm run test:web
-npm run test:web:build
+npm run test:web:build   # also checks the production Pages subpath
+```
 
+External frames and translation responses are fixtures in these tests. They
+check application behavior independently of third-party availability. Screenshots
+are saved under `dist-release/audit-desktop.png` and `audit-mobile.png`.
+Set `SVE_CHROMIUM` to an existing Chromium executable if using a managed runtime.
+
+`npm run test:desktop` exercises actual Windows WebView2 windows and Rust IPC.
+It requires an isolated audit build and refuses to run against a normal user
+profile. See [the functional audit](docs/functional-audit.md) for setup, verified
+coverage and remaining external-service limitations.
+
+The older optional live-service smoke test remains available:
+
+```bash
+python scripts/web_smoke_test.py   # via the webapp-testing with_server helper
+```
+
+It drives the real UI headlessly: searches `curl` / `旋度` / `standing wave`,
+checks `site:` filtering and the sidebar source filter, verifies Chinese synonym
+expansion, switches the interface to 简体中文, enables result translation and
+asserts that Chinese translations appear, then refreshes `docs/screenshot.png`
+and `docs/screenshot-zh.png`.
+
+### Logic unit tests
+
+```bash
+npm test                                                    # offline (36 checks)
+node --experimental-strip-types scripts/unit_test.mjs --live  # + one real MyMemory call
+```
+
+Covers the offline glossary, the query parser, synonym expansion,
+matching/ranking and the translation URL helpers. Runs directly on Node's
+TypeScript type stripping — no test framework required.
+
+### Deployment
+
+`.github/workflows/deploy-pages.yml` builds the site with `npm run build:web` and
+publishes it with GitHub Pages (Actions source). Every push to `main` redeploys.
+
+Rust checks:
+
+```bash
 cd src-tauri
 cargo fmt --check
-cargo test --no-default-features
-cargo clippy --no-default-features --all-targets -- -D warnings
-cargo check --locked
+cargo clippy --no-default-features --all-targets   # lint the pure logic + tests
+cargo clippy                                       # lint the Tauri-facing code
+cargo test --no-default-features                   # parser/query/ranking unit tests
+```
+
+`--no-default-features` disables the `tauri` feature so the test suite links only
+the pure logic (no GUI/webview runtime needed). The 34 tests cover every provider
+parser, query normalization/ranking, URL validation, database persistence, cache
+recovery and provider failure isolation. CI also checks desktop compilation on Windows.
+
+To verify the **live** providers against the real websites (network required):
+
+```bash
+cd src-tauri
 cargo run --no-default-features --example probe
 ```
 
-本轮已通过 36 项 JavaScript 测试、34 项 Rust 测试、22 组浏览器回归及 6 组实际 Windows WebView2 回归。桌面回归使用独立应用标识和测试数据，运行 `npm run test:desktop` 前请按[检查报告](docs/functional-audit.md)准备环境。外部网页和翻译响应在交互测试中使用固定数据；来源联网检查独立执行。
+`examples/probe.rs` runs every acceptance query (`gradient`, `curl`,
+`divergence`, `standing wave`, `harmonic oscillator`,
+`electromagnetic induction`, `quantum`, `Fourier`, `梯度`, `旋度`, `驻波`)
+through the real concurrent search pipeline and prints per-source result counts,
+so you can confirm that the adapters still parse correctly.
 
-推送 `main` 会运行 CI 并部署 GitHub Pages；推送版本标签会构建 Windows 便携包和 NSIS 安装包，产物位于 GitHub Actions 的 `windows-release` artifact，经检查后附加到 Release。
+### Running in a browser
 
-## 数据与隐私
+When the frontend runs outside Tauri (`npm run dev`, or the deployed GitHub Pages
+site) it transparently switches to the **static-index backend**: search runs
+entirely client-side against the pre-generated JSON indexes, favorites/history/
+settings use `localStorage`, and “open in new window” becomes a normal browser tab.
+The desktop app keeps using the live Rust backend. Either way the search logic is
+the same deterministic algorithm — there is no mock or fabricated data.
 
-无需账号，无遥测、分析或云端数据库。收藏、历史、设置和索引缓存在本机保存。桌面搜索直接访问来源网站；启用机器翻译后，待翻译文本会发送给 MyMemory。打开外部翻译页面或设置自定义代理时，也会向相应服务发送请求。
+---
 
-应用只接受 HTTP/HTTPS 外部地址。独立外部网页没有应用 IPC 权限；主窗口和工作区使用限定的 Tauri 能力。
+## Search syntax
 
-## 社区与治理
+| Input | Meaning |
+| --- | --- |
+| `gradient` | search every enabled source |
+| `site:falstad wave` | only Falstad |
+| `source:phet wave` | only PhET |
+| `type:interactive gradient` | only interactive results |
+| `"standing wave"` | exact phrase |
+| `旋度` | expands to `curl` (and vice versa) |
 
-- GitHub Issues：可复现 bug 与范围明确的功能请求。
-- Discord：[加入社区](https://discord.gg/wA2xy6VPK)，用于快速交流、设计讨论和早期反馈；不是 SLA 支持渠道。
-- Security：按 [SECURITY.md](SECURITY.md) 私下报告，不要开公开 Issue。
-- Contributing：开发、Provider 契约与架构边界见 [CONTRIBUTING.md](CONTRIBUTING.md)。
-- Release：使用 `vX.Y.Z` tag；Windows 发布包含便携包、安装包和 SHA-256 清单，维护者负责发布。
+## Keyboard shortcuts
 
-## 许可证
+| Keys | Action |
+| --- | --- |
+| `Ctrl/Cmd + K` / `Ctrl/Cmd + L` | focus the search box |
+| `Enter` | open the selected result in a new window |
+| `Ctrl/Cmd + Enter` | open the selected result in a new window |
+| `Space` | Quick Look |
+| `Ctrl/Cmd + D` | favorite the selected result |
+| `Ctrl/Cmd + W` | close Quick Look |
+| `Esc` | close Quick Look |
+| `↑` / `↓` | move the selection |
+| Right-click a row | Open / New Window / System Browser / Copy URL / Favorite |
 
-[GNU Affero General Public License v3.0](LICENSE)。Copyright © 2026 Yur Stya.
+In a standalone browser window the injected toolbar adds Back, Forward, Reload,
+Copy URL, Open externally, Pin and Close.
+
+---
+
+## Privacy
+
+STEM Visual Explorer is a **local-first** tool:
+
+- No account, no login, no telemetry, no analytics.
+- No cloud database; favorites, history, settings and cached indexes live only on
+  your machine (app data directory, plus a small SQLite file).
+- Network requests go **directly** from your machine to the source websites — there
+  is no proxy or middle server.
+- No AI/LLM ranking: relevance scores are computed from a fixed, transparent formula.
+- Translation is **off by default**. When you enable it, only the text you are
+  translating (a result title/description, or a page's text nodes in the desktop
+  app) is sent to the third-party **MyMemory** translation API. Terms already in
+  the offline glossary are translated locally and never leave your machine.
+
+The app is a polite HTTP client: it sends a descriptive `User-Agent`
+(`STEMVisualExplorer/<version>`), uses a small number of concurrent requests with
+timeouts, and never attempts to bypass Cloudflare, CAPTCHAs, logins or anti-bot
+measures.
+
+## Security
+
+- Only `http`/`https` URLs are accepted; `file:`, `javascript:` and `data:` are
+  rejected. Every result URL is validated in Rust with the `url` crate before it is
+  opened in a window or handed to the system browser.
+- The Tauri capability grants only `core:default` to the main and workspace windows.
+  There is no unrestricted shell or filesystem permission.
+- Standalone browser windows talk back to the app through a restricted `sve://`
+  pseudo-scheme that is intercepted in Rust; they receive no IPC capability.
+
+---
+
+## Known limitations
+
+- **Browser previews cannot be rewritten.** In the web build a cross-origin
+  iframe is off-limits to scripts, so native pages are translated by opening the
+  translated page (or via your own proxy template) rather than editing the
+  embedded DOM. In-place native-page translation is available in the desktop app.
+- **Machine translation needs the network** (MyMemory). The offline glossary still
+  works without it, but only covers STEM terms.
+- **Embedded previews** can be blocked by a site's `X-Frame-Options` / CSP. The
+  preview pane keeps working and always offers “Open in new window” and
+  “Open in system browser” as escape hatches.
+- **The web build searches a snapshot.** `styayur.github.io/stem-visual-explorer`
+  searches the committed `public/index/*.json` (regenerate with
+  `dump_web_index`); the desktop app refreshes stale directory indexes from the
+  source sites and uses live native search where supported. Desktop indexes are
+  saved to disk with a seven-day TTL; automatic refresh failure retains an older
+  usable index, while an explicit refresh reports failure.
+- **Browser popup policies** may limit opening several external tabs at once.
+  Each workspace pane also has its own external-open button.
+- **Live per-provider progress** is shown as a single in-flight state per provider;
+  the backend returns all providers' results together once the concurrent search
+  completes (so results can be ranked uniformly across sources).
+- **PhysicStuff** and **猫田の物理** are experimental — their HTML is simplified and
+  a redesign on their side may require a parser update.
+- **Math Insight native search** is currently disabled in favour of the static
+  index (see the note above).
+- Provider HTML parsers are covered by fixture tests, but the real sites can change
+  at any time; parser failures are reported per-provider and never crash the app.
+
+---
+
+## Community
+
+- GitHub Issues for reproducible bugs and scoped feature requests.
+- Discord for informal feedback and early discussion: https://discord.gg/wA2xy6VPK. It is not an SLA support channel.
+- Security reports must use [SECURITY.md](SECURITY.md), not a public issue.
+- Development and provider rules are in [CONTRIBUTING.md](CONTRIBUTING.md).
+- Releases use `vX.Y.Z` tags; maintainers build portable/installer assets and publish SHA-256 checksums.
+
+## License
+
+Licensed under the **GNU Affero General Public License v3.0** — see [LICENSE](LICENSE).
+
+Copyright (C) 2026 Yur Stya.
