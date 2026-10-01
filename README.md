@@ -6,6 +6,8 @@
 
 **Visual search and comparison for mathematics and physics resources.**
 
+**Status:** 🟡 Beta
+
 [Web App](https://styayur.github.io/stem-visual-explorer/) · [Windows](https://github.com/styayur/stem-visual-explorer/releases/latest) · [Documentation](docs/architecture.md) · [Releases](https://github.com/styayur/stem-visual-explorer/releases) · [Discussions](https://github.com/styayur/stem-visual-explorer/discussions)
 
 [English](README.md) · [中文](README.zh-CN.md)
@@ -562,6 +564,27 @@ measures.
   at any time; parser failures are reported per-provider and never crash the app.
 
 ---
+
+## Roadmap
+
+### Current
+
+- Concept search with capability-aware previews and multilingual query normalization.
+- Bilingual README and a static web dataset for the browser edition.
+
+### Next
+
+- More provider adapters with fixture-covered parsers.
+- Parser resilience and index freshness automation.
+
+### Future
+
+- User-curated collections and richer visualization surfaces.
+
+### Not planned
+
+- Becoming a general-purpose browser; preview stays a supporting capability.
+- Bypassing provider access limits or relaying authenticated content.
 
 ## Community
 
