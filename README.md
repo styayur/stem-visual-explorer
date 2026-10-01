@@ -84,7 +84,7 @@
 
 ## 产品边界与 Provider 扩展
 
-**核心领域是 STEM 资源发现、比较和学习上下文，不是通用浏览器。** WebViewer 只支持查看当前选中的外部资源，不扩展为标签页浏览器或绕过 CSP/X-Frame-Options 的代理。新增 Provider 必须遵守 [Provider extension contract](docs/provider-extension.md)，并通过 registry metadata、host policy、PreviewCapability 和 parser fixture 契约测试。
+**核心领域是 STEM 资源发现、比较和学习上下文，不是通用浏览器。** 完整边界见 [docs/architecture.md](docs/architecture.md)。 WebViewer 只支持查看当前选中的外部资源，不扩展为标签页浏览器或绕过 CSP/X-Frame-Options 的代理。新增 Provider 必须遵守 [Provider extension contract](docs/provider-extension.md)，并通过 registry metadata、host policy、PreviewCapability 和 parser fixture 契约测试。
 
 ## 跨语言概念归一化
 

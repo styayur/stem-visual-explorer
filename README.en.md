@@ -186,7 +186,7 @@ provider's results are still shown.
 
 ## Product boundary and provider contract
 
-**The core domain is STEM resource discovery, comparison, and learning context, not a general-purpose browser.** WebViewer supports inspection of the selected resource; it does not become a tabbed browser or bypass CSP/X-Frame-Options through a proxy. New providers must follow [the provider extension contract](docs/provider-extension.md) and pass metadata, host-policy, PreviewCapability, and parser-fixture contract tests.
+**The core domain is STEM resource discovery, comparison, and learning context, not a general-purpose browser.** See [docs/architecture.md](docs/architecture.md) for the full boundary contract. WebViewer supports inspection of the selected resource; it does not become a tabbed browser or bypass CSP/X-Frame-Options through a proxy. New providers must follow [the provider extension contract](docs/provider-extension.md) and pass metadata, host-policy, PreviewCapability, and parser-fixture contract tests.
 
 ## Provider architecture
 
