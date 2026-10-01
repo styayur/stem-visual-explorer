@@ -6,6 +6,8 @@
 
 **数学与物理资源的可视化检索与比较。**
 
+**Status:** 🟡 Beta
+
 [Web 应用](https://styayur.github.io/stem-visual-explorer/) · [Windows](https://github.com/styayur/stem-visual-explorer/releases/latest) · [文档](docs/architecture.md) · [Releases](https://github.com/styayur/stem-visual-explorer/releases) · [Discussions](https://github.com/styayur/stem-visual-explorer/discussions)
 
 [中文](README.zh-CN.md) · [English](README.md)
@@ -159,6 +161,27 @@ cargo run --no-default-features --example probe
 无需账号，无遥测、分析或云端数据库。收藏、历史、设置和索引缓存在本机保存。桌面搜索直接访问来源网站；启用机器翻译后，待翻译文本会发送给 MyMemory。打开外部翻译页面或设置自定义代理时，也会向相应服务发送请求。
 
 应用只接受 HTTP/HTTPS 外部地址。独立外部网页没有应用 IPC 权限；主窗口和工作区使用限定的 Tauri 能力。
+
+## 路线图
+
+### 当前
+
+- 支持概念搜索、能力感知预览与跨语言概念归一化。
+- 双语文档与网页版静态索引。
+
+### 下一步
+
+- 增加更多 Provider 适配器，解析器配套 fixture 测试。
+- 提升解析器稳定性与索引自动更新。
+
+### 未来
+
+- 用户自建收藏与更丰富的可视化界面。
+
+### 暂不计划
+
+- 成为通用浏览器；预览始终是辅助能力。
+- 绕过来源网站访问限制或中转需登录的内容。
 
 ## 社区与治理
 
