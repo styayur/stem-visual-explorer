@@ -1,0 +1,21 @@
+[commands.format]
+program = "cargo"
+args = ["fmt", "--check"]
+cwd = "src-tauri"
+timeout_secs = 120
+
+[commands.lint]
+program = "cargo"
+args = ["clippy", "--no-default-features", "--all-targets", "--", "-D", "warnings"]
+cwd = "src-tauri"
+timeout_secs = 600
+
+[commands.test]
+program = "npm"
+args = ["test"]
+timeout_secs = 600
+
+[commands.build]
+program = "npm"
+args = ["run", "build"]
+timeout_secs = 900
