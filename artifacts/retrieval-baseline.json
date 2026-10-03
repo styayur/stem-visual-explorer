@@ -1,0 +1,3503 @@
+{
+  "revision": "3cd6ceb",
+  "concepts": 61,
+  "isolated": 48,
+  "queries": [
+    {
+      "query": "梯度",
+      "recognized_concepts": [
+        "gradient"
+      ],
+      "expanded_variants": [
+        {
+          "text": "curl",
+          "concept_id": "curl",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "旋度",
+          "concept_id": "curl",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "directional derivative",
+          "concept_id": "directional-derivative",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "方向导数",
+          "concept_id": "directional-derivative",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "方向導數",
+          "concept_id": "directional-derivative",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "divergence",
+          "concept_id": "divergence",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "散度",
+          "concept_id": "divergence",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "grad",
+          "concept_id": "gradient",
+          "kind": "alternate",
+          "weight": 0.75
+        },
+        {
+          "text": "gradient",
+          "concept_id": "gradient",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "spatial gradient",
+          "concept_id": "gradient",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "梯度",
+          "concept_id": "gradient",
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 27,
+      "top10": [
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/understanding-pythagorean-distance-and-the-gradient/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Understanding Pythagorean Distance and the Gradient",
+          "description": null,
+          "url": "https://betterexplained.com/articles/understanding-pythagorean-distance-and-the-gradient/",
+          "result_type": "article",
+          "tags": [
+            "Vector Calculus",
+            "distance",
+            "gradient",
+            "pythagorean",
+            "understanding"
+          ],
+          "score": 76,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/vector-calculus-understanding-the-gradient/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Vector Calculus: Understanding the Gradient",
+          "description": null,
+          "url": "https://betterexplained.com/articles/vector-calculus-understanding-the-gradient/",
+          "result_type": "article",
+          "tags": [
+            "Vector Calculus",
+            "calculus",
+            "gradient",
+            "understanding",
+            "vector"
+          ],
+          "score": 76,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_gradient_zero",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The curl of a gradient is zero",
+          "description": "Calculation showing that the curl of a gradient is zero.",
+          "url": "https://mathinsight.org/curl_gradient_zero",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 73.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/gradient_theorem_simple_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "A simple example of using the gradient theorem",
+          "description": "An example of using the gradient theorem to calculate the line integral of a conservative, or path-independent, vector field.",
+          "url": "https://mathinsight.org/gradient_theorem_simple_examples",
+          "result_type": "article",
+          "tags": [
+            "conservative vector field"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/directional_derivative_gradient_introduction",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "An introduction to the directional derivative and the gradient",
+          "description": "Interactive graphics about a mountain range illustrate the concepts behind the directional derivative and the gradient of scalar-valued functions of two variables.",
+          "url": "https://mathinsight.org/directional_derivative_gradient_introduction",
+          "result_type": "article",
+          "tags": [
+            "derivative"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/directional_derivative_gradient_derivation",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Derivation of the directional derivative and the gradient",
+          "description": "Derivation of the directional derivative and the gradient from the definition of differentiability of scalar-valued multivariable functions.",
+          "url": "https://mathinsight.org/directional_derivative_gradient_derivation",
+          "result_type": "article",
+          "tags": [
+            "derivative"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/directional_derivative_gradient_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Directional derivative and gradient examples",
+          "description": "Examples of calculating the directional derivative and the gradient.",
+          "url": "https://mathinsight.org/directional_derivative_gradient_examples",
+          "result_type": "article",
+          "tags": [
+            "derivative"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/gradient_theorem_line_integrals",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The gradient theorem for line integrals",
+          "description": "A introduction to the gradient theorem for conservative or path-independent line integrals.",
+          "url": "https://mathinsight.org/gradient_theorem_line_integrals",
+          "result_type": "article",
+          "tags": [
+            "conservative vector field"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/gradient_vector",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The gradient vector",
+          "description": "The gradient vector is the matrix of partial derivatives of a scalar valued function viewed as a vector.",
+          "url": "https://mathinsight.org/gradient_vector",
+          "result_type": "article",
+          "tags": [
+            "derivative"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/divergence_curl_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Divergence and curl example",
+          "description": "An example problem of calculating the divergence and curl of a vector field.",
+          "url": "https://mathinsight.org/divergence_curl_examples",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 21,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 21,
+        "falstad": 0,
+        "phet": 1,
+        "betterexplained": 4,
+        "physicsfundamentals": 0,
+        "physicstuff": 1,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "旋度",
+      "recognized_concepts": [
+        "curl"
+      ],
+      "expanded_variants": [
+        {
+          "text": "curl",
+          "concept_id": "curl",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "rot",
+          "concept_id": "curl",
+          "kind": "alternate",
+          "weight": 0.75
+        },
+        {
+          "text": "rotation of a vector field",
+          "concept_id": "curl",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "旋度",
+          "concept_id": "curl",
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "divergence",
+          "concept_id": "divergence",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "散度",
+          "concept_id": "divergence",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "stokes theorem",
+          "concept_id": "stokes-theorem",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "斯托克斯定理",
+          "concept_id": "stokes-theorem",
+          "kind": "related",
+          "weight": 0.35
+        }
+      ],
+      "result_count": 31,
+      "top10": [
+        {
+          "id": "mathinsight::https://mathinsight.org/divergence_curl_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Divergence and curl example",
+          "description": "An example problem of calculating the divergence and curl of a vector field.",
+          "url": "https://mathinsight.org/divergence_curl_examples",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 85.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/divergence_curl_notation",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Divergence and curl notation",
+          "description": "Different ways to denote divergence and curl.",
+          "url": "https://mathinsight.org/divergence_curl_notation",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 85.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_gradient_zero",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The curl of a gradient is zero",
+          "description": "Calculation showing that the curl of a gradient is zero.",
+          "url": "https://mathinsight.org/curl_gradient_zero",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 85.5,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Vector Calculus: Understanding Circulation and Curl",
+          "description": null,
+          "url": "https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+          "result_type": "article",
+          "tags": [
+            "Vector Calculus",
+            "calculus",
+            "circulation",
+            "curl",
+            "understanding",
+            "vector"
+          ],
+          "score": 76,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Mandelbrot Set",
+          "description": "Mathematics & Statistics · 22 Mar 2026Mandelbrot SetZoom into the Mandelbrot set — the most famous fractal in mathematics. Explore infinite boundary complexity generated by a single recursive formula, and discover how iteration count maps to the vivid colour gradient.",
+          "url": "https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+          "result_type": "interactive",
+          "tags": [
+            "Mathematics Statistics",
+            "mandelbrot",
+            "set"
+          ],
+          "score": 72.5,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/mechanics/torque-rotational-motion",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Torque Rotational Motion",
+          "description": "Mechanics · 12 Aug 2026Torque Calculator and Rotational Motion SimulatorTorque calculator and rotational motion simulator — balance a lever with the τ = rF sinθ formula, then race a disk, ring and sphere down a ramp.",
+          "url": "https://physicstuff.com/mechanics/torque-rotational-motion",
+          "result_type": "interactive",
+          "tags": [
+            "Mechanics",
+            "motion",
+            "rotational",
+            "torque"
+          ],
+          "score": 72.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/path_dependent_zero_curl",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "A path-dependent vector field with zero curl",
+          "description": "A counterexample showing how a vector field could have zero curl but still fail to be conservative or path-independent.",
+          "url": "https://mathinsight.org/path_dependent_zero_curl",
+          "result_type": "article",
+          "tags": [
+            "conservative vector field"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_subtleties",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Subtleties about curl",
+          "description": "Counterexamples illustrating how the curl of a vector field may differ from the intuitive appearance of a vector field's circulation.",
+          "url": "https://mathinsight.org/curl_subtleties",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_components",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The components of the curl",
+          "description": "Illustration of the meaning behind the components of the curl.",
+          "url": "https://mathinsight.org/curl_components",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_definition_line_integral",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The definition of curl from line integrals",
+          "description": "How the curl of a vector field is defined by line integrals representing circulation.",
+          "url": "https://mathinsight.org/curl_definition_line_integral",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 17,
+        "falstad": 1,
+        "phet": 4,
+        "betterexplained": 2,
+        "physicsfundamentals": 5,
+        "physicstuff": 2,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "傅里叶变换",
+      "recognized_concepts": [
+        "fourier-transform"
+      ],
+      "expanded_variants": [
+        {
+          "text": "fourier transform",
+          "concept_id": "fourier-transform",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "ft",
+          "concept_id": "fourier-transform",
+          "kind": "alternate",
+          "weight": 0.75
+        },
+        {
+          "text": "傅立叶变换",
+          "concept_id": "fourier-transform",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "傅立葉變換",
+          "concept_id": "fourier-transform",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "傅里叶变换",
+          "concept_id": "fourier-transform",
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "傅里葉變換",
+          "concept_id": "fourier-transform",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "frequency",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "頻率",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "频率",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "wave",
+          "concept_id": "wave",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "波",
+          "concept_id": "wave",
+          "kind": "related",
+          "weight": 0.35
+        }
+      ],
+      "result_count": 79,
+      "top10": [
+        {
+          "id": "physicstuff::https://physicstuff.com/waves-oscillations/fft-denoising",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Fft Denoising",
+          "description": "Waves & Oscillations · 7 Apr 2026Signal Recovery with FFTBuild a noisy signal from multiple frequencies, then use the Fast Fourier Transform to recover the original — see denoising in action.",
+          "url": "https://physicstuff.com/waves-oscillations/fft-denoising",
+          "result_type": "interactive",
+          "tags": [
+            "Waves Oscillations",
+            "denoising",
+            "fft"
+          ],
+          "score": 74.5,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/reactants-products-and-leftovers",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Reactants, Products and Leftovers",
+          "description": "Create your own sandwich and then see how many sandwiches you can make with different amounts of ingredients. Do the same with chemical reactions. See how many products you can make with different amounts of reactants. Play a game to test your understanding of reactants, products and leftovers. Can you get a perfect score on each level?",
+          "url": "https://phet.colorado.edu/en/simulations/reactants-products-and-leftovers",
+          "result_type": "simulation",
+          "tags": [
+            "and",
+            "leftovers",
+            "products",
+            "reactants"
+          ],
+          "score": 72.5,
+          "thumbnail": "https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers-128.png"
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/applet/area_left_riemann_sum",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Applet: Area via a left Riemann sum",
+          "description": null,
+          "url": "https://mathinsight.org/applet/area_left_riemann_sum",
+          "result_type": "applet",
+          "tags": [
+            "applet",
+            "area",
+            "left",
+            "riemann",
+            "sum",
+            "via"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "An Interactive Guide To The Fourier Transform",
+          "description": null,
+          "url": "https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+          "result_type": "interactive",
+          "tags": [
+            "Math - Advanced Topics",
+            "fourier",
+            "guide",
+            "transform"
+          ],
+          "score": 62,
+          "thumbnail": null
+        },
+        {
+          "id": "falstad::https://falstad.com/fft/",
+          "source_id": "falstad",
+          "source_name": "Falstad",
+          "title": "Discrete Fourier Transform",
+          "description": null,
+          "url": "https://falstad.com/fft/",
+          "result_type": "applet",
+          "tags": [
+            "discrete",
+            "fourier",
+            "miscellaneous",
+            "transform"
+          ],
+          "score": 62,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/life-lessons-10-years/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Life Lessons After 10 Years of BetterExplained.com",
+          "description": null,
+          "url": "https://betterexplained.com/articles/life-lessons-10-years/",
+          "result_type": "article",
+          "tags": [
+            "Interviews & Discussions",
+            "after",
+            "betterexplained",
+            "com",
+            "lessons",
+            "life",
+            "years"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/ratio-oomph/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Understand Ratios with \"Oomph\" and \"Often\"",
+          "description": null,
+          "url": "https://betterexplained.com/articles/ratio-oomph/",
+          "result_type": "article",
+          "tags": [
+            "Math - Essentials",
+            "often",
+            "oomph",
+            "ratios",
+            "understand"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Fourier: Making Waves",
+          "description": "Add up sines or cosines to make waves of different shapes. Discover how changing the amplitudes of different harmonics changes the sound you hear. Play the Wave Game and combine harmonics to match a target waveform. Construct wave packets and explore the effects of changing the spacing between Fourier components and wave packet width.",
+          "url": "https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "result_type": "simulation",
+          "tags": [
+            "fourier",
+            "making",
+            "waves"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/fourier-making-waves/latest/fourier-making-waves-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/quantum-wave-interference",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Quantum Wave Interference",
+          "description": "When do photons, electrons, and atoms behave like particles and when do they behave like waves? Watch waves spread out and interfere as they pass through a double slit, then get detected on a screen as tiny dots. Use quantum detectors to explore how measurements change the waves and the patterns they produce on the screen.",
+          "url": "https://phet.colorado.edu/en/simulations/quantum-wave-interference",
+          "result_type": "simulation",
+          "tags": [
+            "interference",
+            "quantum",
+            "wave"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/quantum-wave-interference/latest/quantum-wave-interference-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/wave-interference",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Wave Interference",
+          "description": "Make waves with a dripping faucet, audio speaker, or laser! Add a second source to create an interference pattern. Put up a barrier to explore single-slit diffraction and double-slit interference. Experiment with diffraction through elliptical, rectangular, or irregular apertures.",
+          "url": "https://phet.colorado.edu/en/simulations/wave-interference",
+          "result_type": "simulation",
+          "tags": [
+            "interference",
+            "wave"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference-128.png"
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 3,
+        "falstad": 12,
+        "phet": 9,
+        "betterexplained": 4,
+        "physicsfundamentals": 16,
+        "physicstuff": 12,
+        "maotian": 23
+      }
+    },
+    {
+      "query": "角动量",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "角动量",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "力矩",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "力矩",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "行列式",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "行列式",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "泰勒级数",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "泰勒级数",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "线积分",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "线积分",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "面积分",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "面积分",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "多普勒效应",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "多普勒效应",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "洛伦兹力",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "洛伦兹力",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "麦克斯韦方程组",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "麦克斯韦方程组",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "光电效应",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "光电效应",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "薛定谔方程",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "薛定谔方程",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 0,
+      "top10": [],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "熵",
+      "recognized_concepts": [
+        "entropy"
+      ],
+      "expanded_variants": [
+        {
+          "text": "entropy",
+          "concept_id": "entropy",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "熵",
+          "concept_id": "entropy",
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 2,
+      "top10": [
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/entropy-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Entropy Simulator",
+          "description": "Entropy S = Q / T Slide the heat and both reservoir temperatures to watch the entropy ledger, and see S = k ln W count microstates live. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/entropy-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "entropy",
+            "simulator"
+          ],
+          "score": 90.5,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/thermodynamics/carnot-engine-efficiency-calculator",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Carnot Engine Efficiency Calculator",
+          "description": "Thermodynamics · 27 Sept 2026Carnot Engine Efficiency Calculator: The Laws of Thermodynamics ExplainedCarnot engine efficiency calculator applying the laws of thermodynamics — run a live 4-stroke P–V cycle, audit any engine with entropy, find max power.",
+          "url": "https://physicstuff.com/thermodynamics/carnot-engine-efficiency-calculator",
+          "result_type": "interactive",
+          "tags": [
+            "Thermodynamics",
+            "calculator",
+            "carnot",
+            "efficiency",
+            "engine"
+          ],
+          "score": 14.5,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 1,
+        "physicstuff": 1,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "FT",
+      "recognized_concepts": [
+        "fourier-transform"
+      ],
+      "expanded_variants": [
+        {
+          "text": "fourier transform",
+          "concept_id": "fourier-transform",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "ft",
+          "concept_id": "fourier-transform",
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "傅立叶变换",
+          "concept_id": "fourier-transform",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "傅立葉變換",
+          "concept_id": "fourier-transform",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "傅里叶变换",
+          "concept_id": "fourier-transform",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "傅里葉變換",
+          "concept_id": "fourier-transform",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "frequency",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "頻率",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "频率",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "wave",
+          "concept_id": "wave",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "波",
+          "concept_id": "wave",
+          "kind": "related",
+          "weight": 0.35
+        }
+      ],
+      "result_count": 79,
+      "top10": [
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/reactants-products-and-leftovers",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Reactants, Products and Leftovers",
+          "description": "Create your own sandwich and then see how many sandwiches you can make with different amounts of ingredients. Do the same with chemical reactions. See how many products you can make with different amounts of reactants. Play a game to test your understanding of reactants, products and leftovers. Can you get a perfect score on each level?",
+          "url": "https://phet.colorado.edu/en/simulations/reactants-products-and-leftovers",
+          "result_type": "simulation",
+          "tags": [
+            "and",
+            "leftovers",
+            "products",
+            "reactants"
+          ],
+          "score": 95,
+          "thumbnail": "https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers-128.png"
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/waves-oscillations/fft-denoising",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Fft Denoising",
+          "description": "Waves & Oscillations · 7 Apr 2026Signal Recovery with FFTBuild a noisy signal from multiple frequencies, then use the Fast Fourier Transform to recover the original — see denoising in action.",
+          "url": "https://physicstuff.com/waves-oscillations/fft-denoising",
+          "result_type": "interactive",
+          "tags": [
+            "Waves Oscillations",
+            "denoising",
+            "fft"
+          ],
+          "score": 95,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/applet/area_left_riemann_sum",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Applet: Area via a left Riemann sum",
+          "description": null,
+          "url": "https://mathinsight.org/applet/area_left_riemann_sum",
+          "result_type": "applet",
+          "tags": [
+            "applet",
+            "area",
+            "left",
+            "riemann",
+            "sum",
+            "via"
+          ],
+          "score": 85,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/life-lessons-10-years/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Life Lessons After 10 Years of BetterExplained.com",
+          "description": null,
+          "url": "https://betterexplained.com/articles/life-lessons-10-years/",
+          "result_type": "article",
+          "tags": [
+            "Interviews & Discussions",
+            "after",
+            "betterexplained",
+            "com",
+            "lessons",
+            "life",
+            "years"
+          ],
+          "score": 80,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/ratio-oomph/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Understand Ratios with \"Oomph\" and \"Often\"",
+          "description": null,
+          "url": "https://betterexplained.com/articles/ratio-oomph/",
+          "result_type": "article",
+          "tags": [
+            "Math - Essentials",
+            "often",
+            "oomph",
+            "ratios",
+            "understand"
+          ],
+          "score": 80,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "An Interactive Guide To The Fourier Transform",
+          "description": null,
+          "url": "https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+          "result_type": "interactive",
+          "tags": [
+            "Math - Advanced Topics",
+            "fourier",
+            "guide",
+            "transform"
+          ],
+          "score": 62,
+          "thumbnail": null
+        },
+        {
+          "id": "falstad::https://falstad.com/fft/",
+          "source_id": "falstad",
+          "source_name": "Falstad",
+          "title": "Discrete Fourier Transform",
+          "description": null,
+          "url": "https://falstad.com/fft/",
+          "result_type": "applet",
+          "tags": [
+            "discrete",
+            "fourier",
+            "miscellaneous",
+            "transform"
+          ],
+          "score": 62,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Fourier: Making Waves",
+          "description": "Add up sines or cosines to make waves of different shapes. Discover how changing the amplitudes of different harmonics changes the sound you hear. Play the Wave Game and combine harmonics to match a target waveform. Construct wave packets and explore the effects of changing the spacing between Fourier components and wave packet width.",
+          "url": "https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "result_type": "simulation",
+          "tags": [
+            "fourier",
+            "making",
+            "waves"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/fourier-making-waves/latest/fourier-making-waves-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/quantum-wave-interference",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Quantum Wave Interference",
+          "description": "When do photons, electrons, and atoms behave like particles and when do they behave like waves? Watch waves spread out and interfere as they pass through a double slit, then get detected on a screen as tiny dots. Use quantum detectors to explore how measurements change the waves and the patterns they produce on the screen.",
+          "url": "https://phet.colorado.edu/en/simulations/quantum-wave-interference",
+          "result_type": "simulation",
+          "tags": [
+            "interference",
+            "quantum",
+            "wave"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/quantum-wave-interference/latest/quantum-wave-interference-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/wave-interference",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Wave Interference",
+          "description": "Make waves with a dripping faucet, audio speaker, or laser! Add a second source to create an interference pattern. Put up a barrier to explore single-slit diffraction and double-slit interference. Experiment with diffraction through elliptical, rectangular, or irregular apertures.",
+          "url": "https://phet.colorado.edu/en/simulations/wave-interference",
+          "result_type": "simulation",
+          "tags": [
+            "interference",
+            "wave"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference-128.png"
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 3,
+        "falstad": 12,
+        "phet": 9,
+        "betterexplained": 4,
+        "physicsfundamentals": 16,
+        "physicstuff": 12,
+        "maotian": 23
+      }
+    },
+    {
+      "query": "rot",
+      "recognized_concepts": [
+        "curl"
+      ],
+      "expanded_variants": [
+        {
+          "text": "curl",
+          "concept_id": "curl",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "rot",
+          "concept_id": "curl",
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "rotation of a vector field",
+          "concept_id": "curl",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "旋度",
+          "concept_id": "curl",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "divergence",
+          "concept_id": "divergence",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "散度",
+          "concept_id": "divergence",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "stokes theorem",
+          "concept_id": "stokes-theorem",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "斯托克斯定理",
+          "concept_id": "stokes-theorem",
+          "kind": "related",
+          "weight": 0.35
+        }
+      ],
+      "result_count": 31,
+      "top10": [
+        {
+          "id": "physicstuff::https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Mandelbrot Set",
+          "description": "Mathematics & Statistics · 22 Mar 2026Mandelbrot SetZoom into the Mandelbrot set — the most famous fractal in mathematics. Explore infinite boundary complexity generated by a single recursive formula, and discover how iteration count maps to the vivid colour gradient.",
+          "url": "https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+          "result_type": "interactive",
+          "tags": [
+            "Mathematics Statistics",
+            "mandelbrot",
+            "set"
+          ],
+          "score": 95,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/mechanics/torque-rotational-motion",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Torque Rotational Motion",
+          "description": "Mechanics · 12 Aug 2026Torque Calculator and Rotational Motion SimulatorTorque calculator and rotational motion simulator — balance a lever with the τ = rF sinθ formula, then race a disk, ring and sphere down a ramp.",
+          "url": "https://physicstuff.com/mechanics/torque-rotational-motion",
+          "result_type": "interactive",
+          "tags": [
+            "Mechanics",
+            "motion",
+            "rotational",
+            "torque"
+          ],
+          "score": 95,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/divergence_curl_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Divergence and curl example",
+          "description": "An example problem of calculating the divergence and curl of a vector field.",
+          "url": "https://mathinsight.org/divergence_curl_examples",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 85.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/divergence_curl_notation",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Divergence and curl notation",
+          "description": "Different ways to denote divergence and curl.",
+          "url": "https://mathinsight.org/divergence_curl_notation",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 85.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_gradient_zero",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The curl of a gradient is zero",
+          "description": "Calculation showing that the curl of a gradient is zero.",
+          "url": "https://mathinsight.org/curl_gradient_zero",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 85.5,
+          "thumbnail": null
+        },
+        {
+          "id": "falstad::https://falstad.com/qmrotator/",
+          "source_id": "falstad",
+          "source_name": "Falstad",
+          "title": "Quantum Rigid Rotator Applet",
+          "description": null,
+          "url": "https://falstad.com/qmrotator/",
+          "result_type": "applet",
+          "tags": [
+            "quantum",
+            "quantum mechanics",
+            "rigid",
+            "rotator"
+          ],
+          "score": 85,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Vector Calculus: Understanding Circulation and Curl",
+          "description": null,
+          "url": "https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+          "result_type": "article",
+          "tags": [
+            "Vector Calculus",
+            "calculus",
+            "circulation",
+            "curl",
+            "understanding",
+            "vector"
+          ],
+          "score": 76,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/path_dependent_zero_curl",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "A path-dependent vector field with zero curl",
+          "description": "A counterexample showing how a vector field could have zero curl but still fail to be conservative or path-independent.",
+          "url": "https://mathinsight.org/path_dependent_zero_curl",
+          "result_type": "article",
+          "tags": [
+            "conservative vector field"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_subtleties",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Subtleties about curl",
+          "description": "Counterexamples illustrating how the curl of a vector field may differ from the intuitive appearance of a vector field's circulation.",
+          "url": "https://mathinsight.org/curl_subtleties",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_components",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The components of the curl",
+          "description": "Illustration of the meaning behind the components of the curl.",
+          "url": "https://mathinsight.org/curl_components",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 66.5,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 17,
+        "falstad": 1,
+        "phet": 4,
+        "betterexplained": 2,
+        "physicsfundamentals": 5,
+        "physicstuff": 2,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "angular momentum",
+      "recognized_concepts": [
+        "momentum"
+      ],
+      "expanded_variants": [
+        {
+          "text": "angular",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "momentum",
+          "concept_id": "momentum",
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "动量",
+          "concept_id": "momentum",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "動量",
+          "concept_id": "momentum",
+          "kind": "canonical",
+          "weight": 0.95
+        }
+      ],
+      "result_count": 14,
+      "top10": [
+        {
+          "id": "physicstuff::https://physicstuff.com/mechanics/conservation-of-angular-momentum",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Conservation Of Angular Momentum",
+          "description": "Mechanics · 30 Aug 2026Conservation of Angular Momentum: Ice Skater Spin and Gyroscope PrecessionConservation of angular momentum, L = Iω, with interactive simulators: see why a skater spins faster with arms tucked and why a spinning gyroscope precesses.",
+          "url": "https://physicstuff.com/mechanics/conservation-of-angular-momentum",
+          "result_type": "interactive",
+          "tags": [
+            "Mechanics",
+            "angular",
+            "conservation",
+            "momentum",
+            "of"
+          ],
+          "score": 95,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/angular-momentum-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Angular Momentum Simulator",
+          "description": "Angular Momentum L = Iω Angular momentum simulator: a free simulation where you move two masses in or out on a turntable and read the spin rate, angular momentum and rotational energy. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/angular-momentum-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "angular",
+            "momentum",
+            "simulator"
+          ],
+          "score": 95,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/mechanics/conservation-of-momentum",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Conservation Of Momentum",
+          "description": "Mechanics · 22 Jul 2026Conservation of Momentum: Elastic and Inelastic Collision SimulatorConservation of momentum explained with an interactive elastic and inelastic collision simulator — final velocity formulas, worked examples and FAQs.",
+          "url": "https://physicstuff.com/mechanics/conservation-of-momentum",
+          "result_type": "interactive",
+          "tags": [
+            "Mechanics",
+            "conservation",
+            "momentum",
+            "of"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/angular-velocity-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Angular Velocity Simulator",
+          "description": "Angular Velocity Free interactive angular velocity simulator: set the spin rate in rpm, slide the marker out from the axis, and watch rad/s, period and tangential speed respond. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/angular-velocity-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "angular",
+            "simulator",
+            "velocity"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/impulse-and-momentum-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Impulse And Momentum Simulator",
+          "description": "Momentum & Impulse Lab J = F·Δt = Δp Set two masses and velocities and watch impulse, momentum and force play out through J = F·Δt = Δp. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/impulse-and-momentum-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "and",
+            "impulse",
+            "momentum",
+            "simulator"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/momentum-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Momentum Simulator",
+          "description": "Momentum & Collisions Lab p = m·v Set the masses, velocities and restitution and watch momentum stay constant through every collision. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/momentum-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "momentum",
+            "simulator"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "falstad::https://falstad.com/qm2dbox/",
+          "source_id": "falstad",
+          "source_name": "Falstad",
+          "title": "2-D Rectangular Square Well Applet",
+          "description": null,
+          "url": "https://falstad.com/qm2dbox/",
+          "result_type": "applet",
+          "tags": [
+            "quantum mechanics",
+            "rectangular",
+            "square",
+            "well"
+          ],
+          "score": 55,
+          "thumbnail": null
+        },
+        {
+          "id": "falstad::https://falstad.com/membrane/",
+          "source_id": "falstad",
+          "source_name": "Falstad",
+          "title": "Rectangular Membrane Waves Applet",
+          "description": null,
+          "url": "https://falstad.com/membrane/",
+          "result_type": "applet",
+          "tags": [
+            "acoustics",
+            "membrane",
+            "rectangular",
+            "waves"
+          ],
+          "score": 55,
+          "thumbnail": null
+        },
+        {
+          "id": "maotian::https://maotian.nomaki.jp/Momentum/index.html",
+          "source_id": "maotian",
+          "source_name": "猫田の物理",
+          "title": "運動量の保存",
+          "description": null,
+          "url": "https://maotian.nomaki.jp/Momentum/index.html",
+          "result_type": "visualization",
+          "tags": [
+            "indexhtml",
+            "momentum"
+          ],
+          "score": 53.5,
+          "thumbnail": null
+        },
+        {
+          "id": "maotian::https://maotian.nomaki.jp/Momentum/index.html#Collision",
+          "source_id": "maotian",
+          "source_name": "猫田の物理",
+          "title": "運動量保存則（ボタン付き）",
+          "description": null,
+          "url": "https://maotian.nomaki.jp/Momentum/index.html#Collision",
+          "result_type": "visualization",
+          "tags": [
+            "indexhtml",
+            "momentum"
+          ],
+          "score": 53.5,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 0,
+        "falstad": 2,
+        "phet": 3,
+        "betterexplained": 0,
+        "physicsfundamentals": 5,
+        "physicstuff": 2,
+        "maotian": 2
+      }
+    },
+    {
+      "query": "determinant",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "determinant",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 8,
+      "top10": [
+        {
+          "id": "mathinsight::https://mathinsight.org/determinant_linear_transformation",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Determinants and linear transformations",
+          "description": "A description of how a determinant describes the geometric properties of a linear transformation.",
+          "url": "https://mathinsight.org/determinant_linear_transformation",
+          "result_type": "article",
+          "tags": [
+            "determinant"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/determinant_geometric_properties",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Geometric properties of the determinant",
+          "description": "Explanation of some of the basic geometric properties of the determinant.",
+          "url": "https://mathinsight.org/determinant_geometric_properties",
+          "result_type": "article",
+          "tags": [
+            "determinant"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/matrices_determinants_multivariable_calculus",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Matrices and determinants for multivariable calculus",
+          "description": "Brief description of matrices and determinants, at the level needed for multivariable calculus.",
+          "url": "https://mathinsight.org/matrices_determinants_multivariable_calculus",
+          "result_type": "article",
+          "tags": [
+            "determinant"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/relationship_determinants_area_volume",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The relationship between determinants and area or volume",
+          "description": "The properties of the cross product and the scalar triple product give links between determinants and area or volume.",
+          "url": "https://mathinsight.org/relationship_determinants_area_volume",
+          "result_type": "article",
+          "tags": [
+            "determinant"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/relationship_determinants_area_volume#area2d",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The relationship between determinants and area or volume",
+          "description": "The properties of the cross product and the scalar triple product give links between determinants and area or volume.",
+          "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d",
+          "result_type": "article",
+          "tags": [
+            "area"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/relationship_determinants_area_volume#area2d1",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The relationship between determinants and area or volume",
+          "description": "The properties of the cross product and the scalar triple product give links between determinants and area or volume.",
+          "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d1",
+          "result_type": "article",
+          "tags": [
+            "parallelogram"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/relationship_determinants_area_volume#volume3d",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The relationship between determinants and area or volume",
+          "description": "The properties of the cross product and the scalar triple product give links between determinants and area or volume.",
+          "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d",
+          "result_type": "article",
+          "tags": [
+            "volume"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/relationship_determinants_area_volume#volume3d1",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The relationship between determinants and area or volume",
+          "description": "The properties of the cross product and the scalar triple product give links between determinants and area or volume.",
+          "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d1",
+          "result_type": "article",
+          "tags": [
+            "parallelepiped"
+          ],
+          "score": 70,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 8,
+        "falstad": 0,
+        "phet": 0,
+        "betterexplained": 0,
+        "physicsfundamentals": 0,
+        "physicstuff": 0,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "Taylor series",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "series",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "taylor",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 24,
+      "top10": [
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/taylor-series/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Intuition for Taylor Series (DNA Analogy)",
+          "description": null,
+          "url": "https://betterexplained.com/articles/taylor-series/",
+          "result_type": "article",
+          "tags": [
+            "Calculus",
+            "analogy",
+            "dna",
+            "intuition",
+            "series",
+            "taylor"
+          ],
+          "score": 80,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/electromagnetism/series-parallel-circuits",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Series Parallel Circuits",
+          "description": "Electromagnetism · 23 Jul 2026Equivalent Resistance Calculator: Series and Parallel CircuitsEquivalent resistance calculator for series and parallel circuits — combine resistors, break a bulb string, and build a live voltage divider.",
+          "url": "https://physicstuff.com/electromagnetism/series-parallel-circuits",
+          "result_type": "interactive",
+          "tags": [
+            "Electromagnetism",
+            "circuits",
+            "parallel",
+            "series"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/series-parallel-circuits-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Series Parallel Circuits Simulator",
+          "description": "Series and Parallel Circuits Lab R_total = R1 + R2 + R3 Change the battery voltage and three resistors, flip between series and parallel. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/series-parallel-circuits-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "circuits",
+            "parallel",
+            "series",
+            "simulator"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/achieving_desired_tolerance_taylor_polynomial_desired_interval_refresher",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Achieving desired tolerance of a Taylor polynomial on desired interval",
+          "description": "For a given interval around a point, how many terms of a Taylor polynomial expanded around that point must be used to achieve a required tolerance?",
+          "url": "https://mathinsight.org/achieving_desired_tolerance_taylor_polynomial_desired_interval_refresher",
+          "result_type": "article",
+          "tags": [
+            "achieving",
+            "desired",
+            "interval",
+            "polynomial",
+            "refresher",
+            "taylor",
+            "tolerance",
+            "Taylor polynomial"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/classical_examples_taylor_polynomials_refresher",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Classic examples of Taylor polynomials",
+          "description": "Some of the most famous (and important) examples of Taylor expansions.",
+          "url": "https://mathinsight.org/classical_examples_taylor_polynomials_refresher",
+          "result_type": "article",
+          "tags": [
+            "Taylor polynomial"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/computational_tricks_regarding_taylor_polynomials_refresher",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Computational tricks regarding Taylor polynomials",
+          "description": "A short cut to calculating Taylor polynomials in terms of Taylor polynomials of simple functions.",
+          "url": "https://mathinsight.org/computational_tricks_regarding_taylor_polynomials_refresher",
+          "result_type": "article",
+          "tags": [
+            "Taylor polynomial"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/determining_tolerance_error_taylor_polynomials_refresher",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Determining tolerance/error in Taylor polynomials.",
+          "description": "Calculating with what tolerance a Taylor polynomial approximates a function on an interval.",
+          "url": "https://mathinsight.org/determining_tolerance_error_taylor_polynomials_refresher",
+          "result_type": "article",
+          "tags": [
+            "Taylor polynomial"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/how_large_interval_given_tolerance_taylor_polynomial_refresher",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "How large an interval with given tolerance for a Taylor polynomial?",
+          "description": "Given a Taylor polynomial expanded around a point, on how large an interval around the point does it achieve a required tolerance?",
+          "url": "https://mathinsight.org/how_large_interval_given_tolerance_taylor_polynomial_refresher",
+          "result_type": "article",
+          "tags": [
+            "Taylor polynomial"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/integrating_taylor_polynomials_first_example_refresher",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Integrating Taylor polynomials",
+          "description": "first example: An example showing how to integrate a Taylor polynomial and interpret the result.",
+          "url": "https://mathinsight.org/integrating_taylor_polynomials_first_example_refresher",
+          "result_type": "article",
+          "tags": [
+            "Taylor polynomial"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/integrating_error_term_taylor_polynomial_example_refresher",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Integrating the error term of a Taylor polynomial",
+          "description": "example: An example showing how to integrate the error term of Taylor polynomial and interpret the result.",
+          "url": "https://mathinsight.org/integrating_error_term_taylor_polynomial_example_refresher",
+          "result_type": "article",
+          "tags": [
+            "Taylor polynomial"
+          ],
+          "score": 60,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 16,
+        "falstad": 1,
+        "phet": 1,
+        "betterexplained": 1,
+        "physicsfundamentals": 2,
+        "physicstuff": 3,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "line integral",
+      "recognized_concepts": [
+        "integral"
+      ],
+      "expanded_variants": [
+        {
+          "text": "line",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "integral",
+          "concept_id": "integral",
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "积分",
+          "concept_id": "integral",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "積分",
+          "concept_id": "integral",
+          "kind": "canonical",
+          "weight": 0.95
+        }
+      ],
+      "result_count": 122,
+      "top10": [
+        {
+          "id": "mathinsight::https://mathinsight.org/line_integral_vector_alternative_notation",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Alternate notation for vector line integrals",
+          "description": "An alternative notation for the line integral of a vector field is introduced.",
+          "url": "https://mathinsight.org/line_integral_vector_alternative_notation",
+          "result_type": "article",
+          "tags": [
+            "integral"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/line_integral_scalar_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Examples of scalar line integrals",
+          "description": "Examples demonstrating how to calculate line integrals of scalar-valued functions.",
+          "url": "https://mathinsight.org/line_integral_scalar_examples",
+          "result_type": "article",
+          "tags": [
+            "line integral"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/line_integral_scalar_function_introduction",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Introduction to a line integral of a scalar-valued function",
+          "description": "Introduction with interactive graphics illustrating the line integral of a scalar-valued function and informally deriving the formula for calculating the integral from the parametrization of the curve.",
+          "url": "https://mathinsight.org/line_integral_scalar_function_introduction",
+          "result_type": "article",
+          "tags": [
+            "integral"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/line_integral_vector_field_introduction",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Introduction to a line integral of a vector field",
+          "description": "The concepts behind the line integral of a vector field along a curve are illustrated by interactive graphics representing the work done on a magnetic particle.  The graphics motivate the formula for the line integral.",
+          "url": "https://mathinsight.org/line_integral_vector_field_introduction",
+          "result_type": "article",
+          "tags": [
+            "integral"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/line_integral_independent_parametrization",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Line integrals are independent of parametrization",
+          "description": "Description of how the value of a line integral over a curve is independent of the parametrization of the curve.",
+          "url": "https://mathinsight.org/line_integral_independent_parametrization",
+          "result_type": "article",
+          "tags": [
+            "line integral"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/line_integral_vector_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Vector line integral examples",
+          "description": "Example of calculating line integrals of vector fields.",
+          "url": "https://mathinsight.org/line_integral_vector_examples",
+          "result_type": "article",
+          "tags": [
+            "integral"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/line_integral_circulation",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Line integrals as circulation",
+          "description": "Definition of circulation as the line integral of a vector field around a closed curve.",
+          "url": "https://mathinsight.org/line_integral_circulation",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_definition_line_integral",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The definition of curl from line integrals",
+          "description": "How the curl of a vector field is defined by line integrals representing circulation.",
+          "url": "https://mathinsight.org/curl_definition_line_integral",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/gradient_theorem_line_integrals",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The gradient theorem for line integrals",
+          "description": "A introduction to the gradient theorem for conservative or path-independent line integrals.",
+          "url": "https://mathinsight.org/gradient_theorem_line_integrals",
+          "result_type": "article",
+          "tags": [
+            "conservative vector field"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/graphing-lines",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Graphing Lines",
+          "description": "Explore the world of lines. Investigate the relationships between linear equations, slope, and graphs of lines. Challenge yourself in the line game!",
+          "url": "https://phet.colorado.edu/en/simulations/graphing-lines",
+          "result_type": "simulation",
+          "tags": [
+            "graphing",
+            "lines"
+          ],
+          "score": 65,
+          "thumbnail": "https://phet.colorado.edu/sims/html/graphing-lines/latest/graphing-lines-128.png"
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 87,
+        "falstad": 2,
+        "phet": 16,
+        "betterexplained": 3,
+        "physicsfundamentals": 6,
+        "physicstuff": 3,
+        "maotian": 5
+      }
+    },
+    {
+      "query": "Fourier transform",
+      "recognized_concepts": [
+        "fourier-transform"
+      ],
+      "expanded_variants": [
+        {
+          "text": "fourier transform",
+          "concept_id": "fourier-transform",
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "ft",
+          "concept_id": "fourier-transform",
+          "kind": "alternate",
+          "weight": 0.75
+        },
+        {
+          "text": "傅立叶变换",
+          "concept_id": "fourier-transform",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "傅立葉變換",
+          "concept_id": "fourier-transform",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "傅里叶变换",
+          "concept_id": "fourier-transform",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "傅里葉變換",
+          "concept_id": "fourier-transform",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "frequency",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "頻率",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "频率",
+          "concept_id": "frequency",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "wave",
+          "concept_id": "wave",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "波",
+          "concept_id": "wave",
+          "kind": "related",
+          "weight": 0.35
+        }
+      ],
+      "result_count": 79,
+      "top10": [
+        {
+          "id": "physicstuff::https://physicstuff.com/waves-oscillations/fft-denoising",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Fft Denoising",
+          "description": "Waves & Oscillations · 7 Apr 2026Signal Recovery with FFTBuild a noisy signal from multiple frequencies, then use the Fast Fourier Transform to recover the original — see denoising in action.",
+          "url": "https://physicstuff.com/waves-oscillations/fft-denoising",
+          "result_type": "interactive",
+          "tags": [
+            "Waves Oscillations",
+            "denoising",
+            "fft"
+          ],
+          "score": 75,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/reactants-products-and-leftovers",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Reactants, Products and Leftovers",
+          "description": "Create your own sandwich and then see how many sandwiches you can make with different amounts of ingredients. Do the same with chemical reactions. See how many products you can make with different amounts of reactants. Play a game to test your understanding of reactants, products and leftovers. Can you get a perfect score on each level?",
+          "url": "https://phet.colorado.edu/en/simulations/reactants-products-and-leftovers",
+          "result_type": "simulation",
+          "tags": [
+            "and",
+            "leftovers",
+            "products",
+            "reactants"
+          ],
+          "score": 72.5,
+          "thumbnail": "https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers-128.png"
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "An Interactive Guide To The Fourier Transform",
+          "description": null,
+          "url": "https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+          "result_type": "interactive",
+          "tags": [
+            "Math - Advanced Topics",
+            "fourier",
+            "guide",
+            "transform"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "falstad::https://falstad.com/fft/",
+          "source_id": "falstad",
+          "source_name": "Falstad",
+          "title": "Discrete Fourier Transform",
+          "description": null,
+          "url": "https://falstad.com/fft/",
+          "result_type": "applet",
+          "tags": [
+            "discrete",
+            "fourier",
+            "miscellaneous",
+            "transform"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/applet/area_left_riemann_sum",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Applet: Area via a left Riemann sum",
+          "description": null,
+          "url": "https://mathinsight.org/applet/area_left_riemann_sum",
+          "result_type": "applet",
+          "tags": [
+            "applet",
+            "area",
+            "left",
+            "riemann",
+            "sum",
+            "via"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/life-lessons-10-years/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Life Lessons After 10 Years of BetterExplained.com",
+          "description": null,
+          "url": "https://betterexplained.com/articles/life-lessons-10-years/",
+          "result_type": "article",
+          "tags": [
+            "Interviews & Discussions",
+            "after",
+            "betterexplained",
+            "com",
+            "lessons",
+            "life",
+            "years"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/ratio-oomph/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Understand Ratios with \"Oomph\" and \"Often\"",
+          "description": null,
+          "url": "https://betterexplained.com/articles/ratio-oomph/",
+          "result_type": "article",
+          "tags": [
+            "Math - Essentials",
+            "often",
+            "oomph",
+            "ratios",
+            "understand"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Fourier: Making Waves",
+          "description": "Add up sines or cosines to make waves of different shapes. Discover how changing the amplitudes of different harmonics changes the sound you hear. Play the Wave Game and combine harmonics to match a target waveform. Construct wave packets and explore the effects of changing the spacing between Fourier components and wave packet width.",
+          "url": "https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "result_type": "simulation",
+          "tags": [
+            "fourier",
+            "making",
+            "waves"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/fourier-making-waves/latest/fourier-making-waves-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/quantum-wave-interference",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Quantum Wave Interference",
+          "description": "When do photons, electrons, and atoms behave like particles and when do they behave like waves? Watch waves spread out and interfere as they pass through a double slit, then get detected on a screen as tiny dots. Use quantum detectors to explore how measurements change the waves and the patterns they produce on the screen.",
+          "url": "https://phet.colorado.edu/en/simulations/quantum-wave-interference",
+          "result_type": "simulation",
+          "tags": [
+            "interference",
+            "quantum",
+            "wave"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/quantum-wave-interference/latest/quantum-wave-interference-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/wave-interference",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Wave Interference",
+          "description": "Make waves with a dripping faucet, audio speaker, or laser! Add a second source to create an interference pattern. Put up a barrier to explore single-slit diffraction and double-slit interference. Experiment with diffraction through elliptical, rectangular, or irregular apertures.",
+          "url": "https://phet.colorado.edu/en/simulations/wave-interference",
+          "result_type": "simulation",
+          "tags": [
+            "interference",
+            "wave"
+          ],
+          "score": 26,
+          "thumbnail": "https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference-128.png"
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 3,
+        "falstad": 12,
+        "phet": 9,
+        "betterexplained": 4,
+        "physicsfundamentals": 16,
+        "physicstuff": 12,
+        "maotian": 23
+      }
+    },
+    {
+      "query": "curl",
+      "recognized_concepts": [
+        "curl"
+      ],
+      "expanded_variants": [
+        {
+          "text": "curl",
+          "concept_id": "curl",
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "rot",
+          "concept_id": "curl",
+          "kind": "alternate",
+          "weight": 0.75
+        },
+        {
+          "text": "rotation of a vector field",
+          "concept_id": "curl",
+          "kind": "synonym",
+          "weight": 0.9
+        },
+        {
+          "text": "旋度",
+          "concept_id": "curl",
+          "kind": "canonical",
+          "weight": 0.95
+        },
+        {
+          "text": "divergence",
+          "concept_id": "divergence",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "散度",
+          "concept_id": "divergence",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "stokes theorem",
+          "concept_id": "stokes-theorem",
+          "kind": "related",
+          "weight": 0.35
+        },
+        {
+          "text": "斯托克斯定理",
+          "concept_id": "stokes-theorem",
+          "kind": "related",
+          "weight": 0.35
+        }
+      ],
+      "result_count": 31,
+      "top10": [
+        {
+          "id": "mathinsight::https://mathinsight.org/divergence_curl_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Divergence and curl example",
+          "description": "An example problem of calculating the divergence and curl of a vector field.",
+          "url": "https://mathinsight.org/divergence_curl_examples",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/divergence_curl_notation",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Divergence and curl notation",
+          "description": "Different ways to denote divergence and curl.",
+          "url": "https://mathinsight.org/divergence_curl_notation",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_gradient_zero",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The curl of a gradient is zero",
+          "description": "Calculation showing that the curl of a gradient is zero.",
+          "url": "https://mathinsight.org/curl_gradient_zero",
+          "result_type": "article",
+          "tags": [
+            "curl"
+          ],
+          "score": 90,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Vector Calculus: Understanding Circulation and Curl",
+          "description": null,
+          "url": "https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+          "result_type": "article",
+          "tags": [
+            "Vector Calculus",
+            "calculus",
+            "circulation",
+            "curl",
+            "understanding",
+            "vector"
+          ],
+          "score": 80,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Mandelbrot Set",
+          "description": "Mathematics & Statistics · 22 Mar 2026Mandelbrot SetZoom into the Mandelbrot set — the most famous fractal in mathematics. Explore infinite boundary complexity generated by a single recursive formula, and discover how iteration count maps to the vivid colour gradient.",
+          "url": "https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+          "result_type": "interactive",
+          "tags": [
+            "Mathematics Statistics",
+            "mandelbrot",
+            "set"
+          ],
+          "score": 72.5,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/mechanics/torque-rotational-motion",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Torque Rotational Motion",
+          "description": "Mechanics · 12 Aug 2026Torque Calculator and Rotational Motion SimulatorTorque calculator and rotational motion simulator — balance a lever with the τ = rF sinθ formula, then race a disk, ring and sphere down a ramp.",
+          "url": "https://physicstuff.com/mechanics/torque-rotational-motion",
+          "result_type": "interactive",
+          "tags": [
+            "Mechanics",
+            "motion",
+            "rotational",
+            "torque"
+          ],
+          "score": 72.5,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/path_dependent_zero_curl",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "A path-dependent vector field with zero curl",
+          "description": "A counterexample showing how a vector field could have zero curl but still fail to be conservative or path-independent.",
+          "url": "https://mathinsight.org/path_dependent_zero_curl",
+          "result_type": "article",
+          "tags": [
+            "conservative vector field"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_subtleties",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Subtleties about curl",
+          "description": "Counterexamples illustrating how the curl of a vector field may differ from the intuitive appearance of a vector field's circulation.",
+          "url": "https://mathinsight.org/curl_subtleties",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_components",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The components of the curl",
+          "description": "Illustration of the meaning behind the components of the curl.",
+          "url": "https://mathinsight.org/curl_components",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 70,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/curl_definition_line_integral",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "The definition of curl from line integrals",
+          "description": "How the curl of a vector field is defined by line integrals representing circulation.",
+          "url": "https://mathinsight.org/curl_definition_line_integral",
+          "result_type": "article",
+          "tags": [
+            "circulation"
+          ],
+          "score": 70,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 17,
+        "falstad": 1,
+        "phet": 4,
+        "betterexplained": 2,
+        "physicsfundamentals": 5,
+        "physicstuff": 2,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "Doppler effect",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "doppler",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "effect",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 21,
+      "top10": [
+        {
+          "id": "physicstuff::https://physicstuff.com/waves-oscillations/doppler-effect",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Doppler Effect",
+          "description": "Waves & Oscillations · 26 Mar 2026The Doppler EffectWhy does an ambulance siren drop in pitch as it passes you? Visualise the Doppler effect — wavefront compression ahead of a moving source, rarefaction behind it — with adjustable source speed and interactive spectral shifts.",
+          "url": "https://physicstuff.com/waves-oscillations/doppler-effect",
+          "result_type": "interactive",
+          "tags": [
+            "Waves Oscillations",
+            "doppler",
+            "effect"
+          ],
+          "score": 135,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/doppler-effect-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Doppler Effect Simulator",
+          "description": "Doppler Effect Lab f_ahead = f·c/(c − vs) Change the source speed and emitted frequency and watch the frequency ahead rise and the frequency behind fall. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/doppler-effect-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "doppler",
+            "effect",
+            "simulator"
+          ],
+          "score": 95,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/thermodynamics/leidenfrost-effect",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Leidenfrost Effect",
+          "description": "Thermodynamics · 1 Mar 2026Leidenfrost EffectWhy do water droplets levitate and skitter on a very hot pan? Explore the Leidenfrost effect — the vapour cushion that insulates droplets above the Leidenfrost point — with an interactive heat transfer simulation.",
+          "url": "https://physicstuff.com/thermodynamics/leidenfrost-effect",
+          "result_type": "interactive",
+          "tags": [
+            "Thermodynamics",
+            "effect",
+            "leidenfrost"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/modern-physics/photoelectric-effect",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Photoelectric Effect",
+          "description": "Modern Physics · 27 Apr 2026The Photoelectric EffectEinstein's Nobel Prize experiment visualised — watch photons eject electrons from a metal plate and discover why frequency beats intensity every time.",
+          "url": "https://physicstuff.com/modern-physics/photoelectric-effect",
+          "result_type": "interactive",
+          "tags": [
+            "Modern Physics",
+            "effect",
+            "photoelectric"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/photoelectric-effect-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Photoelectric Effect Simulator",
+          "description": "Photoelectric Effect Kmax = hc/λ - φ Change the wavelength, intensity and work function and watch emission, stopping voltage and Kmax respond. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/photoelectric-effect-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "effect",
+            "photoelectric",
+            "simulator"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/greenhouse-effect",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Greenhouse Effect",
+          "description": "How do greenhouse gases affect the climate? Explore the atmosphere during the ice age and today. What happens when you add clouds? Change the greenhouse gas concentration and see how the temperature changes.",
+          "url": "https://phet.colorado.edu/en/simulations/greenhouse-effect",
+          "result_type": "simulation",
+          "tags": [
+            "effect",
+            "greenhouse"
+          ],
+          "score": 55,
+          "thumbnail": "https://phet.colorado.edu/sims/html/greenhouse-effect/latest/greenhouse-effect-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/density",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Density",
+          "description": "Why do some materials like wood float in water, and others don’t? Interact with blocks of different materials, including a custom option by modifying their mass and volume, to explore the effect on the density and discover the conditions for sinking or floating in water. Play detective to determine the material of each block by comparing its density with the values in the table.",
+          "url": "https://phet.colorado.edu/en/simulations/density",
+          "result_type": "simulation",
+          "tags": [
+            "density"
+          ],
+          "score": 15,
+          "thumbnail": "https://phet.colorado.edu/sims/html/density/latest/density-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Fourier: Making Waves",
+          "description": "Add up sines or cosines to make waves of different shapes. Discover how changing the amplitudes of different harmonics changes the sound you hear. Play the Wave Game and combine harmonics to match a target waveform. Construct wave packets and explore the effects of changing the spacing between Fourier components and wave packet width.",
+          "url": "https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "result_type": "simulation",
+          "tags": [
+            "fourier",
+            "making",
+            "waves"
+          ],
+          "score": 15,
+          "thumbnail": "https://phet.colorado.edu/sims/html/fourier-making-waves/latest/fourier-making-waves-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/waves-intro",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Waves Intro",
+          "description": "Make waves with a dripping faucet, audio speaker, or laser! Adjust frequency and amplitude, and observe the effects. Hear the sound produced by the speaker, and discover what determines the color of light.",
+          "url": "https://phet.colorado.edu/en/simulations/waves-intro",
+          "result_type": "simulation",
+          "tags": [
+            "intro",
+            "waves"
+          ],
+          "score": 15,
+          "thumbnail": "https://phet.colorado.edu/sims/html/waves-intro/latest/waves-intro-128.png"
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/chaos/lorenz-attractor",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Lorenz Attractor",
+          "description": "Chaos · 1 Feb 2026Lorenz AttractorExplore the butterfly effect with this iconic chaotic system.",
+          "url": "https://physicstuff.com/chaos/lorenz-attractor",
+          "result_type": "interactive",
+          "tags": [
+            "Chaos",
+            "attractor",
+            "lorenz"
+          ],
+          "score": 15,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 8,
+        "falstad": 0,
+        "phet": 4,
+        "betterexplained": 0,
+        "physicsfundamentals": 2,
+        "physicstuff": 4,
+        "maotian": 3
+      }
+    },
+    {
+      "query": "Maxwell equations",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "equations",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "maxwell",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 20,
+      "top10": [
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/vector-addition-equations",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Vector Addition: Equations",
+          "description": "Experiment with vector equations and compare vector sums and differences. Customize the base vectors or explore scalar multiplication by adjusting the coefficients in equation. Specify vectors in Cartesian or polar coordinates, and view the magnitude, angle, and components of each vector.",
+          "url": "https://phet.colorado.edu/en/simulations/vector-addition-equations",
+          "result_type": "simulation",
+          "tags": [
+            "addition",
+            "equations",
+            "vector"
+          ],
+          "score": 65,
+          "thumbnail": "https://phet.colorado.edu/sims/html/vector-addition-equations/latest/vector-addition-equations-128.png"
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/statistical-mechanics/maxwell-velocity",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Maxwell Velocity",
+          "description": "Statistical Mechanics · 5 Feb 2026Maxwell Velocity DistributionVisualize the Maxwell-Boltzmann speed distribution — see how molecular speeds shift with temperature, and compare most probable, mean, and root-mean-square velocities in an interactive simulation.",
+          "url": "https://physicstuff.com/statistical-mechanics/maxwell-velocity",
+          "result_type": "interactive",
+          "tags": [
+            "Statistical Mechanics",
+            "maxwell",
+            "velocity"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/autonomous_differential_equation_introduction",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Introduction to autonomous differential equations",
+          "description": "Introduction to solving autonomous differential equations, using a linear differential equation as an example.",
+          "url": "https://mathinsight.org/autonomous_differential_equation_introduction",
+          "result_type": "article",
+          "tags": [
+            "autonomous",
+            "differential",
+            "equation",
+            "equations",
+            "introduction",
+            "differential equation"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "falstad::https://falstad.com/diffeq/",
+          "source_id": "falstad",
+          "source_name": "Falstad",
+          "title": "Ordinary Differential Equations Applet",
+          "description": null,
+          "url": "https://falstad.com/diffeq/",
+          "result_type": "applet",
+          "tags": [
+            "differential",
+            "equations",
+            "miscellaneous",
+            "ordinary"
+          ],
+          "score": 55,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/balancing-chemical-equations",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Balancing Chemical Equations",
+          "description": "How do you know if a chemical equation is balanced? What can you change to balance an equation? Play a game to test your ideas!",
+          "url": "https://phet.colorado.edu/en/simulations/balancing-chemical-equations",
+          "result_type": "simulation",
+          "tags": [
+            "balancing",
+            "chemical",
+            "equations"
+          ],
+          "score": 55,
+          "thumbnail": "https://phet.colorado.edu/sims/html/balancing-chemical-equations/latest/balancing-chemical-equations-128.png"
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/a-quick-intuition-for-parametric-equations/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "A Quick Intuition For Parametric Equations",
+          "description": null,
+          "url": "https://betterexplained.com/articles/a-quick-intuition-for-parametric-equations/",
+          "result_type": "article",
+          "tags": [
+            "Math - Algebra",
+            "equations",
+            "intuition",
+            "parametric",
+            "quick"
+          ],
+          "score": 50,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/colorized-math-equations/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Colorized Math Equations",
+          "description": null,
+          "url": "https://betterexplained.com/articles/colorized-math-equations/",
+          "result_type": "article",
+          "tags": [
+            "Essays",
+            "colorized",
+            "equations",
+            "math"
+          ],
+          "score": 50,
+          "thumbnail": null
+        },
+        {
+          "id": "betterexplained::https://betterexplained.com/articles/understanding-algebra-why-do-we-factor-equations/",
+          "source_id": "betterexplained",
+          "source_name": "BetterExplained",
+          "title": "Understanding Algebra: Why do we factor equations?",
+          "description": null,
+          "url": "https://betterexplained.com/articles/understanding-algebra-why-do-we-factor-equations/",
+          "result_type": "article",
+          "tags": [
+            "Math - Algebra",
+            "algebra",
+            "equations",
+            "factor",
+            "understanding"
+          ],
+          "score": 50,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/video/autonomous_differential_equation_introduction",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Video: Introduction to autonomous differential equations",
+          "description": null,
+          "url": "https://mathinsight.org/video/autonomous_differential_equation_introduction",
+          "result_type": "video",
+          "tags": [
+            "autonomous",
+            "differential",
+            "equation",
+            "equations",
+            "introduction",
+            "video"
+          ],
+          "score": 50,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/ordinary_differential_equation_linear_integrating_factor_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Examples of solving linear ordinary differential equations using an integrating factor",
+          "description": "Examples of finding an integrating factor and integrating first order linear ordinary differential equations.",
+          "url": "https://mathinsight.org/ordinary_differential_equation_linear_integrating_factor_examples",
+          "result_type": "article",
+          "tags": [
+            "differential equation"
+          ],
+          "score": 40,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 9,
+        "falstad": 1,
+        "phet": 5,
+        "betterexplained": 3,
+        "physicsfundamentals": 1,
+        "physicstuff": 1,
+        "maotian": 0
+      }
+    },
+    {
+      "query": "photoelectric effect",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "effect",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "photoelectric",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 21,
+      "top10": [
+        {
+          "id": "physicstuff::https://physicstuff.com/modern-physics/photoelectric-effect",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Photoelectric Effect",
+          "description": "Modern Physics · 27 Apr 2026The Photoelectric EffectEinstein's Nobel Prize experiment visualised — watch photons eject electrons from a metal plate and discover why frequency beats intensity every time.",
+          "url": "https://physicstuff.com/modern-physics/photoelectric-effect",
+          "result_type": "interactive",
+          "tags": [
+            "Modern Physics",
+            "effect",
+            "photoelectric"
+          ],
+          "score": 135,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/photoelectric-effect-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Photoelectric Effect Simulator",
+          "description": "Photoelectric Effect Kmax = hc/λ - φ Change the wavelength, intensity and work function and watch emission, stopping voltage and Kmax respond. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/photoelectric-effect-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "effect",
+            "photoelectric",
+            "simulator"
+          ],
+          "score": 95,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/waves-oscillations/doppler-effect",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Doppler Effect",
+          "description": "Waves & Oscillations · 26 Mar 2026The Doppler EffectWhy does an ambulance siren drop in pitch as it passes you? Visualise the Doppler effect — wavefront compression ahead of a moving source, rarefaction behind it — with adjustable source speed and interactive spectral shifts.",
+          "url": "https://physicstuff.com/waves-oscillations/doppler-effect",
+          "result_type": "interactive",
+          "tags": [
+            "Waves Oscillations",
+            "doppler",
+            "effect"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/thermodynamics/leidenfrost-effect",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Leidenfrost Effect",
+          "description": "Thermodynamics · 1 Mar 2026Leidenfrost EffectWhy do water droplets levitate and skitter on a very hot pan? Explore the Leidenfrost effect — the vapour cushion that insulates droplets above the Leidenfrost point — with an interactive heat transfer simulation.",
+          "url": "https://physicstuff.com/thermodynamics/leidenfrost-effect",
+          "result_type": "interactive",
+          "tags": [
+            "Thermodynamics",
+            "effect",
+            "leidenfrost"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/doppler-effect-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Doppler Effect Simulator",
+          "description": "Doppler Effect Lab f_ahead = f·c/(c − vs) Change the source speed and emitted frequency and watch the frequency ahead rise and the frequency behind fall. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/doppler-effect-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "doppler",
+            "effect",
+            "simulator"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/greenhouse-effect",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Greenhouse Effect",
+          "description": "How do greenhouse gases affect the climate? Explore the atmosphere during the ice age and today. What happens when you add clouds? Change the greenhouse gas concentration and see how the temperature changes.",
+          "url": "https://phet.colorado.edu/en/simulations/greenhouse-effect",
+          "result_type": "simulation",
+          "tags": [
+            "effect",
+            "greenhouse"
+          ],
+          "score": 55,
+          "thumbnail": "https://phet.colorado.edu/sims/html/greenhouse-effect/latest/greenhouse-effect-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/density",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Density",
+          "description": "Why do some materials like wood float in water, and others don’t? Interact with blocks of different materials, including a custom option by modifying their mass and volume, to explore the effect on the density and discover the conditions for sinking or floating in water. Play detective to determine the material of each block by comparing its density with the values in the table.",
+          "url": "https://phet.colorado.edu/en/simulations/density",
+          "result_type": "simulation",
+          "tags": [
+            "density"
+          ],
+          "score": 15,
+          "thumbnail": "https://phet.colorado.edu/sims/html/density/latest/density-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Fourier: Making Waves",
+          "description": "Add up sines or cosines to make waves of different shapes. Discover how changing the amplitudes of different harmonics changes the sound you hear. Play the Wave Game and combine harmonics to match a target waveform. Construct wave packets and explore the effects of changing the spacing between Fourier components and wave packet width.",
+          "url": "https://phet.colorado.edu/en/simulations/fourier-making-waves",
+          "result_type": "simulation",
+          "tags": [
+            "fourier",
+            "making",
+            "waves"
+          ],
+          "score": 15,
+          "thumbnail": "https://phet.colorado.edu/sims/html/fourier-making-waves/latest/fourier-making-waves-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/waves-intro",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Waves Intro",
+          "description": "Make waves with a dripping faucet, audio speaker, or laser! Adjust frequency and amplitude, and observe the effects. Hear the sound produced by the speaker, and discover what determines the color of light.",
+          "url": "https://phet.colorado.edu/en/simulations/waves-intro",
+          "result_type": "simulation",
+          "tags": [
+            "intro",
+            "waves"
+          ],
+          "score": 15,
+          "thumbnail": "https://phet.colorado.edu/sims/html/waves-intro/latest/waves-intro-128.png"
+        },
+        {
+          "id": "physicstuff::https://physicstuff.com/chaos/lorenz-attractor",
+          "source_id": "physicstuff",
+          "source_name": "PhysicStuff",
+          "title": "Lorenz Attractor",
+          "description": "Chaos · 1 Feb 2026Lorenz AttractorExplore the butterfly effect with this iconic chaotic system.",
+          "url": "https://physicstuff.com/chaos/lorenz-attractor",
+          "result_type": "interactive",
+          "tags": [
+            "Chaos",
+            "attractor",
+            "lorenz"
+          ],
+          "score": 15,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 8,
+        "falstad": 0,
+        "phet": 4,
+        "betterexplained": 0,
+        "physicsfundamentals": 2,
+        "physicstuff": 4,
+        "maotian": 3
+      }
+    },
+    {
+      "query": "Schrodinger equation",
+      "recognized_concepts": [],
+      "expanded_variants": [
+        {
+          "text": "equation",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        },
+        {
+          "text": "schrodinger",
+          "concept_id": null,
+          "kind": "original",
+          "weight": 1
+        }
+      ],
+      "result_count": 50,
+      "top10": [
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/schrodinger-equation-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Schrodinger Equation Simulator",
+          "description": "The Schrodinger Equation: Particle in a Box E = n²h² / 8mL² Drag the box width and the quantum number and watch the energy levels climb as n squared over L squared, live. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/schrodinger-equation-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "equation",
+            "schrodinger",
+            "simulator"
+          ],
+          "score": 95,
+          "thumbnail": null
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/balancing-chemical-equations",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Balancing Chemical Equations",
+          "description": "How do you know if a chemical equation is balanced? What can you change to balance an equation? Play a game to test your ideas!",
+          "url": "https://phet.colorado.edu/en/simulations/balancing-chemical-equations",
+          "result_type": "simulation",
+          "tags": [
+            "balancing",
+            "chemical",
+            "equations"
+          ],
+          "score": 65,
+          "thumbnail": "https://phet.colorado.edu/sims/html/balancing-chemical-equations/latest/balancing-chemical-equations-128.png"
+        },
+        {
+          "id": "phet::https://phet.colorado.edu/en/simulations/vector-addition-equations",
+          "source_id": "phet",
+          "source_name": "PhET",
+          "title": "Vector Addition: Equations",
+          "description": "Experiment with vector equations and compare vector sums and differences. Customize the base vectors or explore scalar multiplication by adjusting the coefficients in equation. Specify vectors in Cartesian or polar coordinates, and view the magnitude, angle, and components of each vector.",
+          "url": "https://phet.colorado.edu/en/simulations/vector-addition-equations",
+          "result_type": "simulation",
+          "tags": [
+            "addition",
+            "equations",
+            "vector"
+          ],
+          "score": 65,
+          "thumbnail": "https://phet.colorado.edu/sims/html/vector-addition-equations/latest/vector-addition-equations-128.png"
+        },
+        {
+          "id": "physicsfundamentals::https://physicsfundamentalsinfo.com/labs/lens-equation-simulator",
+          "source_id": "physicsfundamentals",
+          "source_name": "Physics Fundamentals",
+          "title": "Lens Equation Simulator",
+          "description": "Lens Equation 1/f = 1/do + 1/di Drag the object distance and focal length sliders to see image distance, magnification and image type update live. Explore lab »",
+          "url": "https://physicsfundamentalsinfo.com/labs/lens-equation-simulator",
+          "result_type": "simulation",
+          "tags": [
+            "equation",
+            "lens",
+            "simulator"
+          ],
+          "score": 65,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/ordinary_differential_equation_introduction",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "An introduction to ordinary differential equations",
+          "description": "An introduction using simple examples explaining what an ordinary differential equation is and how one might solve them.",
+          "url": "https://mathinsight.org/ordinary_differential_equation_introduction",
+          "result_type": "article",
+          "tags": [
+            "differential equation"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/another_differential_equation_projectile_motion_refresher",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Another differential equation: projectile motion",
+          "description": "projectile motion: Calculating an equation for the position of an object acted upon by only gravity.",
+          "url": "https://mathinsight.org/another_differential_equation_projectile_motion_refresher",
+          "result_type": "article",
+          "tags": [
+            "another",
+            "differential",
+            "equation",
+            "motion",
+            "projectile",
+            "refresher",
+            "concavity",
+            "inflection points"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/ordinary_differential_equation_linear_integrating_factor_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Examples of solving linear ordinary differential equations using an integrating factor",
+          "description": "Examples of finding an integrating factor and integrating first order linear ordinary differential equations.",
+          "url": "https://mathinsight.org/ordinary_differential_equation_linear_integrating_factor_examples",
+          "result_type": "article",
+          "tags": [
+            "differential equation"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/autonomous_differential_equation_introduction",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Introduction to autonomous differential equations",
+          "description": "Introduction to solving autonomous differential equations, using a linear differential equation as an example.",
+          "url": "https://mathinsight.org/autonomous_differential_equation_introduction",
+          "result_type": "article",
+          "tags": [
+            "autonomous",
+            "differential",
+            "equation",
+            "equations",
+            "introduction",
+            "differential equation"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/bifurcations_differential_equation_introduction",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Introduction to bifurcations of a differential equation",
+          "description": "Representing the influence of a parameter on the behavior of a differential equation in terms of a bifurcation diagram of equilibria.",
+          "url": "https://mathinsight.org/bifurcations_differential_equation_introduction",
+          "result_type": "article",
+          "tags": [
+            "bifurcations",
+            "differential",
+            "equation",
+            "introduction",
+            "bifurcation",
+            "bifurcation diagram",
+            "differential equation"
+          ],
+          "score": 60,
+          "thumbnail": null
+        },
+        {
+          "id": "mathinsight::https://mathinsight.org/ordinary_differential_equation_introduction_examples",
+          "source_id": "mathinsight",
+          "source_name": "Math Insight",
+          "title": "Ordinary differential equation examples",
+          "description": "Simple examples of solving ordinary differential equation.",
+          "url": "https://mathinsight.org/ordinary_differential_equation_introduction_examples",
+          "result_type": "article",
+          "tags": [
+            "differential equation"
+          ],
+          "score": 60,
+          "thumbnail": null
+        }
+      ],
+      "provider_distribution": {
+        "mathinsight": 31,
+        "falstad": 2,
+        "phet": 8,
+        "betterexplained": 3,
+        "physicsfundamentals": 5,
+        "physicstuff": 1,
+        "maotian": 0
+      }
+    }
+  ],
+  "false_positives": [
+    {
+      "query": "FT",
+      "titles": [
+        "left",
+        "after",
+        "generic wave frequency"
+      ]
+    },
+    {
+      "query": "rot",
+      "titles": [
+        "prototype",
+        "rotator"
+      ]
+    },
+    {
+      "query": "傅里叶变换",
+      "titles": [
+        "left",
+        "after",
+        "generic wave frequency"
+      ]
+    },
+    {
+      "query": "旋度",
+      "titles": [
+        "prototype",
+        "rotator"
+      ]
+    }
+  ]
+}
