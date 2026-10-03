@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use std::future::Future;
 use std::sync::Mutex;
 
-pub const CACHE_VERSION: u32 = 1;
+pub const CACHE_VERSION: u32 = 2;
 /// How many days before a cached index is considered stale and refreshed in
 /// the background. Stale caches remain searchable.
 pub const STALE_AFTER_DAYS: i64 = 7;
@@ -46,6 +46,10 @@ where
     let outcome = tokio::time::timeout(std::time::Duration::from_secs(8), fetch)
         .await
         .unwrap_or_else(|_| Err(AppError::Other(format!("{id} index refresh timed out"))));
+    let outcome = outcome.and_then(|fresh| {
+        validate_index(id, &fresh, cached.as_ref())?;
+        Ok(fresh)
+    });
     match outcome {
         Ok(fresh) => {
             if fresh.entries.is_empty() {
@@ -73,6 +77,8 @@ where
 /// One row in a locally-indexed provider.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IndexEntry {
+    #[serde(flatten)]
+    pub semantic: crate::models::SemanticMetadata,
     pub title: String,
     pub description: Option<String>,
     pub url: String,
@@ -90,7 +96,12 @@ pub struct CachedIndex {
 }
 
 impl CachedIndex {
-    pub fn new(entries: Vec<IndexEntry>) -> Self {
+    pub fn new(mut entries: Vec<IndexEntry>) -> Self {
+        for entry in &mut entries {
+            let source = entry.semantic.description_source.clone();
+            entry.semantic = annotate(entry);
+            entry.semantic.description_source = source;
+        }
         Self {
             version: CACHE_VERSION,
             updated_at: today_iso(),
@@ -113,10 +124,6 @@ pub fn today_iso() -> String {
     chrono::Utc::now().format("%Y-%m-%d").to_string()
 }
 
-fn normalize_ws(s: &str) -> String {
-    s.split_whitespace().collect::<Vec<_>>().join(" ")
-}
-
 /// Build a unified `SearchResult` from a local index entry.
 pub fn to_result(source_id: &str, source_name: &str, entry: &IndexEntry) -> SearchResult {
     SearchResult {
@@ -130,6 +137,8 @@ pub fn to_result(source_id: &str, source_name: &str, entry: &IndexEntry) -> Sear
         tags: entry.tags.clone(),
         score: 0.0,
         thumbnail: entry.thumbnail.clone(),
+        semantic: entry.semantic.clone(),
+        explanation: None,
     }
 }
 
@@ -150,24 +159,26 @@ pub fn search_entries(
         if crate::util::validate_http_url(&entry.url).is_err() {
             continue;
         }
-        let hay = normalize_ws(&format!(
-            "{} {} {} {}",
-            entry.title,
-            entry.tags.join(" "),
-            entry.description.clone().unwrap_or_default(),
-            entry.url
-        ))
-        .to_lowercase();
-
-        let phrases_ok = query.phrases.iter().all(|p| hay.contains(p.as_str()));
-        if !phrases_ok {
+        if query.site_filter.as_ref().is_some_and(|s| s != source_id)
+            || query.type_filter.is_some_and(|t| t != entry.result_type)
+        {
             continue;
         }
-
-        let token_ok =
-            query.tokens.is_empty() || query.variants.iter().any(|v| hay.contains(&v.text));
-        if token_ok {
-            out.push(to_result(source_id, source_name, entry));
+        if !query.phrases.iter().all(|p| {
+            std::iter::once(&entry.title)
+                .chain(&entry.tags)
+                .chain(entry.description.iter())
+                .any(|s| crate::search::normalize::matches(s, p, crate::search::normalize::mode(p)))
+        }) {
+            continue;
+        }
+        let mut result = to_result(source_id, source_name, entry);
+        let explanation = crate::search::ranking::explain(query, &result);
+        if ["all-groups", "browse"].contains(&explanation.match_tier.as_str())
+            || (query.explore && explanation.matched.iter().any(|m| m.tier == "exploratory"))
+        {
+            result.explanation = Some(explanation);
+            out.push(result);
         }
     }
     out
@@ -275,4 +286,146 @@ pub fn title_words(title: &str) -> Vec<String> {
         }
     }
     out
+}
+
+pub fn annotate(entry: &IndexEntry) -> crate::models::SemanticMetadata {
+    use crate::search::normalize::{concepts, matches, mode, names};
+    let mut meta = crate::models::SemanticMetadata::default();
+    let mut subjects = std::collections::BTreeSet::new();
+    for c in concepts() {
+        let mut fields = Vec::new();
+        let contains = |s: &str| {
+            names(c).iter().any(|n| matches(s, n, mode(n)))
+                || c.aliases
+                    .iter()
+                    .filter(|a| a.r#match != "exact")
+                    .any(|a| matches(s, &a.text, &a.r#match))
+        };
+        if contains(&entry.title) {
+            fields.push("title".into());
+        }
+        if entry.tags.iter().any(|s| contains(s)) {
+            fields.push("tags".into());
+        }
+        if entry.description.as_ref().is_some_and(|s| contains(s)) {
+            fields.push("description".into());
+        }
+        if !fields.is_empty() {
+            meta.concept_evidence.insert(c.id.clone(), fields);
+            subjects.insert(c.subject.clone());
+        }
+    }
+    meta.concept_ids = meta.concept_evidence.keys().cloned().collect();
+    meta.subject = subjects.into_iter().collect();
+    meta.language = if entry.url.starts_with("https://maotian.nomaki.jp/") || entry
+        .title
+        .chars()
+        .any(|c| ('\u{3040}'..='\u{30ff}').contains(&c))
+    {
+        "ja"
+    } else if entry
+        .title
+        .chars()
+        .any(|c| ('\u{3400}'..='\u{9fff}').contains(&c))
+    {
+        "zh"
+    } else {
+        "en"
+    }
+    .into();
+    meta
+}
+
+/// Bounded adjacent text is safe listing metadata; never concatenate a whole page.
+pub fn listing_description(
+    el: scraper::ElementRef<'_>,
+    title: &str,
+    category: &str,
+) -> (Option<String>, Option<String>) {
+    let adjacent = el
+        .next_siblings()
+        .take_while(|n| n.value().is_text())
+        .filter_map(|n| n.value().as_text())
+        .map(|t| t.text.as_ref())
+        .collect::<Vec<_>>()
+        .join(" ");
+    let text = adjacent.split_whitespace().collect::<Vec<_>>().join(" ");
+    if text.chars().count() >= 20 && text.chars().count() <= 600 {
+        return (Some(text), Some("listing-adjacent-text".into()));
+    }
+    if let Some(value) = el
+        .value()
+        .attr("title")
+        .filter(|v| *v != title && v.chars().count() >= 20)
+    {
+        return (
+            Some(value.chars().take(600).collect()),
+            Some("title-attribute".into()),
+        );
+    }
+    let description = if category.is_empty() {
+        title.to_string()
+    } else {
+        format!("{title} — {category}")
+    };
+    (
+        Some(description),
+        Some("title-and-provider-category".into()),
+    )
+}
+/// Fail closed before replacing usable data. Callers may retain old caches on automatic refresh failures.
+pub fn validate_index(id: &str, fresh: &CachedIndex, previous: Option<&CachedIndex>) -> Result<()> {
+    let n = fresh.entries.len();
+    if n == 0 {
+        return Err(AppError::Parse(format!("{id}: empty index")));
+    }
+    let ratio = |count: usize| count as f64 / n as f64;
+    if ratio(
+        fresh
+            .entries
+            .iter()
+            .filter(|e| crate::util::validate_http_url(&e.url).is_err())
+            .count(),
+    ) > 0.05
+    {
+        return Err(AppError::Parse(format!("{id}: invalid URL ratio >5%")));
+    }
+    if ratio(
+        fresh
+            .entries
+            .iter()
+            .filter(|e| e.title.trim().is_empty())
+            .count(),
+    ) > 0.05
+    {
+        return Err(AppError::Parse(format!("{id}: missing title ratio >5%")));
+    }
+    let unique = fresh
+        .entries
+        .iter()
+        .map(|e| &e.url)
+        .collect::<std::collections::HashSet<_>>()
+        .len();
+    if ratio(n - unique) > 0.05 {
+        return Err(AppError::Parse(format!("{id}: duplicate URL ratio >5%")));
+    }
+    if let Some(old) = previous {
+        if n * 10 < old.entries.len() * 7 {
+            return Err(AppError::Parse(format!(
+                "{id}: count drop exceeds 30% ({} -> {n})",
+                old.entries.len()
+            )));
+        }
+        let covered = |c: &CachedIndex| {
+            c.entries
+                .iter()
+                .filter(|e| !e.semantic.concept_ids.is_empty())
+                .count() as f64
+                / c.entries.len().max(1) as f64
+        };
+        if covered(old) > 0.1 && covered(fresh) < covered(old) * 0.7 {
+            return Err(AppError::Parse(format!("{id}: semantic coverage collapse")));
+        }
+    }
+    Ok(())
 }

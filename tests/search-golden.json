@@ -1,0 +1,985 @@
+{
+  "entries": [
+    {
+      "title": "Angular momentum",
+      "url": "https://example.test/0",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "determinant",
+      "url": "https://example.test/1",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "Taylor series",
+      "url": "https://example.test/2",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "line integral",
+      "url": "https://example.test/3",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "Fourier transform",
+      "url": "https://example.test/4",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "curl",
+      "url": "https://example.test/5",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "Doppler effect",
+      "url": "https://example.test/6",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "Maxwell equations",
+      "url": "https://example.test/7",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "photoelectric effect",
+      "url": "https://example.test/8",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "Schrodinger equation",
+      "url": "https://example.test/9",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "left",
+      "url": "https://example.test/10",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "after",
+      "url": "https://example.test/11",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "prototype",
+      "url": "https://example.test/12",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "rotator",
+      "url": "https://example.test/13",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "generic wave frequency",
+      "url": "https://example.test/14",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "gradient",
+      "url": "https://example.test/15",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "gradient curl",
+      "url": "https://example.test/16",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "line",
+      "url": "https://example.test/17",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "integral",
+      "url": "https://example.test/18",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "a Fourier transform visualization",
+      "url": "https://example.test/19",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "rotation of a vector field",
+      "url": "https://example.test/20",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "stationary wave",
+      "url": "https://example.test/21",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "standing wave",
+      "url": "https://example.test/22",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "驻波",
+      "url": "https://example.test/23",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "L",
+      "url": "https://example.test/24",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "aLpha",
+      "url": "https://example.test/25",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "afterthought",
+      "url": "https://example.test/26",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "FT",
+      "url": "https://example.test/27",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "rot",
+      "url": "https://example.test/28",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    },
+    {
+      "title": "unrelated page",
+      "url": "https://example.test/curl/FT/gradient",
+      "description": null,
+      "tags": [],
+      "thumbnail": null,
+      "result_type": "article"
+    }
+  ],
+  "cases": [
+    {
+      "query": "angular momentum",
+      "concept_ids": [
+        "angular-momentum"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Angular momentum"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "角动量",
+      "concept_ids": [
+        "angular-momentum"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Angular momentum"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "角動量",
+      "concept_ids": [
+        "angular-momentum"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Angular momentum"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "determinant",
+      "concept_ids": [
+        "determinant"
+      ],
+      "groups": 1,
+      "must_include": [
+        "determinant"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "行列式",
+      "concept_ids": [
+        "determinant"
+      ],
+      "groups": 1,
+      "must_include": [
+        "determinant"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "行列式",
+      "concept_ids": [
+        "determinant"
+      ],
+      "groups": 1,
+      "must_include": [
+        "determinant"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "taylor series",
+      "concept_ids": [
+        "taylor-series"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Taylor series"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "泰勒级数",
+      "concept_ids": [
+        "taylor-series"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Taylor series"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "泰勒級數",
+      "concept_ids": [
+        "taylor-series"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Taylor series"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "line integral",
+      "concept_ids": [
+        "line-integral"
+      ],
+      "groups": 1,
+      "must_include": [
+        "line integral"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "线积分",
+      "concept_ids": [
+        "line-integral"
+      ],
+      "groups": 1,
+      "must_include": [
+        "line integral"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "線積分",
+      "concept_ids": [
+        "line-integral"
+      ],
+      "groups": 1,
+      "must_include": [
+        "line integral"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "fourier transform",
+      "concept_ids": [
+        "fourier-transform"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Fourier transform"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": [
+        "wave",
+        "frequency"
+      ]
+    },
+    {
+      "query": "傅里叶变换",
+      "concept_ids": [
+        "fourier-transform"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Fourier transform"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": [
+        "wave",
+        "frequency"
+      ]
+    },
+    {
+      "query": "傅里葉變換",
+      "concept_ids": [
+        "fourier-transform"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Fourier transform"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": [
+        "wave",
+        "frequency"
+      ]
+    },
+    {
+      "query": "curl",
+      "concept_ids": [
+        "curl"
+      ],
+      "groups": 1,
+      "must_include": [
+        "curl"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "旋度",
+      "concept_ids": [
+        "curl"
+      ],
+      "groups": 1,
+      "must_include": [
+        "curl"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "旋度",
+      "concept_ids": [
+        "curl"
+      ],
+      "groups": 1,
+      "must_include": [
+        "curl"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "doppler effect",
+      "concept_ids": [
+        "doppler-effect"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Doppler effect"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "多普勒效应",
+      "concept_ids": [
+        "doppler-effect"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Doppler effect"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "都卜勒效應",
+      "concept_ids": [
+        "doppler-effect"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Doppler effect"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "maxwell equations",
+      "concept_ids": [
+        "maxwell-equations"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Maxwell equations"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "麦克斯韦方程组",
+      "concept_ids": [
+        "maxwell-equations"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Maxwell equations"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "馬克士威方程組",
+      "concept_ids": [
+        "maxwell-equations"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Maxwell equations"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "photoelectric effect",
+      "concept_ids": [
+        "photoelectric-effect"
+      ],
+      "groups": 1,
+      "must_include": [
+        "photoelectric effect"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "光电效应",
+      "concept_ids": [
+        "photoelectric-effect"
+      ],
+      "groups": 1,
+      "must_include": [
+        "photoelectric effect"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "光電效應",
+      "concept_ids": [
+        "photoelectric-effect"
+      ],
+      "groups": 1,
+      "must_include": [
+        "photoelectric effect"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "schrodinger equation",
+      "concept_ids": [
+        "schrodinger-equation"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Schrodinger equation"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "薛定谔方程",
+      "concept_ids": [
+        "schrodinger-equation"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Schrodinger equation"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "薛丁格方程",
+      "concept_ids": [
+        "schrodinger-equation"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Schrodinger equation"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "prototype",
+        "rotator",
+        "generic wave frequency",
+        "unrelated page"
+      ],
+      "must_not_expand_as_direct": []
+    },
+    {
+      "query": "FT",
+      "concept_ids": [
+        "fourier-transform"
+      ],
+      "groups": 1,
+      "must_include": [
+        "Fourier transform",
+        "FT"
+      ],
+      "must_not_include": [
+        "left",
+        "after",
+        "afterthought",
+        "generic wave frequency"
+      ],
+      "variants": [
+        {
+          "text": "ft",
+          "match": "token"
+        }
+      ]
+    },
+    {
+      "query": "rot",
+      "concept_ids": [
+        "curl"
+      ],
+      "groups": 1,
+      "must_include": [
+        "curl",
+        "rot"
+      ],
+      "must_not_include": [
+        "prototype",
+        "rotator"
+      ],
+      "variants": [
+        {
+          "text": "rot",
+          "match": "token"
+        }
+      ]
+    },
+    {
+      "query": "gradient curl",
+      "concept_ids": [
+        "curl",
+        "gradient"
+      ],
+      "groups": 2,
+      "must_include": [
+        "gradient curl"
+      ],
+      "must_not_include": [
+        "gradient",
+        "curl"
+      ],
+      "ranking": [
+        "gradient curl",
+        "gradient"
+      ]
+    },
+    {
+      "query": "  GRADIENT   curl ",
+      "concept_ids": [
+        "curl",
+        "gradient"
+      ],
+      "groups": 2,
+      "must_include": [
+        "gradient curl"
+      ]
+    },
+    {
+      "query": "\"standing   wave\"",
+      "concept_ids": [
+        "standing-wave"
+      ],
+      "groups": 1,
+      "must_include": [
+        "standing wave"
+      ],
+      "must_not_include": [
+        "stationary wave",
+        "驻波"
+      ],
+      "phrases": [
+        "standing wave"
+      ]
+    },
+    {
+      "query": "L",
+      "concept_ids": [],
+      "groups": 1,
+      "must_include": [
+        "L"
+      ],
+      "must_not_include": [
+        "aLpha",
+        "Angular momentum"
+      ]
+    },
+    {
+      "query": "傅里叶变换 related:true",
+      "concept_ids": [
+        "fourier-transform"
+      ],
+      "groups": 1,
+      "must_include": [
+        "generic wave frequency"
+      ],
+      "related_titles": [
+        "generic wave frequency"
+      ]
+    },
+    {
+      "query": "site:test type:article 旋度",
+      "concept_ids": [
+        "curl"
+      ],
+      "groups": 1,
+      "site_filter": "test",
+      "type_filter": "article",
+      "must_include": [
+        "curl"
+      ]
+    },
+    {
+      "query": "site:other curl",
+      "concept_ids": [
+        "curl"
+      ],
+      "groups": 1,
+      "must_not_include": [
+        "curl"
+      ]
+    },
+    {
+      "query": "prototype",
+      "concept_ids": [],
+      "groups": 1,
+      "must_include": [
+        "prototype"
+      ],
+      "must_not_include": [
+        "rot"
+      ]
+    },
+    {
+      "query": "line integral",
+      "concept_ids": [
+        "line-integral"
+      ],
+      "groups": 1,
+      "must_not_include": [
+        "line",
+        "integral"
+      ]
+    }
+  ]
+}

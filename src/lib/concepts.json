@@ -5,10 +5,15 @@
     "zh_cn": "梯度",
     "zh_tw": "梯度",
     "synonyms": [
-      "spatial gradient"
+      "spatial gradient",
+      "梯度场",
+      "梯度場"
     ],
     "aliases": [
-      "grad"
+      {
+        "text": "grad",
+        "match": "token"
+      }
     ],
     "related": [
       "directional-derivative",
@@ -19,6 +24,10 @@
       "derivative",
       "vector",
       "partial-derivative"
+    ],
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -30,7 +39,10 @@
       "rotation of a vector field"
     ],
     "aliases": [
-      "rot"
+      {
+        "text": "rot",
+        "match": "token"
+      }
     ],
     "related": [
       "divergence",
@@ -39,6 +51,10 @@
     "prerequisites": [
       "vector",
       "partial-derivative"
+    ],
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -48,7 +64,10 @@
     "zh_tw": "散度",
     "synonyms": [],
     "aliases": [
-      "div"
+      {
+        "text": "div",
+        "match": "token"
+      }
     ],
     "related": [
       "gradient",
@@ -58,6 +77,10 @@
     "prerequisites": [
       "vector",
       "partial-derivative"
+    ],
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -69,7 +92,10 @@
       "stationary wave"
     ],
     "aliases": [
-      "standing waves"
+      {
+        "text": "standing waves",
+        "match": "phrase"
+      }
     ],
     "related": [
       "interference",
@@ -79,6 +105,10 @@
       "wave",
       "frequency",
       "wavelength"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -90,7 +120,9 @@
       "简谐振动",
       "簡諧振動",
       "简谐振子",
-      "簡諧振子"
+      "簡諧振子",
+      "単振動",
+      "harmonic oscillators"
     ],
     "aliases": [],
     "related": [
@@ -99,6 +131,10 @@
     ],
     "prerequisites": [
       "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -109,10 +145,13 @@
     "synonyms": [
       "gauss theorem",
       "gauss divergence theorem",
-      "高斯定理"
+      "高斯散度定理"
     ],
     "aliases": [
-      "gauss's theorem"
+      {
+        "text": "gauss's theorem",
+        "match": "phrase"
+      }
     ],
     "related": [
       "stokes-theorem"
@@ -120,6 +159,10 @@
     "prerequisites": [
       "divergence",
       "integral"
+    ],
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -133,7 +176,10 @@
       "斯托克斯"
     ],
     "aliases": [
-      "stokes"
+      {
+        "text": "stokes",
+        "match": "token"
+      }
     ],
     "related": [
       "divergence-theorem"
@@ -141,6 +187,10 @@
     "prerequisites": [
       "curl",
       "integral"
+    ],
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -148,10 +198,18 @@
     "en": "directional derivative",
     "zh_cn": "方向导数",
     "zh_tw": "方向導數",
-    "synonyms": [],
+    "synonyms": [
+      "directional derivatives"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "derivative"
+    ],
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "electromagnetic-induction",
@@ -162,7 +220,10 @@
       "faraday induction"
     ],
     "aliases": [
-      "faraday's law"
+      {
+        "text": "faraday's law",
+        "match": "phrase"
+      }
     ],
     "related": [
       "electric-field",
@@ -171,6 +232,10 @@
     "prerequisites": [
       "magnetic-field",
       "current"
+    ],
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -181,7 +246,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "vector"
+    ],
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "electromagnetic-field",
@@ -191,27 +262,49 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "vector"
+    ],
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "electric-field",
     "en": "electric field",
     "zh_cn": "电场",
     "zh_tw": "電場",
-    "synonyms": [],
+    "synonyms": [
+      "electric fields"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "vector"
+    ],
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "magnetic-field",
     "en": "magnetic field",
     "zh_cn": "磁场",
     "zh_tw": "磁場",
-    "synonyms": [],
+    "synonyms": [
+      "magnetic fields"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "vector"
+    ],
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "quantum-mechanics",
@@ -220,7 +313,10 @@
     "zh_tw": "量子力學",
     "synonyms": [],
     "aliases": [
-      "QM"
+      {
+        "text": "QM",
+        "match": "token"
+      }
     ],
     "related": [
       "quantum",
@@ -228,6 +324,10 @@
     ],
     "prerequisites": [
       "probability"
+    ],
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -238,7 +338,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "probability"
+    ],
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "fourier",
@@ -251,7 +357,13 @@
     ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "integral"
+    ],
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "wave-equation",
@@ -261,7 +373,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "derivative"
+    ],
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "thermodynamics",
@@ -271,7 +389,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "energy"
+    ],
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "mechanics",
@@ -280,8 +404,16 @@
     "zh_tw": "力學",
     "synonyms": [],
     "aliases": [],
-    "related": [],
-    "prerequisites": []
+    "related": [
+      "force",
+      "momentum",
+      "energy"
+    ],
+    "prerequisites": [],
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "optics",
@@ -291,7 +423,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "wave"
+    ],
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "relativity",
@@ -301,32 +439,57 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "energy"
+    ],
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "derivative",
     "en": "derivative",
     "zh_cn": "导数",
     "zh_tw": "導數",
-    "synonyms": [],
+    "synonyms": [
+      "derivatives"
+    ],
     "aliases": [
-      "differentiation"
+      {
+        "text": "differentiation",
+        "match": "token"
+      }
     ],
     "related": [
       "integral",
       "partial-derivative"
     ],
-    "prerequisites": []
+    "prerequisites": [
+      "limit"
+    ],
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "integral",
     "en": "integral",
     "zh_cn": "积分",
     "zh_tw": "積分",
-    "synonyms": [],
+    "synonyms": [
+      "integrals"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "limit"
+    ],
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "vector",
@@ -334,54 +497,87 @@
     "zh_cn": "向量",
     "zh_tw": "向量",
     "synonyms": [
-      "矢量"
+      "矢量",
+      "vectors"
     ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [],
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "matrix",
     "en": "matrix",
     "zh_cn": "矩阵",
     "zh_tw": "矩陣",
-    "synonyms": [],
+    "synonyms": [
+      "matrices"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [],
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "eigenvalue",
     "en": "eigenvalue",
     "zh_cn": "特征值",
     "zh_tw": "特徵值",
-    "synonyms": [],
+    "synonyms": [
+      "eigenvalues"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "matrix"
+    ],
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "differential-equation",
     "en": "differential equation",
     "zh_cn": "微分方程",
     "zh_tw": "微分方程",
-    "synonyms": [],
+    "synonyms": [
+      "differential equations"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "derivative"
+    ],
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "partial-derivative",
     "en": "partial derivative",
     "zh_cn": "偏导数",
     "zh_tw": "偏導數",
-    "synonyms": [],
+    "synonyms": [
+      "partial derivatives"
+    ],
     "aliases": [],
     "related": [
       "gradient"
     ],
     "prerequisites": [
       "derivative"
+    ],
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -392,7 +588,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "derivative"
+    ],
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "fourier-transform",
@@ -401,17 +603,28 @@
     "zh_tw": "傅里葉變換",
     "synonyms": [
       "傅立叶变换",
-      "傅立葉變換"
+      "傅立葉變換",
+      "Fourier transforms"
     ],
     "aliases": [
-      "FT"
+      {
+        "text": "FT",
+        "match": "token"
+      }
     ],
     "related": [
       "wave",
-      "frequency"
+      "frequency",
+      "fourier-series",
+      "frequency-domain",
+      "harmonics"
     ],
     "prerequisites": [
       "integral"
+    ],
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
     ]
   },
   {
@@ -422,27 +635,49 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "pendulum",
     "en": "pendulum",
     "zh_cn": "单摆",
     "zh_tw": "單擺",
-    "synonyms": [],
+    "synonyms": [
+      "pendulums"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "wave",
     "en": "wave",
     "zh_cn": "波",
     "zh_tw": "波",
-    "synonyms": [],
+    "synonyms": [
+      "waves"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "interference",
@@ -452,7 +687,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "diffraction",
@@ -462,7 +703,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "wave"
+    ],
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "refraction",
@@ -472,7 +719,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "wave"
+    ],
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "reflection",
@@ -482,7 +735,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "wave"
+    ],
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "momentum",
@@ -492,7 +751,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "vector"
+    ],
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "energy",
@@ -500,9 +765,20 @@
     "zh_cn": "能量",
     "zh_tw": "能量",
     "synonyms": [],
-    "aliases": [],
+    "aliases": [
+      {
+        "text": "E",
+        "match": "exact"
+      }
+    ],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "work"
+    ],
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "entropy",
@@ -511,8 +787,17 @@
     "zh_tw": "熵",
     "synonyms": [],
     "aliases": [],
-    "related": [],
-    "prerequisites": []
+    "related": [
+      "second-law-of-thermodynamics",
+      "boltzmann-distribution"
+    ],
+    "prerequisites": [
+      "energy"
+    ],
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "electric-potential",
@@ -520,9 +805,20 @@
     "zh_cn": "电势",
     "zh_tw": "電勢",
     "synonyms": [],
-    "aliases": [],
+    "aliases": [
+      {
+        "text": "V",
+        "match": "exact"
+      }
+    ],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "vector"
+    ],
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "circuit",
@@ -530,7 +826,8 @@
     "zh_cn": "电路",
     "zh_tw": "電路",
     "synonyms": [
-      "electric circuit"
+      "electric circuit",
+      "circuits"
     ],
     "aliases": [],
     "related": [
@@ -540,27 +837,47 @@
     ],
     "prerequisites": [
       "current"
+    ],
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
     ]
   },
   {
     "id": "capacitor",
     "en": "capacitor",
-    "zh_cn": "电容",
-    "zh_tw": "電容",
-    "synonyms": [],
+    "zh_cn": "电容器",
+    "zh_tw": "電容器",
+    "synonyms": [
+      "capacitors"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "current"
+    ],
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "inductor",
     "en": "inductor",
-    "zh_cn": "电感",
-    "zh_tw": "電感",
-    "synonyms": [],
+    "zh_cn": "电感器",
+    "zh_tw": "電感器",
+    "synonyms": [
+      "inductors"
+    ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "current"
+    ],
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "resistance",
@@ -570,7 +887,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "current"
+    ],
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "current",
@@ -578,9 +901,20 @@
     "zh_cn": "电流",
     "zh_tw": "電流",
     "synonyms": [],
-    "aliases": [],
+    "aliases": [
+      {
+        "text": "I",
+        "match": "exact"
+      }
+    ],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "electric-charge"
+    ],
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "voltage",
@@ -590,7 +924,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "current"
+    ],
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "frequency",
@@ -600,7 +940,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "wavelength",
@@ -610,7 +956,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "amplitude",
@@ -620,7 +972,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "probability",
@@ -630,7 +988,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "set"
+    ],
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "statistics",
@@ -640,7 +1004,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "probability"
+    ],
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "topology",
@@ -650,7 +1020,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "set"
+    ],
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "fluid",
@@ -660,7 +1036,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "force"
+    ],
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "wave-motion",
@@ -670,7 +1052,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "oscillation",
@@ -678,11 +1066,18 @@
     "zh_cn": "振动",
     "zh_tw": "振動",
     "synonyms": [
-      "振荡"
+      "振荡",
+      "oscillations"
     ],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "resonance",
@@ -692,7 +1087,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "speed-of-light",
@@ -702,7 +1103,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "energy"
+    ],
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "acceleration",
@@ -712,7 +1119,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "velocity"
+    ],
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "velocity",
@@ -722,7 +1135,13 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "displacement"
+    ],
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
   },
   {
     "id": "displacement",
@@ -732,6 +1151,7066 @@
     "synonyms": [],
     "aliases": [],
     "related": [],
-    "prerequisites": []
+    "prerequisites": [
+      "vector"
+    ],
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "limit",
+    "synonyms": [
+      "limits"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "function"
+    ],
+    "en": "limit",
+    "zh_cn": "极限",
+    "zh_tw": "極限",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "continuity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "limit"
+    ],
+    "en": "continuity",
+    "zh_cn": "连续性",
+    "zh_tw": "連續性",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "chain-rule",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "chain rule",
+    "zh_cn": "链式法则",
+    "zh_tw": "鏈式法則",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "product-rule",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "product rule",
+    "zh_cn": "乘积法则",
+    "zh_tw": "乘積法則",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quotient-rule",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "quotient rule",
+    "zh_cn": "商法则",
+    "zh_tw": "商法則",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "implicit-differentiation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "implicit differentiation",
+    "zh_cn": "隐函数求导",
+    "zh_tw": "隱函數求導",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "inverse-function",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "inverse function",
+    "zh_cn": "反函数",
+    "zh_tw": "反函數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "mean-value-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "mean value theorem",
+    "zh_cn": "中值定理",
+    "zh_tw": "中值定理",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rolle-s-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "rolle's theorem",
+    "zh_cn": "罗尔定理",
+    "zh_tw": "羅爾定理",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "l-hopital-s-rule",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "l'hopital's rule",
+    "zh_cn": "洛必达法则",
+    "zh_tw": "洛必達法則",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "taylor-series",
+    "synonyms": [
+      "Taylor expansion",
+      "Taylor expansions",
+      "Taylor Series"
+    ],
+    "aliases": [],
+    "related": [
+      "maclaurin-series",
+      "taylor-polynomial"
+    ],
+    "prerequisites": [
+      "derivative",
+      "power-series"
+    ],
+    "en": "taylor series",
+    "zh_cn": "泰勒级数",
+    "zh_tw": "泰勒級數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "maclaurin-series",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "maclaurin series",
+    "zh_cn": "麦克劳林级数",
+    "zh_tw": "麥克勞林級數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "taylor-polynomial",
+    "synonyms": [
+      "taylor polynomials"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "taylor polynomial",
+    "zh_cn": "泰勒多项式",
+    "zh_tw": "泰勒多項式",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "power-series",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "convergent-series"
+    ],
+    "en": "power series",
+    "zh_cn": "幂级数",
+    "zh_tw": "冪級數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "radius-of-convergence",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "power-series"
+    ],
+    "en": "radius of convergence",
+    "zh_cn": "收敛半径",
+    "zh_tw": "收斂半徑",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "sequence",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [],
+    "en": "sequence",
+    "zh_cn": "数列",
+    "zh_tw": "數列",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "convergent-series",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "sequence"
+    ],
+    "en": "convergent series",
+    "zh_cn": "收敛级数",
+    "zh_tw": "收斂級數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "geometric-series",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "sequence"
+    ],
+    "en": "geometric series",
+    "zh_cn": "几何级数",
+    "zh_tw": "幾何級數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "harmonic-series",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "sequence"
+    ],
+    "en": "harmonic series",
+    "zh_cn": "调和级数",
+    "zh_tw": "調和級數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "alternating-series",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "convergent-series"
+    ],
+    "en": "alternating series",
+    "zh_cn": "交错级数",
+    "zh_tw": "交錯級數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "ratio-test",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "convergent-series"
+    ],
+    "en": "ratio test",
+    "zh_cn": "比值判别法",
+    "zh_tw": "比值判別法",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "root-test",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "convergent-series"
+    ],
+    "en": "root test",
+    "zh_cn": "根值判别法",
+    "zh_tw": "根值判別法",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "absolute-convergence",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "convergent-series"
+    ],
+    "en": "absolute convergence",
+    "zh_cn": "绝对收敛",
+    "zh_tw": "絕對收斂",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "extremum",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "extremum",
+    "zh_cn": "极值",
+    "zh_tw": "極值",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "critical-point",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "critical point",
+    "zh_cn": "临界点",
+    "zh_tw": "臨界點",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "optimization",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "optimization",
+    "zh_cn": "最优化",
+    "zh_tw": "最優化",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "lagrange-multiplier",
+    "synonyms": [
+      "Lagrange multipliers"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "lagrange multiplier",
+    "zh_cn": "拉格朗日乘数",
+    "zh_tw": "拉格朗日乘數",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "second-derivative-test",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "second derivative test",
+    "zh_cn": "二阶导数判别法",
+    "zh_tw": "二階導數判別法",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "concavity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "concavity",
+    "zh_cn": "凹凸性",
+    "zh_tw": "凹凸性",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "inflection-point",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "inflection point",
+    "zh_cn": "拐点",
+    "zh_tw": "拐點",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "differential",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "differential",
+    "zh_cn": "微分",
+    "zh_tw": "微分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "linear-approximation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "linear approximation",
+    "zh_cn": "线性近似",
+    "zh_tw": "線性近似",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "definite-integral",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "definite integral",
+    "zh_cn": "定积分",
+    "zh_tw": "定積分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "indefinite-integral",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "indefinite integral",
+    "zh_cn": "不定积分",
+    "zh_tw": "不定積分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "improper-integral",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "improper integral",
+    "zh_cn": "反常积分",
+    "zh_tw": "反常積分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "riemann-sum",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "riemann sum",
+    "zh_cn": "黎曼和",
+    "zh_tw": "黎曼和",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "fundamental-theorem-of-calculus",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "fundamental theorem of calculus",
+    "zh_cn": "微积分基本定理",
+    "zh_tw": "微積分基本定理",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "integration-by-parts",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "integration by parts",
+    "zh_cn": "分部积分",
+    "zh_tw": "分部積分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "substitution-rule",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "substitution rule",
+    "zh_cn": "换元积分法",
+    "zh_tw": "換元積分法",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "partial-fractions",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "partial fractions",
+    "zh_cn": "部分分式",
+    "zh_tw": "部分分式",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "numerical-integration",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "numerical integration",
+    "zh_cn": "数值积分",
+    "zh_tw": "數值積分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "trapezoidal-rule",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "trapezoidal rule",
+    "zh_cn": "梯形法则",
+    "zh_tw": "梯形法則",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "simpson-s-rule",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "simpson's rule",
+    "zh_cn": "辛普森法则",
+    "zh_tw": "辛普森法則",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "arc-length",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "arc length",
+    "zh_cn": "弧长",
+    "zh_tw": "弧長",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "surface-area",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "surface area",
+    "zh_cn": "表面积",
+    "zh_tw": "表面積",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "volume-of-revolution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "volume of revolution",
+    "zh_cn": "旋转体体积",
+    "zh_tw": "旋轉體體積",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "double-integral",
+    "synonyms": [
+      "double integrals"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "double integral",
+    "zh_cn": "二重积分",
+    "zh_tw": "二重積分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "triple-integral",
+    "synonyms": [
+      "triple integrals"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "triple integral",
+    "zh_cn": "三重积分",
+    "zh_tw": "三重積分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "fubini-s-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "fubini's theorem",
+    "zh_cn": "富比尼定理",
+    "zh_tw": "富比尼定理",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "change-of-variables",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "change of variables",
+    "zh_cn": "变量替换",
+    "zh_tw": "變量替換",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "jacobian",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "jacobian",
+    "zh_cn": "雅可比矩阵",
+    "zh_tw": "雅可比矩陣",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "hessian",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "hessian",
+    "zh_cn": "海森矩阵",
+    "zh_tw": "海森矩陣",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "polar-coordinates",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "polar coordinates",
+    "zh_cn": "极坐标",
+    "zh_tw": "極座標",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "cylindrical-coordinates",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "cylindrical coordinates",
+    "zh_cn": "柱坐标",
+    "zh_tw": "柱座標",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "spherical-coordinates",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "spherical coordinates",
+    "zh_cn": "球坐标",
+    "zh_tw": "球座標",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "parametric-curve",
+    "synonyms": [
+      "parametric curves"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "parametric curve",
+    "zh_cn": "参数曲线",
+    "zh_tw": "參數曲線",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "curvature",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "curvature",
+    "zh_cn": "曲率",
+    "zh_tw": "曲率",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "vector-field",
+    "synonyms": [
+      "vector fields"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "vector field",
+    "zh_cn": "向量场",
+    "zh_tw": "向量場",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "scalar-field",
+    "synonyms": [
+      "scalar fields"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "scalar field",
+    "zh_cn": "标量场",
+    "zh_tw": "純量場",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "vector-calculus",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "vector calculus",
+    "zh_cn": "向量微积分",
+    "zh_tw": "向量微積分",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "line-integral",
+    "synonyms": [
+      "line integrals",
+      "曲线积分",
+      "曲線積分"
+    ],
+    "aliases": [],
+    "related": [
+      "surface-integral",
+      "green-s-theorem"
+    ],
+    "prerequisites": [
+      "integral",
+      "vector-field"
+    ],
+    "en": "line integral",
+    "zh_cn": "线积分",
+    "zh_tw": "線積分",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "surface-integral",
+    "synonyms": [
+      "surface integrals",
+      "曲面积分",
+      "曲面積分"
+    ],
+    "aliases": [],
+    "related": [
+      "divergence-theorem"
+    ],
+    "prerequisites": [
+      "multiple-integral"
+    ],
+    "en": "surface integral",
+    "zh_cn": "面积分",
+    "zh_tw": "面積分",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "flux",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "flux",
+    "zh_cn": "通量",
+    "zh_tw": "通量",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "circulation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "circulation",
+    "zh_cn": "环流",
+    "zh_tw": "環流",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "conservative-field",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "conservative field",
+    "zh_cn": "保守场",
+    "zh_tw": "保守場",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "potential-function",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "potential function",
+    "zh_cn": "势函数",
+    "zh_tw": "勢函數",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "green-s-theorem",
+    "synonyms": [
+      "Green theorem",
+      "Greens theorem"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "green's theorem",
+    "zh_cn": "格林定理",
+    "zh_tw": "格林定理",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "laplacian",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "laplacian",
+    "zh_cn": "拉普拉斯算子",
+    "zh_tw": "拉普拉斯算子",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "determinant",
+    "synonyms": [
+      "determinants"
+    ],
+    "aliases": [
+      {
+        "text": "det",
+        "match": "token"
+      }
+    ],
+    "related": [
+      "matrix-rank"
+    ],
+    "prerequisites": [
+      "matrix"
+    ],
+    "en": "determinant",
+    "zh_cn": "行列式",
+    "zh_tw": "行列式",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "matrix-rank",
+    "synonyms": [
+      "rank"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "matrix"
+    ],
+    "en": "matrix rank",
+    "zh_cn": "矩阵的秩",
+    "zh_tw": "矩陣的秩",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "basis",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector-space"
+    ],
+    "en": "basis",
+    "zh_cn": "基",
+    "zh_tw": "基底",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "dimension",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "basis"
+    ],
+    "en": "dimension",
+    "zh_cn": "维数",
+    "zh_tw": "維數",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "linear-span",
+    "synonyms": [
+      "span"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "linear span",
+    "zh_cn": "线性张成",
+    "zh_tw": "線性張成",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "linear-independence",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "linear independence",
+    "zh_cn": "线性无关",
+    "zh_tw": "線性獨立",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "linear-dependence",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "linear dependence",
+    "zh_cn": "线性相关",
+    "zh_tw": "線性相依",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "linear-transformation",
+    "synonyms": [
+      "linear transformations"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "linear transformation",
+    "zh_cn": "线性变换",
+    "zh_tw": "線性變換",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "kernel",
+    "synonyms": [
+      "null space",
+      "nullspace"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "kernel",
+    "zh_cn": "核空间",
+    "zh_tw": "核空間",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "column-space",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "column space",
+    "zh_cn": "列空间",
+    "zh_tw": "行向量空間",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "row-space",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "row space",
+    "zh_cn": "行空间",
+    "zh_tw": "列向量空間",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "image-of-a-linear-map",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "image of a linear map",
+    "zh_cn": "线性映射的像",
+    "zh_tw": "線性映射的像",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "eigenvector",
+    "synonyms": [
+      "eigenvectors"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "eigenvalue"
+    ],
+    "en": "eigenvector",
+    "zh_cn": "特征向量",
+    "zh_tw": "特徵向量",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "diagonalization",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "diagonalization",
+    "zh_cn": "对角化",
+    "zh_tw": "對角化",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "orthogonality",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "orthogonality",
+    "zh_cn": "正交性",
+    "zh_tw": "正交性",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "orthogonal-projection",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "orthogonal projection",
+    "zh_cn": "正交投影",
+    "zh_tw": "正交投影",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "gram-schmidt-process",
+    "synonyms": [
+      "Gram-Schmidt",
+      "Gram Schmidt orthogonalization"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "gram-schmidt process",
+    "zh_cn": "格拉姆施密特正交化",
+    "zh_tw": "格拉姆施密特正交化",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quadratic-form",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "quadratic form",
+    "zh_cn": "二次型",
+    "zh_tw": "二次型",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "singular-value-decomposition",
+    "synonyms": [],
+    "aliases": [
+      {
+        "text": "SVD",
+        "match": "token"
+      }
+    ],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "singular value decomposition",
+    "zh_cn": "奇异值分解",
+    "zh_tw": "奇異值分解",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "vector-space",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "vector space",
+    "zh_cn": "向量空间",
+    "zh_tw": "向量空間",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "subspace",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector-space"
+    ],
+    "en": "subspace",
+    "zh_cn": "子空间",
+    "zh_tw": "子空間",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "dot-product",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "dot product",
+    "zh_cn": "点积",
+    "zh_tw": "內積",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "cross-product",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "cross product",
+    "zh_cn": "叉积",
+    "zh_tw": "外積",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "inner-product",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "inner product",
+    "zh_cn": "内积",
+    "zh_tw": "內積運算",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "norm",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "norm",
+    "zh_cn": "范数",
+    "zh_tw": "範數",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "unit-vector",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "unit vector",
+    "zh_cn": "单位向量",
+    "zh_tw": "單位向量",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "matrix-inverse",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "matrix inverse",
+    "zh_cn": "逆矩阵",
+    "zh_tw": "反矩陣",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "matrix-transpose",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "matrix transpose",
+    "zh_cn": "转置矩阵",
+    "zh_tw": "轉置矩陣",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "matrix-multiplication",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "matrix multiplication",
+    "zh_cn": "矩阵乘法",
+    "zh_tw": "矩陣乘法",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "gaussian-elimination",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "gaussian elimination",
+    "zh_cn": "高斯消元",
+    "zh_tw": "高斯消去",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "row-echelon-form",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "row echelon form",
+    "zh_cn": "行阶梯形",
+    "zh_tw": "列梯形",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "linear-system",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "linear system",
+    "zh_cn": "线性方程组",
+    "zh_tw": "線性方程組",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "least-squares",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "least squares",
+    "zh_cn": "最小二乘法",
+    "zh_tw": "最小平方法",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "lu-decomposition",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "lu decomposition",
+    "zh_cn": "LU分解",
+    "zh_tw": "LU分解",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "qr-decomposition",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "qr decomposition",
+    "zh_cn": "QR分解",
+    "zh_tw": "QR分解",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "spectral-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "spectral theorem",
+    "zh_cn": "谱定理",
+    "zh_tw": "譜定理",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "symmetric-matrix",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "symmetric matrix",
+    "zh_cn": "对称矩阵",
+    "zh_tw": "對稱矩陣",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "hermitian-matrix",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "hermitian matrix",
+    "zh_cn": "厄米矩阵",
+    "zh_tw": "厄米矩陣",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "positive-definite-matrix",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "positive definite matrix",
+    "zh_cn": "正定矩阵",
+    "zh_tw": "正定矩陣",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "trace",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "trace",
+    "zh_cn": "矩阵的迹",
+    "zh_tw": "矩陣的跡",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rank-nullity-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "rank nullity theorem",
+    "zh_cn": "秩零化度定理",
+    "zh_tw": "秩零化度定理",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "change-of-basis",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "change of basis",
+    "zh_cn": "基变换",
+    "zh_tw": "基底變換",
+    "subject": "mathematics.linear-algebra",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "ordinary-differential-equation",
+    "synonyms": [
+      "ordinary differential equations"
+    ],
+    "aliases": [
+      {
+        "text": "ODE",
+        "match": "token"
+      }
+    ],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "ordinary differential equation",
+    "zh_cn": "常微分方程",
+    "zh_tw": "常微分方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "partial-differential-equation",
+    "synonyms": [
+      "partial differential equations"
+    ],
+    "aliases": [
+      {
+        "text": "PDE",
+        "match": "token"
+      }
+    ],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "partial differential equation",
+    "zh_cn": "偏微分方程",
+    "zh_tw": "偏微分方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "initial-value-problem",
+    "synonyms": [],
+    "aliases": [
+      {
+        "text": "IVP",
+        "match": "token"
+      }
+    ],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "initial value problem",
+    "zh_cn": "初值问题",
+    "zh_tw": "初值問題",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "boundary-value-problem",
+    "synonyms": [],
+    "aliases": [
+      {
+        "text": "BVP",
+        "match": "token"
+      }
+    ],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "boundary value problem",
+    "zh_cn": "边值问题",
+    "zh_tw": "邊值問題",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "first-order-ode",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "first order ode",
+    "zh_cn": "一阶常微分方程",
+    "zh_tw": "一階常微分方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "second-order-ode",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "second order ode",
+    "zh_cn": "二阶常微分方程",
+    "zh_tw": "二階常微分方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "separable-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "separable equation",
+    "zh_cn": "可分离变量方程",
+    "zh_tw": "可分離變數方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "integrating-factor",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "integrating factor",
+    "zh_cn": "积分因子",
+    "zh_tw": "積分因子",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "exact-differential-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "exact differential equation",
+    "zh_cn": "恰当微分方程",
+    "zh_tw": "恰當微分方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "homogeneous-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "homogeneous equation",
+    "zh_cn": "齐次方程",
+    "zh_tw": "齊次方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "characteristic-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "characteristic equation",
+    "zh_cn": "特征方程",
+    "zh_tw": "特徵方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "variation-of-parameters",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "variation of parameters",
+    "zh_cn": "常数变易法",
+    "zh_tw": "常數變易法",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "undetermined-coefficients",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "undetermined coefficients",
+    "zh_cn": "待定系数法",
+    "zh_tw": "待定係數法",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "system-of-differential-equations",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "system of differential equations",
+    "zh_cn": "微分方程组",
+    "zh_tw": "微分方程組",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "phase-portrait",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "phase portrait",
+    "zh_cn": "相图",
+    "zh_tw": "相圖",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "equilibrium-solution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "equilibrium solution",
+    "zh_cn": "平衡解",
+    "zh_tw": "平衡解",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "stability",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "stability",
+    "zh_cn": "稳定性",
+    "zh_tw": "穩定性",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "euler-s-method",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "euler's method",
+    "zh_cn": "欧拉方法",
+    "zh_tw": "歐拉方法",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "runge-kutta-method",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "runge-kutta method",
+    "zh_cn": "龙格库塔方法",
+    "zh_tw": "龍格庫塔方法",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "laplace-transform",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "laplace transform",
+    "zh_cn": "拉普拉斯变换",
+    "zh_tw": "拉普拉斯變換",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "inverse-laplace-transform",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "inverse laplace transform",
+    "zh_cn": "拉普拉斯逆变换",
+    "zh_tw": "拉普拉斯逆變換",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "fourier-series",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "fourier series",
+    "zh_cn": "傅里叶级数",
+    "zh_tw": "傅里葉級數",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "convolution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "convolution",
+    "zh_cn": "卷积",
+    "zh_tw": "摺積",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "heat-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "heat equation",
+    "zh_cn": "热方程",
+    "zh_tw": "熱方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "laplace-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "laplace equation",
+    "zh_cn": "拉普拉斯方程",
+    "zh_tw": "拉普拉斯方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "poisson-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "poisson equation",
+    "zh_cn": "泊松方程",
+    "zh_tw": "泊松方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "separation-of-variables",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "separation of variables",
+    "zh_cn": "分离变量法",
+    "zh_tw": "分離變數法",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "sturm-liouville-problem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "sturm-liouville problem",
+    "zh_cn": "斯图姆刘维尔问题",
+    "zh_tw": "斯圖姆劉維爾問題",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "green-s-function",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "green's function",
+    "zh_cn": "格林函数",
+    "zh_tw": "格林函數",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "logistic-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "logistic equation",
+    "zh_cn": "逻辑斯蒂方程",
+    "zh_tw": "邏輯斯蒂方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "exponential-growth",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "derivative"
+    ],
+    "en": "exponential growth",
+    "zh_cn": "指数增长",
+    "zh_tw": "指數增長",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "sample-space",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "sample space",
+    "zh_cn": "样本空间",
+    "zh_tw": "樣本空間",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "random-variable",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "random variable",
+    "zh_cn": "随机变量",
+    "zh_tw": "隨機變數",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "conditional-probability",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "conditional probability",
+    "zh_cn": "条件概率",
+    "zh_tw": "條件概率",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "bayes-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "bayes' theorem",
+    "zh_cn": "贝叶斯定理",
+    "zh_tw": "貝氏定理",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "independent-events",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "independent events",
+    "zh_cn": "独立事件",
+    "zh_tw": "獨立事件",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "expected-value",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "expected value",
+    "zh_cn": "期望值",
+    "zh_tw": "期望值",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "variance",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "variance",
+    "zh_cn": "方差",
+    "zh_tw": "變異數",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "standard-deviation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "standard deviation",
+    "zh_cn": "标准差",
+    "zh_tw": "標準差",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "covariance",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "covariance",
+    "zh_cn": "协方差",
+    "zh_tw": "共變異數",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "correlation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "correlation",
+    "zh_cn": "相关系数",
+    "zh_tw": "相關係數",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "probability-density",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "probability density",
+    "zh_cn": "概率密度",
+    "zh_tw": "機率密度",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "cumulative-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "cumulative distribution",
+    "zh_cn": "累积分布",
+    "zh_tw": "累積分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "joint-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "joint distribution",
+    "zh_cn": "联合分布",
+    "zh_tw": "聯合分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "marginal-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "marginal distribution",
+    "zh_cn": "边缘分布",
+    "zh_tw": "邊際分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "bernoulli-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "bernoulli distribution",
+    "zh_cn": "伯努利分布",
+    "zh_tw": "伯努利分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "binomial-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "binomial distribution",
+    "zh_cn": "二项分布",
+    "zh_tw": "二項分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "poisson-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "poisson distribution",
+    "zh_cn": "泊松分布",
+    "zh_tw": "泊松分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "normal-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "normal distribution",
+    "zh_cn": "正态分布",
+    "zh_tw": "常態分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "uniform-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "uniform distribution",
+    "zh_cn": "均匀分布",
+    "zh_tw": "均勻分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "exponential-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "exponential distribution",
+    "zh_cn": "指数分布",
+    "zh_tw": "指數分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "geometric-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "geometric distribution",
+    "zh_cn": "几何分布",
+    "zh_tw": "幾何分布",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "law-of-large-numbers",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "law of large numbers",
+    "zh_cn": "大数定律",
+    "zh_tw": "大數法則",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "central-limit-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "central limit theorem",
+    "zh_cn": "中心极限定理",
+    "zh_tw": "中央極限定理",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "moment-generating-function",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "moment generating function",
+    "zh_cn": "矩母函数",
+    "zh_tw": "動差生成函數",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "markov-chain",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "markov chain",
+    "zh_cn": "马尔可夫链",
+    "zh_tw": "馬可夫鏈",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "random-walk",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "random walk",
+    "zh_cn": "随机游走",
+    "zh_tw": "隨機漫步",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "permutation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "permutation",
+    "zh_cn": "排列",
+    "zh_tw": "排列",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "combination",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "combination",
+    "zh_cn": "组合",
+    "zh_tw": "組合",
+    "subject": "mathematics.probability",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "sampling",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "sampling",
+    "zh_cn": "抽样",
+    "zh_tw": "抽樣",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "sample-mean",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "sample mean",
+    "zh_cn": "样本均值",
+    "zh_tw": "樣本平均數",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "median",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "median",
+    "zh_cn": "中位数",
+    "zh_tw": "中位數",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "mode",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "mode",
+    "zh_cn": "众数",
+    "zh_tw": "眾數",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quantile",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "quantile",
+    "zh_cn": "分位数",
+    "zh_tw": "分位數",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "histogram",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "histogram",
+    "zh_cn": "直方图",
+    "zh_tw": "直方圖",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "confidence-interval",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "confidence interval",
+    "zh_cn": "置信区间",
+    "zh_tw": "信賴區間",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "hypothesis-test",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "hypothesis test",
+    "zh_cn": "假设检验",
+    "zh_tw": "假設檢定",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "p-value",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "p value",
+    "zh_cn": "p值",
+    "zh_tw": "p值",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "null-hypothesis",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "null hypothesis",
+    "zh_cn": "零假设",
+    "zh_tw": "虛無假設",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "type-i-error",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "type i error",
+    "zh_cn": "第一类错误",
+    "zh_tw": "第一類錯誤",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "type-ii-error",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "type ii error",
+    "zh_cn": "第二类错误",
+    "zh_tw": "第二類錯誤",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "statistical-power",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "statistical power",
+    "zh_cn": "统计功效",
+    "zh_tw": "統計檢定力",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "t-test",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "t test",
+    "zh_cn": "t检验",
+    "zh_tw": "t檢定",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "chi-squared-test",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "chi squared test",
+    "zh_cn": "卡方检验",
+    "zh_tw": "卡方檢定",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "analysis-of-variance",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "analysis of variance",
+    "zh_cn": "方差分析",
+    "zh_tw": "變異數分析",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "linear-regression",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "linear regression",
+    "zh_cn": "线性回归",
+    "zh_tw": "線性迴歸",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "maximum-likelihood",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "maximum likelihood",
+    "zh_cn": "极大似然",
+    "zh_tw": "最大概似",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "bayesian-inference",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "bayesian inference",
+    "zh_cn": "贝叶斯推断",
+    "zh_tw": "貝氏推論",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "bootstrap",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "bootstrap",
+    "zh_cn": "自助法",
+    "zh_tw": "拔靴法",
+    "subject": "mathematics.statistics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "kinematics",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "kinematics",
+    "zh_cn": "运动学",
+    "zh_tw": "運動學",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "projectile-motion",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "projectile motion",
+    "zh_cn": "抛体运动",
+    "zh_tw": "拋體運動",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "free-fall",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "free fall",
+    "zh_cn": "自由落体",
+    "zh_tw": "自由落體",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "newton-s-first-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "newton's first law",
+    "zh_cn": "牛顿第一定律",
+    "zh_tw": "牛頓第一定律",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "newton-s-second-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "newton's second law",
+    "zh_cn": "牛顿第二定律",
+    "zh_tw": "牛頓第二定律",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "newton-s-third-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "newton's third law",
+    "zh_cn": "牛顿第三定律",
+    "zh_tw": "牛頓第三定律",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "force",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "acceleration"
+    ],
+    "en": "force",
+    "zh_cn": "力",
+    "zh_tw": "力",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "mass",
+    "synonyms": [],
+    "aliases": [],
+    "related": [
+      "force",
+      "momentum"
+    ],
+    "prerequisites": [],
+    "en": "mass",
+    "zh_cn": "质量",
+    "zh_tw": "質量",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "friction",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "friction",
+    "zh_cn": "摩擦力",
+    "zh_tw": "摩擦力",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "normal-force",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "normal force",
+    "zh_cn": "支持力",
+    "zh_tw": "正向力",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "tension",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "tension",
+    "zh_cn": "张力",
+    "zh_tw": "張力",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "free-body-diagram",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "free body diagram",
+    "zh_cn": "受力图",
+    "zh_tw": "受力圖",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "work",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force",
+      "displacement"
+    ],
+    "en": "work",
+    "zh_cn": "功",
+    "zh_tw": "功",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "kinetic-energy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "kinetic energy",
+    "zh_cn": "动能",
+    "zh_tw": "動能",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "potential-energy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "potential energy",
+    "zh_cn": "势能",
+    "zh_tw": "位能",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "conservation-of-energy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "conservation of energy",
+    "zh_cn": "能量守恒",
+    "zh_tw": "能量守恆",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "power",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "power",
+    "zh_cn": "功率",
+    "zh_tw": "功率",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "impulse",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "impulse",
+    "zh_cn": "冲量",
+    "zh_tw": "衝量",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "conservation-of-momentum",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "conservation of momentum",
+    "zh_cn": "动量守恒",
+    "zh_tw": "動量守恆",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "elastic-collision",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "elastic collision",
+    "zh_cn": "弹性碰撞",
+    "zh_tw": "彈性碰撞",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "inelastic-collision",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "inelastic collision",
+    "zh_cn": "非弹性碰撞",
+    "zh_tw": "非彈性碰撞",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "center-of-mass",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "center of mass",
+    "zh_cn": "质心",
+    "zh_tw": "質心",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "gravity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "gravity",
+    "zh_cn": "重力",
+    "zh_tw": "重力",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "universal-gravitation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "universal gravitation",
+    "zh_cn": "万有引力",
+    "zh_tw": "萬有引力",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "kepler-s-laws",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "kepler's laws",
+    "zh_cn": "开普勒定律",
+    "zh_tw": "克卜勒定律",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "orbital-motion",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "orbital motion",
+    "zh_cn": "轨道运动",
+    "zh_tw": "軌道運動",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "escape-velocity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "escape velocity",
+    "zh_cn": "逃逸速度",
+    "zh_tw": "逃逸速度",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "angular-momentum",
+    "synonyms": [
+      "moment of momentum"
+    ],
+    "aliases": [
+      {
+        "text": "L",
+        "match": "exact"
+      }
+    ],
+    "related": [
+      "torque",
+      "moment-of-inertia",
+      "angular-velocity"
+    ],
+    "prerequisites": [
+      "momentum",
+      "vector",
+      "cross-product"
+    ],
+    "en": "angular momentum",
+    "zh_cn": "角动量",
+    "zh_tw": "角動量",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "torque",
+    "synonyms": [
+      "moment of force",
+      "转矩",
+      "轉矩"
+    ],
+    "aliases": [],
+    "related": [
+      "angular-momentum"
+    ],
+    "prerequisites": [
+      "cross-product",
+      "force"
+    ],
+    "en": "torque",
+    "zh_cn": "力矩",
+    "zh_tw": "力矩",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "moment-of-inertia",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "moment of inertia",
+    "zh_cn": "转动惯量",
+    "zh_tw": "轉動慣量",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "angular-velocity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "angular velocity",
+    "zh_cn": "角速度",
+    "zh_tw": "角速度",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "angular-acceleration",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "angular acceleration",
+    "zh_cn": "角加速度",
+    "zh_tw": "角加速度",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rigid-body",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "rigid body",
+    "zh_cn": "刚体",
+    "zh_tw": "剛體",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rotational-kinetic-energy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "rotational kinetic energy",
+    "zh_cn": "转动动能",
+    "zh_tw": "轉動動能",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rolling-motion",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "rolling motion",
+    "zh_cn": "滚动",
+    "zh_tw": "滾動",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "centripetal-force",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "centripetal force",
+    "zh_cn": "向心力",
+    "zh_tw": "向心力",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "centripetal-acceleration",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "centripetal acceleration",
+    "zh_cn": "向心加速度",
+    "zh_tw": "向心加速度",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "circular-motion",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "circular motion",
+    "zh_cn": "圆周运动",
+    "zh_tw": "圓周運動",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "gyroscope",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "gyroscope",
+    "zh_cn": "陀螺仪",
+    "zh_tw": "陀螺儀",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "precession",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "precession",
+    "zh_cn": "进动",
+    "zh_tw": "進動",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "parallel-axis-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "parallel axis theorem",
+    "zh_cn": "平行轴定理",
+    "zh_tw": "平行軸定理",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "conservation-of-angular-momentum",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "conservation of angular momentum",
+    "zh_cn": "角动量守恒",
+    "zh_tw": "角動量守恆",
+    "subject": "physics.mechanics.rotation",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "lagrangian-mechanics",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "lagrangian mechanics",
+    "zh_cn": "拉格朗日力学",
+    "zh_tw": "拉格朗日力學",
+    "subject": "physics.mechanics.analytical",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "hamiltonian-mechanics",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "hamiltonian mechanics",
+    "zh_cn": "哈密顿力学",
+    "zh_tw": "哈密頓力學",
+    "subject": "physics.mechanics.analytical",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "generalized-coordinates",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "generalized coordinates",
+    "zh_cn": "广义坐标",
+    "zh_tw": "廣義座標",
+    "subject": "physics.mechanics.analytical",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "euler-lagrange-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "euler-lagrange equation",
+    "zh_cn": "欧拉拉格朗日方程",
+    "zh_tw": "歐拉拉格朗日方程",
+    "subject": "physics.mechanics.analytical",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "principle-of-least-action",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "principle of least action",
+    "zh_cn": "最小作用量原理",
+    "zh_tw": "最小作用量原理",
+    "subject": "physics.mechanics.analytical",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "phase-space",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "phase space",
+    "zh_cn": "相空间",
+    "zh_tw": "相空間",
+    "subject": "physics.mechanics.analytical",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "poisson-bracket",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "poisson bracket",
+    "zh_cn": "泊松括号",
+    "zh_tw": "泊松括號",
+    "subject": "physics.mechanics.analytical",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "pressure",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force"
+    ],
+    "en": "pressure",
+    "zh_cn": "压强",
+    "zh_tw": "壓強",
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "buoyancy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force"
+    ],
+    "en": "buoyancy",
+    "zh_cn": "浮力",
+    "zh_tw": "浮力",
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "archimedes-principle",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force"
+    ],
+    "en": "archimedes' principle",
+    "zh_cn": "阿基米德原理",
+    "zh_tw": "阿基米德原理",
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "bernoulli-s-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force"
+    ],
+    "en": "bernoulli's equation",
+    "zh_cn": "伯努利方程",
+    "zh_tw": "伯努利方程",
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "continuity-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force"
+    ],
+    "en": "continuity equation",
+    "zh_cn": "连续性方程",
+    "zh_tw": "連續性方程",
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "viscosity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force"
+    ],
+    "en": "viscosity",
+    "zh_cn": "黏度",
+    "zh_tw": "黏度",
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "reynolds-number",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force"
+    ],
+    "en": "reynolds number",
+    "zh_cn": "雷诺数",
+    "zh_tw": "雷諾數",
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "surface-tension",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "force"
+    ],
+    "en": "surface tension",
+    "zh_cn": "表面张力",
+    "zh_tw": "表面張力",
+    "subject": "physics.mechanics.fluids",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "damped-oscillation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "damped oscillation",
+    "zh_cn": "阻尼振动",
+    "zh_tw": "阻尼振動",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "forced-oscillation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "forced oscillation",
+    "zh_cn": "受迫振动",
+    "zh_tw": "受迫振動",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "period",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "period",
+    "zh_cn": "周期",
+    "zh_tw": "週期",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "phase",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "phase",
+    "zh_cn": "相位",
+    "zh_tw": "相位",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "wave-speed",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "wave speed",
+    "zh_cn": "波速",
+    "zh_tw": "波速",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "transverse-wave",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "transverse wave",
+    "zh_cn": "横波",
+    "zh_tw": "橫波",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "longitudinal-wave",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "longitudinal wave",
+    "zh_cn": "纵波",
+    "zh_tw": "縱波",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "superposition",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "superposition",
+    "zh_cn": "叠加原理",
+    "zh_tw": "疊加原理",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "beats",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "beats",
+    "zh_cn": "拍频",
+    "zh_tw": "拍頻",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "doppler-effect",
+    "synonyms": [
+      "Doppler shift",
+      "多普勒效應"
+    ],
+    "aliases": [],
+    "related": [
+      "wave"
+    ],
+    "prerequisites": [
+      "frequency",
+      "velocity"
+    ],
+    "en": "doppler effect",
+    "zh_cn": "多普勒效应",
+    "zh_tw": "都卜勒效應",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "sound-wave",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "sound wave",
+    "zh_cn": "声波",
+    "zh_tw": "聲波",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "intensity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "intensity",
+    "zh_cn": "强度",
+    "zh_tw": "強度",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "normal-mode",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "normal mode",
+    "zh_cn": "简正模式",
+    "zh_tw": "簡正模式",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "dispersion",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "dispersion",
+    "zh_cn": "色散",
+    "zh_tw": "色散",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "group-velocity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "group velocity",
+    "zh_cn": "群速度",
+    "zh_tw": "群速度",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "phase-velocity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "phase velocity",
+    "zh_cn": "相速度",
+    "zh_tw": "相速度",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "harmonics",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "harmonics",
+    "zh_cn": "谐波",
+    "zh_tw": "諧波",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "frequency-domain",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ],
+    "en": "frequency domain",
+    "zh_cn": "频域",
+    "zh_tw": "頻域",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "electric-charge",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [],
+    "en": "electric charge",
+    "zh_cn": "电荷",
+    "zh_tw": "電荷",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "coulomb-s-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "coulomb's law",
+    "zh_cn": "库仑定律",
+    "zh_tw": "庫侖定律",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "electric-flux",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "electric flux",
+    "zh_cn": "电通量",
+    "zh_tw": "電通量",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "gauss-s-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "gauss's law",
+    "zh_cn": "高斯定律",
+    "zh_tw": "高斯定律",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "electric-dipole",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "electric dipole",
+    "zh_cn": "电偶极子",
+    "zh_tw": "電偶極子",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "dielectric",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "dielectric",
+    "zh_cn": "电介质",
+    "zh_tw": "電介質",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "polarization",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "polarization",
+    "zh_cn": "极化",
+    "zh_tw": "極化",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "magnetic-flux",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "magnetic flux",
+    "zh_cn": "磁通量",
+    "zh_tw": "磁通量",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "lorentz-force",
+    "synonyms": [
+      "ローレンツ力"
+    ],
+    "aliases": [],
+    "related": [
+      "magnetic-force"
+    ],
+    "prerequisites": [
+      "cross-product"
+    ],
+    "en": "lorentz force",
+    "zh_cn": "洛伦兹力",
+    "zh_tw": "洛倫茲力",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "biot-savart-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "biot-savart law",
+    "zh_cn": "毕奥萨伐尔定律",
+    "zh_tw": "必歐沙伐定律",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "ampere-s-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "ampere's law",
+    "zh_cn": "安培定律",
+    "zh_tw": "安培定律",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "lenz-s-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "lenz's law",
+    "zh_cn": "楞次定律",
+    "zh_tw": "楞次定律",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "electromotive-force",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "electromotive force",
+    "zh_cn": "电动势",
+    "zh_tw": "電動勢",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "maxwell-equations",
+    "synonyms": [
+      "Maxwell's equations",
+      "Maxwell equation",
+      "麦克斯韦方程",
+      "麥克斯韋方程組",
+      "麥克斯韋方程"
+    ],
+    "aliases": [],
+    "related": [
+      "electromagnetic-wave"
+    ],
+    "prerequisites": [
+      "electric-field",
+      "magnetic-field",
+      "curl",
+      "divergence"
+    ],
+    "en": "maxwell equations",
+    "zh_cn": "麦克斯韦方程组",
+    "zh_tw": "馬克士威方程組",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "displacement-current",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "displacement current",
+    "zh_cn": "位移电流",
+    "zh_tw": "位移電流",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "poynting-vector",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "poynting vector",
+    "zh_cn": "坡印廷矢量",
+    "zh_tw": "坡印亭向量",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "magnetic-dipole",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "magnetic dipole",
+    "zh_cn": "磁偶极子",
+    "zh_tw": "磁偶極子",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "solenoid",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "solenoid",
+    "zh_cn": "螺线管",
+    "zh_tw": "螺線管",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "magnetic-force",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ],
+    "en": "magnetic force",
+    "zh_cn": "磁力",
+    "zh_tw": "磁力",
+    "subject": "physics.electromagnetism",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "resistor",
+    "synonyms": [
+      "resistors"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "resistor",
+    "zh_cn": "电阻器",
+    "zh_tw": "電阻器",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "capacitance",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "capacitance",
+    "zh_cn": "电容",
+    "zh_tw": "電容",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "inductance",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "inductance",
+    "zh_cn": "电感",
+    "zh_tw": "電感",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "ohm-s-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "ohm's law",
+    "zh_cn": "欧姆定律",
+    "zh_tw": "歐姆定律",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "kirchhoff-s-laws",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "kirchhoff's laws",
+    "zh_cn": "基尔霍夫定律",
+    "zh_tw": "克希荷夫定律",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "series-circuit",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "series circuit",
+    "zh_cn": "串联电路",
+    "zh_tw": "串聯電路",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "parallel-circuit",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "parallel circuit",
+    "zh_cn": "并联电路",
+    "zh_tw": "並聯電路",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rc-circuit",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "rc circuit",
+    "zh_cn": "RC电路",
+    "zh_tw": "RC電路",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rl-circuit",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "rl circuit",
+    "zh_cn": "RL电路",
+    "zh_tw": "RL電路",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rlc-circuit",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "rlc circuit",
+    "zh_cn": "RLC电路",
+    "zh_tw": "RLC電路",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "alternating-current",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "alternating current",
+    "zh_cn": "交流电",
+    "zh_tw": "交流電",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "direct-current",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "direct current",
+    "zh_cn": "直流电",
+    "zh_tw": "直流電",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "impedance",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "impedance",
+    "zh_cn": "阻抗",
+    "zh_tw": "阻抗",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "reactance",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "reactance",
+    "zh_cn": "电抗",
+    "zh_tw": "電抗",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "phasor",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "phasor",
+    "zh_cn": "相量",
+    "zh_tw": "相量",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "transformer",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "transformer",
+    "zh_cn": "变压器",
+    "zh_tw": "變壓器",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "diode",
+    "synonyms": [
+      "diodes"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "diode",
+    "zh_cn": "二极管",
+    "zh_tw": "二極體",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "transistor",
+    "synonyms": [
+      "transistors"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "transistor",
+    "zh_cn": "晶体管",
+    "zh_tw": "電晶體",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "operational-amplifier",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "operational amplifier",
+    "zh_cn": "运算放大器",
+    "zh_tw": "運算放大器",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "rectifier",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "rectifier",
+    "zh_cn": "整流器",
+    "zh_tw": "整流器",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "low-pass-filter",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "low pass filter",
+    "zh_cn": "低通滤波器",
+    "zh_tw": "低通濾波器",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "high-pass-filter",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "current"
+    ],
+    "en": "high pass filter",
+    "zh_cn": "高通滤波器",
+    "zh_tw": "高通濾波器",
+    "subject": "physics.circuits",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "snell-s-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "snell's law",
+    "zh_cn": "斯涅尔定律",
+    "zh_tw": "司乃耳定律",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "total-internal-reflection",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "total internal reflection",
+    "zh_cn": "全反射",
+    "zh_tw": "全反射",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "refractive-index",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "refractive index",
+    "zh_cn": "折射率",
+    "zh_tw": "折射率",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "lens",
+    "synonyms": [
+      "lenses"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "lens",
+    "zh_cn": "透镜",
+    "zh_tw": "透鏡",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "thin-lens-equation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "thin lens equation",
+    "zh_cn": "薄透镜公式",
+    "zh_tw": "薄透鏡公式",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "focal-length",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "focal length",
+    "zh_cn": "焦距",
+    "zh_tw": "焦距",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "magnification",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "magnification",
+    "zh_cn": "放大率",
+    "zh_tw": "放大率",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "mirror",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "mirror",
+    "zh_cn": "反射镜",
+    "zh_tw": "反射鏡",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "double-slit-experiment",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "double slit experiment",
+    "zh_cn": "双缝实验",
+    "zh_tw": "雙狹縫實驗",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "single-slit-diffraction",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "single slit diffraction",
+    "zh_cn": "单缝衍射",
+    "zh_tw": "單狹縫繞射",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "diffraction-grating",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "diffraction grating",
+    "zh_cn": "衍射光栅",
+    "zh_tw": "繞射光柵",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "thin-film-interference",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "thin film interference",
+    "zh_cn": "薄膜干涉",
+    "zh_tw": "薄膜干涉",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "optical-polarization",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "optical polarization",
+    "zh_cn": "光的偏振",
+    "zh_tw": "光的偏振",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "malus-s-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "malus's law",
+    "zh_cn": "马吕斯定律",
+    "zh_tw": "馬呂斯定律",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "brewster-angle",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "brewster angle",
+    "zh_cn": "布儒斯特角",
+    "zh_tw": "布儒斯特角",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "huygens-principle",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "huygens' principle",
+    "zh_cn": "惠更斯原理",
+    "zh_tw": "惠更斯原理",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "interferometer",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "interferometer",
+    "zh_cn": "干涉仪",
+    "zh_tw": "干涉儀",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "resolving-power",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "resolving power",
+    "zh_cn": "分辨本领",
+    "zh_tw": "解析能力",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "laser",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "wave"
+    ],
+    "en": "laser",
+    "zh_cn": "激光",
+    "zh_tw": "雷射",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "temperature",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "temperature",
+    "zh_cn": "温度",
+    "zh_tw": "溫度",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "heat",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "heat",
+    "zh_cn": "热量",
+    "zh_tw": "熱量",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "internal-energy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "internal energy",
+    "zh_cn": "内能",
+    "zh_tw": "內能",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "heat-capacity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "heat capacity",
+    "zh_cn": "热容",
+    "zh_tw": "熱容",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "specific-heat",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "specific heat",
+    "zh_cn": "比热容",
+    "zh_tw": "比熱容",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "latent-heat",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "latent heat",
+    "zh_cn": "潜热",
+    "zh_tw": "潛熱",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "thermal-expansion",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "thermal expansion",
+    "zh_cn": "热膨胀",
+    "zh_tw": "熱膨脹",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "ideal-gas-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "ideal gas law",
+    "zh_cn": "理想气体定律",
+    "zh_tw": "理想氣體定律",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "kinetic-theory",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "kinetic theory",
+    "zh_cn": "气体动理论",
+    "zh_tw": "氣體動理論",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "equipartition-theorem",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "equipartition theorem",
+    "zh_cn": "能量均分定理",
+    "zh_tw": "能量均分定理",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "first-law-of-thermodynamics",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "first law of thermodynamics",
+    "zh_cn": "热力学第一定律",
+    "zh_tw": "熱力學第一定律",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "second-law-of-thermodynamics",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "second law of thermodynamics",
+    "zh_cn": "热力学第二定律",
+    "zh_tw": "熱力學第二定律",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "third-law-of-thermodynamics",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "third law of thermodynamics",
+    "zh_cn": "热力学第三定律",
+    "zh_tw": "熱力學第三定律",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "enthalpy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "enthalpy",
+    "zh_cn": "焓",
+    "zh_tw": "焓",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "gibbs-free-energy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "gibbs free energy",
+    "zh_cn": "吉布斯自由能",
+    "zh_tw": "吉布斯自由能",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "helmholtz-free-energy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "helmholtz free energy",
+    "zh_cn": "亥姆霍兹自由能",
+    "zh_tw": "亥姆霍茲自由能",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "carnot-cycle",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "carnot cycle",
+    "zh_cn": "卡诺循环",
+    "zh_tw": "卡諾循環",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "heat-engine",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "heat engine",
+    "zh_cn": "热机",
+    "zh_tw": "熱機",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "refrigerator",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "refrigerator",
+    "zh_cn": "制冷机",
+    "zh_tw": "製冷機",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "isothermal-process",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "isothermal process",
+    "zh_cn": "等温过程",
+    "zh_tw": "等溫過程",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "adiabatic-process",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "adiabatic process",
+    "zh_cn": "绝热过程",
+    "zh_tw": "絕熱過程",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "isobaric-process",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "isobaric process",
+    "zh_cn": "等压过程",
+    "zh_tw": "等壓過程",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "isochoric-process",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "isochoric process",
+    "zh_cn": "等容过程",
+    "zh_tw": "等容過程",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "thermal-conduction",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "thermal conduction",
+    "zh_cn": "热传导",
+    "zh_tw": "熱傳導",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "convection",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "convection",
+    "zh_cn": "对流",
+    "zh_tw": "對流",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "thermal-radiation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "thermal radiation",
+    "zh_cn": "热辐射",
+    "zh_tw": "熱輻射",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "partition-function",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "partition function",
+    "zh_cn": "配分函数",
+    "zh_tw": "配分函數",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "boltzmann-distribution",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "boltzmann distribution",
+    "zh_cn": "玻尔兹曼分布",
+    "zh_tw": "波茲曼分布",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "special-relativity",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "special relativity",
+    "zh_cn": "狭义相对论",
+    "zh_tw": "狹義相對論",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "lorentz-transformation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "lorentz transformation",
+    "zh_cn": "洛伦兹变换",
+    "zh_tw": "洛倫茲變換",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "time-dilation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "time dilation",
+    "zh_cn": "时间膨胀",
+    "zh_tw": "時間膨脹",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "length-contraction",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "length contraction",
+    "zh_cn": "长度收缩",
+    "zh_tw": "長度收縮",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "mass-energy-equivalence",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "mass energy equivalence",
+    "zh_cn": "质能等价",
+    "zh_tw": "質能等價",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "blackbody-radiation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "blackbody radiation",
+    "zh_cn": "黑体辐射",
+    "zh_tw": "黑體輻射",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "planck-s-law",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "planck's law",
+    "zh_cn": "普朗克定律",
+    "zh_tw": "普朗克定律",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "photoelectric-effect",
+    "synonyms": [
+      "photoelectric",
+      "光電効果"
+    ],
+    "aliases": [],
+    "related": [
+      "photon"
+    ],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "photoelectric effect",
+    "zh_cn": "光电效应",
+    "zh_tw": "光電效應",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "compton-scattering",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "compton scattering",
+    "zh_cn": "康普顿散射",
+    "zh_tw": "康普頓散射",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "photon",
+    "synonyms": [
+      "photons"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "photon",
+    "zh_cn": "光子",
+    "zh_tw": "光子",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "de-broglie-wavelength",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "de broglie wavelength",
+    "zh_cn": "德布罗意波长",
+    "zh_tw": "德布羅意波長",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "wave-particle-duality",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "wave particle duality",
+    "zh_cn": "波粒二象性",
+    "zh_tw": "波粒二象性",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "bohr-model",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "bohr model",
+    "zh_cn": "玻尔模型",
+    "zh_tw": "波耳模型",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "atomic-spectrum",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "atomic spectrum",
+    "zh_cn": "原子光谱",
+    "zh_tw": "原子光譜",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "radioactive-decay",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "radioactive decay",
+    "zh_cn": "放射性衰变",
+    "zh_tw": "放射性衰變",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "half-life",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "half life",
+    "zh_cn": "半衰期",
+    "zh_tw": "半衰期",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "nuclear-binding-energy",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "nuclear binding energy",
+    "zh_cn": "核结合能",
+    "zh_tw": "核結合能",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "nuclear-fission",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "nuclear fission",
+    "zh_cn": "核裂变",
+    "zh_tw": "核分裂",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "nuclear-fusion",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "energy"
+    ],
+    "en": "nuclear fusion",
+    "zh_cn": "核聚变",
+    "zh_tw": "核融合",
+    "subject": "physics.modern",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "schrodinger-equation",
+    "synonyms": [
+      "Schrödinger equation",
+      "Schrodinger's equation",
+      "Schrödinger's equation",
+      "薛定諤方程"
+    ],
+    "aliases": [],
+    "related": [
+      "wave-function"
+    ],
+    "prerequisites": [
+      "partial-differential-equation"
+    ],
+    "en": "schrodinger equation",
+    "zh_cn": "薛定谔方程",
+    "zh_tw": "薛丁格方程",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "wave-function",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "wave function",
+    "zh_cn": "波函数",
+    "zh_tw": "波函數",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "born-rule",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "born rule",
+    "zh_cn": "玻恩规则",
+    "zh_tw": "波恩規則",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "uncertainty-principle",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "uncertainty principle",
+    "zh_cn": "不确定性原理",
+    "zh_tw": "不確定性原理",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quantum-tunneling",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "quantum tunneling",
+    "zh_cn": "量子隧穿",
+    "zh_tw": "量子穿隧",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "particle-in-a-box",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "particle in a box",
+    "zh_cn": "箱中粒子",
+    "zh_tw": "箱中粒子",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quantum-well",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "quantum well",
+    "zh_cn": "量子阱",
+    "zh_tw": "量子井",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "potential-barrier",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "potential barrier",
+    "zh_cn": "势垒",
+    "zh_tw": "位能障壁",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quantum-harmonic-oscillator",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "quantum harmonic oscillator",
+    "zh_cn": "量子谐振子",
+    "zh_tw": "量子諧振子",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "hydrogen-atom",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "hydrogen atom",
+    "zh_cn": "氢原子",
+    "zh_tw": "氫原子",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quantum-number",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "quantum number",
+    "zh_cn": "量子数",
+    "zh_tw": "量子數",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "spin",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "spin",
+    "zh_cn": "自旋",
+    "zh_tw": "自旋",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "pauli-exclusion-principle",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "pauli exclusion principle",
+    "zh_cn": "泡利不相容原理",
+    "zh_tw": "包立不相容原理",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quantum-superposition",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "quantum superposition",
+    "zh_cn": "量子叠加",
+    "zh_tw": "量子疊加",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "quantum-entanglement",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "quantum entanglement",
+    "zh_cn": "量子纠缠",
+    "zh_tw": "量子糾纏",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "commutator",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "commutator",
+    "zh_cn": "对易子",
+    "zh_tw": "對易子",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "observable",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "observable",
+    "zh_cn": "可观测量",
+    "zh_tw": "可觀測量",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "expectation-value",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "expectation value",
+    "zh_cn": "期望算符值",
+    "zh_tw": "期望算符值",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "hermitian-operator",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "hermitian operator",
+    "zh_cn": "厄米算符",
+    "zh_tw": "厄米算符",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "dirac-notation",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "dirac notation",
+    "zh_cn": "狄拉克符号",
+    "zh_tw": "狄拉克符號",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "perturbation-theory",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "probability"
+    ],
+    "en": "perturbation theory",
+    "zh_cn": "微扰理论",
+    "zh_tw": "微擾理論",
+    "subject": "physics.quantum",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "complex-number",
+    "synonyms": [
+      "complex numbers"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [],
+    "en": "complex number",
+    "zh_cn": "复数",
+    "zh_tw": "複數",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "complex-plane",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "complex-number"
+    ],
+    "en": "complex plane",
+    "zh_cn": "复平面",
+    "zh_tw": "複平面",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "euler-s-formula",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "complex-number",
+      "exponential-function"
+    ],
+    "en": "euler's formula",
+    "zh_cn": "欧拉公式",
+    "zh_tw": "歐拉公式",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "exponential-function",
+    "synonyms": [
+      "exponential functions"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "function"
+    ],
+    "en": "exponential function",
+    "zh_cn": "指数函数",
+    "zh_tw": "指數函數",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "logarithm",
+    "synonyms": [
+      "logarithms"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "exponential-function"
+    ],
+    "en": "logarithm",
+    "zh_cn": "对数",
+    "zh_tw": "對數",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "trigonometry",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [],
+    "en": "trigonometry",
+    "zh_cn": "三角学",
+    "zh_tw": "三角學",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "sine",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "trigonometry"
+    ],
+    "en": "sine",
+    "zh_cn": "正弦",
+    "zh_tw": "正弦",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "cosine",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "trigonometry"
+    ],
+    "en": "cosine",
+    "zh_cn": "余弦",
+    "zh_tw": "餘弦",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "tangent",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "trigonometry"
+    ],
+    "en": "tangent",
+    "zh_cn": "正切",
+    "zh_tw": "正切",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "hyperbolic-function",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "exponential-function"
+    ],
+    "en": "hyperbolic function",
+    "zh_cn": "双曲函数",
+    "zh_tw": "雙曲函數",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "set",
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [],
+    "en": "set",
+    "zh_cn": "集合",
+    "zh_tw": "集合",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "function",
+    "synonyms": [
+      "functions"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "set"
+    ],
+    "en": "function",
+    "zh_cn": "函数",
+    "zh_tw": "函數",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "calculus",
+    "en": "calculus",
+    "zh_cn": "微积分",
+    "zh_tw": "微積分",
+    "subject": "mathematics.calculus",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "limit"
+    ]
+  },
+  {
+    "id": "dynamical-system",
+    "en": "dynamical system",
+    "zh_cn": "动力系统",
+    "zh_tw": "動力系統",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "dynamical systems"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "differential-equation"
+    ]
+  },
+  {
+    "id": "discrete-dynamical-system",
+    "en": "discrete dynamical system",
+    "zh_cn": "离散动力系统",
+    "zh_tw": "離散動力系統",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "discrete dynamical systems"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "dynamical-system"
+    ]
+  },
+  {
+    "id": "autonomous-differential-equation",
+    "en": "autonomous differential equation",
+    "zh_cn": "自治微分方程",
+    "zh_tw": "自治微分方程",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "autonomous differential equations"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "ordinary-differential-equation"
+    ]
+  },
+  {
+    "id": "population-growth",
+    "en": "population growth",
+    "zh_cn": "种群增长",
+    "zh_tw": "族群成長",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "exponential-growth"
+    ]
+  },
+  {
+    "id": "logistic-growth",
+    "en": "logistic growth",
+    "zh_cn": "逻辑斯蒂增长",
+    "zh_tw": "邏輯斯蒂成長",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "logistic-equation"
+    ]
+  },
+  {
+    "id": "fixed-point",
+    "en": "fixed point",
+    "zh_cn": "不动点",
+    "zh_tw": "不動點",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "function"
+    ]
+  },
+  {
+    "id": "iteration",
+    "en": "iteration",
+    "zh_cn": "迭代",
+    "zh_tw": "迭代",
+    "subject": "mathematics.foundations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "function"
+    ]
+  },
+  {
+    "id": "limit-cycle",
+    "en": "limit cycle",
+    "zh_cn": "极限环",
+    "zh_tw": "極限環",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "phase-portrait"
+    ]
+  },
+  {
+    "id": "bifurcation",
+    "en": "bifurcation",
+    "zh_cn": "分岔",
+    "zh_tw": "分岔",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "stability"
+    ]
+  },
+  {
+    "id": "chaos",
+    "en": "chaos",
+    "zh_cn": "混沌",
+    "zh_tw": "混沌",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "dynamical-system"
+    ]
+  },
+  {
+    "id": "exponential-decay",
+    "en": "exponential decay",
+    "zh_cn": "指数衰减",
+    "zh_tw": "指數衰減",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "exponential-function"
+    ]
+  },
+  {
+    "id": "vector-valued-function",
+    "en": "vector valued function",
+    "zh_cn": "向量值函数",
+    "zh_tw": "向量值函數",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "vector-valued function",
+      "vector-valued functions"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "vector"
+    ]
+  },
+  {
+    "id": "parametric-surface",
+    "en": "parametric surface",
+    "zh_cn": "参数曲面",
+    "zh_tw": "參數曲面",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "parametric surfaces"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "parametric-curve"
+    ]
+  },
+  {
+    "id": "tangent-plane",
+    "en": "tangent plane",
+    "zh_cn": "切平面",
+    "zh_tw": "切平面",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "tangent planes"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "partial-derivative"
+    ]
+  },
+  {
+    "id": "level-curve",
+    "en": "level curve",
+    "zh_cn": "等高线",
+    "zh_tw": "等高線",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "level curves"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "scalar-field"
+    ]
+  },
+  {
+    "id": "level-surface",
+    "en": "level surface",
+    "zh_cn": "等值面",
+    "zh_tw": "等值面",
+    "subject": "mathematics.calculus.vector",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "level surfaces"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "scalar-field"
+    ]
+  },
+  {
+    "id": "discrete-fourier-transform",
+    "en": "discrete fourier transform",
+    "zh_cn": "离散傅里叶变换",
+    "zh_tw": "離散傅里葉變換",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [
+      {
+        "text": "DFT",
+        "match": "token"
+      }
+    ],
+    "related": [],
+    "prerequisites": [
+      "fourier-transform"
+    ]
+  },
+  {
+    "id": "fast-fourier-transform",
+    "en": "fast fourier transform",
+    "zh_cn": "快速傅里叶变换",
+    "zh_tw": "快速傅里葉變換",
+    "subject": "mathematics.differential-equations",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [
+      {
+        "text": "FFT",
+        "match": "token"
+      }
+    ],
+    "related": [],
+    "prerequisites": [
+      "discrete-fourier-transform"
+    ]
+  },
+  {
+    "id": "speed",
+    "en": "speed",
+    "zh_cn": "速率",
+    "zh_tw": "速率",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "velocity"
+    ]
+  },
+  {
+    "id": "light",
+    "en": "light",
+    "zh_cn": "光",
+    "zh_tw": "光",
+    "subject": "physics.optics",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "electromagnetic-wave"
+    ]
+  },
+  {
+    "id": "coupled-oscillation",
+    "en": "coupled oscillation",
+    "zh_cn": "耦合振动",
+    "zh_tw": "耦合振動",
+    "subject": "physics.waves",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "coupled oscillations"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "oscillation"
+    ]
+  },
+  {
+    "id": "work-energy-theorem",
+    "en": "work energy theorem",
+    "zh_cn": "动能定理",
+    "zh_tw": "動能定理",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "work"
+    ]
+  },
+  {
+    "id": "coefficient-of-restitution",
+    "en": "coefficient of restitution",
+    "zh_cn": "恢复系数",
+    "zh_tw": "恢復係數",
+    "subject": "physics.mechanics",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "elastic-collision"
+    ]
+  },
+  {
+    "id": "maxwell-speed-distribution",
+    "en": "maxwell speed distribution",
+    "zh_cn": "麦克斯韦速率分布",
+    "zh_tw": "馬克士威速率分布",
+    "subject": "physics.thermodynamics",
+    "level": [
+      "undergraduate"
+    ],
+    "synonyms": [
+      "Maxwell velocity distribution",
+      "Maxwell-Boltzmann distribution",
+      "Maxwell velocity"
+    ],
+    "aliases": [],
+    "related": [],
+    "prerequisites": [
+      "kinetic-theory"
+    ]
   }
 ]

@@ -124,9 +124,15 @@ fn parse_index(body: &str) -> Result<Vec<IndexEntry>> {
             tags.sort();
             tags.dedup();
 
+            let (description, description_source) =
+                common::listing_description(el, &text, &current_category);
             out.push(IndexEntry {
+                semantic: crate::models::SemanticMetadata {
+                    description_source,
+                    ..Default::default()
+                },
                 title: text.clone(),
-                description: None,
+                description,
                 url,
                 result_type: ResultType::Applet,
                 tags,

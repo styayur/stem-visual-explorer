@@ -131,13 +131,31 @@ fn parse_home(body: &str) -> Result<Vec<IndexEntry>> {
 
         let path_part = href.split('#').next().unwrap_or(href).trim_end_matches('/');
         let mut tags = common::slug_words(path_part);
-        tags.retain(|t| !t.is_empty());
+        tags.retain(|t| !t.is_empty() && t != "indexhtml");
+        // Preserve complete CamelCase taxonomy phrases before sorting individual tags.
+        if let Some(section) = path_part.split('/').next() {
+            let words = common::slug_words(section);
+            if words.len() > 1 {
+                tags.push(words.join(" "));
+            }
+        }
         tags.sort();
         tags.dedup();
 
+        let category = tags
+            .iter()
+            .filter(|t| t.contains(' '))
+            .cloned()
+            .collect::<Vec<_>>()
+            .join(" · ");
+        let (description, description_source) = common::listing_description(el, &text, &category);
         out.push(IndexEntry {
+            semantic: crate::models::SemanticMetadata {
+                description_source,
+                ..Default::default()
+            },
             title: text.clone(),
-            description: None,
+            description,
             url: url.to_string(),
             result_type: ResultType::Visualization,
             tags,

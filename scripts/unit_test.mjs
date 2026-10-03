@@ -38,7 +38,7 @@ test("concept variants preserve all five weights", () => {
   const q = normalizeConcepts(["旋度"]);
   for (const [text, weight] of [["旋度",1],["curl",.95],["rotation of a vector field",.9],["rot",.75],["divergence",.35]])
     assert.equal(q.variants.find((v) => v.text === text).weight, weight);
-  assert.ok(!q.variants.some((v) => v.text === "gradient" || v.text === "partial derivative"));
+  assert.ok(!q.variants.some((v) => v.text === "gradient" || (v.text === "partial derivative" && v.tier !== "exploratory")));
 });
 test("concept IDs deduplicate across languages and longest phrases", () => {
   assert.deepEqual(normalizeConcepts(["curl", "旋度", "rot"]).concept_ids, ["curl"]);
@@ -49,7 +49,7 @@ test("concept IDs deduplicate across languages and longest phrases", () => {
 test("weighted ranking does not reward redundant concept aliases", () => {
   const q = expand(parseQuery("旋度"));
   const make = (title) => ({ id:title, source_id:"test", source_name:"Test", title, description:null, url:"https://example.com/", result_type:"article", tags:[], thumbnail:null, score:0 });
-  for (const [title, score] of [["curl",57],["rotation of a vector field",54],["rot",45],["divergence",10.5],["curl rot rotation of a vector field",57]])
+  for (const [title, score] of [["curl",1100],["rotation of a vector field",1100],["rot",1075],["divergence",0],["curl rot rotation of a vector field",1075]])
     assert.equal(rankResults(q,[make(title)])[0].score, score);
 });
 test("resource graph annotations include related and prerequisite concepts", () => {
@@ -167,7 +167,7 @@ test("only a proxy template is embeddable", () => {
 console.log("regressions");
 test("traditional glossary and reverse lookup", () => {
   assert.equal(glossaryLookup("standing wave", "zh-TW"), "駐波");
-  assert.equal(glossaryLookup("harmonic oscillator", "zh-TW"), "簡諧振動");
+  assert.equal(glossaryLookup("harmonic oscillator", "zh-TW"), "諧振子");
   assert.equal(glossaryLookup("電場", "en"), "electric field");
 });
 test("multiword English and traditional query expansion", () => {

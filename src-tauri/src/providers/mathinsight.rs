@@ -54,6 +54,7 @@ impl MathInsightProvider {
                 }
             } else if !title.is_empty() {
                 entries.push(IndexEntry {
+                    semantic: Default::default(),
                     title,
                     description: desc,
                     url,
@@ -137,6 +138,7 @@ fn parse_list(body: &str, default_type: ResultType) -> Result<Vec<IndexEntry>> {
         tags.dedup();
 
         out.push(IndexEntry {
+            semantic: Default::default(),
             title: text.clone(),
             description: None,
             url: url.to_string(),

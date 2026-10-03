@@ -71,6 +71,8 @@ pub async fn refresh_provider_index(
         .map_err(to_err)?;
 
     let empty = NormalizedQuery {
+        groups: vec![],
+        explore: false,
         raw: String::new(),
         tokens: vec![],
         variants: vec![],

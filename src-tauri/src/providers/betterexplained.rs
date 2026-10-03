@@ -175,9 +175,15 @@ fn parse_native_results(body: &str) -> Vec<IndexEntry> {
                 let title = el.text().collect::<Vec<_>>().concat();
                 let title = title.split_whitespace().collect::<Vec<_>>().join(" ");
                 if !title.is_empty() {
+                    let (description, description_source) =
+                        common::listing_description(el, &title, "");
                     out.push(IndexEntry {
+                        semantic: crate::models::SemanticMetadata {
+                            description_source,
+                            ..Default::default()
+                        },
                         title: title.clone(),
-                        description: None,
+                        description,
                         url: href.to_string(),
                         result_type: result_type_for(&title),
                         tags: common::title_words(&title),
@@ -227,10 +233,16 @@ fn parse_archive(body: &str) -> Result<Vec<IndexEntry>> {
 
         let final_title = if text.is_empty() { title } else { text };
         let result_type = result_type_for(&final_title);
+        let (description, description_source) =
+            common::listing_description(el, &final_title, &current_series);
 
         out.push(IndexEntry {
+            semantic: crate::models::SemanticMetadata {
+                description_source,
+                ..Default::default()
+            },
             title: final_title,
-            description: None,
+            description,
             url: Url::parse(href)
                 .map(|u| u.to_string())
                 .unwrap_or_else(|_| href.to_string()),

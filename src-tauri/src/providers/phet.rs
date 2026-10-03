@@ -177,6 +177,7 @@ impl Simulation {
         tags.dedup();
 
         Some(IndexEntry {
+            semantic: Default::default(),
             title,
             description,
             url,
