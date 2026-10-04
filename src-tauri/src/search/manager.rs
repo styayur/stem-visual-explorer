@@ -44,6 +44,7 @@ pub async fn run_search(
             results: Vec::new(),
             providers,
             total: 0,
+            unfiltered_total: 0,
         });
     }
 
@@ -53,7 +54,8 @@ pub async fn run_search(
     for provider in selected.iter() {
         let provider = Arc::clone(provider);
         let ctx = ctx.clone();
-        let query = query.clone();
+        let mut query = query.clone();
+        query.type_filter = None;
         let opts = SearchOptions { force_refresh };
         let task_provider = provider.id().to_string();
         let task = set.spawn(async move {
@@ -95,6 +97,7 @@ pub async fn run_search(
         }
     }
 
+    let unfiltered_total = results.len();
     // Apply the optional type filter.
     if let Some(t) = query.type_filter {
         results.retain(|r| r.result_type == t);
@@ -111,6 +114,7 @@ pub async fn run_search(
         results,
         providers,
         total,
+        unfiltered_total,
     })
 }
 

@@ -1,0 +1,77 @@
+name: Refresh provider indexes
+on:
+  schedule:
+    - cron: '23 3 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: refresh-provider-indexes
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: npm ci
+      - name: Preserve previous snapshot and fetch live providers into staging
+        run: |
+          mkdir -p artifacts
+          cp -R public/index artifacts/index-before
+          SVE_INDEX_OUT=artifacts/index-candidate cargo run --locked --no-default-features --manifest-path src-tauri/Cargo.toml --example dump_web_index
+      - name: Annotate, hash and validate staged snapshot
+        env:
+          SVE_INDEX_OUT: artifacts/index-candidate
+          SVE_INDEX_BASE: artifacts/index-before
+        run: |
+          npm run index:enrich
+          npm run ontology:validate
+          npm run index:quality
+          npm run benchmark
+      - name: Promote candidate in runner workspace and run regressions
+        run: |
+          cp artifacts/index-candidate/*.json public/index/
+          npm test
+          npm run test:parity
+          npm run build
+          npm run build:web
+          npx playwright install --with-deps chromium
+          npm run test:web
+          npm run test:web:build
+          cargo fmt --manifest-path src-tauri/Cargo.toml --check
+          cargo test --locked --no-default-features --manifest-path src-tauri/Cargo.toml
+          cargo clippy --locked --no-default-features --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
+          npm run ontology:audit
+          node scripts/refresh_pr_body.mjs
+      - name: Open or update refresh PR only after every gate succeeds
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
+        with:
+          token: ${{ secrets.INDEX_REFRESH_TOKEN || github.token }}
+          branch: chore/refresh-provider-indexes
+          delete-branch: true
+          commit-message: 'chore(index): refresh provider indexes'
+          title: 'chore(index): refresh provider indexes'
+          body-path: artifacts/refresh-pr.md
+          add-paths: |
+            public/index/*.json
+            artifacts/provider-quality.json
+            artifacts/retrieval-benchmark-summary.json
+            artifacts/ontology-statistics.json
+      - name: Retain diagnostics including failed refreshes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: index-refresh-audit
+          path: artifacts/
+          retention-days: 30

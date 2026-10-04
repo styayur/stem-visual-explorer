@@ -17,6 +17,11 @@ export interface SearchResult {
   url: string;
   result_type: ResultType;
   tags: string[];
+  concept_ids?: string[];
+  concept_evidence?: Record<string,string[]>;
+  subject?: string[];
+  language?: string;
+  explanation?: import("./searchEngine").SearchExplanation;
   score: number;
   thumbnail: string | null;
 }
@@ -40,6 +45,9 @@ export interface ProviderStatus {
 }
 
 export interface SearchResponse {
+  unfiltered_total?: number;
+  language_mapping_gap?: boolean;
+  diagnostics?: import("./searchDiagnostics").SearchDiagnostics;
   query: string;
   expanded_terms: string[];
   results: SearchResult[];

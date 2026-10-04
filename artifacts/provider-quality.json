@@ -1,0 +1,114 @@
+[
+  {
+    "provider": "mathinsight",
+    "entry_count": 447,
+    "description_coverage": 0.8814317673378076,
+    "tags_coverage": 1,
+    "semantic_concept_coverage": 0.7874720357941835,
+    "subject_coverage": 0.7874720357941835,
+    "language_coverage": 1,
+    "thumbnail_coverage": 0,
+    "description_sources": {
+      "unspecified": 447
+    },
+    "baseline": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+    "previous_count": 447,
+    "updated_at": "2026-10-04"
+  },
+  {
+    "provider": "falstad",
+    "entry_count": 85,
+    "description_coverage": 1,
+    "tags_coverage": 1,
+    "semantic_concept_coverage": 0.5176470588235295,
+    "subject_coverage": 0.5176470588235295,
+    "language_coverage": 1,
+    "thumbnail_coverage": 0,
+    "description_sources": {
+      "title-and-provider-category": 85
+    },
+    "baseline": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+    "previous_count": 85,
+    "updated_at": "2026-10-04"
+  },
+  {
+    "provider": "phet",
+    "entry_count": 120,
+    "description_coverage": 1,
+    "tags_coverage": 1,
+    "semantic_concept_coverage": 0.6333333333333333,
+    "subject_coverage": 0.6333333333333333,
+    "language_coverage": 1,
+    "thumbnail_coverage": 1,
+    "description_sources": {
+      "unspecified": 120
+    },
+    "baseline": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+    "previous_count": 120,
+    "updated_at": "2026-10-04"
+  },
+  {
+    "provider": "betterexplained",
+    "entry_count": 144,
+    "description_coverage": 1,
+    "tags_coverage": 1,
+    "semantic_concept_coverage": 0.375,
+    "subject_coverage": 0.375,
+    "language_coverage": 1,
+    "thumbnail_coverage": 0,
+    "description_sources": {
+      "title-and-provider-category": 144
+    },
+    "baseline": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+    "previous_count": 144,
+    "updated_at": "2026-10-04"
+  },
+  {
+    "provider": "physicsfundamentals",
+    "entry_count": 138,
+    "description_coverage": 1,
+    "tags_coverage": 1,
+    "semantic_concept_coverage": 0.8913043478260869,
+    "subject_coverage": 0.8913043478260869,
+    "language_coverage": 1,
+    "thumbnail_coverage": 0,
+    "description_sources": {
+      "unspecified": 138
+    },
+    "baseline": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+    "previous_count": 134,
+    "updated_at": "2026-10-04"
+  },
+  {
+    "provider": "physicstuff",
+    "entry_count": 52,
+    "description_coverage": 1,
+    "tags_coverage": 1,
+    "semantic_concept_coverage": 1,
+    "subject_coverage": 1,
+    "language_coverage": 1,
+    "thumbnail_coverage": 0,
+    "description_sources": {
+      "unspecified": 52
+    },
+    "baseline": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+    "previous_count": 52,
+    "updated_at": "2026-10-04"
+  },
+  {
+    "provider": "maotian",
+    "entry_count": 93,
+    "description_coverage": 1,
+    "tags_coverage": 1,
+    "semantic_concept_coverage": 0.8172043010752689,
+    "subject_coverage": 0.8172043010752689,
+    "language_coverage": 1,
+    "thumbnail_coverage": 0,
+    "description_sources": {
+      "title-and-provider-category": 93
+    },
+    "baseline": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+    "previous_count": 93,
+    "updated_at": "2026-10-04"
+  }
+]

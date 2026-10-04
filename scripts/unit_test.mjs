@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 // Fast, deterministic unit tests for the shared search/translation logic.
 // Runs directly on Node (>=22) via native TypeScript type stripping:
 //
@@ -26,7 +27,7 @@ let passed = 0;
 function test(name, fn) {
   fn();
   passed++;
-  console.log(`  ok  ${name}`);
+  printReport(`  ok  ${name}`);
 }
 
 test("concept dictionary edges are valid", () => {
@@ -38,7 +39,7 @@ test("concept variants preserve all five weights", () => {
   const q = normalizeConcepts(["旋度"]);
   for (const [text, weight] of [["旋度",1],["curl",.95],["rotation of a vector field",.9],["rot",.75],["divergence",.35]])
     assert.equal(q.variants.find((v) => v.text === text).weight, weight);
-  assert.ok(!q.variants.some((v) => v.text === "gradient" || v.text === "partial derivative"));
+  assert.ok(!q.variants.some((v) => v.text === "gradient" || (v.text === "partial derivative" && v.tier !== "exploratory")));
 });
 test("concept IDs deduplicate across languages and longest phrases", () => {
   assert.deepEqual(normalizeConcepts(["curl", "旋度", "rot"]).concept_ids, ["curl"]);
@@ -49,7 +50,7 @@ test("concept IDs deduplicate across languages and longest phrases", () => {
 test("weighted ranking does not reward redundant concept aliases", () => {
   const q = expand(parseQuery("旋度"));
   const make = (title) => ({ id:title, source_id:"test", source_name:"Test", title, description:null, url:"https://example.com/", result_type:"article", tags:[], thumbnail:null, score:0 });
-  for (const [title, score] of [["curl",57],["rotation of a vector field",54],["rot",45],["divergence",10.5],["curl rot rotation of a vector field",57]])
+  for (const [title, score] of [["curl",1100],["rotation of a vector field",1100],["rot",1075],["divergence",0],["curl rot rotation of a vector field",1075]])
     assert.equal(rankResults(q,[make(title)])[0].score, score);
 });
 test("resource graph annotations include related and prerequisite concepts", () => {
@@ -65,7 +66,7 @@ test("preview policies never embed unknown or mismatched origins", () => {
     assert.equal(previewCapability({source_id:"falstad",url}),"NativeCard");
 });
 
-console.log("glossary");
+printReport("glossary");
 test("en -> zh", () => {
   assert.equal(glossaryLookup("gradient", "zh-CN"), "梯度");
   assert.equal(glossaryLookup("standing wave", "zh-CN"), "驻波");
@@ -81,7 +82,7 @@ test("covers a reasonable STEM vocabulary", () => {
   assert.ok(glossarySize() >= 60, `only ${glossarySize()} glossary entries`);
 });
 
-console.log("query parser");
+printReport("query parser");
 test("plain terms", () => {
   assert.deepEqual(parseQuery("gradient curl").terms, ["gradient", "curl"]);
 });
@@ -98,7 +99,7 @@ test("exact phrase", () => {
   assert.deepEqual(q.terms, ["harmonic"]);
 });
 
-console.log("synonym expansion");
+printReport("synonym expansion");
 test("gradient", () => {
   assert.ok(expand(parseQuery("梯度")).tokens.includes("gradient"));
 });
@@ -114,7 +115,7 @@ test("english term is preserved", () => {
   assert.ok(expand(parseQuery("curl")).tokens.includes("curl"));
 });
 
-console.log("matching + ranking");
+printReport("matching + ranking");
 const entries = [
   { title: "curl", description: null, url: "https://x.test/1", result_type: "article", tags: ["curl"], thumbnail: null },
   { title: "The idea of curl of a vector field", description: "circulation", url: "https://x.test/2", result_type: "article", tags: ["curl", "vector field"], thumbnail: null },
@@ -140,7 +141,7 @@ test("empty query yields nothing", () => {
   assert.equal(matchEntries(entries, "test", "Test", expand(parseQuery(""))).length, 0);
 });
 
-console.log("translation helpers");
+printReport("translation helpers");
 test("source language guess", () => {
   assert.equal(guessSourceLanguage("gradient"), "en");
   // Kana presence is the Japanese signal; kanji-only text is ambiguous and
@@ -164,10 +165,10 @@ test("only a proxy template is embeddable", () => {
   assert.ok(buildEmbeddableTranslatedUrl("https://a.test/", "zh-CN", "https://p.test/?u={url}"));
 });
 
-console.log("regressions");
+printReport("regressions");
 test("traditional glossary and reverse lookup", () => {
   assert.equal(glossaryLookup("standing wave", "zh-TW"), "駐波");
-  assert.equal(glossaryLookup("harmonic oscillator", "zh-TW"), "簡諧振動");
+  assert.equal(glossaryLookup("harmonic oscillator", "zh-TW"), "諧振子");
   assert.equal(glossaryLookup("電場", "en"), "electric field");
 });
 test("multiword English and traditional query expansion", () => {
@@ -214,16 +215,16 @@ const realFetch = globalThis.fetch;
 try {
   globalThis.fetch = async () => ({ ok: true, json: async () => ({ responseStatus: 403, responseData: { translatedText: "quota exhausted" } }) });
   await assert.rejects(mymemoryTranslate("some text", "en", "zh-CN"), /403/);
-  passed++; console.log("  ok  translation service errors are not cached as translations");
+  passed++; printReport("  ok  translation service errors are not cached as translations");
 } finally { globalThis.fetch = realFetch; }
 
 if (process.argv.includes("--live")) {
-  console.log("live MyMemory (network)");
+  printReport("live MyMemory (network)");
   const out = await mymemoryTranslate("gradient and directional derivative", "en", "zh-CN");
   assert.ok(out.length > 0);
   assert.ok(/[\u4e00-\u9fff]/.test(out), `expected Chinese output, got "${out}"`);
-  console.log(`  ok  mymemory: "gradient and directional derivative" -> "${out}"`);
+  printReport(`  ok  mymemory: "gradient and directional derivative" -> "${out}"`);
   passed++;
 }
 
-console.log(`\nUNIT TESTS: ${passed} passed`);
+printReport(`\nUNIT TESTS: ${passed} passed`);

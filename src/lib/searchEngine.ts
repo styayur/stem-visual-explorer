@@ -1,7 +1,14 @@
 // Deterministic, browser-side search: a faithful port of the Rust
 // `search::{query, normalize, ranking}` modules. No AI, no network.
 import type { ResultType, SearchResult } from "./types";
-import { normalizeConcepts, type QueryVariant } from "./concepts.ts";
+import {
+  normalizeConcepts,
+  matches,
+  matchMode,
+  normalizeTerm,
+  type ConceptGroup,
+  type QueryVariant,
+} from "./concepts.ts";
 
 export interface ParsedQuery {
   raw: string;
@@ -13,6 +20,8 @@ export interface ParsedQuery {
 
 export interface NormalizedQuery {
   raw: string;
+  groups: ConceptGroup[];
+  explore: boolean;
   tokens: string[];
   variants: QueryVariant[];
   concept_ids: string[];
@@ -87,11 +96,26 @@ export function parseQuery(raw: string): ParsedQuery {
 }
 
 export function expand(parsed: ParsedQuery): NormalizedQuery {
-  const normalized = normalizeConcepts(parsed.terms, parsed.phrases);
+  const explore = parsed.terms.some((t) => t.toLowerCase() === "related:true");
+  const normalized = normalizeConcepts(
+    parsed.terms.filter((t) => t.toLowerCase() !== "related:true"),
+    parsed.phrases,
+  );
   // Preserve expanded_terms for old clients; matching/scoring uses full variants.
-  const tokens = [...new Set(normalized.variants.flatMap((v) => [v.text, ...v.text.split(/\s+/)]))].sort();
-  return { raw: parsed.raw, tokens, ...normalized, phrases: parsed.phrases,
-    siteFilter: parsed.siteFilter, typeFilter: parsed.typeFilter };
+  const tokens = [
+    ...new Set(
+      normalized.variants.flatMap((v) => [v.text, ...v.text.split(/\s+/)]),
+    ),
+  ].sort();
+  return {
+    raw: parsed.raw,
+    tokens,
+    explore,
+    ...normalized,
+    phrases: parsed.phrases,
+    siteFilter: parsed.siteFilter,
+    typeFilter: parsed.typeFilter,
+  };
 }
 
 export function parseAndExpand(raw: string): NormalizedQuery {
@@ -109,78 +133,206 @@ export interface IndexEntryLike {
   result_type: ResultType;
   tags: string[];
   thumbnail: string | null;
+  concept_ids?: string[];
+  concept_evidence?: Record<string, string[]>;
+  subject?: string[];
+  language?: string;
 }
 
-/** Candidate matching against one provider's index. */
+export interface MatchEvidence {
+  concept_id: string | null;
+  group: string;
+  field: "title" | "concepts" | "tags" | "description";
+  tier: "direct" | "equivalent" | "exploratory";
+  text: string;
+}
+export interface SearchExplanation {
+  matched: MatchEvidence[];
+  matched_concept_ids: string[];
+  match_tier: "all-groups" | "partial" | "exploratory" | "browse" | "none";
+  groups_matched: number;
+  groups_total: number;
+  score_components: Record<string, number>;
+}
+function fieldEvidence(
+  entry: IndexEntryLike,
+  variants: QueryVariant[],
+  group: string,
+): MatchEvidence[] {
+  const out: MatchEvidence[] = [];
+  for (const [field, values] of [
+    ["title", [entry.title]],
+    ["tags", entry.tags],
+    ["description", [entry.description ?? ""]],
+  ] as const) {
+    const v = variants.find((v) => values.some((value) => matches(value, v)));
+    if (v)
+      out.push({
+        concept_id: v.concept_id,
+        group,
+        field,
+        tier: v.tier,
+        text: v.text,
+      });
+  }
+  const v = variants.find(
+    (v) => v.concept_id && entry.concept_ids?.includes(v.concept_id),
+  );
+  if (v)
+    out.push({
+      concept_id: v.concept_id,
+      group,
+      field: "concepts",
+      tier: v.tier,
+      text: v.text,
+    });
+  return out;
+}
+export function explainMatch(
+  query: NormalizedQuery,
+  entry: IndexEntryLike,
+): SearchExplanation {
+  const matched = query.groups.flatMap((g) =>
+    fieldEvidence(entry, g.variants, g.id),
+  );
+  const groupsMatched = new Set(matched.map((m) => m.group)).size;
+  const all = groupsMatched === query.groups.length;
+  if (query.explore && !all)
+    matched.push(
+      ...fieldEvidence(
+        entry,
+        query.variants.filter((v) => v.tier === "exploratory"),
+        "exploratory",
+      ),
+    );
+  const exploratory = matched.some((m) => m.tier === "exploratory");
+  const match_tier = !query.groups.length
+    ? "browse"
+    : all
+      ? "all-groups"
+      : groupsMatched
+        ? "partial"
+        : exploratory
+          ? "exploratory"
+          : "none";
+  const titleAll =
+    query.groups.length > 0 &&
+    query.groups.every((g) =>
+      matched.some((m) => m.group === g.id && m.field === "title"),
+    );
+  const exact =
+    query.groups.length === 1 &&
+    query.groups[0].variants.some(
+      (v) => v.kind !== "alternate" && normalizeTerm(entry.title) === v.text,
+    );
+  const components: Record<string, number> = {
+    coverage:
+      match_tier === "all-groups"
+        ? 1000
+        : match_tier === "partial"
+          ? (500 * groupsMatched) / query.groups.length
+          : 0,
+    title: exact
+      ? 100
+      : titleAll
+        ? 75
+        : matched.some((m) => m.field === "title")
+          ? 55
+          : 0,
+    concepts: matched.some((m) => m.field === "concepts") ? 65 : 0,
+    tags: matched.some((m) => m.field === "tags") ? 30 : 0,
+    description: matched.some((m) => m.field === "description") ? 15 : 0,
+    interactive: [
+      "interactive",
+      "simulation",
+      "applet",
+      "visualization",
+    ].includes(entry.result_type)
+      ? 5
+      : 0,
+  };
+  if (match_tier === "exploratory")
+    for (const key of Object.keys(components)) components[key] *= 0.1;
+  if (match_tier === "none")
+    for (const key of Object.keys(components)) components[key] = 0;
+  return {
+    matched,
+    matched_concept_ids: [
+      ...new Set(matched.flatMap((m) => (m.concept_id ? [m.concept_id] : []))),
+    ].sort(),
+    match_tier,
+    groups_matched: groupsMatched,
+    groups_total: query.groups.length,
+    score_components: components,
+  };
+}
+/** Strict AND across groups; OR across safe equivalents within each group. */
 export function matchEntries(
   entries: IndexEntryLike[],
   sourceId: string,
   sourceName: string,
-  query: NormalizedQuery
+  query: NormalizedQuery,
 ): SearchResult[] {
-  if (query.tokens.length === 0 && query.phrases.length === 0 && !query.siteFilter && !query.typeFilter) return [];
-
-  const out: SearchResult[] = [];
-  for (const e of entries) {
-    try { if (!["http:", "https:"].includes(new URL(e.url).protocol)) continue; } catch { continue; }
-    const hay = whitespace(
-      `${e.title} ${e.tags.join(" ")} ${e.description ?? ""} ${e.url}`
-    ).toLowerCase();
-
-    if (!query.phrases.every((p) => hay.includes(p))) continue;
-
-    const tokenOk =
-      query.tokens.length === 0 || query.variants.some((v) => hay.includes(v.text));
-    if (!tokenOk) continue;
-
-    out.push({
-      id: `${sourceId}::${e.url}`,
-      source_id: sourceId,
-      source_name: sourceName,
-      title: e.title,
-      description: e.description,
-      url: e.url,
-      result_type: e.result_type,
-      tags: e.tags,
-      score: 0,
-      thumbnail: e.thumbnail,
-    });
-  }
-  return out;
-}
-
-/** Transparent, deterministic relevance score (mirrors the Rust rules). */
-export function scoreResult(query: NormalizedQuery, r: SearchResult): number {
-  const title = r.title.toLowerCase();
-  const tags = r.tags.map((t) => t.toLowerCase());
-  const desc = (r.description ?? "").toLowerCase();
-  const parsed = parseQuery(query.raw);
-  const raw = [...parsed.terms, ...parsed.phrases].join(" ").toLowerCase();
-  const best = (text: string, variants = query.variants) => Math.max(0, ...variants.filter((v) => text.includes(v.text)).map((v) => v.weight));
-  const groups = new Map<string, QueryVariant[]>();
-  for (const v of query.variants.filter((v) => v.kind !== "related")) {
-    const key = v.concept_id ?? v.text;
-    groups.set(key, [...(groups.get(key) ?? []), v]);
-  }
-  const allWeight = groups.size && query.phrases.every((p) => title.includes(p))
-    ? Math.min(...[...groups.values()].map((vs) => best(title, vs))) : 0;
-  let score = raw && title.trim() === raw.trim() ? 100 : allWeight > 0 ? 60 * allWeight : 30 * best(title);
-  // Each field is capped at its strongest variant, so aliases cannot inflate rank.
-  score += 20 * best(tags.join(" ")) + 10 * best(desc);
-
-  if (["interactive", "simulation", "applet", "visualization"].includes(r.result_type)) {
-    score += 5;
-  }
-  return Math.round(score * 1000) / 1000;
-}
-
-export function rankResults(query: NormalizedQuery, results: SearchResult[]): SearchResult[] {
-  for (const r of results) r.score = scoreResult(query, r);
-  return results.sort((a, b) => {
-    if (b.score !== a.score) return b.score - a.score;
-    if (a.source_name !== b.source_name) return a.source_name < b.source_name ? -1 : 1;
-    const at = a.title.toLowerCase();
-    const bt = b.title.toLowerCase();
-    return at < bt ? -1 : at > bt ? 1 : a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+  if (!query.groups.length && !query.siteFilter && !query.typeFilter) return [];
+  if (query.siteFilter && query.siteFilter !== sourceId) return [];
+  return entries.flatMap((e) => {
+    try {
+      if (!["http:", "https:"].includes(new URL(e.url).protocol)) return [];
+    } catch {
+      return [];
+    }
+    if (query.typeFilter && query.typeFilter !== e.result_type) return [];
+    if (
+      !query.phrases.every((text) =>
+        [e.title, ...e.tags, e.description ?? ""].some((value) =>
+          matches(value, { text, match: matchMode(text) }),
+        ),
+      )
+    )
+      return [];
+    const explanation = explainMatch(query, e);
+    if (
+      !["all-groups", "browse"].includes(explanation.match_tier) &&
+      !(
+        query.explore &&
+        explanation.matched.some((m) => m.tier === "exploratory")
+      )
+    )
+      return [];
+    return [
+      {
+        ...e,
+        id: `${sourceId}::${e.url}`,
+        source_id: sourceId,
+        source_name: sourceName,
+        score: 0,
+        explanation,
+      },
+    ];
   });
+}
+export function scoreResult(query: NormalizedQuery, r: SearchResult): number {
+  r.explanation = explainMatch(query, r);
+  return (
+    Math.round(
+      Object.values(r.explanation.score_components).reduce((a, b) => a + b, 0) *
+        1000,
+    ) / 1000
+  );
+}
+export function rankResults(
+  query: NormalizedQuery,
+  results: SearchResult[],
+): SearchResult[] {
+  for (const r of results) r.score = scoreResult(query, r);
+  return results.sort(
+    (a, b) =>
+      b.score - a.score ||
+      compare(a.source_name, b.source_name) ||
+      compare(a.title.toLowerCase(), b.title.toLowerCase()) ||
+      compare(a.id, b.id),
+  );
+}
+function compare(a: string, b: string) {
+  return a < b ? -1 : a > b ? 1 : 0;
 }

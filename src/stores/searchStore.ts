@@ -13,6 +13,8 @@ export type TypeFilter = "all" | ResultType;
 
 interface SearchState {
   query: string;
+  exploreRelated: boolean;
+  setExploreRelated: (value:boolean)=>void;
   response: SearchResponse | null;
   loading: boolean;
   error: string | null;
@@ -56,6 +58,8 @@ function firstSelection(results: SearchResult[]) {
 
 export const useSearchStore = create<SearchState>((set, get) => ({
   query: "",
+  exploreRelated:false,
+  setExploreRelated: (value) => { set({exploreRelated:value}); void get().runSearch(); },
   response: null,
   loading: false,
   error: null,
@@ -80,7 +84,7 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     }
     set({ loading: true, error: null, query, quickLook: null, selectedId: null, selectedIndex: -1 });
     try {
-      const response = await cmd.runSearch(query, forceRefresh);
+      const response = await cmd.runSearch(query + (get().exploreRelated ? " related:true" : ""), forceRefresh);
       if (version !== searchVersion) return;
       set({
         response,

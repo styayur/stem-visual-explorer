@@ -12,6 +12,8 @@ import { providerCapability } from "./previewPolicy";
 import { httpUrl } from "./urls";
 
 export interface ManifestEntry {
+  schema_version: number;
+  content_hash?:string;
   id: string;
   name: string;
   homepage: string;
@@ -22,6 +24,7 @@ export interface ManifestEntry {
 }
 
 interface ProviderIndex {
+  schema_version: number;
   source_id: string;
   source_name: string;
   homepage: string;
@@ -31,7 +34,7 @@ interface ProviderIndex {
 }
 
 const base = import.meta.env.BASE_URL || "/";
-const STORAGE_KEY = "sve.webIndex.v1";
+const STORAGE_KEY = "sve.webIndex.v2";
 
 let manifest: ManifestEntry[] | null = null;
 const loaded = new Map<string, ProviderIndex>();
@@ -51,16 +54,17 @@ async function fetchJson(url: string): Promise<unknown> {
 
 function validManifest(value: unknown): value is ManifestEntry[] {
   return Array.isArray(value) && value.every((v) => v && typeof v.id === "string" &&
-    typeof v.name === "string" && typeof v.homepage === "string" && typeof v.updated_at === "string" &&
+    v.schema_version === 2 && typeof v.name === "string" && typeof v.homepage === "string" && typeof v.updated_at === "string" &&
     typeof v.file === "string" && /^[\w-]+\.json$/.test(v.file) && Number.isFinite(v.count));
 }
 
 function validIndex(value: unknown, entry: ManifestEntry): value is ProviderIndex {
   const v = value as ProviderIndex | null;
-  return !!v && v.source_id === entry.id && v.updated_at === entry.updated_at &&
+  return !!v && v.schema_version === 2 && v.source_id === entry.id && v.updated_at === entry.updated_at &&
     typeof v.source_name === "string" && Array.isArray(v.entries) && v.entries.every((e) => {
       try { httpUrl(e.url); } catch { return false; }
       return typeof e.title === "string" && typeof e.result_type === "string" &&
+        Array.isArray(e.concept_ids) && Array.isArray(e.subject) && typeof e.language === "string" && !!e.concept_evidence &&
         Array.isArray(e.tags) && e.tags.every((t) => typeof t === "string") &&
         (e.description === null || typeof e.description === "string");
     });
@@ -71,6 +75,7 @@ function indexUrl(file: string): string {
 }
 
 export async function loadManifest(): Promise<ManifestEntry[]> {
+  try {for (const key of Object.keys(localStorage)) if(key.startsWith("sve.webIndex.v1:")) localStorage.removeItem(key);} catch { /* optional cache */ }
   if (manifest) return manifest;
   if (manifestRequest) return manifestRequest;
   const version = generation;
@@ -108,7 +113,7 @@ async function fetchProvider(id: string): Promise<ProviderIndex | null> {
 
   // Try the localStorage cache first.
   try {
-    const cached = localStorage.getItem(`${STORAGE_KEY}:${m.updated_at}:${id}`);
+    const cached = localStorage.getItem(`${STORAGE_KEY}:${m.content_hash??m.updated_at}:${id}`);
     if (cached) {
       const parsed: unknown = JSON.parse(cached);
       if (validIndex(parsed, m)) {
@@ -128,7 +133,7 @@ async function fetchProvider(id: string): Promise<ProviderIndex | null> {
       for (const key of Object.keys(localStorage)) {
         if (key.startsWith(`${STORAGE_KEY}:`) && key.endsWith(`:${id}`)) localStorage.removeItem(key);
       }
-      localStorage.setItem(`${STORAGE_KEY}:${m.updated_at}:${id}`, JSON.stringify(parsed));
+      localStorage.setItem(`${STORAGE_KEY}:${m.content_hash??m.updated_at}:${id}`, JSON.stringify(parsed));
     } catch { /* quota exceeded — memory cache is enough */ }
   }
   return parsed;
@@ -169,7 +174,7 @@ export async function webSearch(
       try {
         const index = await loadProvider(entry.id);
         const found = index
-          ? matchEntries(index.entries, index.source_id, index.source_name, q)
+          ? matchEntries(index.entries, index.source_id, index.source_name, {...q,typeFilter:null})
           : [];
         results.push(...found);
         statuses.push({
@@ -236,6 +241,7 @@ export async function webSearch(
     results: ranked,
     providers: statuses,
     total: ranked.length,
+    unfiltered_total:results.length,
   };
 }
 
@@ -250,7 +256,7 @@ export async function refreshWebProvider(id: string): Promise<void> {
   const entry = m.find((x) => x.id === id);
   if (entry) {
     try {
-      localStorage.removeItem(`${STORAGE_KEY}:${entry.updated_at}:${id}`);
+      localStorage.removeItem(`${STORAGE_KEY}:${entry.content_hash??entry.updated_at}:${id}`);
     } catch {
       /* ignore */
     }

@@ -126,6 +126,7 @@ fn parse_labs(body: &str) -> Result<Vec<IndexEntry>> {
         tags.dedup();
 
         out.push(IndexEntry {
+            semantic: Default::default(),
             title,
             description: if text.is_empty() { None } else { Some(text) },
             url: url.to_string(),

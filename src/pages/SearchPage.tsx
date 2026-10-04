@@ -1,3 +1,4 @@
+import SearchContext from "../components/SearchContext";
 import { LayoutGrid } from "lucide-react";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
@@ -6,7 +7,6 @@ import SourceSidebar from "../components/SourceSidebar";
 import SearchResults from "../components/SearchResults";
 import PreviewPane from "../components/PreviewPane";
 import QuickLook from "../components/QuickLook";
-import { useSearchStore } from "../stores/searchStore";
 import { useSettingsStore } from "../stores/settingsStore";
 import { useWorkspaceStore } from "../stores/workspaceStore";
 import { cn } from "../lib/cn";
@@ -15,7 +15,7 @@ import { useT } from "../lib/i18n";
 export default function SearchPage() {
   const t = useT();
   const previewMode = useSettingsStore((s) => s.settings.preview_mode);
-  const expandedTerms = useSearchStore((s) => s.expandedTerms);
+
   const workspaceSelected = useWorkspaceStore((s) => s.selected);
   const openWorkspace = useWorkspaceStore((s) => s.open);
   const [wide, setWide] = useState(() => window.matchMedia("(min-width: 1024px)").matches);
@@ -58,21 +58,7 @@ export default function SearchPage() {
         </button>
       </div>
 
-      {expandedTerms.length > 0 && (
-        <div className="flex items-center gap-1.5 overflow-x-auto border-b border-edge-light bg-canvas-light px-3 py-1.5 dark:border-edge-dark dark:bg-canvas-dark">
-          <span className="shrink-0 text-[10px] uppercase tracking-wide text-zinc-400">
-            {t("search.expanded")}
-          </span>
-          {expandedTerms.slice(0, 12).map((t) => (
-            <span
-              key={t}
-              className="shrink-0 rounded-full bg-zinc-200/70 px-2 py-0.5 text-[11px] text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      )}
+      <SearchContext />
 
       <div className="flex min-h-0 flex-1">
         <aside className="w-[130px] shrink-0 sm:w-[210px]">

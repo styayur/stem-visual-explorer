@@ -1,26 +1,19 @@
-//! Fetch every provider's local index and write it as JSON for the static web
-//! build (GitHub Pages). Run with:
-//!
-//! ```text
-//! cargo run --no-default-features --example dump_web_index
-//! ```
-//!
-//! Output defaults to `../public/index` (override with `SVE_INDEX_OUT`).
-
+//! Live-only snapshot generator. All providers must pass gates before any destination file changes.
 use serde::Serialize;
-use stem_visual_explorer_lib::providers::ProviderRegistry;
-use stem_visual_explorer_lib::providers::{common::CachedIndex, http_client, SearchContext};
-
+use stem_visual_explorer_lib::providers::{
+    common::{validate_index, CachedIndex},
+    http_client, ProviderRegistry, SearchContext,
+};
 #[derive(Serialize)]
-struct WebIndex<'a> {
-    source_id: &'a str,
-    source_name: &'a str,
-    homepage: &'a str,
+struct WebIndex {
+    source_id: String,
+    source_name: String,
+    homepage: String,
     experimental: bool,
     updated_at: String,
-    entries: &'a [stem_visual_explorer_lib::providers::common::IndexEntry],
+    schema_version: u32,
+    entries: Vec<stem_visual_explorer_lib::providers::common::IndexEntry>,
 }
-
 #[derive(Serialize)]
 struct ManifestEntry {
     id: String,
@@ -30,65 +23,96 @@ struct ManifestEntry {
     count: usize,
     updated_at: String,
     file: String,
+    schema_version: u32,
 }
-
 #[tokio::main]
-async fn main() {
-    let out_dir = std::env::var("SVE_INDEX_OUT").unwrap_or_else(|_| "../public/index".to_string());
-    let out = std::path::PathBuf::from(&out_dir);
-    std::fs::create_dir_all(&out).expect("create output dir");
-
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .ok_or("Cargo manifest directory has no repository parent")?;
+    let out = std::env::var("SVE_INDEX_OUT")
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|_| root.join("public/index"));
+    let base = std::env::var("SVE_INDEX_BASE")
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|_| root.join("public/index"));
     let registry = ProviderRegistry::new();
     let ctx = SearchContext {
         client: http_client(),
-        cache_dir: std::env::temp_dir().join("sve-web-index-cache"),
+        cache_dir: std::env::temp_dir().join("sve-live-refresh-unused-cache"),
     };
-
     let mut manifest = Vec::new();
-
-    for provider in registry.all() {
-        match provider.load_index(&ctx).await {
-            Ok(Some(CachedIndex {
-                updated_at,
-                entries,
-                ..
-            })) => {
-                let doc = WebIndex {
-                    source_id: provider.id(),
-                    source_name: provider.name(),
-                    homepage: provider.homepage(),
-                    experimental: provider.experimental(),
-                    updated_at: updated_at.clone(),
-                    entries: &entries,
-                };
-                let file = format!("{}.json", provider.id());
-                let json = serde_json::to_vec(&doc).expect("serialize index");
-                std::fs::write(out.join(&file), json).expect("write index file");
-                println!(
-                    "{: <22} {:>5} entries -> {file}",
-                    provider.name(),
-                    entries.len()
-                );
-                manifest.push(ManifestEntry {
-                    id: provider.id().to_string(),
-                    name: provider.name().to_string(),
-                    homepage: provider.homepage().to_string(),
-                    experimental: provider.experimental(),
-                    count: entries.len(),
-                    updated_at,
-                    file,
-                });
+    let mut documents = Vec::new();
+    let mut errors = Vec::new();
+    for p in registry.all() {
+        // load_index calls the real provider fetch, never disk cache or fixtures.
+        let outcome =
+            tokio::time::timeout(std::time::Duration::from_secs(60), p.load_index(&ctx)).await;
+        let fresh = match outcome {
+            Ok(Ok(Some(index))) => index,
+            other => {
+                errors.push(format!("{}: {other:?}", p.id()));
+                continue;
             }
-            Ok(None) => println!("{: <22} (no local index)", provider.name()),
-            Err(e) => eprintln!("{: <22} ERROR: {e}", provider.name()),
+        };
+        let previous = std::fs::read(base.join(format!("{}.json", p.id())))
+            .ok()
+            .and_then(|s| serde_json::from_slice::<serde_json::Value>(&s).ok())
+            .and_then(|v| serde_json::from_value(v["entries"].clone()).ok())
+            .map(CachedIndex::new);
+        if let Err(e) = validate_index(p.id(), &fresh, previous.as_ref()) {
+            errors.push(e.to_string());
+            continue;
         }
+        let file = format!("{}.json", p.id());
+        println!(
+            "{}: {} -> {} (live)",
+            p.name(),
+            previous.as_ref().map_or(0, |p| p.entries.len()),
+            fresh.entries.len()
+        );
+        manifest.push(ManifestEntry {
+            id: p.id().into(),
+            name: p.name().into(),
+            homepage: p.homepage().into(),
+            experimental: p.experimental(),
+            count: fresh.entries.len(),
+            updated_at: fresh.updated_at.clone(),
+            file: file.clone(),
+            schema_version: 2,
+        });
+        documents.push((
+            file,
+            WebIndex {
+                source_id: p.id().into(),
+                source_name: p.name().into(),
+                homepage: p.homepage().into(),
+                experimental: p.experimental(),
+                updated_at: fresh.updated_at,
+                schema_version: 2,
+                entries: fresh.entries,
+            },
+        ));
     }
-
-    let manifest_json = serde_json::to_vec_pretty(&manifest).expect("serialize manifest");
-    std::fs::write(out.join("manifest.json"), manifest_json).expect("write manifest");
+    if !errors.is_empty() {
+        return Err(format!(
+            "Refresh rejected; destination unchanged:\n{}",
+            errors.join("\n")
+        )
+        .into());
+    }
+    std::fs::create_dir_all(&out)?;
+    for (file, doc) in documents {
+        std::fs::write(out.join(file), serde_json::to_vec(&doc)?)?;
+    }
+    std::fs::write(
+        out.join("manifest.json"),
+        serde_json::to_vec_pretty(&manifest)?,
+    )?;
     println!(
-        "\nwrote {} provider indexes to {}",
+        "Validated {} live providers -> {}",
         manifest.len(),
         out.display()
     );
+    Ok(())
 }

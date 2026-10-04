@@ -1,84 +1,171 @@
-use crate::models::{NormalizedQuery, ResultType, SearchResult};
-
-/// Transparent, deterministic relevance scoring.
-///
-/// - Exact title match: +100
-/// - All direct concept groups in title: 60 * weakest group weight
-/// - Otherwise title: 30 * strongest matching variant
-/// - Tags: 20 * strongest matching variant (capped across aliases)
-/// - Description: 10 * strongest matching variant
-/// - Interactive / simulation / applet / visualization bonus: +5
-pub fn score(query: &NormalizedQuery, result: &SearchResult) -> f32 {
-    let title = result.title.to_lowercase();
-    let tags: Vec<String> = result.tags.iter().map(|t| t.to_lowercase()).collect();
-    let desc = result
-        .description
-        .clone()
-        .unwrap_or_default()
-        .to_lowercase();
-
-    let parsed = super::query::parse(&query.raw);
-    let raw = parsed
-        .terms
-        .iter()
-        .chain(parsed.phrases.iter())
-        .cloned()
-        .collect::<Vec<_>>()
-        .join(" ")
-        .to_lowercase();
-    let best = |text: &str, variants: &[&crate::models::QueryVariant]| -> f32 {
-        variants
-            .iter()
-            .filter(|v| text.contains(&v.text))
-            .map(|v| v.weight)
-            .fold(0.0, f32::max)
-    };
-    let variants: Vec<_> = query.variants.iter().collect();
-    let mut groups: std::collections::BTreeMap<String, Vec<&crate::models::QueryVariant>> =
-        std::collections::BTreeMap::new();
-    for v in &query.variants {
-        if v.kind != "related" {
-            groups
-                .entry(v.concept_id.clone().unwrap_or_else(|| v.text.clone()))
-                .or_default()
-                .push(v);
+use super::normalize::{matches, term};
+use crate::models::{
+    MatchEvidence, NormalizedQuery, QueryVariant, ResultType, SearchExplanation, SearchResult,
+};
+use std::collections::{BTreeMap, BTreeSet};
+fn field_evidence(r: &SearchResult, variants: &[QueryVariant], group: &str) -> Vec<MatchEvidence> {
+    let mut out = Vec::new();
+    let fields = [
+        ("title", vec![r.title.as_str()]),
+        ("tags", r.tags.iter().map(String::as_str).collect()),
+        (
+            "description",
+            vec![r.description.as_deref().unwrap_or_default()],
+        ),
+    ];
+    for (field, values) in fields {
+        if let Some(v) = variants.iter().find(|v| {
+            values
+                .iter()
+                .any(|value| matches(value, &v.text, &v.r#match))
+        }) {
+            out.push(MatchEvidence {
+                concept_id: v.concept_id.clone(),
+                group: group.into(),
+                field: field.into(),
+                tier: v.tier.clone(),
+                text: v.text.clone(),
+            });
         }
     }
-    let all_weight = if !groups.is_empty() && query.phrases.iter().all(|p| title.contains(p)) {
-        groups
-            .values()
-            .map(|vs| best(&title, vs))
-            .fold(1.0, f32::min)
-    } else {
-        0.0
-    };
-    let mut score = if !raw.is_empty() && title.trim() == raw.trim() {
-        100.0
-    } else if all_weight > 0.0 {
-        60.0 * all_weight
-    } else {
-        30.0 * best(&title, &variants)
-    };
-    score += 20.0 * best(&tags.join(" "), &variants) + 10.0 * best(&desc, &variants);
-
-    if matches!(
-        result.result_type,
-        ResultType::Interactive
-            | ResultType::Simulation
-            | ResultType::Applet
-            | ResultType::Visualization
-    ) {
-        score += 5.0;
+    if let Some(v) = variants.iter().find(|v| {
+        v.concept_id
+            .as_ref()
+            .is_some_and(|id| r.semantic.concept_ids.contains(id))
+    }) {
+        out.push(MatchEvidence {
+            concept_id: v.concept_id.clone(),
+            group: group.into(),
+            field: "concepts".into(),
+            tier: v.tier.clone(),
+            text: v.text.clone(),
+        });
     }
-
-    (score * 1000.0).round() / 1000.0
+    out
 }
-
-/// Rank and sort results by descending score, using source name and title as
-/// deterministic tie breakers so the ordering is stable.
-pub fn rank(query: &NormalizedQuery, mut results: Vec<SearchResult>) -> Vec<SearchResult> {
-    for r in results.iter_mut() {
-        r.score = score(query, r);
+pub fn explain(q: &NormalizedQuery, r: &SearchResult) -> SearchExplanation {
+    let mut matched: Vec<_> = q
+        .groups
+        .iter()
+        .flat_map(|g| field_evidence(r, &g.variants, &g.id))
+        .collect();
+    let groups_matched = matched
+        .iter()
+        .map(|m| &m.group)
+        .collect::<BTreeSet<_>>()
+        .len();
+    let all = groups_matched == q.groups.len();
+    if q.explore && !all {
+        matched.extend(field_evidence(
+            r,
+            &q.variants
+                .iter()
+                .filter(|v| v.tier == "exploratory")
+                .cloned()
+                .collect::<Vec<_>>(),
+            "exploratory",
+        ));
+    }
+    let exploratory = matched.iter().any(|m| m.tier == "exploratory");
+    let tier = if q.groups.is_empty() {
+        "browse"
+    } else if all {
+        "all-groups"
+    } else if groups_matched > 0 {
+        "partial"
+    } else if exploratory {
+        "exploratory"
+    } else {
+        "none"
+    };
+    let title_all = !q.groups.is_empty()
+        && q.groups.iter().all(|g| {
+            matched
+                .iter()
+                .any(|m| m.group == g.id && m.field == "title")
+        });
+    let exact = q.groups.len() == 1
+        && q.groups[0]
+            .variants
+            .iter()
+            .any(|v| v.kind != "alternate" && term(&r.title) == v.text);
+    let has = |field: &str| matched.iter().any(|m| m.field == field);
+    let mut score_components: BTreeMap<String, f64> = [
+        (
+            "coverage",
+            if tier == "all-groups" {
+                1000.0
+            } else if tier == "partial" {
+                500.0 * groups_matched as f64 / q.groups.len() as f64
+            } else {
+                0.0
+            },
+        ),
+        (
+            "title",
+            if exact {
+                100.0
+            } else if title_all {
+                75.0
+            } else if has("title") {
+                55.0
+            } else {
+                0.0
+            },
+        ),
+        ("concepts", if has("concepts") { 65.0 } else { 0.0 }),
+        ("tags", if has("tags") { 30.0 } else { 0.0 }),
+        ("description", if has("description") { 15.0 } else { 0.0 }),
+        (
+            "interactive",
+            if matches!(
+                r.result_type,
+                ResultType::Interactive
+                    | ResultType::Simulation
+                    | ResultType::Applet
+                    | ResultType::Visualization
+            ) {
+                5.0
+            } else {
+                0.0
+            },
+        ),
+    ]
+    .into_iter()
+    .map(|(k, v)| (k.into(), v))
+    .collect();
+    if tier == "exploratory" {
+        for v in score_components.values_mut() {
+            *v *= 0.1;
+        }
+    }
+    if tier == "none" {
+        for v in score_components.values_mut() {
+            *v = 0.0;
+        }
+    }
+    let matched_concept_ids = matched
+        .iter()
+        .filter_map(|m| m.concept_id.clone())
+        .collect::<BTreeSet<_>>()
+        .into_iter()
+        .collect();
+    SearchExplanation {
+        matched,
+        matched_concept_ids,
+        match_tier: tier.into(),
+        groups_matched,
+        groups_total: q.groups.len(),
+        score_components,
+    }
+}
+pub fn score(q: &NormalizedQuery, r: &SearchResult) -> f64 {
+    (explain(q, r).score_components.values().sum::<f64>() * 1000.0).round() / 1000.0
+}
+pub fn rank(q: &NormalizedQuery, mut results: Vec<SearchResult>) -> Vec<SearchResult> {
+    for r in &mut results {
+        r.score = score(q, r);
+        r.explanation = Some(explain(q, r));
     }
     results.sort_by(|a, b| {
         b.score
@@ -102,6 +189,8 @@ mod tests {
 
     fn result(title: &str, tags: &[&str], desc: &str, rt: ResultType) -> SearchResult {
         SearchResult {
+            semantic: Default::default(),
+            explanation: None,
             id: title.to_string(),
             source_id: "test".into(),
             source_name: "Test".into(),

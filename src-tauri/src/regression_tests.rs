@@ -3,6 +3,7 @@ use std::sync::{Arc, Mutex};
 
 fn entry(title: &str) -> common::IndexEntry {
     common::IndexEntry {
+        semantic: Default::default(),
         title: title.into(),
         description: None,
         url: format!("https://example.com/{title}"),
@@ -226,24 +227,27 @@ fn concept_variants_have_weights_and_deduplicate() {
         );
     }
     assert!(!q.variants.iter().any(|v| v.text == "gradient")); // no recursive graph traversal
-    assert!(!q.variants.iter().any(|v| v.text == "partial derivative")); // prerequisites are not synonyms
+    assert!(!q
+        .variants
+        .iter()
+        .any(|v| v.text == "partial derivative" && v.tier != "exploratory")); // prerequisites are not synonyms
 }
 
 #[test]
 fn weighted_ranking_prefers_direct_concepts_without_alias_inflation() {
     let q = search::normalize::expand(&search::query::parse("旋度"));
     for (title, expected) in [
-        ("curl", 57.0),
-        ("rotation of a vector field", 54.0),
-        ("rot", 45.0),
-        ("divergence", 10.5),
+        ("curl", 1100.0),
+        ("rotation of a vector field", 1100.0),
+        ("rot", 1075.0),
+        ("divergence", 0.0),
     ] {
         assert_eq!(
             search::ranking::score(&q, &common::to_result("test", "Test", &entry(title))),
             expected
         );
     }
-    let one = common::to_result("test", "Test", &entry("curl"));
+    let one = common::to_result("test", "Test", &entry("About curl"));
     let mut many = one.clone();
     many.title = "curl rot rotation of a vector field".into();
     assert_eq!(
@@ -329,4 +333,139 @@ fn webviewer_labels_never_receive_application_ipc() {
     for label in ["browser-1", "workspace-", "workspace-evil", "main-1", ""] {
         assert!(!util::is_app_window(label));
     }
+}
+
+#[test]
+fn shared_search_golden_contract() {
+    let data: serde_json::Value =
+        serde_json::from_str(include_str!("../../tests/search-golden.json"))
+            .expect("Regression fixture setup must succeed");
+    let entries: Vec<common::IndexEntry> = serde_json::from_value(data["entries"].clone())
+        .expect("Regression fixture setup must succeed");
+    for c in data["cases"]
+        .as_array()
+        .expect("Regression fixture setup must succeed")
+    {
+        let raw = c["query"]
+            .as_str()
+            .expect("Regression fixture setup must succeed");
+        let q = search::normalize::expand(&search::query::parse(raw));
+        assert_eq!(serde_json::json!(q.concept_ids), c["concept_ids"], "{raw}");
+        assert_eq!(
+            q.groups.len(),
+            c["groups"]
+                .as_u64()
+                .expect("Regression fixture setup must succeed") as usize
+        );
+        let results =
+            search::ranking::rank(&q, common::search_entries("test", "Test", &entries, &q));
+        for key in ["must_include", "must_not_include"] {
+            if let Some(titles) = c[key].as_array() {
+                for t in titles {
+                    assert_eq!(
+                        results.iter().any(|r| r.title
+                            == t.as_str().expect("Regression fixture setup must succeed")),
+                        key == "must_include",
+                        "{raw}: {t}"
+                    );
+                }
+            }
+        }
+        if let Some(expected) = c["variants"].as_array() {
+            for v in expected {
+                assert!(q.variants.iter().any(|x| x.text
+                    == v["text"]
+                        .as_str()
+                        .expect("Regression fixture setup must succeed")
+                    && x.r#match
+                        == v["match"]
+                            .as_str()
+                            .expect("Regression fixture setup must succeed")));
+            }
+        }
+        if let Some(expected) = c["must_not_expand_as_direct"].as_array() {
+            for v in expected {
+                assert!(!q.variants.iter().any(|x| x.text
+                    == v.as_str().expect("Regression fixture setup must succeed")
+                    && x.tier != "exploratory"));
+            }
+        }
+    }
+}
+#[test]
+fn all_benchmark_languages_resolve_to_expected_concepts() {
+    let cases: serde_json::Value =
+        serde_json::from_str(include_str!("../../tests/concept-benchmark.json"))
+            .expect("Regression fixture setup must succeed");
+    for c in cases
+        .as_array()
+        .expect("Regression fixture setup must succeed")
+    {
+        for queries in c["queries"]
+            .as_object()
+            .expect("Regression fixture setup must succeed")
+            .values()
+        {
+            for query in queries
+                .as_array()
+                .expect("Regression fixture setup must succeed")
+            {
+                let q = search::normalize::expand(&search::query::parse(
+                    query
+                        .as_str()
+                        .expect("Regression fixture setup must succeed"),
+                ));
+                assert_eq!(
+                    serde_json::json!(q.concept_ids),
+                    c["expected_concepts"],
+                    "{query}"
+                );
+            }
+        }
+    }
+}
+#[test]
+fn provider_quality_gates_reject_corrupt_refreshes() {
+    let make = |n| common::CachedIndex::new((0..n).map(|i| entry(&format!("curl {i}"))).collect());
+    let old = make(10);
+    assert!(common::validate_index("test", &make(10), Some(&old)).is_ok());
+    assert!(common::validate_index("test", &make(6), Some(&old)).is_err());
+    assert!(common::validate_index("test", &make(0), Some(&old)).is_err());
+    let mut invalid = make(10);
+    for e in &mut invalid.entries {
+        e.url = "javascript:alert(1)".into();
+    }
+    assert!(common::validate_index("test", &invalid, Some(&old)).is_err());
+    let mut empty = make(10);
+    for e in &mut empty.entries {
+        e.title = String::new();
+    }
+    assert!(common::validate_index("test", &empty, Some(&old)).is_err());
+    let mut collapse = make(10);
+    for e in &mut collapse.entries {
+        e.semantic = Default::default();
+    }
+    assert!(common::validate_index("test", &collapse, Some(&old)).is_err());
+}
+#[tokio::test]
+async fn old_cache_version_rebuilds_without_deserialize_failure() {
+    let dir = Temp::new();
+    std::fs::create_dir_all(&dir.0).expect("Regression fixture setup must succeed");
+    let ctx = SearchContext {
+        client: http_client(),
+        cache_dir: dir.0.clone(),
+    };
+    let old = serde_json::json!({"version":1,"updated_at":common::today_iso(),"entries":[{"title":"old","description":null,"url":"https://example.test/old","result_type":"article","tags":[],"thumbnail":null}]});
+    std::fs::write(cache::cache_path(&dir.0, "test"), old.to_string())
+        .expect("Regression fixture setup must succeed");
+    let fresh = common::cached_index(&ctx, "test", &Mutex::new(None), false, async {
+        Ok(common::CachedIndex::new(vec![entry("Angular momentum")]))
+    })
+    .await
+    .expect("Regression fixture setup must succeed");
+    assert_eq!(fresh.version, 2);
+    assert!(fresh.entries[0]
+        .semantic
+        .concept_ids
+        .contains(&"angular-momentum".into()));
 }

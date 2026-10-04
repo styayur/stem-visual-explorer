@@ -17,6 +17,10 @@ pub enum ResultType {
 /// A unified search result produced by every provider.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SearchResult {
+    #[serde(flatten)]
+    pub semantic: SemanticMetadata,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub explanation: Option<SearchExplanation>,
     pub id: String,
     pub source_id: String,
     pub source_name: String,
@@ -25,7 +29,7 @@ pub struct SearchResult {
     pub url: String,
     pub result_type: ResultType,
     pub tags: Vec<String>,
-    pub score: f32,
+    pub score: f64,
     pub thumbnail: Option<String>,
 }
 
@@ -97,15 +101,19 @@ pub struct ParsedQuery {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct QueryVariant {
+    pub tier: String,
+    pub r#match: String,
     pub text: String,
     pub concept_id: Option<String>,
     pub kind: String,
-    pub weight: f32,
+    pub weight: f64,
 }
 
 /// A normalized query after synonym expansion.
 #[derive(Debug, Clone)]
 pub struct NormalizedQuery {
+    pub groups: Vec<ConceptGroup>,
+    pub explore: bool,
     pub raw: String,
     pub tokens: Vec<String>,
     pub variants: Vec<QueryVariant>,
@@ -127,6 +135,7 @@ impl NormalizedQuery {
 /// The full response handed to the frontend for one search.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SearchResponse {
+    pub unfiltered_total: usize,
     pub query: String,
     pub expanded_terms: Vec<String>,
     pub results: Vec<SearchResult>,
@@ -203,4 +212,41 @@ impl Default for Settings {
             page_translate_proxy: String::new(),
         }
     }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ConceptGroup {
+    pub id: String,
+    pub concept_id: Option<String>,
+    pub variants: Vec<QueryVariant>,
+}
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+pub struct SemanticMetadata {
+    #[serde(default)]
+    pub concept_ids: Vec<String>,
+    #[serde(default)]
+    pub concept_evidence: std::collections::BTreeMap<String, Vec<String>>,
+    #[serde(default)]
+    pub subject: Vec<String>,
+    #[serde(default)]
+    pub language: String,
+    #[serde(default)]
+    pub description_source: Option<String>,
+}
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MatchEvidence {
+    pub concept_id: Option<String>,
+    pub group: String,
+    pub field: String,
+    pub tier: String,
+    pub text: String,
+}
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SearchExplanation {
+    pub matched: Vec<MatchEvidence>,
+    pub matched_concept_ids: Vec<String>,
+    pub match_tier: String,
+    pub groups_matched: usize,
+    pub groups_total: usize,
+    pub score_components: std::collections::BTreeMap<String, f64>,
 }

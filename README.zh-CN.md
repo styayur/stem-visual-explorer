@@ -29,7 +29,7 @@
 
 **使用 Windows 桌面版：** 在 [Releases](https://github.com/styayur/stem-visual-explorer/releases/latest) 下载 Windows x64 安装程序，或下载 `windows-x64.zip`，解压后运行 `stem-visual-explorer.exe`。桌面版需要 Microsoft Edge WebView2 Runtime；安装程序会按配置处理缺失的运行时，便携版需使用系统已有的运行时。发布文件附带 `SHA256SUMS.txt` 校验值。
 
-当前版本：**v0.2.0**。本次新增 Provider 预览能力、原生资源卡片、受控多窗口 WebViewer，以及离线跨语言概念图与带权查询归一化，详细验证记录见[功能检查报告](docs/functional-audit.md)。
+检索升级：**v0.3** 使用 490 个本科 STEM 概念、分层检索和语义索引，修复中文漏召回及缩写 substring 误召回。真实 before/after 见 [v0.3 检查报告](docs/audits/v0.3-report.md)。
 
 ## 可以做什么
 
@@ -105,21 +105,14 @@
 
 ## 跨语言概念归一化
 
-查询层使用 `src/lib/concepts.json` 中的 STEM 术语词典与概念图，无需 LLM、翻译 API 或网络。每个概念都有稳定的 `id`、英文 `en`、简中 `zh_cn`、繁中 `zh_tw`、同义词 `synonyms`、别名 `aliases`、相关概念 `related` 和先修概念 `prerequisites`。
+`src/lib/concepts.json` 是中、英、繁体术语与翻译词典的唯一来源，包含 490 个本科概念、稳定 ID、标签、同义词、带匹配模式的别名、学科、层级和相关/先修关系。
 
-归一化先按最长术语识别概念，例如 `partial derivative` 作为一个概念处理；中英、繁简和别名均可作为入口，按 `concept_id` 去重，而不是将中文简单翻译为英文。
+默认搜索按概念组 AND、组内同义变体 OR 检索。Direct/Equivalent 可以召回，Related/Prerequisite 只在显式“扩展相关概念”时参与，并标注为 Related、降低排序。ASCII 缩写按词边界匹配：`FT` 不会命中 `left`，`rot` 不会命中 `prototype`。URL 不参与普通全文搜索。
 
-| 查询变体 | 权重 |
-| --- | --- |
-| 原始词 `original` | 1.0 |
-| 规范名称 `canonical`（英/简/繁） | 0.95 |
-| 同义词 `synonym` | 0.9 |
-| 别名 `alternate` | 0.75 |
-| 一层相关概念 `related` | 0.35 |
+排序分别记录标题、语义概念、标签和描述证据，可在 benchmark 或开发模式查看解释。页面显示双语概念 chip、先修/相关链接、零结果原因；Web 还显示静态索引日期和超过 30 天的过期提示，不冒充实时搜索。桌面缓存版本升级到 2，浏览器 v1 索引缓存自动失效；收藏、历史和工作区保持兼容。
 
-同一概念的同一文本只保留最高权重。相关概念只展开一层，不递归；先修概念仅用于资源卡片，不作为同义词扩展。未知词保留原始权重；引号仍要求原始短语匹配，`site:` / `source:` / `type:` 不参与概念展开。
+共有 465 个 benchmark case、1,395 个三语查询、36 组人工直接相关标题规则及 41 个 TS/Rust 共享 golden case。周更工作流必须通过来源健康、检索质量、构建、浏览器和 Rust 回归，才创建索引更新 PR。详见 [检索架构与验证方法](docs/retrieval.md)。
 
-排序保留精确标题优先和交互资源加分，其余标题、标签、摘要匹配使用变体权重。每个字段取最强匹配，避免堆叠别名增加分数；“全部匹配”以直接概念分组计算，相关概念不能冒充直接查询。排序使用来源、标题和结果 ID 作为稳定的同分规则，浏览器与 Rust 实现保持一致。
 
 ## 本地开发
 

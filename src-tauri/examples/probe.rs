@@ -1,72 +1,95 @@
-//! Live provider probe used to verify the acceptance queries against the real
-//! source websites. Run with:
-//!
-//! ```text
-//! cargo run --no-default-features --example probe
-//! ```
-
-use std::collections::BTreeSet;
-use stem_visual_explorer_lib::providers::{http_client, ProviderRegistry, SearchContext};
-use stem_visual_explorer_lib::search::manager;
-
+//! Live provider health + multilingual retrieval coverage. No fixtures or cache reads.
+use serde_json::json;
+use stem_visual_explorer_lib::{
+    providers::{
+        common::{search_entries, validate_index, CachedIndex},
+        http_client, ProviderRegistry, SearchContext,
+    },
+    search::{normalize, query, ranking},
+};
 #[tokio::main]
-async fn main() {
-    let queries = [
-        "gradient",
-        "curl",
-        "divergence",
-        "standing wave",
-        "harmonic oscillator",
-        "electromagnetic induction",
-        "quantum",
-        "Fourier",
-        "梯度",
-        "旋度",
-        "驻波",
-    ];
-
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let registry = ProviderRegistry::new();
-    let enabled: Vec<String> = registry.all().iter().map(|p| p.id().to_string()).collect();
     let ctx = SearchContext {
         client: http_client(),
-        cache_dir: std::env::temp_dir().join("sve-probe-cache"),
+        cache_dir: std::env::temp_dir().join("sve-probe-no-cache"),
     };
-
-    let mut providers_with_results: BTreeSet<String> = BTreeSet::new();
-
-    for q in queries {
-        println!("\n=== query: {q} ===");
-        match manager::run_search(&ctx, &registry, q, &enabled, false).await {
-            Ok(resp) => {
-                println!("total results: {}", resp.total);
-                println!("expanded terms: {}", resp.expanded_terms.join(", "));
-                for p in &resp.providers {
-                    if p.error.is_some() {
-                        println!("  {: <22} ERROR: {}", p.name, p.error.clone().unwrap());
-                    } else {
-                        if p.count > 0 {
-                            providers_with_results.insert(p.id.clone());
-                        }
-                        let idx = p
-                            .indexed_items
-                            .map(|n| format!(" (indexed {n})"))
-                            .unwrap_or_default();
-                        println!("  {: <22} {}{}", p.name, p.count, idx);
-                    }
+    let mut indexes = Vec::new();
+    let mut health = Vec::new();
+    for p in registry.all() {
+        let fetched =
+            tokio::time::timeout(std::time::Duration::from_secs(60), p.load_index(&ctx)).await;
+        match fetched {
+            Ok(Ok(Some(index))) => match validate_index(p.id(), &index, None) {
+                Ok(()) => {
+                    health.push(json!({"provider":p.id(),"live":true,"entries":index.entries.len(),"error":null}));
+                    indexes.push((p.id(), p.name(), index));
                 }
-                if let Some(top) = resp.results.first() {
-                    println!("  top: [{}] {}", top.source_name, top.title);
-                }
+                Err(e) => health.push(json!({"provider":p.id(),"live":true,"error":e.to_string()})),
+            },
+            other => {
+                health.push(json!({"provider":p.id(),"live":true,"error":format!("{other:?}")}))
             }
-            Err(e) => println!("  SEARCH ERROR: {e}"),
         }
     }
-
-    println!(
-        "\nproviders that returned at least one result across all queries: {}",
-        providers_with_results.len()
-    );
-    for id in &providers_with_results {
-        println!("  - {id}");
+    let ids = [
+        "angular-momentum",
+        "determinant",
+        "taylor-series",
+        "line-integral",
+        "fourier-transform",
+        "curl",
+        "doppler-effect",
+        "maxwell-equations",
+        "photoelectric-effect",
+        "schrodinger-equation",
+        "entropy",
+        "torque",
+        "gradient",
+        "normal-distribution",
+        "laplace-transform",
+        "ohm-s-law",
+        "refraction",
+        "heat-equation",
+        "eigenvalue",
+        "quantum-tunneling",
+    ];
+    let mut queries = Vec::new();
+    for id in ids {
+        let c = normalize::concepts()
+            .iter()
+            .find(|c| c.id == id)
+            .ok_or_else(|| format!("Probe concept missing from ontology: {id}"))?;
+        queries.extend([c.en.clone(), c.zh_cn.clone(), c.zh_tw.clone()]);
     }
+    queries.extend(["FT".into(), "rot".into(), "gradient curl".into()]);
+    let mut rows = Vec::new();
+    for raw in queries {
+        let q = normalize::expand(&query::parse(&raw));
+        let mut all = Vec::new();
+        let mut counts = serde_json::Map::new();
+        for (id, name, CachedIndex { entries, .. }) in &indexes {
+            let results = search_entries(id, name, entries, &q);
+            counts.insert((*id).into(), json!(results.len()));
+            all.extend(results);
+        }
+        let results = ranking::rank(&q, all);
+        println!("{raw}: {:?}; {} results", q.concept_ids, results.len());
+        for r in results.iter().take(5) {
+            println!("  [{}] {}", r.source_name, r.title);
+        }
+        rows.push(json!({"query":raw,"concept_resolution":q.concept_ids,"query_groups":q.groups,"direct_equivalent_terms":q.variants.iter().filter(|v|v.tier!="exploratory").collect::<Vec<_>>(),"provider_result_counts":counts,"count":results.len(),"top5":results.into_iter().take(5).collect::<Vec<_>>()}));
+    }
+    let failed = health.iter().any(|p| !p["error"].is_null());
+    let report = json!({"verification":"live provider indexes fetched during this run; no fixtures, no disk cache","providers":health,"queries":rows});
+    let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .ok_or("Cargo manifest directory has no repository parent")?
+        .join("artifacts/provider-probe.json");
+    std::fs::create_dir_all(path.parent().ok_or("Probe report path has no parent")?)?;
+    std::fs::write(path, serde_json::to_vec_pretty(&report)?)?;
+    if failed {
+        return Err("live provider failure; inspect artifacts/provider-probe.json".into());
+    }
+    Ok(())
 }

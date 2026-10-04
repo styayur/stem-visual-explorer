@@ -27,3 +27,9 @@ src-tauri/cache
 # release packaging output
 dist-release
 
+
+# Generated verification evidence; keep only compact review summaries
+artifacts/*
+!artifacts/retrieval-benchmark-summary.json
+!artifacts/provider-quality.json
+!artifacts/ontology-statistics.json

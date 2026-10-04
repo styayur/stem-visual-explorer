@@ -1,3 +1,5 @@
+import {diagnose,diagnosticMessages} from "../lib/searchDiagnostics";
+import {useSettingsStore} from "../stores/settingsStore";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { useSearchStore, visibleResults } from "../stores/searchStore";
@@ -18,6 +20,7 @@ const SUGGESTED = [
 
 export default function SearchResults() {
   const t = useT();
+  const locale=useSettingsStore(s=>s.settings.ui_locale);
   const response = useSearchStore((s) => s.response);
   const loading = useSearchStore((s) => s.loading);
   const error = useSearchStore((s) => s.error);
@@ -43,6 +46,10 @@ export default function SearchResults() {
 
   if (error) return <div role="alert" className="p-6 text-sm text-red-600"><p>{error}</p><button type="button" className="mt-3 underline" onClick={() => runSearch()}>{t("common.retry")}</button></div>;
 
+  if(response && results.length===0) {
+    const d=diagnose(response,results.length);
+    return <div role="status" className="p-6 space-y-3 text-sm text-zinc-500">{d.reasons.map(reason=><p key={reason} data-reason={reason}>{diagnosticMessages[reason][locale==="zh-CN"?1:locale==="zh-TW"?2:0]}</p>)}</div>;
+  }
   if (!response || response.results.length === 0) {
     return <EmptyState query={response?.query ?? ""} onPick={runSearch} />;
   }

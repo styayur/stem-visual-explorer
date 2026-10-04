@@ -42,3 +42,13 @@ Unknown provider IDs and mismatched hosts default conservatively to `NativeCard`
 - Is source licensing/attribution appropriate?
 - Do web and desktop behavior remain coherent?
 - Are Chinese and English limitations updated?
+
+## v0.3 semantic index and refresh gates
+
+Construct `IndexEntry` with default `SemanticMetadata`; return it through `CachedIndex::new` to derive concept IDs, subject, language and field evidence offline. A native-search-only entry can still match lexically; do not fabricate semantic IDs. Preserve full provider category phrases as tags instead of sorting words into accidental phrases. Never put an entire page body or URL into the normal search haystack.
+
+For missing descriptions, prefer bounded adjacent listing text or descriptive title attributes. Title/category fallback is permitted only with `description_source: "title-and-provider-category"`; it is context, not an article abstract. Do not scrape arbitrary full bodies or call an LLM to enrich metadata. Known provider URL taxonomy can be explicit tags, but full URLs are excluded from recall.
+
+Add positive/negative fixtures for new parsing paths. Quality gates reject empty indexes, >30% count drops, >5% invalid URLs/missing titles/duplicate URLs and >30% relative semantic coverage collapse. Both automatic caches and snapshot generation use these checks. A failed forced refresh must report its failure. Do not silently drop an experimental provider from the manifest.
+
+Run `npm run ontology:audit`, `npm run index:quality`, `npm run benchmark`, `npm run test:parity` and live `dump_web_index`/`probe` in addition to parser tests. A new provider requires extending the manifest expectation contract deliberately, not bypassing its missing-provider check. Snapshot refresh PRs must include before/after counts and retrieval metrics; source fetch dates are UTC.

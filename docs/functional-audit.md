@@ -2,6 +2,14 @@
 
 本轮检查覆盖浏览器前端、静态索引搜索、七个 Rust 来源适配器、收藏与历史、设置、预览、工作区、翻译，以及实际 Windows WebView2 桌面窗口。
 
+## 2026-10-04 v0.3 检索升级
+
+新的实现、真实检索结果、来源质量和最终命令状态统一记录在 [v0.3 审计报告](audits/v0.3-report.md)，架构与复现命令见 [retrieval.md](retrieval.md)。本次保留了修改前全部检查与 v0.2 搜索原始结果。测试中的 iframe/翻译响应仍是 fixture；真实来源抓取独立记录在 `artifacts/provider-probe.json`，不能混同。
+
+升级修复概念覆盖不足、词典双来源、related 混入默认候选、缩写 substring、多概念 OR、混合字段评分、URL 召回、元数据缺口、快照无刷新门禁和缺少检索指标等问题。新增共享 golden parity、缓存迁移、精确字段解释、零结果分层诊断及显式 related control。原有安全/产品边界不变。初始 precision hints 的三项标注错误及修订理由单独公开在 [relevance review](audits/v0.3-relevance-review.md)。
+
+以下是历史版本检查记录，不代表此次重新执行了历史桌面 GUI 审计。
+
 ## 2026-09-30 三项升级
 
 - **PreviewCapability**：七个来源在共享策略文件中声明 `Embed / NativeCard / ExternalOnly`，未知来源默认为卡片。预览、Quick Look、工作区共用资源卡片组件；卡片显示摘要、类型、标签和离线概念关系。已验证卡片来源不发起 iframe 请求，即使配置翻译代理也不会嵌入代理页面。
@@ -67,3 +75,8 @@ CI 已加入浏览器回归、Pages 构建测试及 Windows 桌面编译任务�
 - 网站的嵌入限制、浏览器多弹窗策略、MyMemory 网络/额度限制依然由第三方控制；没有承诺所有外部页面都能嵌入或翻译。
 
 依赖迁移参考：[Vite 官方迁移说明](https://vite.dev/guide/migration)。
+
+
+## v0.3 merge-readiness hygiene
+
+The native audit profile is built on this host with the available MSVC toolchain. The initial cold-cache search exceeded the unchanged desktop test deadline; repeated ontology/field normalization was removed from deterministic index annotation. Shared TS/Rust golden annotations remain exact. The isolated WebView2 desktop suite subsequently passed all six groups, including provider health, persistence and viewer IPC denial. Raw logs/screenshots remain ignored local output; the committed v0.3 report and compact summaries retain the results. Ordinary CI permissions are read-only, and index quality now compares to the PR base/current main snapshot using local Git objects.
