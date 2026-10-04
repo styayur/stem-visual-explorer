@@ -4,9 +4,9 @@ STEM Visual Explorer is a local-first resource discovery and comparison tool. It
 
 ## Core domain
 
-- Normalize multilingual STEM queries into stable concepts and weighted variants.
+- Resolve multilingual STEM queries into stable concepts, AND groups, and Direct/Equivalent/Exploratory variants.
 - Search enabled providers concurrently and merge results into one normalized shape.
-- Rank by transparent lexical, concept, exact-title, and interaction rules.
+- Match safe word boundaries and score separate title, semantic annotation, tag and description evidence. URLs do not participate in lexical recall.
 - Support favorites, history, preview selection, and bounded four-pane comparison.
 - Keep search, provider, and ranking policy shared between desktop and web where practical.
 
@@ -40,3 +40,9 @@ Network requests go directly from the user's machine to source providers. Transl
 ## Release boundary
 
 Desktop releases use `vX.Y.Z` tags, exact-source validation, Windows build checks, stable portable/installer names, and `SHA256SUMS.txt`. The GitHub Pages build is generated from the same source and deployed separately. Maintainers own tagging and publication.
+
+## v0.3 retrieval and snapshot contract
+
+The canonical ontology also backs glossary translation. Rust and TypeScript consume the same ontology, benchmark labels and golden contract. Candidate retrieval is strict AND across concept groups; graph exploration is explicitly opt-in. Search explanations and the shared diagnostic presenter make zero results distinguishable from failed/disabled providers and filters. See [retrieval.md](retrieval.md).
+
+Index schema/cache version 2 adds deterministic semantic metadata with field provenance. Web content-hash cache keys prevent same-date stale snapshots; desktop invalidates old schema caches and rebuilds without fatal deserialization. A staged weekly/manual refresh rejects provider-count/URL/title/duplicate/semantic regressions before creating a PR. CI compares the old and new engines on the same baseline corpus as well as the refreshed corpus. No cloud service, telemetry, IPC capability or embedding bypass was added.
