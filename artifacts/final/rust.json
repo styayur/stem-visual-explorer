@@ -1,0 +1,59 @@
+[
+  {
+    "command": "cargo fmt --manifest-path src-tauri/Cargo.toml --check",
+    "exit_code": 0,
+    "started_at": "2026-10-04T01:11:34.4230641Z",
+    "duration_seconds": 0.2424981,
+    "log": "artifacts\\final\\cargo-fmt-manifest-path-src-tauri-Cargo-toml-check.log",
+    "package_version": "0.3.0"
+  },
+  {
+    "command": "cargo test --manifest-path src-tauri/Cargo.toml --no-default-features",
+    "exit_code": 0,
+    "started_at": "2026-10-04T01:11:34.7005771Z",
+    "duration_seconds": 15.4684117,
+    "log": "artifacts\\final\\cargo-test-manifest-path-src-tauri-Cargo-toml-no-default-features.log",
+    "package_version": "0.3.0"
+  },
+  {
+    "command": "cargo clippy --manifest-path src-tauri/Cargo.toml --no-default-features --all-targets -- -D warnings",
+    "exit_code": 0,
+    "started_at": "2026-10-04T01:11:50.1740554Z",
+    "duration_seconds": 5.5451205,
+    "log": "artifacts\\final\\cargo-clippy-manifest-path-src-tauri-Cargo-toml-no-default-features-all-targets-D-warnings.log",
+    "package_version": "0.3.0"
+  },
+  {
+    "command": "cargo check --manifest-path src-tauri/Cargo.toml --locked",
+    "exit_code": 0,
+    "started_at": "2026-10-04T01:11:55.7222846Z",
+    "duration_seconds": 7.9593995,
+    "log": "artifacts\\final\\cargo-check-manifest-path-src-tauri-Cargo-toml-locked.log",
+    "package_version": "0.3.0"
+  },
+  {
+    "command": "cargo test --manifest-path src-tauri/Cargo.toml",
+    "exit_code": 101,
+    "started_at": "2026-10-04T01:12:03.6845777Z",
+    "duration_seconds": 33.7410523,
+    "log": "artifacts\\final\\cargo-test-manifest-path-src-tauri-Cargo-toml.log",
+    "package_version": "0.3.0"
+  },
+  {
+    "command": "cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings",
+    "exit_code": 0,
+    "started_at": "2026-10-04T01:12:37.4288689Z",
+    "duration_seconds": 9.289622,
+    "log": "artifacts\\final\\cargo-clippy-manifest-path-src-tauri-Cargo-toml-all-targets-D-warnings.log",
+    "package_version": "0.3.0"
+  },
+  {
+    "command": "cargo test --manifest-path src-tauri/Cargo.toml",
+    "exit_code": 0,
+    "started_at": "2026-10-04T03:54:22.6730090Z",
+    "duration_seconds": 13.1919789,
+    "log": "artifacts/final/cargo-test-full-retry.log",
+    "package_version": "0.3.0",
+    "verification": "retry after live probe process released Windows executable lock"
+  }
+]

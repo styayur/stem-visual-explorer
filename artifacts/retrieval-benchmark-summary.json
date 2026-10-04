@@ -1,0 +1,3047 @@
+{
+  "baseline_revision": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+  "methodology": "465 curated multilingual concept cases; 172 cases require independent literal title witnesses from v0.2. Curated title-hint precision uses fixed k (unfilled slots count as nonrelevant). Empty/empty overlap=0. No provider excluded. Precision is a conservative title-hint estimate, not exhaustive relevance judgments.",
+  "ontology": {
+    "concepts": 490,
+    "relations": 51,
+    "prerequisites": 501,
+    "aliases": 22,
+    "synonyms": 112,
+    "subjects": 18,
+    "isolated": 0,
+    "dangling": 0,
+    "duplicate_ids": 0,
+    "invalid_aliases": 0,
+    "bilingual_coverage": 1
+  },
+  "baseline": {
+    "concept_resolution_accuracy": 0.12831541218637993,
+    "cross_language_concept_parity": 0.12688172043010754,
+    "cross_language_top10_overlap": 0.1165557262331456,
+    "concept_recall": 0.5232558139534884,
+    "zero_result_queries": 848,
+    "zero_result_rate": 0.6078853046594982,
+    "query_count": 1395,
+    "cross_language_top10_overlap_when_available": 0.12604282022886676,
+    "precision_at_5": 0.2518518518518518,
+    "precision_at_10": 0.1722222222222222,
+    "false_positive_regression_count": 10
+  },
+  "controlled": {
+    "concept_resolution_accuracy": 1,
+    "cross_language_concept_parity": 1,
+    "cross_language_top10_overlap": 0.4989247311827957,
+    "concept_recall": 1,
+    "zero_result_queries": 699,
+    "zero_result_rate": 0.5010752688172043,
+    "query_count": 1395,
+    "cross_language_top10_overlap_when_available": 1,
+    "precision_at_5": 0.44999999999999996,
+    "precision_at_10": 0.2916666666666667,
+    "false_positive_regression_count": 0
+  },
+  "current": {
+    "concept_resolution_accuracy": 1,
+    "cross_language_concept_parity": 1,
+    "cross_language_top10_overlap": 0.5075268817204301,
+    "concept_recall": 1,
+    "zero_result_queries": 687,
+    "zero_result_rate": 0.4924731182795699,
+    "query_count": 1395,
+    "cross_language_top10_overlap_when_available": 1,
+    "precision_at_5": 0.44999999999999996,
+    "precision_at_10": 0.2916666666666667,
+    "false_positive_regression_count": 0
+  },
+  "precision": [
+    {
+      "id": "gradient",
+      "languages": [
+        {
+          "language": "en",
+          "query": "gradient",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Understanding Pythagorean Distance and the Gradient",
+              "url": "https://betterexplained.com/articles/understanding-pythagorean-distance-and-the-gradient/",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Gradient",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-the-gradient/",
+              "relevant": true
+            },
+            {
+              "title": "A simple example of using the gradient theorem",
+              "url": "https://mathinsight.org/gradient_theorem_simple_examples",
+              "relevant": true
+            },
+            {
+              "title": "An introduction to the directional derivative and the gradient",
+              "url": "https://mathinsight.org/directional_derivative_gradient_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Derivation of the directional derivative and the gradient",
+              "url": "https://mathinsight.org/directional_derivative_gradient_derivation",
+              "relevant": true
+            },
+            {
+              "title": "Directional derivative and gradient examples",
+              "url": "https://mathinsight.org/directional_derivative_gradient_examples",
+              "relevant": true
+            },
+            {
+              "title": "The curl of a gradient is zero",
+              "url": "https://mathinsight.org/curl_gradient_zero",
+              "relevant": true
+            },
+            {
+              "title": "The gradient theorem for line integrals",
+              "url": "https://mathinsight.org/gradient_theorem_line_integrals",
+              "relevant": true
+            },
+            {
+              "title": "The gradient vector",
+              "url": "https://mathinsight.org/gradient_vector",
+              "relevant": true
+            },
+            {
+              "title": "Mandelbrot Set",
+              "url": "https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "梯度",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Understanding Pythagorean Distance and the Gradient",
+              "url": "https://betterexplained.com/articles/understanding-pythagorean-distance-and-the-gradient/",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Gradient",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-the-gradient/",
+              "relevant": true
+            },
+            {
+              "title": "A simple example of using the gradient theorem",
+              "url": "https://mathinsight.org/gradient_theorem_simple_examples",
+              "relevant": true
+            },
+            {
+              "title": "An introduction to the directional derivative and the gradient",
+              "url": "https://mathinsight.org/directional_derivative_gradient_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Derivation of the directional derivative and the gradient",
+              "url": "https://mathinsight.org/directional_derivative_gradient_derivation",
+              "relevant": true
+            },
+            {
+              "title": "Directional derivative and gradient examples",
+              "url": "https://mathinsight.org/directional_derivative_gradient_examples",
+              "relevant": true
+            },
+            {
+              "title": "The curl of a gradient is zero",
+              "url": "https://mathinsight.org/curl_gradient_zero",
+              "relevant": true
+            },
+            {
+              "title": "The gradient theorem for line integrals",
+              "url": "https://mathinsight.org/gradient_theorem_line_integrals",
+              "relevant": true
+            },
+            {
+              "title": "The gradient vector",
+              "url": "https://mathinsight.org/gradient_vector",
+              "relevant": true
+            },
+            {
+              "title": "Mandelbrot Set",
+              "url": "https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "梯度",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Understanding Pythagorean Distance and the Gradient",
+              "url": "https://betterexplained.com/articles/understanding-pythagorean-distance-and-the-gradient/",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Gradient",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-the-gradient/",
+              "relevant": true
+            },
+            {
+              "title": "A simple example of using the gradient theorem",
+              "url": "https://mathinsight.org/gradient_theorem_simple_examples",
+              "relevant": true
+            },
+            {
+              "title": "An introduction to the directional derivative and the gradient",
+              "url": "https://mathinsight.org/directional_derivative_gradient_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Derivation of the directional derivative and the gradient",
+              "url": "https://mathinsight.org/directional_derivative_gradient_derivation",
+              "relevant": true
+            },
+            {
+              "title": "Directional derivative and gradient examples",
+              "url": "https://mathinsight.org/directional_derivative_gradient_examples",
+              "relevant": true
+            },
+            {
+              "title": "The curl of a gradient is zero",
+              "url": "https://mathinsight.org/curl_gradient_zero",
+              "relevant": true
+            },
+            {
+              "title": "The gradient theorem for line integrals",
+              "url": "https://mathinsight.org/gradient_theorem_line_integrals",
+              "relevant": true
+            },
+            {
+              "title": "The gradient vector",
+              "url": "https://mathinsight.org/gradient_vector",
+              "relevant": true
+            },
+            {
+              "title": "Mandelbrot Set",
+              "url": "https://physicstuff.com/mathematics-statistics/mandelbrot-set",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 0.9
+    },
+    {
+      "id": "curl",
+      "languages": [
+        {
+          "language": "en",
+          "query": "curl",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Vector Calculus: Understanding Circulation and Curl",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl example",
+              "url": "https://mathinsight.org/divergence_curl_examples",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl notation",
+              "url": "https://mathinsight.org/divergence_curl_notation",
+              "relevant": true
+            },
+            {
+              "title": "The curl of a gradient is zero",
+              "url": "https://mathinsight.org/curl_gradient_zero",
+              "relevant": true
+            },
+            {
+              "title": "A path-dependent vector field with zero curl",
+              "url": "https://mathinsight.org/path_dependent_zero_curl",
+              "relevant": true
+            },
+            {
+              "title": "Subtleties about curl",
+              "url": "https://mathinsight.org/curl_subtleties",
+              "relevant": true
+            },
+            {
+              "title": "The components of the curl",
+              "url": "https://mathinsight.org/curl_components",
+              "relevant": true
+            },
+            {
+              "title": "The definition of curl from line integrals",
+              "url": "https://mathinsight.org/curl_definition_line_integral",
+              "relevant": true
+            },
+            {
+              "title": "The idea of the curl of a vector field",
+              "url": "https://mathinsight.org/curl_idea",
+              "relevant": true
+            },
+            {
+              "title": "The idea behind Green's theorem",
+              "url": "https://mathinsight.org/greens_theorem_idea#scalar_curl",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "旋度",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Vector Calculus: Understanding Circulation and Curl",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl example",
+              "url": "https://mathinsight.org/divergence_curl_examples",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl notation",
+              "url": "https://mathinsight.org/divergence_curl_notation",
+              "relevant": true
+            },
+            {
+              "title": "The curl of a gradient is zero",
+              "url": "https://mathinsight.org/curl_gradient_zero",
+              "relevant": true
+            },
+            {
+              "title": "A path-dependent vector field with zero curl",
+              "url": "https://mathinsight.org/path_dependent_zero_curl",
+              "relevant": true
+            },
+            {
+              "title": "Subtleties about curl",
+              "url": "https://mathinsight.org/curl_subtleties",
+              "relevant": true
+            },
+            {
+              "title": "The components of the curl",
+              "url": "https://mathinsight.org/curl_components",
+              "relevant": true
+            },
+            {
+              "title": "The definition of curl from line integrals",
+              "url": "https://mathinsight.org/curl_definition_line_integral",
+              "relevant": true
+            },
+            {
+              "title": "The idea of the curl of a vector field",
+              "url": "https://mathinsight.org/curl_idea",
+              "relevant": true
+            },
+            {
+              "title": "The idea behind Green's theorem",
+              "url": "https://mathinsight.org/greens_theorem_idea#scalar_curl",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "旋度",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Vector Calculus: Understanding Circulation and Curl",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-circulation-and-curl/",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl example",
+              "url": "https://mathinsight.org/divergence_curl_examples",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl notation",
+              "url": "https://mathinsight.org/divergence_curl_notation",
+              "relevant": true
+            },
+            {
+              "title": "The curl of a gradient is zero",
+              "url": "https://mathinsight.org/curl_gradient_zero",
+              "relevant": true
+            },
+            {
+              "title": "A path-dependent vector field with zero curl",
+              "url": "https://mathinsight.org/path_dependent_zero_curl",
+              "relevant": true
+            },
+            {
+              "title": "Subtleties about curl",
+              "url": "https://mathinsight.org/curl_subtleties",
+              "relevant": true
+            },
+            {
+              "title": "The components of the curl",
+              "url": "https://mathinsight.org/curl_components",
+              "relevant": true
+            },
+            {
+              "title": "The definition of curl from line integrals",
+              "url": "https://mathinsight.org/curl_definition_line_integral",
+              "relevant": true
+            },
+            {
+              "title": "The idea of the curl of a vector field",
+              "url": "https://mathinsight.org/curl_idea",
+              "relevant": true
+            },
+            {
+              "title": "The idea behind Green's theorem",
+              "url": "https://mathinsight.org/greens_theorem_idea#scalar_curl",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 0.9
+    },
+    {
+      "id": "fourier-transform",
+      "languages": [
+        {
+          "language": "en",
+          "query": "fourier transform",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "An Interactive Guide To The Fourier Transform",
+              "url": "https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+              "relevant": true
+            },
+            {
+              "title": "Discrete Fourier Transform",
+              "url": "https://falstad.com/fft/",
+              "relevant": true
+            },
+            {
+              "title": "Fft Denoising",
+              "url": "https://physicstuff.com/waves-oscillations/fft-denoising",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "傅里叶变换",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "An Interactive Guide To The Fourier Transform",
+              "url": "https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+              "relevant": true
+            },
+            {
+              "title": "Discrete Fourier Transform",
+              "url": "https://falstad.com/fft/",
+              "relevant": true
+            },
+            {
+              "title": "Fft Denoising",
+              "url": "https://physicstuff.com/waves-oscillations/fft-denoising",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "傅里葉變換",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "An Interactive Guide To The Fourier Transform",
+              "url": "https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/",
+              "relevant": true
+            },
+            {
+              "title": "Discrete Fourier Transform",
+              "url": "https://falstad.com/fft/",
+              "relevant": true
+            },
+            {
+              "title": "Fft Denoising",
+              "url": "https://physicstuff.com/waves-oscillations/fft-denoising",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.4000000000000001,
+      "precision_at_10": 0.20000000000000004
+    },
+    {
+      "id": "angular-momentum",
+      "languages": [
+        {
+          "language": "en",
+          "query": "angular momentum",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Conservation Of Angular Momentum",
+              "url": "https://physicstuff.com/mechanics/conservation-of-angular-momentum",
+              "relevant": true
+            },
+            {
+              "title": "Angular Momentum Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/angular-momentum-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "角动量",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Conservation Of Angular Momentum",
+              "url": "https://physicstuff.com/mechanics/conservation-of-angular-momentum",
+              "relevant": true
+            },
+            {
+              "title": "Angular Momentum Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/angular-momentum-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "角動量",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Conservation Of Angular Momentum",
+              "url": "https://physicstuff.com/mechanics/conservation-of-angular-momentum",
+              "relevant": true
+            },
+            {
+              "title": "Angular Momentum Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/angular-momentum-simulator",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.4000000000000001,
+      "precision_at_10": 0.20000000000000004
+    },
+    {
+      "id": "torque",
+      "languages": [
+        {
+          "language": "en",
+          "query": "torque",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Torque Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/torque-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Torque Rotational Motion",
+              "url": "https://physicstuff.com/mechanics/torque-rotational-motion",
+              "relevant": true
+            },
+            {
+              "title": "Equilibrium Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/equilibrium-simulator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "力矩",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Torque Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/torque-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Torque Rotational Motion",
+              "url": "https://physicstuff.com/mechanics/torque-rotational-motion",
+              "relevant": true
+            },
+            {
+              "title": "Equilibrium Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/equilibrium-simulator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "力矩",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Torque Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/torque-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Torque Rotational Motion",
+              "url": "https://physicstuff.com/mechanics/torque-rotational-motion",
+              "relevant": true
+            },
+            {
+              "title": "Equilibrium Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/equilibrium-simulator",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.4000000000000001,
+      "precision_at_10": 0.20000000000000004
+    },
+    {
+      "id": "determinant",
+      "languages": [
+        {
+          "language": "en",
+          "query": "determinant",
+          "precision_at_5": 1,
+          "precision_at_10": 0.8,
+          "judged_top10": [
+            {
+              "title": "Determinants and linear transformations",
+              "url": "https://mathinsight.org/determinant_linear_transformation",
+              "relevant": true
+            },
+            {
+              "title": "Geometric properties of the determinant",
+              "url": "https://mathinsight.org/determinant_geometric_properties",
+              "relevant": true
+            },
+            {
+              "title": "Matrices and determinants for multivariable calculus",
+              "url": "https://mathinsight.org/matrices_determinants_multivariable_calculus",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d1",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d1",
+              "relevant": true
+            },
+            {
+              "title": "Kirchhoffs Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/kirchhoffs-law-simulator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "行列式",
+          "precision_at_5": 1,
+          "precision_at_10": 0.8,
+          "judged_top10": [
+            {
+              "title": "Determinants and linear transformations",
+              "url": "https://mathinsight.org/determinant_linear_transformation",
+              "relevant": true
+            },
+            {
+              "title": "Geometric properties of the determinant",
+              "url": "https://mathinsight.org/determinant_geometric_properties",
+              "relevant": true
+            },
+            {
+              "title": "Matrices and determinants for multivariable calculus",
+              "url": "https://mathinsight.org/matrices_determinants_multivariable_calculus",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d1",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d1",
+              "relevant": true
+            },
+            {
+              "title": "Kirchhoffs Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/kirchhoffs-law-simulator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "行列式",
+          "precision_at_5": 1,
+          "precision_at_10": 0.8,
+          "judged_top10": [
+            {
+              "title": "Determinants and linear transformations",
+              "url": "https://mathinsight.org/determinant_linear_transformation",
+              "relevant": true
+            },
+            {
+              "title": "Geometric properties of the determinant",
+              "url": "https://mathinsight.org/determinant_geometric_properties",
+              "relevant": true
+            },
+            {
+              "title": "Matrices and determinants for multivariable calculus",
+              "url": "https://mathinsight.org/matrices_determinants_multivariable_calculus",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d1",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d1",
+              "relevant": true
+            },
+            {
+              "title": "Kirchhoffs Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/kirchhoffs-law-simulator",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 0.8000000000000002
+    },
+    {
+      "id": "taylor-series",
+      "languages": [
+        {
+          "language": "en",
+          "query": "taylor series",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Intuition for Taylor Series (DNA Analogy)",
+              "url": "https://betterexplained.com/articles/taylor-series/",
+              "relevant": true
+            },
+            {
+              "title": "Classic examples of Taylor polynomials",
+              "url": "https://mathinsight.org/classical_examples_taylor_polynomials_refresher",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "泰勒级数",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Intuition for Taylor Series (DNA Analogy)",
+              "url": "https://betterexplained.com/articles/taylor-series/",
+              "relevant": true
+            },
+            {
+              "title": "Classic examples of Taylor polynomials",
+              "url": "https://mathinsight.org/classical_examples_taylor_polynomials_refresher",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "泰勒級數",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Intuition for Taylor Series (DNA Analogy)",
+              "url": "https://betterexplained.com/articles/taylor-series/",
+              "relevant": true
+            },
+            {
+              "title": "Classic examples of Taylor polynomials",
+              "url": "https://mathinsight.org/classical_examples_taylor_polynomials_refresher",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.20000000000000004,
+      "precision_at_10": 0.10000000000000002
+    },
+    {
+      "id": "line-integral",
+      "languages": [
+        {
+          "language": "en",
+          "query": "line integral",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Examples of scalar line integrals",
+              "url": "https://mathinsight.org/line_integral_scalar_examples",
+              "relevant": true
+            },
+            {
+              "title": "Line integrals are independent of parametrization",
+              "url": "https://mathinsight.org/line_integral_independent_parametrization",
+              "relevant": true
+            },
+            {
+              "title": "Alternate notation for vector line integrals",
+              "url": "https://mathinsight.org/line_integral_vector_alternative_notation",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a line integral of a scalar-valued function",
+              "url": "https://mathinsight.org/line_integral_scalar_function_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a line integral of a vector field",
+              "url": "https://mathinsight.org/line_integral_vector_field_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Line integrals as circulation",
+              "url": "https://mathinsight.org/line_integral_circulation",
+              "relevant": true
+            },
+            {
+              "title": "The definition of curl from line integrals",
+              "url": "https://mathinsight.org/curl_definition_line_integral",
+              "relevant": true
+            },
+            {
+              "title": "The gradient theorem for line integrals",
+              "url": "https://mathinsight.org/gradient_theorem_line_integrals",
+              "relevant": true
+            },
+            {
+              "title": "Vector line integral examples",
+              "url": "https://mathinsight.org/line_integral_vector_examples",
+              "relevant": true
+            },
+            {
+              "title": "A simple example of using the gradient theorem",
+              "url": "https://mathinsight.org/gradient_theorem_simple_examples",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "线积分",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Examples of scalar line integrals",
+              "url": "https://mathinsight.org/line_integral_scalar_examples",
+              "relevant": true
+            },
+            {
+              "title": "Line integrals are independent of parametrization",
+              "url": "https://mathinsight.org/line_integral_independent_parametrization",
+              "relevant": true
+            },
+            {
+              "title": "Alternate notation for vector line integrals",
+              "url": "https://mathinsight.org/line_integral_vector_alternative_notation",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a line integral of a scalar-valued function",
+              "url": "https://mathinsight.org/line_integral_scalar_function_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a line integral of a vector field",
+              "url": "https://mathinsight.org/line_integral_vector_field_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Line integrals as circulation",
+              "url": "https://mathinsight.org/line_integral_circulation",
+              "relevant": true
+            },
+            {
+              "title": "The definition of curl from line integrals",
+              "url": "https://mathinsight.org/curl_definition_line_integral",
+              "relevant": true
+            },
+            {
+              "title": "The gradient theorem for line integrals",
+              "url": "https://mathinsight.org/gradient_theorem_line_integrals",
+              "relevant": true
+            },
+            {
+              "title": "Vector line integral examples",
+              "url": "https://mathinsight.org/line_integral_vector_examples",
+              "relevant": true
+            },
+            {
+              "title": "A simple example of using the gradient theorem",
+              "url": "https://mathinsight.org/gradient_theorem_simple_examples",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "線積分",
+          "precision_at_5": 1,
+          "precision_at_10": 0.9,
+          "judged_top10": [
+            {
+              "title": "Examples of scalar line integrals",
+              "url": "https://mathinsight.org/line_integral_scalar_examples",
+              "relevant": true
+            },
+            {
+              "title": "Line integrals are independent of parametrization",
+              "url": "https://mathinsight.org/line_integral_independent_parametrization",
+              "relevant": true
+            },
+            {
+              "title": "Alternate notation for vector line integrals",
+              "url": "https://mathinsight.org/line_integral_vector_alternative_notation",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a line integral of a scalar-valued function",
+              "url": "https://mathinsight.org/line_integral_scalar_function_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a line integral of a vector field",
+              "url": "https://mathinsight.org/line_integral_vector_field_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Line integrals as circulation",
+              "url": "https://mathinsight.org/line_integral_circulation",
+              "relevant": true
+            },
+            {
+              "title": "The definition of curl from line integrals",
+              "url": "https://mathinsight.org/curl_definition_line_integral",
+              "relevant": true
+            },
+            {
+              "title": "The gradient theorem for line integrals",
+              "url": "https://mathinsight.org/gradient_theorem_line_integrals",
+              "relevant": true
+            },
+            {
+              "title": "Vector line integral examples",
+              "url": "https://mathinsight.org/line_integral_vector_examples",
+              "relevant": true
+            },
+            {
+              "title": "A simple example of using the gradient theorem",
+              "url": "https://mathinsight.org/gradient_theorem_simple_examples",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 0.9
+    },
+    {
+      "id": "surface-integral",
+      "languages": [
+        {
+          "language": "en",
+          "query": "surface integral",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Introduction to a surface integral of a scalar-valued function",
+              "url": "https://mathinsight.org/surface_integral_scalar_function_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a surface integral of a vector field",
+              "url": "https://mathinsight.org/surface_integral_vector_field_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Scalar surface integral examples",
+              "url": "https://mathinsight.org/surface_integral_scalar_examples",
+              "relevant": true
+            },
+            {
+              "title": "Vector surface integral examples",
+              "url": "https://mathinsight.org/surface_integral_vector_examples",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "面积分",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Introduction to a surface integral of a scalar-valued function",
+              "url": "https://mathinsight.org/surface_integral_scalar_function_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a surface integral of a vector field",
+              "url": "https://mathinsight.org/surface_integral_vector_field_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Scalar surface integral examples",
+              "url": "https://mathinsight.org/surface_integral_scalar_examples",
+              "relevant": true
+            },
+            {
+              "title": "Vector surface integral examples",
+              "url": "https://mathinsight.org/surface_integral_vector_examples",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "面積分",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Introduction to a surface integral of a scalar-valued function",
+              "url": "https://mathinsight.org/surface_integral_scalar_function_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to a surface integral of a vector field",
+              "url": "https://mathinsight.org/surface_integral_vector_field_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Scalar surface integral examples",
+              "url": "https://mathinsight.org/surface_integral_scalar_examples",
+              "relevant": true
+            },
+            {
+              "title": "Vector surface integral examples",
+              "url": "https://mathinsight.org/surface_integral_vector_examples",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.8000000000000002,
+      "precision_at_10": 0.4000000000000001
+    },
+    {
+      "id": "maxwell-equations",
+      "languages": [
+        {
+          "language": "en",
+          "query": "maxwell equations",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-CN",
+          "query": "麦克斯韦方程组",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-TW",
+          "query": "馬克士威方程組",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    },
+    {
+      "id": "doppler-effect",
+      "languages": [
+        {
+          "language": "en",
+          "query": "doppler effect",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Doppler Effect",
+              "url": "https://physicstuff.com/waves-oscillations/doppler-effect",
+              "relevant": true
+            },
+            {
+              "title": "Doppler Effect Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/doppler-effect-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "多普勒效应",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Doppler Effect",
+              "url": "https://physicstuff.com/waves-oscillations/doppler-effect",
+              "relevant": true
+            },
+            {
+              "title": "Doppler Effect Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/doppler-effect-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "都卜勒效應",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Doppler Effect",
+              "url": "https://physicstuff.com/waves-oscillations/doppler-effect",
+              "relevant": true
+            },
+            {
+              "title": "Doppler Effect Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/doppler-effect-simulator",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.4000000000000001,
+      "precision_at_10": 0.20000000000000004
+    },
+    {
+      "id": "photoelectric-effect",
+      "languages": [
+        {
+          "language": "en",
+          "query": "photoelectric effect",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Photoelectric Effect",
+              "url": "https://physicstuff.com/modern-physics/photoelectric-effect",
+              "relevant": true
+            },
+            {
+              "title": "Photoelectric Effect Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/photoelectric-effect-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "光电效应",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Photoelectric Effect",
+              "url": "https://physicstuff.com/modern-physics/photoelectric-effect",
+              "relevant": true
+            },
+            {
+              "title": "Photoelectric Effect Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/photoelectric-effect-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "光電效應",
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2,
+          "judged_top10": [
+            {
+              "title": "Photoelectric Effect",
+              "url": "https://physicstuff.com/modern-physics/photoelectric-effect",
+              "relevant": true
+            },
+            {
+              "title": "Photoelectric Effect Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/photoelectric-effect-simulator",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.4000000000000001,
+      "precision_at_10": 0.20000000000000004
+    },
+    {
+      "id": "entropy",
+      "languages": [
+        {
+          "language": "en",
+          "query": "entropy",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Entropy Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/entropy-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Carnot Engine Efficiency Calculator",
+              "url": "https://physicstuff.com/thermodynamics/carnot-engine-efficiency-calculator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "熵",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Entropy Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/entropy-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Carnot Engine Efficiency Calculator",
+              "url": "https://physicstuff.com/thermodynamics/carnot-engine-efficiency-calculator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "熵",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Entropy Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/entropy-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Carnot Engine Efficiency Calculator",
+              "url": "https://physicstuff.com/thermodynamics/carnot-engine-efficiency-calculator",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.20000000000000004,
+      "precision_at_10": 0.10000000000000002
+    },
+    {
+      "id": "schrodinger-equation",
+      "languages": [
+        {
+          "language": "en",
+          "query": "schrodinger equation",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Schrodinger Equation Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/schrodinger-equation-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "薛定谔方程",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Schrodinger Equation Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/schrodinger-equation-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "薛丁格方程",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Schrodinger Equation Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/schrodinger-equation-simulator",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.20000000000000004,
+      "precision_at_10": 0.10000000000000002
+    },
+    {
+      "id": "lorentz-force",
+      "languages": [
+        {
+          "language": "en",
+          "query": "lorentz force",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Magnetic Field Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/magnetic-field-simulator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "洛伦兹力",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Magnetic Field Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/magnetic-field-simulator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "洛倫茲力",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Magnetic Field Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/magnetic-field-simulator",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    },
+    {
+      "id": "divergence",
+      "languages": [
+        {
+          "language": "en",
+          "query": "divergence",
+          "precision_at_5": 1,
+          "precision_at_10": 0.7,
+          "judged_top10": [
+            {
+              "title": "Vector Calculus: Understanding Divergence",
+              "url": "https://betterexplained.com/articles/divergence/",
+              "relevant": true
+            },
+            {
+              "title": "Divergence theorem examples",
+              "url": "https://mathinsight.org/divergence_theorem_examples",
+              "relevant": true
+            },
+            {
+              "title": "Subtleties about divergence",
+              "url": "https://mathinsight.org/divergence_subtleties",
+              "relevant": true
+            },
+            {
+              "title": "The idea behind the divergence theorem",
+              "url": "https://mathinsight.org/divergence_theorem_idea",
+              "relevant": true
+            },
+            {
+              "title": "The idea of the divergence of a vector field",
+              "url": "https://mathinsight.org/divergence_idea",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl example",
+              "url": "https://mathinsight.org/divergence_curl_examples",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl notation",
+              "url": "https://mathinsight.org/divergence_curl_notation",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "散度",
+          "precision_at_5": 1,
+          "precision_at_10": 0.7,
+          "judged_top10": [
+            {
+              "title": "Vector Calculus: Understanding Divergence",
+              "url": "https://betterexplained.com/articles/divergence/",
+              "relevant": true
+            },
+            {
+              "title": "Divergence theorem examples",
+              "url": "https://mathinsight.org/divergence_theorem_examples",
+              "relevant": true
+            },
+            {
+              "title": "Subtleties about divergence",
+              "url": "https://mathinsight.org/divergence_subtleties",
+              "relevant": true
+            },
+            {
+              "title": "The idea behind the divergence theorem",
+              "url": "https://mathinsight.org/divergence_theorem_idea",
+              "relevant": true
+            },
+            {
+              "title": "The idea of the divergence of a vector field",
+              "url": "https://mathinsight.org/divergence_idea",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl example",
+              "url": "https://mathinsight.org/divergence_curl_examples",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl notation",
+              "url": "https://mathinsight.org/divergence_curl_notation",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "散度",
+          "precision_at_5": 1,
+          "precision_at_10": 0.7,
+          "judged_top10": [
+            {
+              "title": "Vector Calculus: Understanding Divergence",
+              "url": "https://betterexplained.com/articles/divergence/",
+              "relevant": true
+            },
+            {
+              "title": "Divergence theorem examples",
+              "url": "https://mathinsight.org/divergence_theorem_examples",
+              "relevant": true
+            },
+            {
+              "title": "Subtleties about divergence",
+              "url": "https://mathinsight.org/divergence_subtleties",
+              "relevant": true
+            },
+            {
+              "title": "The idea behind the divergence theorem",
+              "url": "https://mathinsight.org/divergence_theorem_idea",
+              "relevant": true
+            },
+            {
+              "title": "The idea of the divergence of a vector field",
+              "url": "https://mathinsight.org/divergence_idea",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl example",
+              "url": "https://mathinsight.org/divergence_curl_examples",
+              "relevant": true
+            },
+            {
+              "title": "Divergence and curl notation",
+              "url": "https://mathinsight.org/divergence_curl_notation",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 0.6999999999999998
+    },
+    {
+      "id": "eigenvalue",
+      "languages": [
+        {
+          "language": "en",
+          "query": "eigenvalue",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "The stability of the asynchronous state as function of largest eigenvalue",
+              "url": "https://mathinsight.org/stability_asynchronous_state_largest_eigenvalue",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "特征值",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "The stability of the asynchronous state as function of largest eigenvalue",
+              "url": "https://mathinsight.org/stability_asynchronous_state_largest_eigenvalue",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "特徵值",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "The stability of the asynchronous state as function of largest eigenvalue",
+              "url": "https://mathinsight.org/stability_asynchronous_state_largest_eigenvalue",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.20000000000000004,
+      "precision_at_10": 0.10000000000000002
+    },
+    {
+      "id": "dot-product",
+      "languages": [
+        {
+          "language": "en",
+          "query": "dot product",
+          "precision_at_5": 1,
+          "precision_at_10": 0.6,
+          "judged_top10": [
+            {
+              "title": "Dot product examples",
+              "url": "https://mathinsight.org/dot_product_examples",
+              "relevant": true
+            },
+            {
+              "title": "Dot product in matrix notation",
+              "url": "https://mathinsight.org/dot_product_matrix_notation",
+              "relevant": true
+            },
+            {
+              "title": "The dot product",
+              "url": "https://mathinsight.org/dot_product",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the dot product in terms of vector components",
+              "url": "https://mathinsight.org/dot_product_formula_components",
+              "relevant": true
+            },
+            {
+              "title": "Dot Product Applet",
+              "url": "https://falstad.com/dotproduct/",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Dot Product",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-the-dot-product/",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "点积",
+          "precision_at_5": 1,
+          "precision_at_10": 0.6,
+          "judged_top10": [
+            {
+              "title": "Dot product examples",
+              "url": "https://mathinsight.org/dot_product_examples",
+              "relevant": true
+            },
+            {
+              "title": "Dot product in matrix notation",
+              "url": "https://mathinsight.org/dot_product_matrix_notation",
+              "relevant": true
+            },
+            {
+              "title": "The dot product",
+              "url": "https://mathinsight.org/dot_product",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the dot product in terms of vector components",
+              "url": "https://mathinsight.org/dot_product_formula_components",
+              "relevant": true
+            },
+            {
+              "title": "Dot Product Applet",
+              "url": "https://falstad.com/dotproduct/",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Dot Product",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-the-dot-product/",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "內積",
+          "precision_at_5": 1,
+          "precision_at_10": 0.6,
+          "judged_top10": [
+            {
+              "title": "Dot product examples",
+              "url": "https://mathinsight.org/dot_product_examples",
+              "relevant": true
+            },
+            {
+              "title": "Dot product in matrix notation",
+              "url": "https://mathinsight.org/dot_product_matrix_notation",
+              "relevant": true
+            },
+            {
+              "title": "The dot product",
+              "url": "https://mathinsight.org/dot_product",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the dot product in terms of vector components",
+              "url": "https://mathinsight.org/dot_product_formula_components",
+              "relevant": true
+            },
+            {
+              "title": "Dot Product Applet",
+              "url": "https://falstad.com/dotproduct/",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Dot Product",
+              "url": "https://betterexplained.com/articles/vector-calculus-understanding-the-dot-product/",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 0.6
+    },
+    {
+      "id": "cross-product",
+      "languages": [
+        {
+          "language": "en",
+          "query": "cross product",
+          "precision_at_5": 1,
+          "precision_at_10": 0.5,
+          "judged_top10": [
+            {
+              "title": "Cross product examples",
+              "url": "https://mathinsight.org/cross_product_examples",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the cross product",
+              "url": "https://mathinsight.org/cross_product_formula",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the cross product",
+              "url": "https://mathinsight.org/cross_product_formula#crossproductformula",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Cross Product",
+              "url": "https://betterexplained.com/articles/cross-product/",
+              "relevant": true
+            },
+            {
+              "title": "The cross product",
+              "url": "https://mathinsight.org/cross_product",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d1",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d1",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "叉积",
+          "precision_at_5": 1,
+          "precision_at_10": 0.5,
+          "judged_top10": [
+            {
+              "title": "Cross product examples",
+              "url": "https://mathinsight.org/cross_product_examples",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the cross product",
+              "url": "https://mathinsight.org/cross_product_formula",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the cross product",
+              "url": "https://mathinsight.org/cross_product_formula#crossproductformula",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Cross Product",
+              "url": "https://betterexplained.com/articles/cross-product/",
+              "relevant": true
+            },
+            {
+              "title": "The cross product",
+              "url": "https://mathinsight.org/cross_product",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d1",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d1",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "外積",
+          "precision_at_5": 1,
+          "precision_at_10": 0.5,
+          "judged_top10": [
+            {
+              "title": "Cross product examples",
+              "url": "https://mathinsight.org/cross_product_examples",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the cross product",
+              "url": "https://mathinsight.org/cross_product_formula",
+              "relevant": true
+            },
+            {
+              "title": "The formula for the cross product",
+              "url": "https://mathinsight.org/cross_product_formula#crossproductformula",
+              "relevant": true
+            },
+            {
+              "title": "Vector Calculus: Understanding the Cross Product",
+              "url": "https://betterexplained.com/articles/cross-product/",
+              "relevant": true
+            },
+            {
+              "title": "The cross product",
+              "url": "https://mathinsight.org/cross_product",
+              "relevant": true
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#area2d1",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d",
+              "relevant": false
+            },
+            {
+              "title": "The relationship between determinants and area or volume",
+              "url": "https://mathinsight.org/relationship_determinants_area_volume#volume3d1",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 0.5
+    },
+    {
+      "id": "partial-derivative",
+      "languages": [
+        {
+          "language": "en",
+          "query": "partial derivative",
+          "precision_at_5": 1,
+          "precision_at_10": 0.6,
+          "judged_top10": [
+            {
+              "title": "Elementary partial derivative problems",
+              "url": "https://mathinsight.org/partial_derivative_elementary_problems",
+              "relevant": true
+            },
+            {
+              "title": "A differentiable function with discontinuous partial derivatives",
+              "url": "https://mathinsight.org/differentiable_function_discontinuous_partial_derivatives",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to partial derivatives",
+              "url": "https://mathinsight.org/partial_derivative_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Non-differentiable functions must have discontinuous partial derivatives",
+              "url": "https://mathinsight.org/nondifferentiable_discontinuous_partial_derivatives",
+              "relevant": true
+            },
+            {
+              "title": "Partial derivative by limit definition",
+              "url": "https://mathinsight.org/partial_derivative_limit_definition",
+              "relevant": true
+            },
+            {
+              "title": "Partial derivative examples",
+              "url": "https://mathinsight.org/partial_derivative_examples",
+              "relevant": true
+            },
+            {
+              "title": "The gradient vector",
+              "url": "https://mathinsight.org/gradient_vector",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "偏导数",
+          "precision_at_5": 1,
+          "precision_at_10": 0.6,
+          "judged_top10": [
+            {
+              "title": "Elementary partial derivative problems",
+              "url": "https://mathinsight.org/partial_derivative_elementary_problems",
+              "relevant": true
+            },
+            {
+              "title": "A differentiable function with discontinuous partial derivatives",
+              "url": "https://mathinsight.org/differentiable_function_discontinuous_partial_derivatives",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to partial derivatives",
+              "url": "https://mathinsight.org/partial_derivative_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Non-differentiable functions must have discontinuous partial derivatives",
+              "url": "https://mathinsight.org/nondifferentiable_discontinuous_partial_derivatives",
+              "relevant": true
+            },
+            {
+              "title": "Partial derivative by limit definition",
+              "url": "https://mathinsight.org/partial_derivative_limit_definition",
+              "relevant": true
+            },
+            {
+              "title": "Partial derivative examples",
+              "url": "https://mathinsight.org/partial_derivative_examples",
+              "relevant": true
+            },
+            {
+              "title": "The gradient vector",
+              "url": "https://mathinsight.org/gradient_vector",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "偏導數",
+          "precision_at_5": 1,
+          "precision_at_10": 0.6,
+          "judged_top10": [
+            {
+              "title": "Elementary partial derivative problems",
+              "url": "https://mathinsight.org/partial_derivative_elementary_problems",
+              "relevant": true
+            },
+            {
+              "title": "A differentiable function with discontinuous partial derivatives",
+              "url": "https://mathinsight.org/differentiable_function_discontinuous_partial_derivatives",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to partial derivatives",
+              "url": "https://mathinsight.org/partial_derivative_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Non-differentiable functions must have discontinuous partial derivatives",
+              "url": "https://mathinsight.org/nondifferentiable_discontinuous_partial_derivatives",
+              "relevant": true
+            },
+            {
+              "title": "Partial derivative by limit definition",
+              "url": "https://mathinsight.org/partial_derivative_limit_definition",
+              "relevant": true
+            },
+            {
+              "title": "Partial derivative examples",
+              "url": "https://mathinsight.org/partial_derivative_examples",
+              "relevant": true
+            },
+            {
+              "title": "The gradient vector",
+              "url": "https://mathinsight.org/gradient_vector",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 0.6
+    },
+    {
+      "id": "double-integral",
+      "languages": [
+        {
+          "language": "en",
+          "query": "double integral",
+          "precision_at_5": 1,
+          "precision_at_10": 1,
+          "judged_top10": [
+            {
+              "title": "Double integral examples",
+              "url": "https://mathinsight.org/double_integral_examples",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as iterated integrals",
+              "url": "https://mathinsight.org/double_integral_iterated",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as volume",
+              "url": "https://mathinsight.org/double_integral_volume",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals where one integration order is easier",
+              "url": "https://mathinsight.org/double_integral_one_integration_order_easier",
+              "relevant": true
+            },
+            {
+              "title": "Examples of changing the order of integration in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_order_integration_examples",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variables_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to double integrals",
+              "url": "https://mathinsight.org/double_integral_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Area calculation for changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variables_area_calculation",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as area",
+              "url": "https://mathinsight.org/double_integral_area",
+              "relevant": true
+            },
+            {
+              "title": "Illustrated example of changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variable_illustrated_example",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "二重积分",
+          "precision_at_5": 1,
+          "precision_at_10": 1,
+          "judged_top10": [
+            {
+              "title": "Double integral examples",
+              "url": "https://mathinsight.org/double_integral_examples",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as iterated integrals",
+              "url": "https://mathinsight.org/double_integral_iterated",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as volume",
+              "url": "https://mathinsight.org/double_integral_volume",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals where one integration order is easier",
+              "url": "https://mathinsight.org/double_integral_one_integration_order_easier",
+              "relevant": true
+            },
+            {
+              "title": "Examples of changing the order of integration in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_order_integration_examples",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variables_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to double integrals",
+              "url": "https://mathinsight.org/double_integral_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Area calculation for changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variables_area_calculation",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as area",
+              "url": "https://mathinsight.org/double_integral_area",
+              "relevant": true
+            },
+            {
+              "title": "Illustrated example of changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variable_illustrated_example",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "二重積分",
+          "precision_at_5": 1,
+          "precision_at_10": 1,
+          "judged_top10": [
+            {
+              "title": "Double integral examples",
+              "url": "https://mathinsight.org/double_integral_examples",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as iterated integrals",
+              "url": "https://mathinsight.org/double_integral_iterated",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as volume",
+              "url": "https://mathinsight.org/double_integral_volume",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals where one integration order is easier",
+              "url": "https://mathinsight.org/double_integral_one_integration_order_easier",
+              "relevant": true
+            },
+            {
+              "title": "Examples of changing the order of integration in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_order_integration_examples",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variables_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Introduction to double integrals",
+              "url": "https://mathinsight.org/double_integral_introduction",
+              "relevant": true
+            },
+            {
+              "title": "Area calculation for changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variables_area_calculation",
+              "relevant": true
+            },
+            {
+              "title": "Double integrals as area",
+              "url": "https://mathinsight.org/double_integral_area",
+              "relevant": true
+            },
+            {
+              "title": "Illustrated example of changing variables in double integrals",
+              "url": "https://mathinsight.org/double_integral_change_variable_illustrated_example",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 1,
+      "precision_at_10": 1
+    },
+    {
+      "id": "fourier-series",
+      "languages": [
+        {
+          "language": "en",
+          "query": "fourier series",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Fourier Series Applet",
+              "url": "https://falstad.com/fourier/",
+              "relevant": true
+            },
+            {
+              "title": "Fourier Synthesis",
+              "url": "https://physicstuff.com/waves-oscillations/fourier-synthesis",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "傅里叶级数",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Fourier Series Applet",
+              "url": "https://falstad.com/fourier/",
+              "relevant": true
+            },
+            {
+              "title": "Fourier Synthesis",
+              "url": "https://physicstuff.com/waves-oscillations/fourier-synthesis",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "傅里葉級數",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Fourier Series Applet",
+              "url": "https://falstad.com/fourier/",
+              "relevant": true
+            },
+            {
+              "title": "Fourier Synthesis",
+              "url": "https://physicstuff.com/waves-oscillations/fourier-synthesis",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.20000000000000004,
+      "precision_at_10": 0.10000000000000002
+    },
+    {
+      "id": "laplace-transform",
+      "languages": [
+        {
+          "language": "en",
+          "query": "laplace transform",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-CN",
+          "query": "拉普拉斯变换",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-TW",
+          "query": "拉普拉斯變換",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    },
+    {
+      "id": "heat-equation",
+      "languages": [
+        {
+          "language": "en",
+          "query": "heat equation",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-CN",
+          "query": "热方程",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-TW",
+          "query": "熱方程",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    },
+    {
+      "id": "normal-distribution",
+      "languages": [
+        {
+          "language": "en",
+          "query": "normal distribution",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-CN",
+          "query": "正态分布",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-TW",
+          "query": "常態分布",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    },
+    {
+      "id": "bayes-theorem",
+      "languages": [
+        {
+          "language": "en",
+          "query": "bayes' theorem",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "An Intuitive (and Short) Explanation of Bayes' Theorem",
+              "url": "https://betterexplained.com/articles/an-intuitive-and-short-explanation-of-bayes-theorem/",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "贝叶斯定理",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "An Intuitive (and Short) Explanation of Bayes' Theorem",
+              "url": "https://betterexplained.com/articles/an-intuitive-and-short-explanation-of-bayes-theorem/",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "貝氏定理",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "An Intuitive (and Short) Explanation of Bayes' Theorem",
+              "url": "https://betterexplained.com/articles/an-intuitive-and-short-explanation-of-bayes-theorem/",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.20000000000000004,
+      "precision_at_10": 0.10000000000000002
+    },
+    {
+      "id": "central-limit-theorem",
+      "languages": [
+        {
+          "language": "en",
+          "query": "central limit theorem",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Projectile Sampling Distributions",
+              "url": "https://phet.colorado.edu/en/simulations/projectile-sampling-distributions",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "中心极限定理",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Projectile Sampling Distributions",
+              "url": "https://phet.colorado.edu/en/simulations/projectile-sampling-distributions",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "中央極限定理",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Projectile Sampling Distributions",
+              "url": "https://phet.colorado.edu/en/simulations/projectile-sampling-distributions",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    },
+    {
+      "id": "conservation-of-energy",
+      "languages": [
+        {
+          "language": "en",
+          "query": "conservation of energy",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Conservation Of Energy Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/conservation-of-energy-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Energy Skate Park",
+              "url": "https://phet.colorado.edu/en/simulations/energy-skate-park",
+              "relevant": true
+            },
+            {
+              "title": "Energy Skate Park: Basics",
+              "url": "https://phet.colorado.edu/en/simulations/energy-skate-park-basics",
+              "relevant": true
+            },
+            {
+              "title": "Energy Visualiser",
+              "url": "https://physicstuff.com/mechanics/energy-visualiser",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "能量守恒",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Conservation Of Energy Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/conservation-of-energy-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Energy Skate Park",
+              "url": "https://phet.colorado.edu/en/simulations/energy-skate-park",
+              "relevant": true
+            },
+            {
+              "title": "Energy Skate Park: Basics",
+              "url": "https://phet.colorado.edu/en/simulations/energy-skate-park-basics",
+              "relevant": true
+            },
+            {
+              "title": "Energy Visualiser",
+              "url": "https://physicstuff.com/mechanics/energy-visualiser",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "能量守恆",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Conservation Of Energy Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/conservation-of-energy-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Energy Skate Park",
+              "url": "https://phet.colorado.edu/en/simulations/energy-skate-park",
+              "relevant": true
+            },
+            {
+              "title": "Energy Skate Park: Basics",
+              "url": "https://phet.colorado.edu/en/simulations/energy-skate-park-basics",
+              "relevant": true
+            },
+            {
+              "title": "Energy Visualiser",
+              "url": "https://physicstuff.com/mechanics/energy-visualiser",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.8000000000000002,
+      "precision_at_10": 0.4000000000000001
+    },
+    {
+      "id": "moment-of-inertia",
+      "languages": [
+        {
+          "language": "en",
+          "query": "moment of inertia",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Moment Of Inertia Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/moment-of-inertia-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "转动惯量",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Moment Of Inertia Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/moment-of-inertia-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "轉動慣量",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Moment Of Inertia Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/moment-of-inertia-simulator",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.20000000000000004,
+      "precision_at_10": 0.10000000000000002
+    },
+    {
+      "id": "standing-wave",
+      "languages": [
+        {
+          "language": "en",
+          "query": "standing wave",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Standing Waves Resonance",
+              "url": "https://physicstuff.com/waves-oscillations/standing-waves-resonance",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "驻波",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Standing Waves Resonance",
+              "url": "https://physicstuff.com/waves-oscillations/standing-waves-resonance",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "駐波",
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1,
+          "judged_top10": [
+            {
+              "title": "Standing Waves Resonance",
+              "url": "https://physicstuff.com/waves-oscillations/standing-waves-resonance",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.20000000000000004,
+      "precision_at_10": 0.10000000000000002
+    },
+    {
+      "id": "electromagnetic-induction",
+      "languages": [
+        {
+          "language": "en",
+          "query": "electromagnetic induction",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Faraday's Law",
+              "url": "https://phet.colorado.edu/en/simulations/faradays-law",
+              "relevant": true
+            },
+            {
+              "title": "Faraday Law Electromagnetic Induction",
+              "url": "https://physicstuff.com/electromagnetism/faraday-law-electromagnetic-induction",
+              "relevant": true
+            },
+            {
+              "title": "Electromagnetic Induction Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/electromagnetic-induction-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Faraday's Electromagnetic Lab",
+              "url": "https://phet.colorado.edu/en/simulations/faradays-electromagnetic-lab",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "电磁感应",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Faraday's Law",
+              "url": "https://phet.colorado.edu/en/simulations/faradays-law",
+              "relevant": true
+            },
+            {
+              "title": "Faraday Law Electromagnetic Induction",
+              "url": "https://physicstuff.com/electromagnetism/faraday-law-electromagnetic-induction",
+              "relevant": true
+            },
+            {
+              "title": "Electromagnetic Induction Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/electromagnetic-induction-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Faraday's Electromagnetic Lab",
+              "url": "https://phet.colorado.edu/en/simulations/faradays-electromagnetic-lab",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "電磁感應",
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4,
+          "judged_top10": [
+            {
+              "title": "Faraday's Law",
+              "url": "https://phet.colorado.edu/en/simulations/faradays-law",
+              "relevant": true
+            },
+            {
+              "title": "Faraday Law Electromagnetic Induction",
+              "url": "https://physicstuff.com/electromagnetism/faraday-law-electromagnetic-induction",
+              "relevant": true
+            },
+            {
+              "title": "Electromagnetic Induction Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/electromagnetic-induction-simulator",
+              "relevant": true
+            },
+            {
+              "title": "Faraday's Electromagnetic Lab",
+              "url": "https://phet.colorado.edu/en/simulations/faradays-electromagnetic-lab",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.8000000000000002,
+      "precision_at_10": 0.4000000000000001
+    },
+    {
+      "id": "ohm-s-law",
+      "languages": [
+        {
+          "language": "en",
+          "query": "ohm's law",
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3,
+          "judged_top10": [
+            {
+              "title": "Ohm's Law",
+              "url": "https://phet.colorado.edu/en/simulations/ohms-law",
+              "relevant": true
+            },
+            {
+              "title": "Ohms Law",
+              "url": "https://physicstuff.com/electromagnetism/ohms-law",
+              "relevant": true
+            },
+            {
+              "title": "Ohms Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/ohms-law-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "欧姆定律",
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3,
+          "judged_top10": [
+            {
+              "title": "Ohm's Law",
+              "url": "https://phet.colorado.edu/en/simulations/ohms-law",
+              "relevant": true
+            },
+            {
+              "title": "Ohms Law",
+              "url": "https://physicstuff.com/electromagnetism/ohms-law",
+              "relevant": true
+            },
+            {
+              "title": "Ohms Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/ohms-law-simulator",
+              "relevant": true
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "歐姆定律",
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3,
+          "judged_top10": [
+            {
+              "title": "Ohm's Law",
+              "url": "https://phet.colorado.edu/en/simulations/ohms-law",
+              "relevant": true
+            },
+            {
+              "title": "Ohms Law",
+              "url": "https://physicstuff.com/electromagnetism/ohms-law",
+              "relevant": true
+            },
+            {
+              "title": "Ohms Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/ohms-law-simulator",
+              "relevant": true
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.6,
+      "precision_at_10": 0.3
+    },
+    {
+      "id": "refraction",
+      "languages": [
+        {
+          "language": "en",
+          "query": "refraction",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Bending Light",
+              "url": "https://phet.colorado.edu/en/simulations/bending-light",
+              "relevant": false
+            },
+            {
+              "title": "Snells Law",
+              "url": "https://physicstuff.com/optics/snells-law",
+              "relevant": false
+            },
+            {
+              "title": "Snells Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/snells-law-simulator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "折射",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Bending Light",
+              "url": "https://phet.colorado.edu/en/simulations/bending-light",
+              "relevant": false
+            },
+            {
+              "title": "Snells Law",
+              "url": "https://physicstuff.com/optics/snells-law",
+              "relevant": false
+            },
+            {
+              "title": "Snells Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/snells-law-simulator",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "折射",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": [
+            {
+              "title": "Bending Light",
+              "url": "https://phet.colorado.edu/en/simulations/bending-light",
+              "relevant": false
+            },
+            {
+              "title": "Snells Law",
+              "url": "https://physicstuff.com/optics/snells-law",
+              "relevant": false
+            },
+            {
+              "title": "Snells Law Simulator",
+              "url": "https://physicsfundamentalsinfo.com/labs/snells-law-simulator",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    },
+    {
+      "id": "quantum-tunneling",
+      "languages": [
+        {
+          "language": "en",
+          "query": "quantum tunneling",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-CN",
+          "query": "量子隧穿",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-TW",
+          "query": "量子穿隧",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    },
+    {
+      "id": "pendulum",
+      "languages": [
+        {
+          "language": "en",
+          "query": "pendulum",
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3,
+          "judged_top10": [
+            {
+              "title": "Foucault Pendulum",
+              "url": "https://falstad.com/foucault/",
+              "relevant": true
+            },
+            {
+              "title": "Pendulum Lab",
+              "url": "https://phet.colorado.edu/en/simulations/pendulum-lab",
+              "relevant": true
+            },
+            {
+              "title": "Simple Pendulum",
+              "url": "https://physicsfundamentalsinfo.com/labs/simple-pendulum",
+              "relevant": true
+            },
+            {
+              "title": "Coulombs Law",
+              "url": "https://physicstuff.com/electromagnetism/coulombs-law",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-CN",
+          "query": "单摆",
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3,
+          "judged_top10": [
+            {
+              "title": "Foucault Pendulum",
+              "url": "https://falstad.com/foucault/",
+              "relevant": true
+            },
+            {
+              "title": "Pendulum Lab",
+              "url": "https://phet.colorado.edu/en/simulations/pendulum-lab",
+              "relevant": true
+            },
+            {
+              "title": "Simple Pendulum",
+              "url": "https://physicsfundamentalsinfo.com/labs/simple-pendulum",
+              "relevant": true
+            },
+            {
+              "title": "Coulombs Law",
+              "url": "https://physicstuff.com/electromagnetism/coulombs-law",
+              "relevant": false
+            }
+          ]
+        },
+        {
+          "language": "zh-TW",
+          "query": "單擺",
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3,
+          "judged_top10": [
+            {
+              "title": "Foucault Pendulum",
+              "url": "https://falstad.com/foucault/",
+              "relevant": true
+            },
+            {
+              "title": "Pendulum Lab",
+              "url": "https://phet.colorado.edu/en/simulations/pendulum-lab",
+              "relevant": true
+            },
+            {
+              "title": "Simple Pendulum",
+              "url": "https://physicsfundamentalsinfo.com/labs/simple-pendulum",
+              "relevant": true
+            },
+            {
+              "title": "Coulombs Law",
+              "url": "https://physicstuff.com/electromagnetism/coulombs-law",
+              "relevant": false
+            }
+          ]
+        }
+      ],
+      "precision_at_5": 0.6,
+      "precision_at_10": 0.3
+    },
+    {
+      "id": "wave-function",
+      "languages": [
+        {
+          "language": "en",
+          "query": "wave function",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-CN",
+          "query": "波函数",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        },
+        {
+          "language": "zh-TW",
+          "query": "波函數",
+          "precision_at_5": 0,
+          "precision_at_10": 0,
+          "judged_top10": []
+        }
+      ],
+      "precision_at_5": 0,
+      "precision_at_10": 0
+    }
+  ],
+  "minimum_failures": []
+}

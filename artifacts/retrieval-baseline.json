@@ -1,7 +1,10 @@
 {
-  "revision": "3cd6ceb",
+  "revision": "b380db84a1760e265841c2e7412a21b0a2595b9d",
+  "observed_revision": "3cd6ceb",
+  "tree": "89d9c17fbe3af4040b4993979f4862bd80582a49",
   "concepts": 61,
-  "isolated": 48,
+  "isolated": 30,
+  "isolated_outgoing_only": 48,
   "queries": [
     {
       "query": "梯度",

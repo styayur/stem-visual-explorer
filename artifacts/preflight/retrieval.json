@@ -1,0 +1,42 @@
+[
+  {
+    "command": "npm run ontology:validate",
+    "exit_code": 0,
+    "started_at": "2026-10-04T00:59:07.9226849Z",
+    "duration_seconds": 0.8551762,
+    "log": "artifacts\\preflight\\npm-run-ontology-validate.log",
+    "package_version": "0.2.0"
+  },
+  {
+    "command": "npm run index:quality",
+    "exit_code": 0,
+    "started_at": "2026-10-04T00:59:08.8269452Z",
+    "duration_seconds": 9.2296145,
+    "log": "artifacts\\preflight\\npm-run-index-quality.log",
+    "package_version": "0.2.0"
+  },
+  {
+    "command": "npm run benchmark",
+    "exit_code": 0,
+    "started_at": "2026-10-04T00:59:18.0632182Z",
+    "duration_seconds": 80.6385078,
+    "log": "artifacts\\preflight\\npm-run-benchmark.log",
+    "package_version": "0.2.0"
+  },
+  {
+    "command": "npm run test:parity",
+    "exit_code": 1,
+    "started_at": "2026-10-04T01:00:38.7060033Z",
+    "duration_seconds": 75.1550236,
+    "log": "artifacts\\preflight\\npm-run-test-parity.log",
+    "package_version": "0.2.0"
+  },
+  {
+    "command": "npm run ontology:audit",
+    "exit_code": 0,
+    "started_at": "2026-10-04T01:01:53.8644521Z",
+    "duration_seconds": 0.9084863,
+    "log": "artifacts\\preflight\\npm-run-ontology-audit.log",
+    "package_version": "0.2.0"
+  }
+]

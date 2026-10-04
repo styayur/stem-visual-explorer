@@ -1,0 +1,11 @@
+   Compiling stem-visual-explorer v0.3.0 (D:\GitHub\styayur\stem-visual-explorer\src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.87s
+     Running `src-tauri\target\debug\examples\dump_web_index.exe`
+Math Insight: 447 -> 447 (live)
+Falstad: 85 -> 85 (live)
+PhET: 120 -> 120 (live)
+BetterExplained: 144 -> 144 (live)
+Physics Fundamentals: 138 -> 138 (live)
+PhysicStuff: 52 -> 52 (live)
+猫田の物理: 93 -> 93 (live)
+Validated 7 live providers -> D:\GitHub\styayur\stem-visual-explorer\public/index

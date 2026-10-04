@@ -1,0 +1,23 @@
+[
+  {
+    "command": "cargo run --manifest-path src-tauri/Cargo.toml --no-default-features --example dump_web_index",
+    "exit_code": 1,
+    "started_at": "2026-10-04T01:07:02.9045599Z",
+    "log": "artifacts/final/live-dump_web_index.log",
+    "verification": "live, no fixtures, no disk cache"
+  },
+  {
+    "command": "cargo run --manifest-path src-tauri/Cargo.toml --no-default-features --example probe",
+    "exit_code": 0,
+    "started_at": "2026-10-04T01:10:14.4912214Z",
+    "log": "artifacts/final/live-probe.log",
+    "verification": "live, no fixtures, no disk cache"
+  },
+  {
+    "command": "cargo run --manifest-path src-tauri/Cargo.toml --no-default-features --example dump_web_index",
+    "exit_code": 0,
+    "started_at": "2026-10-04T01:13:54.7205543Z",
+    "log": "artifacts/final/live-dump_web_index-retry.log",
+    "verification": "live retry, no fixtures, no disk cache"
+  }
+]

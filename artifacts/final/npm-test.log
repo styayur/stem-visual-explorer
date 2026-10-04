@@ -1,0 +1,50 @@
+
+> stem-visual-explorer@0.3.0 test
+> node --experimental-strip-types scripts/unit_test.mjs && node --experimental-strip-types scripts/retrieval_test.mjs && node --experimental-strip-types scripts/search_golden.mjs
+
+  ok  concept dictionary edges are valid
+  ok  concept variants preserve all five weights
+  ok  concept IDs deduplicate across languages and longest phrases
+  ok  weighted ranking does not reward redundant concept aliases
+  ok  resource graph annotations include related and prerequisite concepts
+  ok  preview policies never embed unknown or mismatched origins
+glossary
+  ok  en -> zh
+  ok  zh -> en
+  ok  unknown term returns null
+  ok  covers a reasonable STEM vocabulary
+query parser
+  ok  plain terms
+  ok  site / source filters
+  ok  type filter
+  ok  exact phrase
+synonym expansion
+  ok  gradient
+  ok  curl
+  ok  standing wave
+  ok  english term is preserved
+matching + ranking
+  ok  matches candidates by token
+  ok  exact title ranks first
+  ok  interactive bonus
+  ok  empty query yields nothing
+translation helpers
+  ok  source language guess
+  ok  external translated URL is built
+  ok  custom proxy template is honoured
+  ok  only a proxy template is embeddable
+regressions
+  ok  traditional glossary and reverse lookup
+  ok  multiword English and traditional query expansion
+  ok  exact title still ranks first with source syntax
+  ok  filter-only query browses the index
+  ok  exact phrase normalizes whitespace and excludes unrelated rows
+  ok  ranking has a deterministic final tie-breaker
+  ok  external URLs and workspace payloads are validated
+  ok  unsafe translation proxies cannot be embedded
+  ok  Unicode translation chunks preserve code points and byte limits
+  ok  translation service errors are not cached as translations
+
+UNIT TESTS: 36 passed
+Retrieval regression: boundaries, tiers, annotations, quality gates, diagnostics, all 1395 language resolutions PASS
+Search golden: 41 cases passed

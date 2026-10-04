@@ -1,0 +1,342 @@
+[
+  {
+    "id": "gradient",
+    "query": "gradient",
+    "positive_title_patterns": [
+      "gradient|梯度"
+    ],
+    "negative_title_patterns": [
+      "gradient descent"
+    ],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "curl",
+    "query": "curl",
+    "positive_title_patterns": [
+      "\\bcurl\\b|旋度|rotation of a vector field"
+    ],
+    "negative_title_patterns": [
+      "prototype|rotator"
+    ],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "fourier-transform",
+    "query": "fourier transform",
+    "positive_title_patterns": [
+      "fourier.*transform|傅[里立][叶葉].*[变變][换換]"
+    ],
+    "negative_title_patterns": [
+      "^wave|^standing wave|left|after"
+    ],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "angular-momentum",
+    "query": "angular momentum",
+    "positive_title_patterns": [
+      "angular momentum|角[动動]量"
+    ],
+    "negative_title_patterns": [
+      "linear momentum"
+    ],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "torque",
+    "query": "torque",
+    "positive_title_patterns": [
+      "torque|moment of force|力矩"
+    ],
+    "negative_title_patterns": [
+      "torque converter"
+    ],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "determinant",
+    "query": "determinant",
+    "positive_title_patterns": [
+      "determinant|行列式"
+    ],
+    "negative_title_patterns": [
+      "deterministic"
+    ],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "taylor-series",
+    "query": "taylor series",
+    "positive_title_patterns": [
+      "taylor|泰勒"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "line-integral",
+    "query": "line integral",
+    "positive_title_patterns": [
+      "line integral|线积分|線積分"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "surface-integral",
+    "query": "surface integral",
+    "positive_title_patterns": [
+      "surface integral|面积分|面積分"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "maxwell-equations",
+    "query": "maxwell equations",
+    "positive_title_patterns": [
+      "maxwell|麦克斯韦|麥克斯韋|馬克士威"
+    ],
+    "negative_title_patterns": [
+      "maxwell distribution"
+    ],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "doppler-effect",
+    "query": "doppler effect",
+    "positive_title_patterns": [
+      "doppler|多普勒|都卜勒"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "photoelectric-effect",
+    "query": "photoelectric effect",
+    "positive_title_patterns": [
+      "photoelectric|光电|光電"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "entropy",
+    "query": "entropy",
+    "positive_title_patterns": [
+      "entropy|熵"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "schrodinger-equation",
+    "query": "schrodinger equation",
+    "positive_title_patterns": [
+      "schr[oö]dinger|薛定|薛丁"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "lorentz-force",
+    "query": "lorentz force",
+    "positive_title_patterns": [
+      "lorentz force|ローレンツ|洛伦兹力"
+    ],
+    "negative_title_patterns": [
+      "lorentz transformation"
+    ],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "divergence",
+    "query": "divergence",
+    "positive_title_patterns": [
+      "divergence|散度"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "eigenvalue",
+    "query": "eigenvalue",
+    "positive_title_patterns": [
+      "eigenvalue|eigenvector|特征|特徵"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "dot-product",
+    "query": "dot product",
+    "positive_title_patterns": [
+      "dot product|scalar product|点积|內積"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "cross-product",
+    "query": "cross product",
+    "positive_title_patterns": [
+      "cross product|vector product|叉积|外積"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "partial-derivative",
+    "query": "partial derivative",
+    "positive_title_patterns": [
+      "partial derivative|偏导|偏導"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "double-integral",
+    "query": "double integral",
+    "positive_title_patterns": [
+      "double integral|二重积分|二重積分"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "fourier-series",
+    "query": "fourier series",
+    "positive_title_patterns": [
+      "fourier series|傅里[叶葉][级級][数數]"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "laplace-transform",
+    "query": "laplace transform",
+    "positive_title_patterns": [
+      "laplace transform|拉普拉斯[变變][换換]"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "heat-equation",
+    "query": "heat equation",
+    "positive_title_patterns": [
+      "heat equation|热方程|熱方程"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "normal-distribution",
+    "query": "normal distribution",
+    "positive_title_patterns": [
+      "normal distribution|gaussian|bell curve|正态|常態"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "bayes-theorem",
+    "query": "bayes' theorem",
+    "positive_title_patterns": [
+      "bayes|贝叶斯|貝氏"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "central-limit-theorem",
+    "query": "central limit theorem",
+    "positive_title_patterns": [
+      "central limit|中心极限|中央極限"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "conservation-of-energy",
+    "query": "conservation of energy",
+    "positive_title_patterns": [
+      "energy|能量"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "moment-of-inertia",
+    "query": "moment of inertia",
+    "positive_title_patterns": [
+      "inertia|转动惯量|轉動慣量"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "standing-wave",
+    "query": "standing wave",
+    "positive_title_patterns": [
+      "standing wave|stationary wave|驻波|駐波"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "electromagnetic-induction",
+    "query": "electromagnetic induction",
+    "positive_title_patterns": [
+      "induction|faraday|电磁感应|電磁感應"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "ohm-s-law",
+    "query": "ohm's law",
+    "positive_title_patterns": [
+      "ohm|欧姆|歐姆"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "refraction",
+    "query": "refraction",
+    "positive_title_patterns": [
+      "refraction|折射"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "quantum-tunneling",
+    "query": "quantum tunneling",
+    "positive_title_patterns": [
+      "tunnel|隧穿|穿隧"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "pendulum",
+    "query": "pendulum",
+    "positive_title_patterns": [
+      "pendulum|单摆|單擺"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  },
+  {
+    "id": "wave-function",
+    "query": "wave function",
+    "positive_title_patterns": [
+      "wave function|wavefunction|波函数|波函數"
+    ],
+    "negative_title_patterns": [],
+    "judgment": "Curated title relevance hints; unjudged titles count as nonrelevant, not full document judgments."
+  }
+]

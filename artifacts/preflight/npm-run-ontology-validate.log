@@ -1,0 +1,17 @@
+
+> stem-visual-explorer@0.2.0 ontology:validate
+> node --experimental-strip-types scripts/ontology_validate.mjs
+
+{
+  concepts: 490,
+  relations: 51,
+  prerequisites: 501,
+  aliases: 22,
+  synonyms: 112,
+  subjects: 18,
+  isolated: 0,
+  dangling: 0,
+  duplicate_ids: 0,
+  invalid_aliases: 0,
+  bilingual_coverage: 1
+}
