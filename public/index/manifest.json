@@ -30,7 +30,7 @@
     "updated_at": "2026-10-04",
     "file": "phet.json",
     "schema_version": 2,
-    "content_hash": "7e7f62e3f4f3b8905aa3e38a5a7fa9f50decba7d6c08611b44a0d42ae2cca15f"
+    "content_hash": "7fd0f6af59b960678c063eb2797247e310437cd21417e71aa48965431b02c225"
   },
   {
     "id": "betterexplained",
@@ -52,7 +52,7 @@
     "updated_at": "2026-10-04",
     "file": "physicsfundamentals.json",
     "schema_version": 2,
-    "content_hash": "35c68b095c0b4afa2f81e1f715388fd7d21d63970326bce30aaf82fdbcc70a44"
+    "content_hash": "62a204170cc5f1fab4f06e80b0a756bfe8f48fe6e392be45ba656da39e6675c7"
   },
   {
     "id": "physicstuff",
@@ -63,7 +63,7 @@
     "updated_at": "2026-10-04",
     "file": "physicstuff.json",
     "schema_version": 2,
-    "content_hash": "a32c01e73eb3c707b455131dbed89cba047df7608e876283d4f2e6dad50e7598"
+    "content_hash": "816f949ce9bd2429caf1a6441f266dbd62734265fd482a8ee79a0340f123c875"
   },
   {
     "id": "maotian",

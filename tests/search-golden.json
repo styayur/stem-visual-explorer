@@ -980,6 +980,76 @@
         "line",
         "integral"
       ]
+    },
+    {
+      "query": "简谐振动",
+      "concept_ids": [
+        "simple-harmonic-motion"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "simple harmonic motion",
+      "concept_ids": [
+        "simple-harmonic-motion"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "椭圆",
+      "concept_ids": [
+        "ellipse"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "橢圓",
+      "concept_ids": [
+        "ellipse"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "ellipse",
+      "concept_ids": [
+        "ellipse"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "determinant",
+      "concept_ids": [
+        "determinant"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "linear transformation",
+      "concept_ids": [
+        "linear-transformation"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "倔强系数",
+      "concept_ids": [
+        "spring-constant"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "倔強係數",
+      "concept_ids": [
+        "spring-constant"
+      ],
+      "groups": 1
+    },
+    {
+      "query": "振动的位相",
+      "concept_ids": [
+        "phase"
+      ],
+      "groups": 1
     }
   ]
 }

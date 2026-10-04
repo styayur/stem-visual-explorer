@@ -21,6 +21,19 @@ pub struct Concept {
     pub related: Vec<String>,
     pub prerequisites: Vec<String>,
 }
+#[derive(Debug, Deserialize)]
+pub struct HistoricalAlias {
+    pub text: String,
+    #[serde(rename = "conceptId")]
+    pub concept_id: String,
+}
+pub fn historical_aliases() -> &'static [HistoricalAlias] {
+    static DATA: OnceLock<Vec<HistoricalAlias>> = OnceLock::new();
+    DATA.get_or_init(|| {
+        serde_json::from_str(include_str!("../../../src/learning/historicalAliases.json"))
+            .expect("validated historical query aliases")
+    })
+}
 pub fn concepts() -> &'static [Concept] {
     static DATA: OnceLock<Vec<Concept>> = OnceLock::new();
     DATA.get_or_init(|| {
@@ -98,6 +111,13 @@ fn lookup(s: &str) -> Option<&'static Concept> {
                     }
                 }
             }
+            // Legacy spellings recognize queries without becoming canonical names
+            // or adding unrelated recall variants to provider resource annotations.
+            for alias in historical_aliases() {
+                if let Some(c) = concepts().iter().find(|c| c.id == alias.concept_id) {
+                    out.entry(term(&alias.text)).or_insert(c);
+                }
+            }
             out
         })
         .get(&term(s))
@@ -155,6 +175,7 @@ pub fn expand(parsed: &ParsedQuery) -> NormalizedQuery {
                     .map(|a| a.text.as_str()),
             )
         })
+        .chain(historical_aliases().iter().map(|a| a.text.as_str()))
         .map(|n| n.split_whitespace().count())
         .max()
         .unwrap_or(1);

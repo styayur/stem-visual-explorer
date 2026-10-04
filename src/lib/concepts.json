@@ -117,8 +117,6 @@
     "zh_cn": "谐振子",
     "zh_tw": "諧振子",
     "synonyms": [
-      "简谐振动",
-      "簡諧振動",
       "简谐振子",
       "簡諧振子",
       "単振動",
@@ -632,7 +630,10 @@
     "en": "simple harmonic motion",
     "zh_cn": "简谐运动",
     "zh_tw": "簡諧運動",
-    "synonyms": [],
+    "synonyms": [
+      "简谐振动",
+      "簡諧振動"
+    ],
     "aliases": [],
     "related": [],
     "prerequisites": [
@@ -8211,6 +8212,80 @@
     "related": [],
     "prerequisites": [
       "kinetic-theory"
+    ]
+  },
+  {
+    "id": "ellipse",
+    "en": "ellipse",
+    "zh_cn": "椭圆",
+    "zh_tw": "橢圓",
+    "synonyms": [],
+    "aliases": [],
+    "related": [
+      "polar-coordinates"
+    ],
+    "prerequisites": [
+      "vector",
+      "sine"
+    ],
+    "subject": "mathematics.geometry",
+    "level": [
+      "high-school"
+    ]
+  },
+  {
+    "id": "hookes-law",
+    "en": "Hooke's law",
+    "zh_cn": "胡克定律",
+    "zh_tw": "胡克定律",
+    "synonyms": [],
+    "aliases": [],
+    "related": [
+      "spring-constant",
+      "simple-harmonic-motion"
+    ],
+    "prerequisites": [
+      "force"
+    ],
+    "subject": "physics.mechanics",
+    "level": [
+      "high-school"
+    ]
+  },
+  {
+    "id": "spring-constant",
+    "en": "spring constant",
+    "zh_cn": "弹簧劲度系数",
+    "zh_tw": "彈簧勁度係數",
+    "synonyms": [],
+    "aliases": [],
+    "related": [
+      "hookes-law"
+    ],
+    "prerequisites": [
+      "force"
+    ],
+    "subject": "physics.mechanics",
+    "level": [
+      "high-school"
+    ]
+  },
+  {
+    "id": "equilibrium",
+    "en": "mechanical equilibrium",
+    "zh_cn": "力学平衡",
+    "zh_tw": "力學平衡",
+    "synonyms": [],
+    "aliases": [],
+    "related": [
+      "newton-s-second-law"
+    ],
+    "prerequisites": [
+      "force"
+    ],
+    "subject": "physics.mechanics",
+    "level": [
+      "high-school"
     ]
   }
 ]

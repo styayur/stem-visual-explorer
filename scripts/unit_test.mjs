@@ -73,7 +73,8 @@ test("en -> zh", () => {
   assert.equal(glossaryLookup("Curl", "zh-CN"), "旋度");
 });
 test("zh -> en", () => {
-  assert.equal(glossaryLookup("简谐振动", "en"), "harmonic oscillator");
+  assert.equal(glossaryLookup("简谐振动", "en"), "simple harmonic motion");
+  assert.equal(glossaryLookup("谐振子", "en"), "harmonic oscillator");
 });
 test("unknown term returns null", () => {
   assert.equal(glossaryLookup("zzzz-not-a-term", "zh-CN"), null);

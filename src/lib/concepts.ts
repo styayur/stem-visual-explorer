@@ -1,4 +1,5 @@
 import data from "./concepts.json" with { type: "json" };
+import { historicalAliases } from "../learning/historicalAliases.ts";
 
 export type MatchMode = "exact" | "phrase" | "token" | "cjk-substring";
 export type MatchTier = "direct" | "equivalent" | "exploratory";
@@ -90,6 +91,11 @@ for (const c of concepts)
     if (!lookup.has(key) || [c.en, c.zh_cn, c.zh_tw].includes(n))
       lookup.set(key, c);
   }
+// Opt-in historical query recognition is kept outside canonical labels and recall.
+for (const alias of historicalAliases) {
+  const concept = conceptById.get(alias.conceptId);
+  if (concept && !lookup.has(normalizeTerm(alias.text))) lookup.set(normalizeTerm(alias.text), concept);
+}
 const maxWords = Math.max(
   ...[...lookup.keys()].map((n) => n.split(" ").length),
 );
