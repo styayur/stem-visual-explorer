@@ -29,7 +29,7 @@ pub struct SearchResult {
     pub url: String,
     pub result_type: ResultType,
     pub tags: Vec<String>,
-    pub score: f32,
+    pub score: f64,
     pub thumbnail: Option<String>,
 }
 
@@ -248,5 +248,5 @@ pub struct SearchExplanation {
     pub match_tier: String,
     pub groups_matched: usize,
     pub groups_total: usize,
-    pub score_components: std::collections::BTreeMap<String, f32>,
+    pub score_components: std::collections::BTreeMap<String, f64>,
 }

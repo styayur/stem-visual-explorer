@@ -90,13 +90,13 @@ pub fn explain(q: &NormalizedQuery, r: &SearchResult) -> SearchExplanation {
             .iter()
             .any(|v| v.kind != "alternate" && term(&r.title) == v.text);
     let has = |field: &str| matched.iter().any(|m| m.field == field);
-    let mut score_components: BTreeMap<String, f32> = [
+    let mut score_components: BTreeMap<String, f64> = [
         (
             "coverage",
             if tier == "all-groups" {
                 1000.0
             } else if tier == "partial" {
-                500.0 * groups_matched as f32 / q.groups.len() as f32
+                500.0 * groups_matched as f64 / q.groups.len() as f64
             } else {
                 0.0
             },
@@ -159,8 +159,8 @@ pub fn explain(q: &NormalizedQuery, r: &SearchResult) -> SearchExplanation {
         score_components,
     }
 }
-pub fn score(q: &NormalizedQuery, r: &SearchResult) -> f32 {
-    (explain(q, r).score_components.values().sum::<f32>() * 1000.0).round() / 1000.0
+pub fn score(q: &NormalizedQuery, r: &SearchResult) -> f64 {
+    (explain(q, r).score_components.values().sum::<f64>() * 1000.0).round() / 1000.0
 }
 pub fn rank(q: &NormalizedQuery, mut results: Vec<SearchResult>) -> Vec<SearchResult> {
     for r in &mut results {

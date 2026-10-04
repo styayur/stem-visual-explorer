@@ -317,10 +317,11 @@ pub fn annotate(entry: &IndexEntry) -> crate::models::SemanticMetadata {
     }
     meta.concept_ids = meta.concept_evidence.keys().cloned().collect();
     meta.subject = subjects.into_iter().collect();
-    meta.language = if entry.url.starts_with("https://maotian.nomaki.jp/") || entry
-        .title
-        .chars()
-        .any(|c| ('\u{3040}'..='\u{30ff}').contains(&c))
+    meta.language = if entry.url.starts_with("https://maotian.nomaki.jp/")
+        || entry
+            .title
+            .chars()
+            .any(|c| ('\u{3040}'..='\u{30ff}').contains(&c))
     {
         "ja"
     } else if entry

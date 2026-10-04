@@ -143,11 +143,17 @@ pub fn expand(parsed: &ParsedQuery) -> NormalizedQuery {
         .collect();
     let max_words = concepts()
         .iter()
-        .flat_map(names)
+        .flat_map(|c| {
+            std::iter::once(c.id.as_str()).chain(names(c)).chain(
+                c.aliases
+                    .iter()
+                    .filter(|a| a.r#match != "exact")
+                    .map(|a| a.text.as_str()),
+            )
+        })
         .map(|n| n.split_whitespace().count())
         .max()
-        .unwrap_or(1)
-        .max(8);
+        .unwrap_or(1);
     let mut start = 0;
     while start < terms.len() {
         let mut size = max_words.min(terms.len() - start);

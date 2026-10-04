@@ -43,7 +43,7 @@
     "expected_concepts": [
       "curl"
     ],
-    "expected_min_results": 1,
+    "expected_min_results": 2,
     "positive_resource_urls": [
       "https://mathinsight.org/curl_subtleties",
       "https://mathinsight.org/curl_components",
@@ -732,7 +732,7 @@
     "expected_concepts": [
       "fourier-transform"
     ],
-    "expected_min_results": 1,
+    "expected_min_results": 2,
     "positive_resource_urls": [
       "https://falstad.com/fft/",
       "https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/"
@@ -2854,7 +2854,7 @@
     "expected_concepts": [
       "line-integral"
     ],
-    "expected_min_results": 1,
+    "expected_min_results": 2,
     "positive_resource_urls": [
       "https://mathinsight.org/line_integral_circulation",
       "https://mathinsight.org/curl_definition_line_integral",
@@ -2881,7 +2881,7 @@
     "expected_concepts": [
       "surface-integral"
     ],
-    "expected_min_results": 1,
+    "expected_min_results": 2,
     "positive_resource_urls": [
       "https://mathinsight.org/surface_integral_vector_examples",
       "https://mathinsight.org/surface_integral_vector_field_introduction",
@@ -3049,7 +3049,7 @@
     "expected_concepts": [
       "determinant"
     ],
-    "expected_min_results": 1,
+    "expected_min_results": 2,
     "positive_resource_urls": [
       "https://mathinsight.org/relationship_determinants_area_volume#area2d",
       "https://mathinsight.org/matrices_determinants_multivariable_calculus",
@@ -6275,7 +6275,7 @@
     "expected_concepts": [
       "angular-momentum"
     ],
-    "expected_min_results": 1,
+    "expected_min_results": 2,
     "positive_resource_urls": [
       "https://physicsfundamentalsinfo.com/labs/angular-momentum-simulator",
       "https://physicstuff.com/mechanics/conservation-of-angular-momentum"
@@ -7136,7 +7136,7 @@
     "expected_concepts": [
       "doppler-effect"
     ],
-    "expected_min_results": 1,
+    "expected_min_results": 2,
     "positive_resource_urls": [
       "https://physicsfundamentalsinfo.com/labs/doppler-effect-simulator",
       "https://physicstuff.com/waves-oscillations/doppler-effect"
@@ -9381,7 +9381,7 @@
     "expected_concepts": [
       "photoelectric-effect"
     ],
-    "expected_min_results": 1,
+    "expected_min_results": 2,
     "positive_resource_urls": [
       "https://physicsfundamentalsinfo.com/labs/photoelectric-effect-simulator",
       "https://physicstuff.com/modern-physics/photoelectric-effect"
