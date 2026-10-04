@@ -11,7 +11,7 @@
     "build": "tsc && vite build",
     "build:web": "tsc && vite build --mode web",
     "preview": "vite preview",
-    "test": "node --experimental-strip-types scripts/unit_test.mjs && node --experimental-strip-types scripts/retrieval_test.mjs && node --experimental-strip-types scripts/search_golden.mjs",
+    "test": "node --experimental-strip-types scripts/unit_test.mjs && node --experimental-strip-types scripts/retrieval_test.mjs && node --experimental-strip-types scripts/search_golden.mjs && node scripts/index_baseline_test.mjs",
     "test:web": "node scripts/web_regression.mjs",
     "test:web:build": "npm run build:web && node scripts/web_build_smoke.mjs",
     "test:desktop": "node scripts/desktop_regression.mjs",

@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import assert from "node:assert/strict";
 import { concepts, annotateResource } from "../src/lib/concepts.ts";
-import { fromGit } from "./retrieval_baseline.mjs";
+import { indexBaselineRef, indexFromGit } from "./index_baseline.mjs";
 const read = (p) => JSON.parse(readFileSync(p, "utf8").replace(/^\uFEFF/, ""));
 const ids = new Set(concepts.map((c) => c.id));
 export function quality(index) {
@@ -73,7 +73,11 @@ export function validateIndex(index, previous) {
 if (process.argv[1].includes("index_quality")) {
   const root = process.env.SVE_INDEX_OUT ?? "public/index";
   const manifest = read(`${root}/manifest.json`);
-  const expected = JSON.parse(fromGit("public/index/manifest.json"));
+  const baseDirectory = process.env.SVE_INDEX_BASE;
+  const baseRef = baseDirectory ? null : indexBaselineRef();
+  const expected = baseDirectory
+    ? read(`${baseDirectory}/manifest.json`)
+    : indexFromGit(baseRef, "public/index/manifest.json");
   assert.deepEqual(
     manifest.map((p) => p.id).sort(),
     expected.map((p) => p.id).sort(),
@@ -94,15 +98,16 @@ if (process.argv[1].includes("index_quality")) {
     assert.equal(index.updated_at, p.updated_at);
     assert.equal(index.source_id, p.id);
     assert.ok(!Number.isNaN(Date.parse(p.updated_at)));
-    const previous = process.env.SVE_INDEX_BASE
-      ? read(`${process.env.SVE_INDEX_BASE}/${p.file}`)
-      : JSON.parse(fromGit(`public/index/${p.file}`));
+    const previous = baseDirectory
+      ? read(`${baseDirectory}/${p.file}`)
+      : indexFromGit(baseRef, `public/index/${p.file}`);
     for (const e of previous.entries)
       if (!e.concept_ids)
-        Object.assign(e, annotateResource(e.title, e.tags, e.description));
+        Object.assign(e, annotateResource(e.title, e.tags, e.description, e.url));
     validateIndex(index, previous);
     rows.push({
       ...quality(index),
+      baseline: baseDirectory ?? baseRef,
       previous_count: previous.entries.length,
       updated_at: index.updated_at,
     });

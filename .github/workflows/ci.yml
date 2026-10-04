@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   frontend:
     name: Frontend (type-check + build)
@@ -76,6 +79,8 @@ jobs:
       - run: npm ci
       - run: npm run ontology:validate
       - run: npm run index:quality
+        env:
+          SVE_INDEX_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
       - run: npm run benchmark
       - run: npm run test:parity
       - name: Retain retrieval measurements
