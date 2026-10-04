@@ -68,7 +68,6 @@ jobs:
             artifacts/provider-quality.json
             artifacts/retrieval-benchmark-summary.json
             artifacts/ontology-statistics.json
-            artifacts/unmapped-resource-terms.json
       - name: Retain diagnostics including failed refreshes
         if: always()
         uses: actions/upload-artifact@v4
