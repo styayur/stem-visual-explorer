@@ -25,6 +25,8 @@
 
 ## 快速开始
 
+**原生可视化学习（v0.4.0-alpha.1）：** 搜索简谐振动、椭圆或行列式，点击概念上的“可视化学习”，即可查看先修概念、学习路径与引导课程。三套课程均提供英／简／繁内容，支持参数调整、逐步推演与减少动态效果；绘图和公式引擎按需加载。教材仅显示章节元数据与外部链接。参见[架构与扩展指南](docs/visual-learning.md)。
+
 **直接使用网页版：** 打开[在线应用](https://styayur.github.io/stem-visual-explorer/)，输入 `梯度`、`curl` 或 `standing wave`。不需要注册、API Key 或部署服务。
 
 **使用 Windows 桌面版：** 在 [Releases](https://github.com/styayur/stem-visual-explorer/releases/latest) 下载 Windows x64 安装程序，或下载 `windows-x64.zip`，解压后运行 `stem-visual-explorer.exe`。桌面版需要 Microsoft Edge WebView2 Runtime；安装程序会按配置处理缺失的运行时，便携版需使用系统已有的运行时。发布文件附带 `SHA256SUMS.txt` 校验值。
