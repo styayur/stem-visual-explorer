@@ -76,6 +76,7 @@ const ResultRow = memo(function ResultRow({
           {result.source_name}
         </span>
         <Badge tone="muted">{t(typeLabelKey(result.result_type))}</Badge>
+        {result.explanation?.matched.some(m=>m.tier==="exploratory") && <Badge tone="muted">Related</Badge>}
         {translated && <Badge tone="accent">{t("common.translated")}</Badge>}
         <button
           type="button"

@@ -1,3 +1,4 @@
+import { diagnose } from "./searchDiagnostics";
 // Platform layer: the same API is backed either by the Tauri Rust backend
 // (desktop app) or by the static-index web backend (GitHub Pages build).
 import { invoke } from "@tauri-apps/api/core";
@@ -43,9 +44,11 @@ export async function runSearch(
 ): Promise<SearchResponse> {
   if (!IS_TAURI) {
     const settings = await getSettings();
-    return webSearch(query, settings.enabled_providers, forceRefresh);
+    const response=await webSearch(query, settings.enabled_providers, forceRefresh);
+    return {...response,diagnostics:diagnose(response)};
   }
-  return invoke<SearchResponse>("search", { query, forceRefresh });
+  const response=await invoke<SearchResponse>("search", { query, forceRefresh });
+  return {...response,diagnostics:diagnose(response)};
 }
 
 export async function providersInfo(): Promise<ProviderInfo[]> {

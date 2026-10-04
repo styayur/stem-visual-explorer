@@ -135,7 +135,8 @@ try {
   await page.getByRole("button", { name: "Copy URL", exact: true }).click();
   s = await state();
   assert.equal(await page.evaluate(() => navigator.clipboard.readText()), s.visible.find((r) => r.id === s.selectedId).url);
-  await search("site:falstad curl");
+  // curl previously reached Falstad via rot/rotator substring pollution. Use a real wave entry for the unchanged iframe test.
+  await search("site:falstad wave");
   const oldFrame = await page.locator("iframe").elementHandle();
   await page.getByRole("button", { name: "Reload preview", exact: true }).click();
   assert.equal(await oldFrame.evaluate((frame) => frame.isConnected), false);
@@ -145,6 +146,28 @@ try {
   const external = await popup; await external.waitForLoadState("domcontentloaded");
   assert.equal(external.url(), (await state()).visible[0].url); await external.close();
   ok("copy URL, reload preview and open selected result in a new window");
+  await search("角动量");
+  await page.locator('[data-concept-id="angular-momentum"]').waitFor();
+  assert.ok((await state()).response.results.some(r=>/angular momentum/i.test(r.title)));
+  await page.getByTestId("snapshot-date").waitFor();
+  await search("傅里叶变换");
+  const directCount=(await state()).response.total;
+  assert.ok((await state()).response.results.every(r=>r.explanation.match_tier==="all-groups"));
+  const relatedToggle=page.getByRole("checkbox",{name:"Expand related concepts",exact:true});
+  await relatedToggle.check();
+  await page.waitForFunction(async()=>!(await import("/src/stores/searchStore.ts")).useSearchStore.getState().loading);
+  s=await state();assert.ok(s.response.total>directCount);assert.equal(s.response.results[0].explanation.match_tier,"all-groups");
+  assert.ok(s.response.results.some(r=>r.explanation.matched.some(m=>m.tier==="exploratory")));
+  await relatedToggle.uncheck();
+  await search("site:falstad curl");
+  await page.locator('[data-reason="known-concept-no-resource"]').waitFor();
+  await search("not-a-stem-term-asdf");
+  await page.locator('[data-reason="unknown-concept"]').waitFor();
+  await page.evaluate(()=>localStorage.setItem("sve.webIndex.v1:legacy:test","broken"));
+  await page.reload();await page.waitForLoadState("networkidle");
+  assert.equal(await page.evaluate(()=>localStorage.getItem("sve.webIndex.v1:legacy:test")),null);
+  ok("v0.3 concept chips, snapshot, explicit exploration, zero-result diagnostics and v1 cache migration");
+
   await search("wave");
   for (let i = 0; i < 4; i++) await rows.nth(i).getByTitle("Add to workspace", { exact: true }).click();
   assert.equal(await rows.nth(4).getByTitle("Maximum four pages", { exact: true }).isDisabled(), true);
@@ -226,9 +249,9 @@ try {
     const settings = cmd.normalizeSettings({ enabled_providers: [], translate_results: "false", theme: "bad" });
     if (settings.theme !== "system" || settings.translate_results || settings.enabled_providers.length) throw new Error("Invalid settings migration");
     const index = await import("/src/lib/webIndex.ts");
-    const saved = JSON.parse(localStorage.getItem("sve.webIndex.v1:manifest"));
+    const saved = JSON.parse(localStorage.getItem("sve.webIndex.v2:manifest"));
     await index.clearWebCache();
-    for (const p of saved) localStorage.setItem(`sve.webIndex.v1:${p.updated_at}:${p.id}`, '{"entries":null}');
+    for (const p of saved) localStorage.setItem(`sve.webIndex.v2:${p.content_hash??p.updated_at}:${p.id}`, '{"entries":null}');
     const response = await index.webSearch("wave", saved.map((p) => p.id));
     if (!response.total || response.providers.some((p) => p.error)) throw new Error("Corrupt index did not recover");
   });
