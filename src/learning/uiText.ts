@@ -1,0 +1,87 @@
+import { L } from "./types.ts";
+
+export const learningText = {
+  learn: L("Learn visually", "可视化学习", "視覺化學習"),
+  overview: L("Concept overview", "概念概览", "概念概覽"),
+  prerequisites: L("Prerequisites", "先修概念", "先修概念"),
+  path: L("Learning path", "学习路径", "學習路徑"),
+  guided: L("Guided visualization", "引导式可视化", "引導式視覺化"),
+  open: L("Open guided visualization", "打开引导式可视化", "開啟引導式視覺化"),
+  resources: L("External resources", "外部资源", "外部資源"),
+  searchResources: L(
+    "Search resources for this concept",
+    "搜索此概念的资源",
+    "搜尋此概念的資源",
+  ),
+  textbooks: L("Textbook references", "教材参考", "教材參考"),
+  externalTextbook: L(
+    "External textbook reference",
+    "外部教材参考",
+    "外部教材參考",
+  ),
+  related: L("Related / next concepts", "相关／后续概念", "相關／後續概念"),
+  back: L("Back to search results", "返回搜索结果", "返回搜尋結果"),
+  unsupported: L(
+    "This concept has no native guided lesson yet. Explore its prerequisites and external resources below.",
+    "此概念暂未提供内置引导课程。可查看下方先修概念与外部资源。",
+    "此概念暫未提供內建引導課程。可查看下方先修概念與外部資源。",
+  ),
+  noResources: L(
+    "No matching external resources in this search. Try another source or continue to a related concept.",
+    "本次搜索没有匹配的外部资源。可尝试其他来源或继续学习相关概念。",
+    "本次搜尋沒有匹配的外部資源。可嘗試其他來源或繼續學習相關概念。",
+  ),
+  legacy: L(
+    "Historical term → modern concept",
+    "历史术语 → 现代概念",
+    "歷史術語 → 現代概念",
+  ),
+  loading: L(
+    "Loading visual lesson…",
+    "正在加载可视化课程…",
+    "正在載入視覺化課程…",
+  ),
+  loadError: L(
+    "The lesson could not load. Your learning path and external resources remain available.",
+    "课程加载失败。仍可使用学习路径与外部资源。",
+    "課程載入失敗。仍可使用學習路徑與外部資源。",
+  ),
+  retry: L("Retry", "重试", "重試"),
+  previous: L("Previous", "上一步", "上一步"),
+  next: L("Next", "下一步", "下一步"),
+  play: L("Play", "播放", "播放"),
+  pause: L("Pause", "暂停", "暫停"),
+  restart: L("Restart", "重新开始", "重新開始"),
+  invariant: L("What remains invariant", "什么保持不变", "什麼保持不變"),
+  parameters: L("Explore parameters", "探索参数", "探索參數"),
+  presets: L("Presets", "预设", "預設"),
+  step: L("Step", "步骤", "步驟"),
+  reduced: L(
+    "Reduced motion: use steps and sliders to inspect static states. Playback is disabled.",
+    "已减少动态效果：使用步骤与滑块观察静态状态，播放已停用。",
+    "已減少動態效果：使用步驟與滑桿觀察靜態狀態，播放已停用。",
+  ),
+  arrowScale: L(
+    "Arrow lengths use display scales; exact values are shown below. The x(t) plot spans one physical period.",
+    "箭头长度按显示比例缩放；精确数值见下方。x(t) 图覆盖一个实际周期。",
+    "箭頭長度按顯示比例縮放；精確數值見下方。x(t) 圖涵蓋一個實際週期。",
+  ),
+  ellipseConstraint: L(
+    "The controls enforce 0 ≤ c < a. Drag P or use its angle slider; the trace records visited points.",
+    "控制范围保证 0 ≤ c < a。可拖动 P 或使用参数角滑块；轨迹记录经过的点。",
+    "控制範圍保證 0 ≤ c < a。可拖動 P 或使用參數角滑桿；軌跡記錄經過的點。",
+  ),
+  linearReadout: L(
+    "A is the target matrix; B is the displayed matrix. Dashed lines show the original grid. Corner order 0 → 1 → 2 → 3 reveals orientation.",
+    "A 为目标矩阵，B 为当前显示矩阵。虚线为原网格。角的顺序 0 → 1 → 2 → 3 显示取向。",
+    "A 為目標矩陣，B 為目前顯示矩陣。虛線為原網格。角的順序 0 → 1 → 2 → 3 顯示取向。",
+  ),
+  preserved: L("Orientation preserved (+)", "取向保持（+）", "取向保持（+）"),
+  reversed: L("Orientation reversed (−)", "取向反转（−）", "取向反轉（−）"),
+  collapsed: L("Dimension collapsed (0)", "维度塌缩（0）", "維度塌縮（0）"),
+  scene: L(
+    "Interactive diagram. The explanation, equations, invariant and numeric values describe this visual state. Use labeled sliders for keyboard exploration.",
+    "交互示意图。解释、公式、不变量和数值描述当前视觉状态。键盘操作可使用已标注的滑块。",
+    "互動示意圖。解釋、公式、不變量和數值描述目前視覺狀態。鍵盤操作可使用已標註的滑桿。",
+  ),
+};

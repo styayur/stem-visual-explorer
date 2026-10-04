@@ -1,7 +1,7 @@
 {
   "name": "stem-visual-explorer",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0-alpha.1",
   "type": "module",
   "engines": {
     "node": ">=22.12.0"
@@ -11,7 +11,8 @@
     "build": "tsc && vite build",
     "build:web": "tsc && vite build --mode web",
     "preview": "vite preview",
-    "test": "node --experimental-strip-types scripts/unit_test.mjs && node --experimental-strip-types scripts/retrieval_test.mjs && node --experimental-strip-types scripts/search_golden.mjs && node scripts/index_baseline_test.mjs",
+    "test": "node --experimental-strip-types scripts/unit_test.mjs && node --experimental-strip-types scripts/retrieval_test.mjs && node --experimental-strip-types scripts/search_golden.mjs && node scripts/index_baseline_test.mjs && npm run test:learning",
+    "test:learning": "node --experimental-strip-types scripts/learning_test.mjs",
     "test:web": "node scripts/web_regression.mjs",
     "test:web:build": "npm run build:web && node scripts/web_build_smoke.mjs",
     "test:desktop": "node scripts/desktop_regression.mjs",
@@ -26,6 +27,8 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^2.1.1",
+    "jsxgraph": "1.13.3",
+    "katex": "^0.19.0",
     "lucide-react": "^0.454.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -33,6 +36,7 @@
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.1.0",
+    "@types/katex": "^0.16.8",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^6.1.1",
