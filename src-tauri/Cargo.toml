@@ -22,7 +22,7 @@ reqwest = { version = "0.12", default-features = false, features = ["json", "rus
 scraper = "0.20"
 url = "2"
 tokio = { version = "1", features = ["macros", "rt-multi-thread", "time", "sync"] }
-thiserror = "1"
+thiserror = "2"
 async-trait = "0.1"
 rusqlite = { version = "0.32", features = ["bundled"] }
 chrono = { version = "0.4", features = ["serde"] }
