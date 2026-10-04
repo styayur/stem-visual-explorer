@@ -33,7 +33,8 @@ try {
   await main.locator('div[role="option"]').first().waitFor({ timeout: 30000 });
   const results = await main.evaluate(async () => (await import("/src/stores/searchStore.ts")).useSearchStore.getState().response);
   assert.ok(results.total > 0);
-  assert.equal(results.providers.filter((p) => p.error).length, 0);
+  const providerErrors = results.providers.filter((p) => p.error);
+  assert.equal(providerErrors.length, 0, JSON.stringify(providerErrors));
   ok("live desktop search through Rust providers");
   const saved = results.results[0];
   await invoke("add_favorite", { result: saved });
@@ -130,6 +131,22 @@ try {
   }
   await assert.rejects(invoke("open_workspace", { urls: ["https://example.com/"], resources: [{ ...saved, url: "file:///C:/test" }] }));
   await assert.rejects(invoke("open_workspace", { urls: Array(5).fill("https://example.com/") }));
+  await main.locator("#search-input").fill("简谐振动");
+  await main.locator("#search-input").press("Enter");
+  await main.locator('[data-concept-id="simple-harmonic-motion"]').click();
+  const learning = main.getByTestId("learning-panel");
+  await learning.getByRole("button", {name:"Open guided visualization",exact:true}).click();
+  const lesson = learning.getByTestId("guided-lesson");
+  await lesson.getByTestId("visual-board").locator("svg").waitFor();
+  for(let i=0;i<4;i++)await lesson.getByRole("button",{name:"Next",exact:true}).click();
+  await lesson.getByRole("button",{name:"Play",exact:true}).click();
+  await lesson.getByRole("button",{name:"Pause",exact:true}).click();
+  await lesson.locator('[data-parameter-id="k"]').fill("3");
+  assert.ok((await lesson.getByTestId("lesson-readouts").textContent()).includes("1.732"));
+  await lesson.getByRole("button",{name:"Restart",exact:true}).click();
+  assert.equal(await lesson.getAttribute("data-step-index"),"0");
+  await learning.getByRole("button",{name:"Back to search results",exact:true}).click();
+  ok("native concept learning: Rust search, lazy JSXGraph board, steps, play/pause, parameters and reset");
   await invoke("clear_cache");
   assert.ok((await invoke("providers_info")).every((p) => p.indexed_items === null));
   await invoke("save_settings", { settings });

@@ -2,6 +2,7 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { chromium } from "playwright";
+import { visualLearningRegression } from "./visual_learning_regression.mjs";
 
 const base = "http://127.0.0.1:1422/stem-visual-explorer/";
 const server = spawn(process.execPath, ["node_modules/vite/bin/vite.js", "preview", "--mode", "web", "--host", "127.0.0.1", "--port", "1422", "--strictPort"], { stdio: "pipe" });
@@ -33,5 +34,6 @@ try {
   assert.equal(await workspace.locator("[data-preview-capability]").count(), 1);
   await workspace.getByRole("link").click(); await workspace.locator("#search-input").waitFor();
   assert.deepEqual(errors, []);
+  await visualLearningRegression(browser, base);
   console.log("PAGES BUILD: search, index URLs and workspace navigation passed");
 } finally { await browser?.close(); server.kill(); }

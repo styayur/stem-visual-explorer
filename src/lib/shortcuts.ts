@@ -27,6 +27,7 @@ export function installShortcuts(): () => void {
     }
 
     if (useSettingsStore.getState().page !== "search") return;
+    if (document.querySelector("[data-learning-surface]")) return;
     const state = useSearchStore.getState();
     if (e.key === "Escape" || (state.quickLook && mod && e.key.toLowerCase() === "w")) {
       if (state.quickLook) { e.preventDefault(); state.setQuickLook(null); }

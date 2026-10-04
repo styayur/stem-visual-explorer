@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { mkdir, readFile } from "node:fs/promises";
 import { chromium } from "playwright";
+import { visualLearningRegression } from "./visual_learning_regression.mjs";
 
 const base = process.env.SVE_BASE || "http://127.0.0.1:1421/";
 const server = process.env.SVE_BASE ? null : spawn(process.execPath,
@@ -318,6 +319,7 @@ try {
   await native.close();
   ok("desktop toolbar: complete long-text translation, restore and cancellation");
   assert.deepEqual(errors, []);
+  await visualLearningRegression(browser, base);
   console.log(`WEB REGRESSION: ${checks} groups passed; no uncaught page errors`);
 } finally {
   await browser?.close();
