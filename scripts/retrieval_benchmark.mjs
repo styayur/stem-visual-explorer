@@ -12,7 +12,7 @@ import {
 import { validateOntology } from "./ontology_validate.mjs";
 const read = (p) => JSON.parse(readFileSync(p, "utf8").replace(/^\uFEFF/, ""));
 const cases = read("tests/concept-benchmark.json"),
-  truth = read("tests/precision-ground-truth.json");
+  truth = read(process.env.SVE_PRECISION_HINTS ?? "tests/precision-ground-truth.json");
 assert.ok(cases.length >= 250);
 assert.ok(cases.filter((c) => c.expected_min_results > 0).length >= 100);
 assert.ok(truth.length >= 30);
@@ -210,13 +210,14 @@ try {
     controlled,
     current,
   };
-  mkdirSync("artifacts", { recursive: true });
+  const outputDirectory = process.env.SVE_BENCHMARK_OUT ?? "artifacts";
+  mkdirSync(outputDirectory, { recursive: true });
   writeFileSync(
-    "artifacts/retrieval-benchmark.json",
+    `${outputDirectory}/retrieval-benchmark.json`,
     JSON.stringify(report, null, 2) + "\n",
   );
   writeFileSync(
-    "artifacts/retrieval-benchmark-summary.json",
+    `${outputDirectory}/retrieval-benchmark-summary.json`,
     JSON.stringify(
       {
         baseline_revision: BASELINE_REF,

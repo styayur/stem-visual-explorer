@@ -5,9 +5,9 @@ const read=p=>JSON.parse(readFileSync(p,'utf8').replace(/^\uFEFF/,''));
 const report=read('artifacts/retrieval-benchmark.json'),base=read('artifacts/retrieval-baseline.json'),providers=read('artifacts/provider-quality.json'),stats=read('artifacts/ontology-statistics.json'),probe=read('artifacts/provider-probe.json');
 const percent=n=>`${(n*100).toFixed(2)}%`;
 const before=report.baseline.metrics,after=report.current.metrics;
-const checks=['final','postci'].flatMap(phase=>['frontend','rust','retrieval','live'].flatMap(s=>{const path=`artifacts/${phase}/${s}.json`;return existsSync(path)?read(path):[];}));
+const checks=['merge'].flatMap(phase=>['frontend','rust','retrieval','desktop'].flatMap(s=>{const path=`artifacts/${phase}/${s}.json`;return existsSync(path)?read(path):[];}));
 const latest=new Map(checks.map(c=>[c.command,c]));
-assert.ok([...latest.values()].every(c=>c.exit_code===0),'Final checks are not all passing');
+assert.ok(latest.has('npm run test:desktop') && latest.size >= 18 && [...latest.values()].every(c=>c.exit_code===0),'Final checks are not all passing');
 assert.ok(probe.providers.length===7&&probe.providers.every(p=>!p.error),'Incomplete live health');
 const pairs=[['角动量','angular momentum'],['行列式','determinant'],['泰勒级数','Taylor series'],['线积分','line integral'],['傅里叶变换','Fourier transform'],['旋度','curl'],['多普勒效应','Doppler effect'],['麦克斯韦方程组','Maxwell equations'],['光电效应','photoelectric effect'],['薛定谔方程','Schrodinger equation']];
 const rows=pairs.map(([cn,en])=>{const a=report.current.acceptance.find(q=>q.query===cn),b=report.current.acceptance.find(q=>q.query===en);assert.deepEqual(a.concept_ids,b.concept_ids);assert.deepEqual(a.top10.map(r=>r.url),b.top10.map(r=>r.url));return `| ${cn} / ${en} | ${a.concept_ids.join(', ')} | ${a.result_count} / ${b.result_count} | ${a.top10.slice(0,3).map(r=>`[${r.title.replaceAll('|','/')} — ${r.source_name}](${r.url})`).join('<br>')||'No direct indexed resource; recognized concept. Maxwell Velocity is deliberately excluded.'} |`;});
@@ -38,7 +38,7 @@ STEM Visual Explorer now resolves multilingual concept groups, retrieves only di
 
 ## Branch / PR
 
-Branch: \`feat/v0.3-retrieval-overhaul\`. The final PR URL and final HEAD are supplied in the delivery response; this tracked report intentionally does not embed its own future commit hash. No release/tag/merge is performed.
+Branch: \`feat/v0.3-retrieval-overhaul\`. The final PR URL and final HEAD are supplied in the delivery response; this tracked report intentionally does not embed its own future commit hash. PR: https://github.com/styayur/stem-visual-explorer/pull/18. No release or tag is created by this delivery. Merge status is recorded in the final response.
 
 ## Architecture Changes
 
@@ -86,25 +86,26 @@ The negative fixture titles are \`left\`, \`after\`, \`prototype\`, \`rotator\`,
 
 ${testTable}
 
-Native full-feature tests and all-target clippy passed in this Windows environment. After remote CodeForge findings, all three local suites were rerun: unsafe shell evaluation was removed, CLI tools return path/configuration errors, golden tests name fixture invariants, and PR-document links were repaired. The original CodeForge SARIF and the clean local diagnostic rerun are preserved in artifacts/postci; its Windows build/test autodetection was unavailable, so the explicit verification suites provide those results. Shared contract: 41 golden cases including full Rust/TS annotation and score parity; 465 benchmark cases / 1,395 language queries; 36 reviewed direct-title precision rules. Browser regression: 23 groups. Rust: 38 tests in each feature configuration.
+Native full-feature tests and all-target clippy passed in this Windows environment. After remote CodeForge findings, all three local suites were rerun: unsafe shell evaluation was removed, CLI tools return path/configuration errors, golden tests name fixture invariants, and PR-document links were repaired. Generated raw logs/SARIF are ignored local output; remote CI evidence is retained in GitHub Actions artifacts. Ordinary CI explicitly grants only contents: read. Index health compares against the PR base/current main snapshot, independently of the immutable v0.2 retrieval benchmark. Native cold-cache enrichment now precompiles ontology variants and normalizes each resource field once; matching evidence remains golden-identical. Shared contract: 41 golden cases including full Rust/TS annotation and score parity; 465 benchmark cases / 1,395 language queries; 36 reviewed direct-title precision rules. Browser regression: 23 groups. Rust: 38 tests in each feature configuration.
 
 Live verification: ${probe.queries.length} queries and ${probe.providers.length} providers; ${probe.providers.reduce((n,p)=>n+(p.entries??0),0)} live indexed resources. Probe data are real source fetches. Parser fixtures, browser third-party responses and translation fixtures are separate offline tests.
 
-${failures.length?`Failed attempts were retained: ${failures.map(c=>`\`${c.command}\` (${c.log})`).join(', ')}. Math Insight /video/list timed out; the generator rejected the batch without replacing the snapshot. The independent probe and generator retry subsequently passed. Concurrent full-feature cargo test initially could not link probe.exe while the live probe held the executable open on Windows; after that process exited, the full test retry passed.`:'No failed final attempt.'}
+Historical transient failures were inspected and fixed before review: Math Insight timed out during an early fetch, and concurrent Windows processes once locked probe.exe. The hygiene pass also caught a cold-cache desktop search timeout; field normalization was hoisted out of the per-concept loop. Raw command output is local/CI artifact evidence, not permanent source history.
 
-\`npm run test:desktop\`: SKIPPED — no isolated audit WebView2 session was started for this request. The old native GUI audit is historical; current native compilation/tests and browser security/workspace regressions passed. No claim of new native GUI execution is made.
+Native desktop regression: PASS in the isolated org.stemvisualexplorer.audit20260929 profile, actual WebView2, six groups. Tests retain the original provider-error assertions and timeouts. Third-party viewer/translation responses use fixtures; desktop provider search uses real Rust providers.
+
 
 ## Remaining Limitations
 
 - ${after.zero_result_queries}/${after.query_count} benchmark queries have no direct resource. Maxwell equations has a known concept but no directly indexed resource; Maxwell velocity distributions are not a substitute.
-- Precision uses conservative direct-title relevance hints. Related Taylor-polynomial/generic-energy material is excluded from default direct recall; the original broader measurements are preserved.
+- Precision uses conservative direct-title relevance hints. Related Taylor-polynomial/generic-energy material is excluded from default direct recall; the original broader measurements can be regenerated from the retained original rules.
 - Some descriptions are title/category context; only PhET currently has systematic thumbnails. Language/subject annotations are deterministic heuristics, not editorial classifications.
 - GitHub Actions must be permitted to create PRs or receive \`INDEX_REFRESH_TOKEN\`. The repository permission API reported \`can_approve_pull_request_reviews: false\`; the new schedule cannot run until merged. No scheduled refresh PR is falsely claimed to have run.
 - Third-party source outages and embedding restrictions remain external. No CSP/X-Frame-Options bypass, IPC expansion, telemetry or cloud backend was added.
 
 ## Release Readiness
 
-READY FOR REVIEW — all required local gates pass; live retry passes. Release publication remains a maintainer review/tag decision.
+READY FOR REVIEW — all required local gates pass; live retry passes. All required local gates, including native desktop regression, passed. Remote checks and the final merge decision are recorded on PR #18; no release/tag is created.
 `;
 mkdirSync('docs/audits',{recursive:true});writeFileSync('docs/audits/v0.3-report.md',text);
 const body=`## Summary
@@ -149,7 +150,7 @@ Version-1 desktop/index caches invalidate/rebuild with defaulted fields; browser
 
 ${testTable}
 
-23 browser groups, 38 Rust tests in both feature configurations, exact golden parity, all retrieval/ontology/index gates pass. Live probe: 63 queries, seven providers, no fixtures/cache. Native GUI test was not rerun; native full compilation/tests passed. Raw logs and reports are committed under artifacts/.
+23 browser groups, 38 Rust tests in both feature configurations, exact golden parity, all retrieval/ontology/index gates pass. Live probe: 63 queries, seven providers, no fixtures/cache. Native GUI regression passed in the isolated WebView2 audit profile, as did native full compilation/tests. Compact summaries are committed; raw reports and logs are ignored local output or Actions artifacts.
 
 ## Known limitations
 

@@ -75,3 +75,8 @@ CI 已加入浏览器回归、Pages 构建测试及 Windows 桌面编译任务�
 - 网站的嵌入限制、浏览器多弹窗策略、MyMemory 网络/额度限制依然由第三方控制；没有承诺所有外部页面都能嵌入或翻译。
 
 依赖迁移参考：[Vite 官方迁移说明](https://vite.dev/guide/migration)。
+
+
+## v0.3 merge-readiness hygiene
+
+The native audit profile is built on this host with the available MSVC toolchain. The initial cold-cache search exceeded the unchanged desktop test deadline; repeated ontology/field normalization was removed from deterministic index annotation. Shared TS/Rust golden annotations remain exact. The isolated WebView2 desktop suite subsequently passed all six groups, including provider health, persistence and viewer IPC denial. Raw logs/screenshots remain ignored local output; the committed v0.3 report and compact summaries retain the results. Ordinary CI permissions are read-only, and index quality now compares to the PR base/current main snapshot using local Git objects.

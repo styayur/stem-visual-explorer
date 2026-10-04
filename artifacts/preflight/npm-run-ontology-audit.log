@@ -1,5 +1,0 @@
-
-> stem-visual-explorer@0.2.0 ontology:audit
-> node --experimental-strip-types scripts/ontology_audit.mjs
-
-916 candidate phrases for human review

@@ -1,6 +1,0 @@
-
-> stem-visual-explorer@0.3.0 test:parity
-> node --experimental-strip-types scripts/search_parity.mjs
-
-Search golden: 41 cases passed
-TS/Rust golden parity: exact query groups, variants, match modes, ranking scores and explanations PASS
