@@ -29,7 +29,7 @@ struct ManifestEntry {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .parent()
-        .unwrap();
+        .ok_or("Cargo manifest directory has no repository parent")?;
     let out = std::env::var("SVE_INDEX_OUT")
         .map(std::path::PathBuf::from)
         .unwrap_or_else(|_| root.join("public/index"));

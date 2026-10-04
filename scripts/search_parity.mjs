@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { goldenOutput } from "./search_golden.mjs";
@@ -17,6 +18,6 @@ const rust = JSON.parse(
   ),
 );
 assert.deepEqual(rust, goldenOutput());
-console.log(
+printReport(
   "TS/Rust golden parity: exact query groups, variants, match modes, ranking scores and explanations PASS",
 );

@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import assert from "node:assert/strict";
 import * as engine from "../src/lib/searchEngine.ts";
@@ -33,7 +34,7 @@ function evaluate(implementation, corpus, label) {
     return cache.get(text);
   };
   const rows = cases.map((c, i) => {
-    if (i % 100 === 0) console.log(`${label}: ${i}/${cases.length}`);
+    if (i % 100 === 0) printReport(`${label}: ${i}/${cases.length}`);
     const queries = Object.entries(c.queries).flatMap(([language, queries]) =>
       queries.map((text) => {
         const { query, results } = run(text);
@@ -264,7 +265,7 @@ try {
   if (failures.length) {
     console.error(failures.join("\n"));
     process.exitCode = 1;
-  } else console.log("All retrieval quality gates PASS");
+  } else printReport("All retrieval quality gates PASS");
 } finally {
   old.cleanup();
 }

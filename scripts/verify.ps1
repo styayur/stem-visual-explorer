@@ -14,7 +14,10 @@ $report = @()
 foreach ($command in $commands) {
   $log = Join-Path $directory (($command -replace '[^a-zA-Z0-9]+','-') + '.log')
   $started = [DateTime]::UtcNow
-  Invoke-Expression "$command *> '$log'"
+  # Commands are the fixed argument lists above; no shell evaluation.
+  $commandParts = $command -split ' '
+  $commandArguments = $commandParts[1..($commandParts.Length - 1)]
+  & $commandParts[0] @commandArguments *> $log
   $code = $LASTEXITCODE
   $report += [pscustomobject]@{command=$command;exit_code=$code;started_at=$started.ToString('o');duration_seconds=([DateTime]::UtcNow-$started).TotalSeconds;log=$log;package_version=(Get-Content package.json -Raw|ConvertFrom-Json).version}
   $report | ConvertTo-Json | Set-Content -Encoding utf8 (Join-Path $directory "$Suite.json")

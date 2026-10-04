@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import assert from "node:assert/strict";
 import { concepts, normalizeTerm } from "../src/lib/concepts.ts";
@@ -63,5 +64,5 @@ if (process.argv[1].includes("ontology_validate")) {
     "artifacts/ontology-statistics.json",
     JSON.stringify(stats, null, 2) + "\n",
   );
-  console.log(stats);
+  printReport(stats);
 }

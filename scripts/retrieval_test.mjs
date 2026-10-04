@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
@@ -172,6 +173,6 @@ for (const c of JSON.parse(
   for (const queries of Object.values(c.queries))
     for (const query of queries)
       assert.deepEqual(parseAndExpand(query).concept_ids, c.expected_concepts);
-console.log(
+printReport(
   "Retrieval regression: boundaries, tiers, annotations, quality gates, diagnostics, all 1395 language resolutions PASS",
 );

@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { annotateResource } from "../src/lib/concepts.ts";
@@ -20,6 +21,6 @@ writeFileSync(
   `${root}/manifest.json`,
   JSON.stringify(manifest, null, 2) + "\n",
 );
-console.log(
+printReport(
   "Deterministic schema v2 annotation complete; source dates preserved",
 );

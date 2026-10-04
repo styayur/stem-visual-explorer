@@ -1,10 +1,11 @@
-import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import { report as printReport } from "./cli_output.mjs";
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
 import assert from 'node:assert/strict';
 const read=p=>JSON.parse(readFileSync(p,'utf8').replace(/^\uFEFF/,''));
 const report=read('artifacts/retrieval-benchmark.json'),base=read('artifacts/retrieval-baseline.json'),providers=read('artifacts/provider-quality.json'),stats=read('artifacts/ontology-statistics.json'),probe=read('artifacts/provider-probe.json');
 const percent=n=>`${(n*100).toFixed(2)}%`;
 const before=report.baseline.metrics,after=report.current.metrics;
-const checks=['frontend','rust','retrieval','live'].flatMap(s=>read(`artifacts/final/${s}.json`));
+const checks=['final','postci'].flatMap(phase=>['frontend','rust','retrieval','live'].flatMap(s=>{const path=`artifacts/${phase}/${s}.json`;return existsSync(path)?read(path):[];}));
 const latest=new Map(checks.map(c=>[c.command,c]));
 assert.ok([...latest.values()].every(c=>c.exit_code===0),'Final checks are not all passing');
 assert.ok(probe.providers.length===7&&probe.providers.every(p=>!p.error),'Incomplete live health');
@@ -85,7 +86,7 @@ The negative fixture titles are \`left\`, \`after\`, \`prototype\`, \`rotator\`,
 
 ${testTable}
 
-Native full-feature tests and all-target clippy passed in this Windows environment. Shared contract: 41 golden cases including full Rust/TS annotation and score parity; 465 benchmark cases / 1,395 language queries; 36 reviewed direct-title precision rules. Browser regression: 23 groups. Rust: 38 tests in each feature configuration.
+Native full-feature tests and all-target clippy passed in this Windows environment. After remote CodeForge findings, all three local suites were rerun: unsafe shell evaluation was removed, CLI tools return path/configuration errors, golden tests name fixture invariants, and PR-document links were repaired. The original CodeForge SARIF and the clean local diagnostic rerun are preserved in artifacts/postci; its Windows build/test autodetection was unavailable, so the explicit verification suites provide those results. Shared contract: 41 golden cases including full Rust/TS annotation and score parity; 465 benchmark cases / 1,395 language queries; 36 reviewed direct-title precision rules. Browser regression: 23 groups. Rust: 38 tests in each feature configuration.
 
 Live verification: ${probe.queries.length} queries and ${probe.providers.length} providers; ${probe.providers.reduce((n,p)=>n+(p.entries??0),0)} live indexed resources. Probe data are real source fetches. Parser fixtures, browser third-party responses and translation fixtures are separate offline tests.
 
@@ -130,7 +131,7 @@ ${providerTable}
 
 ## Benchmark
 
-465 cases / 1,395 language queries, 172 resource-witnessed concepts with nonzero minimum requirements, 36 reviewed direct-title rules, 41 golden cases. The old engine is reconstructed from an immutable, tree-equivalent upstream baseline. Precision uses fixed k; unfilled/unjudged slots are nonrelevant. Three initial broad hints were corrected with public rationale and archived raw results; see [relevance review](docs/audits/v0.3-relevance-review.md).
+465 cases / 1,395 language queries, 172 resource-witnessed concepts with nonzero minimum requirements, 36 reviewed direct-title rules, 41 golden cases. The old engine is reconstructed from an immutable, tree-equivalent upstream baseline. Precision uses fixed k; unfilled/unjudged slots are nonrelevant. Three initial broad hints were corrected with public rationale and archived raw results; see [relevance review](https://github.com/styayur/stem-visual-explorer/blob/feat/v0.3-retrieval-overhaul/docs/audits/v0.3-relevance-review.md).
 
 ## Before/After
 
@@ -154,6 +155,6 @@ ${testTable}
 
 ${after.zero_result_queries}/${after.query_count} benchmark queries have no direct indexed resources; Maxwell equations is correctly recognized with zero direct results. Title-hint precision is not full-document human judgment. Description fallback is labeled; language is heuristic. Scheduled refresh PR creation requires repository Actions permission or INDEX_REFRESH_TOKEN. No Release is published.
 
-Full query results, score evidence, limitations and failure/retry provenance: [v0.3 audit](docs/audits/v0.3-report.md).
+Full query results, score evidence, limitations and failure/retry provenance: [v0.3 audit](https://github.com/styayur/stem-visual-explorer/blob/feat/v0.3-retrieval-overhaul/docs/audits/v0.3-report.md).
 `;
-writeFileSync('artifacts/v0.3-pr-body.md',body);console.log('Generated reviewable audit and PR body from measured artifacts');
+writeFileSync('artifacts/v0.3-pr-body.md',body);printReport('Generated reviewable audit and PR body from measured artifacts');

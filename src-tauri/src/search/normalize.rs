@@ -179,7 +179,10 @@ pub fn expand(parsed: &ParsedQuery) -> NormalizedQuery {
         );
     }
     for id in &ids {
-        let c = concepts().iter().find(|c| &c.id == id).unwrap();
+        let c = concepts()
+            .iter()
+            .find(|c| &c.id == id)
+            .expect("Resolved IDs originate from this immutable validated ontology");
         for n in [&c.en, &c.zh_cn, &c.zh_tw] {
             add(&mut out, n, Some(id), "canonical", 0.95, mode(n));
         }

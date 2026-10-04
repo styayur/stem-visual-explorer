@@ -1,0 +1,10 @@
+[
+  {
+    "command": "cargo run --manifest-path src-tauri/Cargo.toml --no-default-features --example probe",
+    "exit_code": 0,
+    "started_at": "2026-10-04T08:05:02.9512207Z",
+    "log": "artifacts/postci/live-probe.log",
+    "package_version": "0.3.0",
+    "verification": "live providers, no cache or fixtures"
+  }
+]

@@ -1,0 +1,207 @@
+   Compiling stem-visual-explorer v0.3.0 (D:\GitHub\styayur\stem-visual-explorer\src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.52s
+     Running `src-tauri\target\debug\examples\probe.exe`
+angular momentum: ["angular-momentum"]; 2 results
+  [PhysicStuff] Conservation Of Angular Momentum
+  [Physics Fundamentals] Angular Momentum Simulator
+角动量: ["angular-momentum"]; 2 results
+  [PhysicStuff] Conservation Of Angular Momentum
+  [Physics Fundamentals] Angular Momentum Simulator
+角動量: ["angular-momentum"]; 2 results
+  [PhysicStuff] Conservation Of Angular Momentum
+  [Physics Fundamentals] Angular Momentum Simulator
+determinant: ["determinant"]; 9 results
+  [Math Insight] Determinants and linear transformations
+  [Math Insight] Geometric properties of the determinant
+  [Math Insight] Matrices and determinants for multivariable calculus
+  [Math Insight] The relationship between determinants and area or volume
+  [Math Insight] The relationship between determinants and area or volume
+行列式: ["determinant"]; 9 results
+  [Math Insight] Determinants and linear transformations
+  [Math Insight] Geometric properties of the determinant
+  [Math Insight] Matrices and determinants for multivariable calculus
+  [Math Insight] The relationship between determinants and area or volume
+  [Math Insight] The relationship between determinants and area or volume
+行列式: ["determinant"]; 9 results
+  [Math Insight] Determinants and linear transformations
+  [Math Insight] Geometric properties of the determinant
+  [Math Insight] Matrices and determinants for multivariable calculus
+  [Math Insight] The relationship between determinants and area or volume
+  [Math Insight] The relationship between determinants and area or volume
+taylor series: ["taylor-series"]; 2 results
+  [BetterExplained] Intuition for Taylor Series (DNA Analogy)
+  [Math Insight] Classic examples of Taylor polynomials
+泰勒级数: ["taylor-series"]; 2 results
+  [BetterExplained] Intuition for Taylor Series (DNA Analogy)
+  [Math Insight] Classic examples of Taylor polynomials
+泰勒級數: ["taylor-series"]; 2 results
+  [BetterExplained] Intuition for Taylor Series (DNA Analogy)
+  [Math Insight] Classic examples of Taylor polynomials
+line integral: ["line-integral"]; 11 results
+  [Math Insight] Examples of scalar line integrals
+  [Math Insight] Line integrals are independent of parametrization
+  [Math Insight] Alternate notation for vector line integrals
+  [Math Insight] Introduction to a line integral of a scalar-valued function
+  [Math Insight] Introduction to a line integral of a vector field
+线积分: ["line-integral"]; 11 results
+  [Math Insight] Examples of scalar line integrals
+  [Math Insight] Line integrals are independent of parametrization
+  [Math Insight] Alternate notation for vector line integrals
+  [Math Insight] Introduction to a line integral of a scalar-valued function
+  [Math Insight] Introduction to a line integral of a vector field
+線積分: ["line-integral"]; 11 results
+  [Math Insight] Examples of scalar line integrals
+  [Math Insight] Line integrals are independent of parametrization
+  [Math Insight] Alternate notation for vector line integrals
+  [Math Insight] Introduction to a line integral of a scalar-valued function
+  [Math Insight] Introduction to a line integral of a vector field
+fourier transform: ["fourier-transform"]; 3 results
+  [BetterExplained] An Interactive Guide To The Fourier Transform
+  [Falstad] Discrete Fourier Transform
+  [PhysicStuff] Fft Denoising
+傅里叶变换: ["fourier-transform"]; 3 results
+  [BetterExplained] An Interactive Guide To The Fourier Transform
+  [Falstad] Discrete Fourier Transform
+  [PhysicStuff] Fft Denoising
+傅里葉變換: ["fourier-transform"]; 3 results
+  [BetterExplained] An Interactive Guide To The Fourier Transform
+  [Falstad] Discrete Fourier Transform
+  [PhysicStuff] Fft Denoising
+curl: ["curl"]; 12 results
+  [BetterExplained] Vector Calculus: Understanding Circulation and Curl
+  [Math Insight] Divergence and curl example
+  [Math Insight] Divergence and curl notation
+  [Math Insight] The curl of a gradient is zero
+  [Math Insight] A path-dependent vector field with zero curl
+旋度: ["curl"]; 12 results
+  [BetterExplained] Vector Calculus: Understanding Circulation and Curl
+  [Math Insight] Divergence and curl example
+  [Math Insight] Divergence and curl notation
+  [Math Insight] The curl of a gradient is zero
+  [Math Insight] A path-dependent vector field with zero curl
+旋度: ["curl"]; 12 results
+  [BetterExplained] Vector Calculus: Understanding Circulation and Curl
+  [Math Insight] Divergence and curl example
+  [Math Insight] Divergence and curl notation
+  [Math Insight] The curl of a gradient is zero
+  [Math Insight] A path-dependent vector field with zero curl
+doppler effect: ["doppler-effect"]; 2 results
+  [PhysicStuff] Doppler Effect
+  [Physics Fundamentals] Doppler Effect Simulator
+多普勒效应: ["doppler-effect"]; 2 results
+  [PhysicStuff] Doppler Effect
+  [Physics Fundamentals] Doppler Effect Simulator
+都卜勒效應: ["doppler-effect"]; 2 results
+  [PhysicStuff] Doppler Effect
+  [Physics Fundamentals] Doppler Effect Simulator
+maxwell equations: ["maxwell-equations"]; 0 results
+麦克斯韦方程组: ["maxwell-equations"]; 0 results
+馬克士威方程組: ["maxwell-equations"]; 0 results
+photoelectric effect: ["photoelectric-effect"]; 2 results
+  [PhysicStuff] Photoelectric Effect
+  [Physics Fundamentals] Photoelectric Effect Simulator
+光电效应: ["photoelectric-effect"]; 2 results
+  [PhysicStuff] Photoelectric Effect
+  [Physics Fundamentals] Photoelectric Effect Simulator
+光電效應: ["photoelectric-effect"]; 2 results
+  [PhysicStuff] Photoelectric Effect
+  [Physics Fundamentals] Photoelectric Effect Simulator
+schrodinger equation: ["schrodinger-equation"]; 1 results
+  [Physics Fundamentals] Schrodinger Equation Simulator
+薛定谔方程: ["schrodinger-equation"]; 1 results
+  [Physics Fundamentals] Schrodinger Equation Simulator
+薛丁格方程: ["schrodinger-equation"]; 1 results
+  [Physics Fundamentals] Schrodinger Equation Simulator
+entropy: ["entropy"]; 2 results
+  [Physics Fundamentals] Entropy Simulator
+  [PhysicStuff] Carnot Engine Efficiency Calculator
+熵: ["entropy"]; 2 results
+  [Physics Fundamentals] Entropy Simulator
+  [PhysicStuff] Carnot Engine Efficiency Calculator
+熵: ["entropy"]; 2 results
+  [Physics Fundamentals] Entropy Simulator
+  [PhysicStuff] Carnot Engine Efficiency Calculator
+torque: ["torque"]; 3 results
+  [Physics Fundamentals] Torque Simulator
+  [PhysicStuff] Torque Rotational Motion
+  [Physics Fundamentals] Equilibrium Simulator
+力矩: ["torque"]; 3 results
+  [Physics Fundamentals] Torque Simulator
+  [PhysicStuff] Torque Rotational Motion
+  [Physics Fundamentals] Equilibrium Simulator
+力矩: ["torque"]; 3 results
+  [Physics Fundamentals] Torque Simulator
+  [PhysicStuff] Torque Rotational Motion
+  [Physics Fundamentals] Equilibrium Simulator
+gradient: ["gradient"]; 10 results
+  [BetterExplained] Understanding Pythagorean Distance and the Gradient
+  [BetterExplained] Vector Calculus: Understanding the Gradient
+  [Math Insight] A simple example of using the gradient theorem
+  [Math Insight] An introduction to the directional derivative and the gradient
+  [Math Insight] Derivation of the directional derivative and the gradient
+梯度: ["gradient"]; 10 results
+  [BetterExplained] Understanding Pythagorean Distance and the Gradient
+  [BetterExplained] Vector Calculus: Understanding the Gradient
+  [Math Insight] A simple example of using the gradient theorem
+  [Math Insight] An introduction to the directional derivative and the gradient
+  [Math Insight] Derivation of the directional derivative and the gradient
+梯度: ["gradient"]; 10 results
+  [BetterExplained] Understanding Pythagorean Distance and the Gradient
+  [BetterExplained] Vector Calculus: Understanding the Gradient
+  [Math Insight] A simple example of using the gradient theorem
+  [Math Insight] An introduction to the directional derivative and the gradient
+  [Math Insight] Derivation of the directional derivative and the gradient
+normal distribution: ["normal-distribution"]; 0 results
+正态分布: ["normal-distribution"]; 0 results
+常態分布: ["normal-distribution"]; 0 results
+laplace transform: ["laplace-transform"]; 0 results
+拉普拉斯变换: ["laplace-transform"]; 0 results
+拉普拉斯變換: ["laplace-transform"]; 0 results
+ohm's law: ["ohm-s-law"]; 3 results
+  [PhET] Ohm's Law
+  [PhysicStuff] Ohms Law
+  [Physics Fundamentals] Ohms Law Simulator
+欧姆定律: ["ohm-s-law"]; 3 results
+  [PhET] Ohm's Law
+  [PhysicStuff] Ohms Law
+  [Physics Fundamentals] Ohms Law Simulator
+歐姆定律: ["ohm-s-law"]; 3 results
+  [PhET] Ohm's Law
+  [PhysicStuff] Ohms Law
+  [Physics Fundamentals] Ohms Law Simulator
+refraction: ["refraction"]; 3 results
+  [PhET] Bending Light
+  [PhysicStuff] Snells Law
+  [Physics Fundamentals] Snells Law Simulator
+折射: ["refraction"]; 3 results
+  [PhET] Bending Light
+  [PhysicStuff] Snells Law
+  [Physics Fundamentals] Snells Law Simulator
+折射: ["refraction"]; 3 results
+  [PhET] Bending Light
+  [PhysicStuff] Snells Law
+  [Physics Fundamentals] Snells Law Simulator
+heat equation: ["heat-equation"]; 0 results
+热方程: ["heat-equation"]; 0 results
+熱方程: ["heat-equation"]; 0 results
+eigenvalue: ["eigenvalue"]; 1 results
+  [Math Insight] The stability of the asynchronous state as function of largest eigenvalue
+特征值: ["eigenvalue"]; 1 results
+  [Math Insight] The stability of the asynchronous state as function of largest eigenvalue
+特徵值: ["eigenvalue"]; 1 results
+  [Math Insight] The stability of the asynchronous state as function of largest eigenvalue
+quantum tunneling: ["quantum-tunneling"]; 0 results
+量子隧穿: ["quantum-tunneling"]; 0 results
+量子穿隧: ["quantum-tunneling"]; 0 results
+FT: ["fourier-transform"]; 3 results
+  [BetterExplained] An Interactive Guide To The Fourier Transform
+  [Falstad] Discrete Fourier Transform
+  [PhysicStuff] Fft Denoising
+rot: ["curl"]; 12 results
+  [BetterExplained] Vector Calculus: Understanding Circulation and Curl
+  [Math Insight] Divergence and curl example
+  [Math Insight] Divergence and curl notation
+  [Math Insight] The curl of a gradient is zero
+  [Math Insight] A path-dependent vector field with zero curl
+gradient curl: ["curl", "gradient"]; 1 results
+  [Math Insight] The curl of a gradient is zero

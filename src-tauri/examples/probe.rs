@@ -56,7 +56,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     ];
     let mut queries = Vec::new();
     for id in ids {
-        let c = normalize::concepts().iter().find(|c| c.id == id).unwrap();
+        let c = normalize::concepts()
+            .iter()
+            .find(|c| c.id == id)
+            .ok_or_else(|| format!("Probe concept missing from ontology: {id}"))?;
         queries.extend([c.en.clone(), c.zh_cn.clone(), c.zh_tw.clone()]);
     }
     queries.extend(["FT".into(), "rot".into(), "gradient curl".into()]);
@@ -77,19 +80,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         rows.push(json!({"query":raw,"concept_resolution":q.concept_ids,"query_groups":q.groups,"direct_equivalent_terms":q.variants.iter().filter(|v|v.tier!="exploratory").collect::<Vec<_>>(),"provider_result_counts":counts,"count":results.len(),"top5":results.into_iter().take(5).collect::<Vec<_>>()}));
     }
+    let failed = health.iter().any(|p| !p["error"].is_null());
     let report = json!({"verification":"live provider indexes fetched during this run; no fixtures, no disk cache","providers":health,"queries":rows});
     let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .parent()
-        .unwrap()
+        .ok_or("Cargo manifest directory has no repository parent")?
         .join("artifacts/provider-probe.json");
-    std::fs::create_dir_all(path.parent().unwrap())?;
+    std::fs::create_dir_all(path.parent().ok_or("Probe report path has no parent")?)?;
     std::fs::write(path, serde_json::to_vec_pretty(&report)?)?;
-    if report["providers"]
-        .as_array()
-        .unwrap()
-        .iter()
-        .any(|p| !p["error"].is_null())
-    {
+    if failed {
         return Err("live provider failure; inspect artifacts/provider-probe.json".into());
     }
     Ok(())

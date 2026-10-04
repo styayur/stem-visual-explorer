@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import {annotateResource} from "../src/lib/concepts.ts";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -75,5 +76,5 @@ export function goldenOutput() {
   return {cases,annotations:golden.entries.map(e=>annotateResource(e.title,e.tags,e.description,e.url))};
 }
 const output = goldenOutput();
-if (process.argv.includes("--json")) console.log(JSON.stringify(output));
-else console.log(`Search golden: ${output.cases.length} cases passed`);
+if (process.argv.includes("--json")) printReport(JSON.stringify(output));
+else printReport(`Search golden: ${output.cases.length} cases passed`);

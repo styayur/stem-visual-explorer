@@ -1,0 +1,1404 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "CodeForge Engine",
+          "semantic_version": "0.2.1",
+          "rules": [
+            {
+              "id": "CF-MD-001",
+              "name": "CF-MD-001",
+              "short_description": {
+                "text": "Broken relative reference: docs/audits/v0.3-relevance-review.md"
+              },
+              "full_description": {
+                "text": "The Markdown target is not present in the workspace."
+              },
+              "properties": {
+                "category": "correctness",
+                "confidence": "high",
+                "sourceEngine": "markdown-builtin"
+              }
+            },
+            {
+              "id": "CF-PS-001",
+              "name": "CF-PS-001",
+              "short_description": {
+                "text": "PowerShell uses Invoke-Expression"
+              },
+              "full_description": {
+                "text": "This heuristic is review-only in v0.2."
+              },
+              "properties": {
+                "category": "security",
+                "confidence": "medium",
+                "sourceEngine": "powershell-builtin"
+              }
+            },
+            {
+              "id": "JS-STYLE-001",
+              "name": "JS-STYLE-001",
+              "short_description": {
+                "text": "console.log may be debug output"
+              },
+              "full_description": {
+                "text": "Route diagnostics through the application logger in production code."
+              },
+              "properties": {
+                "category": "style",
+                "confidence": "medium",
+                "sourceEngine": "javascript-builtin"
+              }
+            },
+            {
+              "id": "RS-CORRECTNESS-001",
+              "name": "RS-CORRECTNESS-001",
+              "short_description": {
+                "text": "Unwrap can panic at runtime"
+              },
+              "full_description": {
+                "text": "Handle the error or document why the invariant makes unwrap infallible."
+              },
+              "properties": {
+                "category": "correctness",
+                "confidence": "high",
+                "sourceEngine": "rust-builtin"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "rule_id": "CF-MD-001",
+          "level": "warning",
+          "message": {
+            "text": "Broken relative reference: docs/audits/v0.3-relevance-review.md"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/artifacts/v0.3-pr-body.md"
+                },
+                "region": {
+                  "startLine": 33,
+                  "startColumn": 416,
+                  "endLine": 33,
+                  "endColumn": 452
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "CF-MD-001",
+            "disposition": "unreviewed",
+            "engine": "markdown-builtin",
+            "language": "markdown",
+            "producer": "markdown-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "CF-MD-001",
+          "level": "warning",
+          "message": {
+            "text": "Broken relative reference: docs/audits/v0.3-report.md"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/artifacts/v0.3-pr-body.md"
+                },
+                "region": {
+                  "startLine": 88,
+                  "startColumn": 92,
+                  "endLine": 88,
+                  "endColumn": 118
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "CF-MD-001",
+            "disposition": "unreviewed",
+            "engine": "markdown-builtin",
+            "language": "markdown",
+            "producer": "markdown-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "CF-PS-001",
+          "level": "warning",
+          "message": {
+            "text": "PowerShell uses Invoke-Expression"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/verify.ps1"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 3,
+                  "endLine": 17,
+                  "endColumn": 20
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "CF-PS-001",
+            "disposition": "unreviewed",
+            "engine": "powershell-builtin",
+            "language": "powershell",
+            "producer": "powershell-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/dump_web_index.rs"
+                },
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 16,
+                  "endLine": 32,
+                  "endColumn": 18
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/probe.rs"
+                },
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 17,
+                  "endLine": 59,
+                  "endColumn": 75
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/probe.rs"
+                },
+                "region": {
+                  "startLine": 81,
+                  "startColumn": 16,
+                  "endLine": 83,
+                  "endColumn": 18
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/probe.rs"
+                },
+                "region": {
+                  "startLine": 85,
+                  "startColumn": 29,
+                  "endLine": 85,
+                  "endColumn": 51
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/probe.rs"
+                },
+                "region": {
+                  "startLine": 87,
+                  "startColumn": 8,
+                  "endLine": 89,
+                  "endColumn": 18
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/search_golden.rs"
+                },
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 23,
+                  "endLine": 7,
+                  "endColumn": 100
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/search_golden.rs"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 36,
+                  "endLine": 8,
+                  "endColumn": 92
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/search_golden.rs"
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 17,
+                  "endLine": 10,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/search_golden.rs"
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 19,
+                  "endLine": 11,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/search_golden.rs"
+                },
+                "region": {
+                  "startLine": 57,
+                  "startColumn": 25,
+                  "endLine": 60,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/examples/search_golden.rs"
+                },
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 50,
+                  "endLine": 59,
+                  "endColumn": 69
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "warning",
+          "message": {
+            "text": "Unwrap can panic at runtime"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/search/normalize.rs"
+                },
+                "region": {
+                  "startLine": 182,
+                  "startColumn": 17,
+                  "endLine": 182,
+                  "endColumn": 65
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 341,
+                  "startColumn": 9,
+                  "endLine": 341,
+                  "endColumn": 86
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 342,
+                  "startColumn": 44,
+                  "endLine": 342,
+                  "endColumn": 100
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 343,
+                  "startColumn": 14,
+                  "endLine": 343,
+                  "endColumn": 47
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 344,
+                  "startColumn": 19,
+                  "endLine": 344,
+                  "endColumn": 47
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 383,
+                  "startColumn": 9,
+                  "endLine": 383,
+                  "endColumn": 90
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 384,
+                  "startColumn": 14,
+                  "endLine": 384,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 385,
+                  "startColumn": 24,
+                  "endLine": 385,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 386,
+                  "startColumn": 26,
+                  "endLine": 386,
+                  "endColumn": 53
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 387,
+                  "startColumn": 73,
+                  "endLine": 387,
+                  "endColumn": 96
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 423,
+                  "startColumn": 5,
+                  "endLine": 423,
+                  "endColumn": 45
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 429,
+                  "startColumn": 5,
+                  "endLine": 429,
+                  "endColumn": 80
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "RS-CORRECTNESS-001",
+          "level": "note",
+          "message": {
+            "text": "Unwrap can panic at runtime (non-production context)"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/src-tauri/src/regression_tests.rs"
+                },
+                "region": {
+                  "startLine": 430,
+                  "startColumn": 17,
+                  "endLine": 434,
+                  "endColumn": 14
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "RS-CORRECTNESS-001",
+            "disposition": "unreviewed",
+            "engine": "rust-builtin",
+            "language": "rust",
+            "producer": "rust-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "test",
+            "tags": [],
+            "transformationClass": "SAFE_AST_FIX"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/audit_report.mjs"
+                },
+                "region": {
+                  "startLine": 159,
+                  "startColumn": 49,
+                  "endLine": 159,
+                  "endColumn": 126
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/enrich_index.mjs"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 1,
+                  "endLine": 25,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/ontology_audit.mjs"
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 1,
+                  "endLine": 78,
+                  "endColumn": 65
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/ontology_validate.mjs"
+                },
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 3,
+                  "endLine": 66,
+                  "endColumn": 21
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/retrieval_baseline.mjs"
+                },
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 3,
+                  "endLine": 39,
+                  "endColumn": 134
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/retrieval_benchmark.mjs"
+                },
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 24,
+                  "endLine": 36,
+                  "endColumn": 69
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/retrieval_benchmark.mjs"
+                },
+                "region": {
+                  "startLine": 267,
+                  "startColumn": 10,
+                  "endLine": 267,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/retrieval_test.mjs"
+                },
+                "region": {
+                  "startLine": 175,
+                  "startColumn": 1,
+                  "endLine": 177,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/search_golden.mjs"
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 38,
+                  "endLine": 78,
+                  "endColumn": 73
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/search_golden.mjs"
+                },
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 6,
+                  "endLine": 79,
+                  "endColumn": 71
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/search_parity.mjs"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 1,
+                  "endLine": 22,
+                  "endColumn": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        },
+        {
+          "rule_id": "JS-STYLE-001",
+          "level": "note",
+          "message": {
+            "text": "console.log may be debug output"
+          },
+          "locations": [
+            {
+              "physical_location": {
+                "artifact_location": {
+                  "uri": "/home/runner/work/stem-visual-explorer/stem-visual-explorer/scripts/unit_test.mjs"
+                },
+                "region": {
+                  "startLine": 167,
+                  "startColumn": 1,
+                  "endLine": 167,
+                  "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "codeforgeRuleId": "JS-STYLE-001",
+            "disposition": "unreviewed",
+            "engine": "javascript-builtin",
+            "language": "javascript",
+            "producer": "javascript-builtin",
+            "producerVersion": "0.2.1",
+            "safeFixAvailable": false,
+            "sourceContext": "production",
+            "tags": [],
+            "transformationClass": "STYLE_ONLY"
+          }
+        }
+      ]
+    }
+  ]
+}

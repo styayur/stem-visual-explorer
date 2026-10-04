@@ -4,16 +4,25 @@ use stem_visual_explorer_lib::{
     search::{normalize, query, ranking},
 };
 fn main() {
-    let data: Value = serde_json::from_str(include_str!("../../tests/search-golden.json")).unwrap();
-    let entries: Vec<IndexEntry> = serde_json::from_value(data["entries"].clone()).unwrap();
+    let data: Value = serde_json::from_str(include_str!("../../tests/search-golden.json"))
+        .expect("Golden fixture must satisfy its asserted schema");
+    let entries: Vec<IndexEntry> = serde_json::from_value(data["entries"].clone())
+        .expect("Golden fixture must satisfy its asserted schema");
     let mut output = Vec::new();
-    for case in data["cases"].as_array().unwrap() {
-        let raw = case["query"].as_str().unwrap();
+    for case in data["cases"]
+        .as_array()
+        .expect("Golden fixture must satisfy its asserted schema")
+    {
+        let raw = case["query"]
+            .as_str()
+            .expect("Golden fixture must satisfy its asserted schema");
         let q = normalize::expand(&query::parse(raw));
         assert_eq!(json!(q.concept_ids), case["concept_ids"], "{raw}");
         assert_eq!(
             q.groups.len(),
-            case["groups"].as_u64().unwrap() as usize,
+            case["groups"]
+                .as_u64()
+                .expect("Golden fixture must satisfy its asserted schema") as usize,
             "{raw}"
         );
         let results = ranking::rank(&q, search_entries("test", "Test", &entries, &q));
@@ -22,7 +31,11 @@ fn main() {
             if let Some(expected) = case[key].as_array() {
                 for title in expected {
                     assert_eq!(
-                        titles.contains(&title.as_str().unwrap()),
+                        titles.contains(
+                            &title
+                                .as_str()
+                                .expect("Golden fixture must satisfy its asserted schema")
+                        ),
                         key == "must_include",
                         "{raw}: {key} {title}"
                     );
@@ -31,19 +44,23 @@ fn main() {
         }
         if let Some(expected) = case["must_not_expand_as_direct"].as_array() {
             for text in expected {
-                assert!(!q
-                    .variants
-                    .iter()
-                    .any(|v| v.text == text.as_str().unwrap() && v.tier != "exploratory"));
+                assert!(!q.variants.iter().any(|v| v.text
+                    == text
+                        .as_str()
+                        .expect("Golden fixture must satisfy its asserted schema")
+                    && v.tier != "exploratory"));
             }
         }
         if let Some(expected) = case["variants"].as_array() {
             for v in expected {
-                assert!(q
-                    .variants
-                    .iter()
-                    .any(|x| x.text == v["text"].as_str().unwrap()
-                        && x.r#match == v["match"].as_str().unwrap()));
+                assert!(q.variants.iter().any(|x| x.text
+                    == v["text"]
+                        .as_str()
+                        .expect("Golden fixture must satisfy its asserted schema")
+                    && x.r#match
+                        == v["match"]
+                            .as_str()
+                            .expect("Golden fixture must satisfy its asserted schema")));
             }
         }
         if let Some(expected) = case["ranking"].as_array() {
@@ -56,8 +73,12 @@ fn main() {
                         "Test",
                         entries
                             .iter()
-                            .find(|e| e.title == t.as_str().unwrap())
-                            .unwrap(),
+                            .find(|e| {
+                                e.title
+                                    == t.as_str()
+                                        .expect("Golden fixture must satisfy its asserted schema")
+                            })
+                            .expect("Golden fixture must satisfy its asserted schema"),
                     )
                 })
                 .collect();

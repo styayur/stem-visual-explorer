@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 // Reconstruct the untouched v0.2 engine and corpus from a pinned Git commit.
 // Never derives baseline numbers from the implementation under test.
 import { execFileSync } from 'node:child_process';
@@ -36,5 +37,5 @@ if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) 
   mkdirSync('artifacts',{recursive:true});
   writeFileSync('artifacts/retrieval-baseline.json',JSON.stringify({revision:BASELINE_REF,observed_revision:OBSERVED_BASELINE_REF,tree:BASELINE_TREE,concepts:old.concepts.length,isolated:old.concepts.filter(c=>!c.related.length&&!c.prerequisites.length&&!incoming.has(c.id)).length,isolated_outgoing_only:old.concepts.filter(c=>!c.related.length&&!c.prerequisites.length).length,queries,false_positives},null,2)+'\n');
   old.cleanup();
-  console.log(JSON.stringify({concepts:old.concepts.length,queries:queries.map(q=>[q.query,q.result_count]),false_positives},null,2));
+  printReport(JSON.stringify({concepts:old.concepts.length,queries:queries.map(q=>[q.query,q.result_count]),false_positives},null,2));
 }

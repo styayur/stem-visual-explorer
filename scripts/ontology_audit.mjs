@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { concepts, conceptNames, normalizeTerm } from "../src/lib/concepts.ts";
 const read = (p) => JSON.parse(readFileSync(p, "utf8").replace(/^\uFEFF/, ""));
@@ -75,4 +76,4 @@ writeFileSync(
     2,
   ) + "\n",
 );
-console.log(`${rows.length} candidate phrases for human review`);
+printReport(`${rows.length} candidate phrases for human review`);

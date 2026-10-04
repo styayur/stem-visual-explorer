@@ -338,20 +338,33 @@ fn webviewer_labels_never_receive_application_ipc() {
 #[test]
 fn shared_search_golden_contract() {
     let data: serde_json::Value =
-        serde_json::from_str(include_str!("../../tests/search-golden.json")).unwrap();
-    let entries: Vec<common::IndexEntry> = serde_json::from_value(data["entries"].clone()).unwrap();
-    for c in data["cases"].as_array().unwrap() {
-        let raw = c["query"].as_str().unwrap();
+        serde_json::from_str(include_str!("../../tests/search-golden.json"))
+            .expect("Regression fixture setup must succeed");
+    let entries: Vec<common::IndexEntry> = serde_json::from_value(data["entries"].clone())
+        .expect("Regression fixture setup must succeed");
+    for c in data["cases"]
+        .as_array()
+        .expect("Regression fixture setup must succeed")
+    {
+        let raw = c["query"]
+            .as_str()
+            .expect("Regression fixture setup must succeed");
         let q = search::normalize::expand(&search::query::parse(raw));
         assert_eq!(serde_json::json!(q.concept_ids), c["concept_ids"], "{raw}");
-        assert_eq!(q.groups.len(), c["groups"].as_u64().unwrap() as usize);
+        assert_eq!(
+            q.groups.len(),
+            c["groups"]
+                .as_u64()
+                .expect("Regression fixture setup must succeed") as usize
+        );
         let results =
             search::ranking::rank(&q, common::search_entries("test", "Test", &entries, &q));
         for key in ["must_include", "must_not_include"] {
             if let Some(titles) = c[key].as_array() {
                 for t in titles {
                     assert_eq!(
-                        results.iter().any(|r| r.title == t.as_str().unwrap()),
+                        results.iter().any(|r| r.title
+                            == t.as_str().expect("Regression fixture setup must succeed")),
                         key == "must_include",
                         "{raw}: {t}"
                     );
@@ -360,19 +373,21 @@ fn shared_search_golden_contract() {
         }
         if let Some(expected) = c["variants"].as_array() {
             for v in expected {
-                assert!(q
-                    .variants
-                    .iter()
-                    .any(|x| x.text == v["text"].as_str().unwrap()
-                        && x.r#match == v["match"].as_str().unwrap()));
+                assert!(q.variants.iter().any(|x| x.text
+                    == v["text"]
+                        .as_str()
+                        .expect("Regression fixture setup must succeed")
+                    && x.r#match
+                        == v["match"]
+                            .as_str()
+                            .expect("Regression fixture setup must succeed")));
             }
         }
         if let Some(expected) = c["must_not_expand_as_direct"].as_array() {
             for v in expected {
-                assert!(!q
-                    .variants
-                    .iter()
-                    .any(|x| x.text == v.as_str().unwrap() && x.tier != "exploratory"));
+                assert!(!q.variants.iter().any(|x| x.text
+                    == v.as_str().expect("Regression fixture setup must succeed")
+                    && x.tier != "exploratory"));
             }
         }
     }
@@ -380,11 +395,26 @@ fn shared_search_golden_contract() {
 #[test]
 fn all_benchmark_languages_resolve_to_expected_concepts() {
     let cases: serde_json::Value =
-        serde_json::from_str(include_str!("../../tests/concept-benchmark.json")).unwrap();
-    for c in cases.as_array().unwrap() {
-        for queries in c["queries"].as_object().unwrap().values() {
-            for query in queries.as_array().unwrap() {
-                let q = search::normalize::expand(&search::query::parse(query.as_str().unwrap()));
+        serde_json::from_str(include_str!("../../tests/concept-benchmark.json"))
+            .expect("Regression fixture setup must succeed");
+    for c in cases
+        .as_array()
+        .expect("Regression fixture setup must succeed")
+    {
+        for queries in c["queries"]
+            .as_object()
+            .expect("Regression fixture setup must succeed")
+            .values()
+        {
+            for query in queries
+                .as_array()
+                .expect("Regression fixture setup must succeed")
+            {
+                let q = search::normalize::expand(&search::query::parse(
+                    query
+                        .as_str()
+                        .expect("Regression fixture setup must succeed"),
+                ));
                 assert_eq!(
                     serde_json::json!(q.concept_ids),
                     c["expected_concepts"],
@@ -420,18 +450,19 @@ fn provider_quality_gates_reject_corrupt_refreshes() {
 #[tokio::test]
 async fn old_cache_version_rebuilds_without_deserialize_failure() {
     let dir = Temp::new();
-    std::fs::create_dir_all(&dir.0).unwrap();
+    std::fs::create_dir_all(&dir.0).expect("Regression fixture setup must succeed");
     let ctx = SearchContext {
         client: http_client(),
         cache_dir: dir.0.clone(),
     };
     let old = serde_json::json!({"version":1,"updated_at":common::today_iso(),"entries":[{"title":"old","description":null,"url":"https://example.test/old","result_type":"article","tags":[],"thumbnail":null}]});
-    std::fs::write(cache::cache_path(&dir.0, "test"), old.to_string()).unwrap();
+    std::fs::write(cache::cache_path(&dir.0, "test"), old.to_string())
+        .expect("Regression fixture setup must succeed");
     let fresh = common::cached_index(&ctx, "test", &Mutex::new(None), false, async {
         Ok(common::CachedIndex::new(vec![entry("Angular momentum")]))
     })
     .await
-    .unwrap();
+    .expect("Regression fixture setup must succeed");
     assert_eq!(fresh.version, 2);
     assert!(fresh.entries[0]
         .semantic
