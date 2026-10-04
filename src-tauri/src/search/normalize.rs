@@ -52,6 +52,10 @@ pub fn mode(s: &str) -> &'static str {
 pub fn matches(text: &str, needle: &str, mode: &str) -> bool {
     let text = term(text);
     let needle = term(needle);
+    matches_normalized(&text, &needle, mode)
+}
+/// Same boundary semantics for fields and terms normalized once by index enrichment.
+pub fn matches_normalized(text: &str, needle: &str, mode: &str) -> bool {
     if needle.is_empty() {
         return false;
     }
@@ -59,10 +63,10 @@ pub fn matches(text: &str, needle: &str, mode: &str) -> bool {
         return text == needle;
     }
     if mode == "cjk-substring" {
-        return text.contains(&needle);
+        return text.contains(needle);
     }
     let word = |c: char| c.is_alphanumeric() || c == '_';
-    text.match_indices(&needle).any(|(at, _)| {
+    text.match_indices(needle).any(|(at, _)| {
         !text[..at].chars().next_back().is_some_and(word)
             && !text[at + needle.len()..].chars().next().is_some_and(word)
     })

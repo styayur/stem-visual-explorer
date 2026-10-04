@@ -142,8 +142,8 @@ pub fn to_result(source_id: &str, source_name: &str, entry: &IndexEntry) -> Sear
     }
 }
 
-/// Local full-text candidate matching. Returns entries whose title, tags,
-/// description or URL matches every exact phrase and at least one token.
+/// Field-aware candidates require all concept groups and all literal phrases.
+/// URLs are validated but never participate in ordinary text matching.
 pub fn search_entries(
     source_id: &str,
     source_name: &str,
@@ -289,25 +289,47 @@ pub fn title_words(title: &str) -> Vec<String> {
 }
 
 pub fn annotate(entry: &IndexEntry) -> crate::models::SemanticMetadata {
-    use crate::search::normalize::{concepts, matches, mode, names};
+    use crate::search::normalize::{concepts, matches_normalized, mode, names, term};
+    // Compile immutable ontology terms once, then normalize each resource field once.
+    // Repeating normalization for every concept made cold-cache desktop searches CPU-bound.
+    type AnnotationTerms = Vec<Vec<(String, String)>>;
+    static TERMS: std::sync::OnceLock<AnnotationTerms> = std::sync::OnceLock::new();
+    let terms = TERMS.get_or_init(|| {
+        concepts()
+            .iter()
+            .map(|c| {
+                names(c)
+                    .into_iter()
+                    .map(|n| (term(n), mode(n).into()))
+                    .chain(
+                        c.aliases
+                            .iter()
+                            .filter(|a| a.r#match != "exact")
+                            .map(|a| (term(&a.text), a.r#match.clone())),
+                    )
+                    .collect()
+            })
+            .collect()
+    });
+    let title = term(&entry.title);
+    let tags: Vec<_> = entry.tags.iter().map(|s| term(s)).collect();
+    let description = entry.description.as_deref().map(term);
     let mut meta = crate::models::SemanticMetadata::default();
     let mut subjects = std::collections::BTreeSet::new();
-    for c in concepts() {
+    for (c, variants) in concepts().iter().zip(terms) {
         let mut fields = Vec::new();
         let contains = |s: &str| {
-            names(c).iter().any(|n| matches(s, n, mode(n)))
-                || c.aliases
-                    .iter()
-                    .filter(|a| a.r#match != "exact")
-                    .any(|a| matches(s, &a.text, &a.r#match))
+            variants
+                .iter()
+                .any(|(n, matching)| matches_normalized(s, n, matching))
         };
-        if contains(&entry.title) {
+        if contains(&title) {
             fields.push("title".into());
         }
-        if entry.tags.iter().any(|s| contains(s)) {
+        if tags.iter().any(|s| contains(s)) {
             fields.push("tags".into());
         }
-        if entry.description.as_ref().is_some_and(|s| contains(s)) {
+        if description.as_ref().is_some_and(|s| contains(s)) {
             fields.push("description".into());
         }
         if !fields.is_empty() {
