@@ -49,7 +49,7 @@ export default function JSXGraphRenderer(props: VisualizationRendererProps) {
         pinchVertical: false,
         pinchSensitivity: 0,
       },
-      resize: { enabled: true, throttle: 100 },
+      resize: { enabled: false, throttle: 100 },
       keyboard: { enabled: false },
     };
     const b = JXG.JSXGraph.initBoard(id, options);
@@ -135,7 +135,18 @@ export default function JSXGraphRenderer(props: VisualizationRendererProps) {
       }
     }
     b.unsuspendUpdate();
+    // Resize the viewport and reapply the authored bounds together. JSXGraph's
+    // default observer can retain desktop scale when the lesson stacks on mobile.
+    const resize = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      if (width > 0 && height > 0) {
+        b.resizeContainer(width, height, true, true);
+        b.setBoundingBox(live.current.frame.bounds, true);
+      }
+    });
+    resize.observe(document.getElementById(id)!);
     return () => {
+      resize.disconnect();
       board.current = null;
       points.current.clear();
       JXG.JSXGraph.freeBoard(b);

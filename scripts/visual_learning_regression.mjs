@@ -299,6 +299,11 @@ export async function visualLearningRegression(browser, base) {
     await page.setViewportSize({ width: 390, height: 844 });
     await change("A", 1.8);
     await lesson.getByTestId("visual-board").scrollIntoViewIfNeeded();
+    await poll(async () => {
+      const board = await lesson.getByTestId("visual-board").boundingBox();
+      const mass = await lesson.locator('[data-scene-id="mass"]').boundingBox();
+      return board && mass && mass.x >= board.x && mass.x + mass.width <= board.x + board.width && mass.y >= board.y && mass.y + mass.height <= board.y + board.height;
+    }, "mobile resizing must keep the physical mass inside the diagram");
     await page.screenshot({ path: "artifacts/visual-learning/mobile.png" });
     assert.ok(
       await page.evaluate(
