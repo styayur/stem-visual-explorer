@@ -1,0 +1,18 @@
+{
+  "environment": {
+    "node": "v26.7.0",
+    "platform": "win32",
+    "arch": "x64",
+    "scope": "Node only; warm queries, fixed development corpus, 20 repetitions. Cold module-import initialization includes JSON and index construction. No browser latency claim."
+  },
+  "queries": 3300,
+  "initializationMs": 59.791599999999995,
+  "medianMs": 0.014799999999979718,
+  "p95Ms": 0.3044000000000011,
+  "maxMs": 1.1524,
+  "batchMs": 223.1227,
+  "lexiconEntries": 37,
+  "candidateVocabularySize": 1603,
+  "staticDataBytes": 21225,
+  "heapUsedBytes": 12552704
+}

@@ -3,6 +3,13 @@
 Search discovers objects. Opening a concept changes a **ConceptSession** without
 running another textual search. The current concept determines the work area.
 
+Query discovery now follows `Raw Query → Resolver v2 → Canonical Concept IDs →
+ConceptSession → Workbench`. Universal Search projects ranked accepted concepts
+before their capabilities. Ambiguous queries expose explicit localized concept
+choices; unknown queries retain ordinary resource search. Neither opens a
+Workbench automatically. The [resolver document](query-resolver-v2.md) owns the
+normalization, scoring, abstention and parity contract.
+
 ```text
 Query / Graph / Resource / Learning Path
                  ↓
