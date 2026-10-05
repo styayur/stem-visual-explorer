@@ -320,7 +320,7 @@ try {
   ok("desktop toolbar: complete long-text translation, restore and cancellation");
   assert.deepEqual(errors, []);
   await visualLearningRegression(browser, base);
-  console.log(`WEB REGRESSION: ${checks} groups passed; no uncaught page errors`);
+  process.stdout.write(`WEB REGRESSION: ${checks} groups passed; no uncaught page errors\n`);
 } finally {
   await browser?.close();
   server?.kill();

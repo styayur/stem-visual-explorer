@@ -34,7 +34,7 @@ import { buildScene, currentMatrix } from "../src/visualizations/scenes.ts";
 let checks = 0;
 const test = (name, fn) => {
   fn();
-  console.log(`ok ${++checks} - ${name}`);
+  process.stdout.write(`ok ${++checks} - ${name}\n`);
 };
 const near = (a, b, tolerance = 1e-10) =>
   assert.ok(Math.abs(a - b) < tolerance, `${a} ≠ ${b}`);
@@ -331,4 +331,4 @@ test("renderer boundary excludes remote code and fails closed on expression stri
   );
   assert.ok(!/\beval\(|new Function\(|dangerouslySetInnerHTML/.test(renderer));
 });
-console.log(`LEARNING TESTS: ${checks} groups passed`);
+process.stdout.write(`LEARNING TESTS: ${checks} groups passed\n`);

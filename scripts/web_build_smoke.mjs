@@ -35,5 +35,5 @@ try {
   await workspace.getByRole("link").click(); await workspace.locator("#search-input").waitFor();
   assert.deepEqual(errors, []);
   await visualLearningRegression(browser, base);
-  console.log("PAGES BUILD: search, index URLs and workspace navigation passed");
+  process.stdout.write("PAGES BUILD: search, index URLs and workspace navigation passed\n");
 } finally { await browser?.close(); server.kill(); }

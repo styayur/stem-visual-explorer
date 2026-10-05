@@ -164,8 +164,8 @@ export async function visualLearningRegression(browser, base) {
       assert.ok(await lesson.locator("math").count());
     }
     await screenshot("shm");
-    console.log(
-      "VISUAL: SHM search, lazy loading, textbook metadata, steps, pointer + keyboard control, play/pause and restart PASS",
+    process.stdout.write(
+      "VISUAL: SHM search, lazy loading, textbook metadata, steps, pointer + keyboard control, play/pause and restart PASS\n",
     );
 
     await panel
@@ -205,8 +205,8 @@ export async function visualLearningRegression(browser, base) {
       await lesson.getByRole("button", { name: "Next", exact: true }).click();
     assert.ok(await lesson.locator("math").count());
     await screenshot("ellipse");
-    console.log(
-      "VISUAL: ellipse search, constrained focal geometry, pointer trace, equation and references PASS",
+    process.stdout.write(
+      "VISUAL: ellipse search, constrained focal geometry, pointer trace, equation and references PASS\n",
     );
 
     await open("determinant", "determinant");
@@ -235,8 +235,8 @@ export async function visualLearningRegression(browser, base) {
     await screenshot("determinant");
     await lesson.getByRole("button", { name: "Play", exact: true }).click();
     await lesson.getByRole("button", { name: "Pause", exact: true }).click();
-    console.log(
-      "VISUAL: determinant, all five presets, intermediate B, area and signed orientation PASS",
+    process.stdout.write(
+      "VISUAL: determinant, all five presets, intermediate B, area and signed orientation PASS\n",
     );
 
     for (const [locale, name] of [
@@ -267,7 +267,7 @@ export async function visualLearningRegression(browser, base) {
         assert.equal(await page.locator("html").getAttribute("lang"), locale);
       }
     }
-    console.log("VISUAL: all 24 lesson states in all three UI languages PASS");
+    process.stdout.write("VISUAL: all 24 lesson states in all three UI languages PASS\n");
 
     // Inspect using CDP: Playwright's locator.evaluate itself uses global eval.
     const result = await cdp.send("Runtime.evaluate", {
@@ -334,8 +334,8 @@ export async function visualLearningRegression(browser, base) {
       "no remote scripts",
     );
     assert.deepEqual(errors, []);
-    console.log(
-      "VISUAL: reduced motion, mobile width, keyboard, graceful fallback, legacy recognition and blocked dynamic execution PASS",
+    process.stdout.write(
+      "VISUAL: reduced motion, mobile width, keyboard, graceful fallback, legacy recognition and blocked dynamic execution PASS\n",
     );
   } finally {
     await context.close();
