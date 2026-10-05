@@ -18,20 +18,30 @@ export default function SearchContext({
     setExplore = useSearchStore((s) => s.setExploreRelated);
   const locale = useSettingsStore((s) => s.settings.ui_locale);
   const [dates, setDates] = useState<string[]>([]);
+  const [choicesHidden, setChoicesHidden] = useState(false);
+  useEffect(() => setChoicesHidden(false), [response?.query]);
   useEffect(() => {
     if (!IS_TAURI)
       void loadManifest()
         .then((m) => setDates(m.map((p) => p.updated_at).sort()))
         .catch(() => {});
   }, [response]);
+  const resolution = useMemo(
+    () => (response ? parseAndExpand(response.query).resolution : null),
+    [response],
+  );
+  const choices =
+    resolution?.status === "ambiguous"
+      ? resolution.candidates
+          .filter((c) => c.score >= 70)
+          .map((c) => conceptById.get(c.conceptId)!)
+      : [];
   const resolved = useMemo(
     () =>
       response
-        ? parseAndExpand(response.query).concept_ids.map(
-            (id) => conceptById.get(id)!,
-          )
+        ? (resolution?.conceptIds ?? []).map((id) => conceptById.get(id)!)
         : [],
-    [response],
+    [response, resolution],
   );
   const label = (c: Concept) =>
     locale === "zh-CN" ? c.zh_cn : locale === "zh-TW" ? c.zh_tw : c.en;
@@ -44,12 +54,43 @@ export default function SearchContext({
   const stale = dates.some((d) => Date.now() - Date.parse(d) > 30 * 86400000);
   const text = (en: string, cn: string, tw: string) =>
     locale === "zh-CN" ? cn : locale === "zh-TW" ? tw : en;
-  if (!dates.length && !resolved.length) return null;
+  if (!dates.length && !resolved.length && !choices.length) return null;
   return (
     <div
       className="shrink-0 space-y-1 border-b border-edge-light px-3 py-2 text-xs dark:border-edge-dark"
       aria-label="Search context"
+      onKeyDown={(e) => {
+        if (e.key === "Escape" && choices.length) {
+          setChoicesHidden(true);
+          document.getElementById("search-input")?.focus();
+        }
+      }}
     >
+      {choices.length > 0 && !choicesHidden && (
+        <div data-testid="query-choices">
+          <p>
+            {text(
+              "Possible concepts — choose one",
+              "可能的概念：请选择",
+              "可能的概念：請選擇",
+            )}
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            {choices.map((c) => (
+              <li key={c.id}>
+                <button
+                  type="button"
+                  data-concept-id={c.id}
+                  className="rounded border border-indigo-400 px-2 py-1 focus-visible:outline focus-visible:outline-2"
+                  onClick={() => onConcept(c.id)}
+                >
+                  {label(c)}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {!IS_TAURI && dates.length > 0 && (
         <div className="text-zinc-500" data-testid="snapshot-date">
           {text("Index snapshot", "索引快照", "索引快照")}: {dates[0]}

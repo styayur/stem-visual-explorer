@@ -16,6 +16,9 @@ pub fn parse(raw: &str) -> ParsedQuery {
     };
 
     let mut rest: Vec<String> = Vec::new();
+    if raw.encode_utf16().count() > 512 {
+        return q;
+    }
     let mut i = 0;
     let chars: Vec<char> = raw.chars().collect();
 

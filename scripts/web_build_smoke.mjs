@@ -4,6 +4,7 @@ import { spawn } from "node:child_process";
 import { chromium } from "playwright";
 import { visualLearningRegression } from "./visual_learning_regression.mjs";
 import { workbenchRegression } from "./workbench_regression.mjs";
+import { queryResolverRegression } from "./query_resolver_regression.mjs";
 import { checkVisualBundle } from "./visual_bundle_security.mjs";
 
 const base = "http://127.0.0.1:1422/stem-visual-explorer/";
@@ -38,6 +39,7 @@ try {
   assert.deepEqual(errors, []);
   await visualLearningRegression(browser, base);
   await workbenchRegression(browser,base);
+  await queryResolverRegression(browser,base);
   await checkVisualBundle();
   process.stdout.write("PAGES BUILD: search, index URLs and workspace navigation passed\n");
 } finally { await browser?.close(); server.kill(); }

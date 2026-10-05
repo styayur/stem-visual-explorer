@@ -1,8 +1,10 @@
+import { resolveQuery } from "../query/resolve.ts";
+import type { QueryResolution } from "../query/types.ts";
 // Deterministic, browser-side search: a faithful port of the Rust
 // `search::{query, normalize, ranking}` modules. No AI, no network.
 import type { ResultType, SearchResult } from "./types";
 import {
-  normalizeConcepts,
+  projectConceptResolution,
   matches,
   matchMode,
   normalizeTerm,
@@ -20,6 +22,7 @@ export interface ParsedQuery {
 
 export interface NormalizedQuery {
   raw: string;
+  resolution: QueryResolution;
   groups: ConceptGroup[];
   explore: boolean;
   tokens: string[];
@@ -56,6 +59,7 @@ export function parseQuery(raw: string): ParsedQuery {
   };
 
   const tokens: string[] = [];
+  if (raw.length > 512) return out;
   let i = 0;
   const s = raw;
 
@@ -97,10 +101,15 @@ export function parseQuery(raw: string): ParsedQuery {
 
 export function expand(parsed: ParsedQuery): NormalizedQuery {
   const explore = parsed.terms.some((t) => t.toLowerCase() === "related:true");
-  const normalized = normalizeConcepts(
-    parsed.terms.filter((t) => t.toLowerCase() !== "related:true"),
-    parsed.phrases,
+  const resolution = resolveQuery(
+    parsed.raw.length > 512
+      ? parsed.raw
+      : [
+          ...parsed.terms.filter((t) => t.toLowerCase() !== "related:true"),
+          ...parsed.phrases,
+        ].join(" "),
   );
+  const normalized = projectConceptResolution(resolution);
   // Preserve expanded_terms for old clients; matching/scoring uses full variants.
   const tokens = [
     ...new Set(
@@ -110,6 +119,7 @@ export function expand(parsed: ParsedQuery): NormalizedQuery {
   return {
     raw: parsed.raw,
     tokens,
+    resolution,
     explore,
     ...normalized,
     phrases: parsed.phrases,

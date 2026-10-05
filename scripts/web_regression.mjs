@@ -6,6 +6,7 @@ import { mkdir, readFile } from "node:fs/promises";
 import { chromium } from "playwright";
 import { visualLearningRegression } from "./visual_learning_regression.mjs";
 import { workbenchRegression } from "./workbench_regression.mjs";
+import { queryResolverRegression } from "./query_resolver_regression.mjs";
 
 const base = process.env.SVE_BASE || "http://127.0.0.1:1421/";
 const server = process.env.SVE_BASE ? null : spawn(process.execPath,
@@ -324,6 +325,7 @@ try {
   assert.deepEqual(errors, []);
   await visualLearningRegression(browser, base);
   await workbenchRegression(browser,base);
+  await queryResolverRegression(browser,base);
   process.stdout.write(`WEB REGRESSION: ${checks} groups passed; no uncaught page errors\n`);
 } finally {
   await browser?.close();

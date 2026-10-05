@@ -1,0 +1,804 @@
+{
+  "colloquial-01": {
+    "expectedConceptIds": [
+      "angular-momentum"
+    ]
+  },
+  "colloquial-02": {
+    "expectedConceptIds": [
+      "angular-momentum"
+    ]
+  },
+  "colloquial-03": {
+    "expectedConceptIds": [
+      "fourier-transform"
+    ]
+  },
+  "colloquial-05": {
+    "expectedConceptIds": [
+      "divergence-theorem"
+    ]
+  },
+  "colloquial-06": {
+    "expectedConceptIds": [
+      "maxwell-equations"
+    ]
+  },
+  "colloquial-07": {
+    "expectedConceptIds": [
+      "linear-transformation",
+      "determinant"
+    ]
+  },
+  "colloquial-09": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "colloquial-10": {
+    "expectedConceptIds": [
+      "ellipse"
+    ]
+  },
+  "colloquial-11": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "colloquial-13": {
+    "expectedConceptIds": [
+      "acceleration"
+    ]
+  },
+  "colloquial-14": {
+    "expectedConceptIds": [
+      "velocity"
+    ]
+  },
+  "colloquial-15": {
+    "expectedConceptIds": [
+      "curl"
+    ]
+  },
+  "colloquial-17": {
+    "expectedConceptIds": [
+      "gradient"
+    ]
+  },
+  "colloquial-18": {
+    "expectedConceptIds": [
+      "standing-wave"
+    ]
+  },
+  "colloquial-19": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "script-variants-01": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "script-variants-02": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "script-variants-03": {
+    "expectedConceptIds": [
+      "linear-transformation"
+    ]
+  },
+  "script-variants-05": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "script-variants-06": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "script-variants-07": {
+    "expectedConceptIds": [
+      "ellipse"
+    ]
+  },
+  "script-variants-09": {
+    "expectedConceptIds": [
+      "conservation-of-angular-momentum"
+    ]
+  },
+  "script-variants-10": {
+    "expectedConceptIds": [
+      "conservation-of-angular-momentum"
+    ]
+  },
+  "script-variants-11": {
+    "expectedConceptIds": [
+      "fourier-transform"
+    ]
+  },
+  "script-variants-13": {
+    "expectedConceptIds": [
+      "electromagnetic-wave"
+    ]
+  },
+  "script-variants-14": {
+    "expectedConceptIds": [
+      "electromagnetic-wave"
+    ]
+  },
+  "script-variants-15": {
+    "expectedConceptIds": [
+      "kinetic-energy",
+      "potential-energy"
+    ]
+  },
+  "script-variants-17": {
+    "expectedConceptIds": [
+      "partial-differential-equation"
+    ]
+  },
+  "script-variants-18": {
+    "expectedConceptIds": [
+      "ordinary-differential-equation"
+    ]
+  },
+  "script-variants-19": {
+    "expectedConceptIds": [
+      "divergence-theorem"
+    ]
+  },
+  "abbreviations-01": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "abbreviations-02": {
+    "expectedConceptIds": [
+      "ordinary-differential-equation"
+    ]
+  },
+  "abbreviations-03": {
+    "expectedConceptIds": [
+      "partial-differential-equation"
+    ]
+  },
+  "abbreviations-05": {
+    "expectedConceptIds": [
+      "discrete-fourier-transform"
+    ]
+  },
+  "abbreviations-06": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "abbreviations-07": {
+    "expectedConceptIds": [
+      "divergence"
+    ]
+  },
+  "abbreviations-09": {
+    "expectedConceptIds": [
+      "curl"
+    ]
+  },
+  "abbreviations-10": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "abbreviations-11": {
+    "expectedConceptIds": [
+      "ordinary-differential-equation"
+    ]
+  },
+  "abbreviations-13": {
+    "expectedConceptIds": [
+      "fast-fourier-transform"
+    ]
+  },
+  "abbreviations-14": {
+    "expectedConceptIds": [
+      "discrete-fourier-transform"
+    ]
+  },
+  "abbreviations-15": {
+    "expectedConceptIds": [
+      "gradient"
+    ]
+  },
+  "abbreviations-17": {
+    "expectedConceptIds": [
+      "determinant",
+      "matrix"
+    ]
+  },
+  "abbreviations-18": {
+    "expectedConceptIds": [
+      "newton-s-second-law"
+    ]
+  },
+  "abbreviations-19": {
+    "expectedConceptIds": [
+      "kinetic-energy"
+    ]
+  },
+  "typos-01": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "typos-02": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "typos-03": {
+    "expectedConceptIds": [
+      "harmonic-oscillator"
+    ]
+  },
+  "typos-05": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "typos-06": {
+    "expectedConceptIds": [
+      "ellipse"
+    ]
+  },
+  "typos-07": {
+    "expectedConceptIds": [
+      "ellipse"
+    ]
+  },
+  "typos-09": {
+    "expectedConceptIds": [
+      "fourier-transform"
+    ]
+  },
+  "typos-10": {
+    "expectedConceptIds": [
+      "angular-momentum"
+    ]
+  },
+  "typos-11": {
+    "expectedConceptIds": [
+      "angular-momentum"
+    ]
+  },
+  "typos-13": {
+    "expectedConceptIds": [
+      "gradient"
+    ]
+  },
+  "typos-14": {
+    "expectedConceptIds": [
+      "curl"
+    ]
+  },
+  "typos-15": {
+    "expectedConceptIds": [
+      "eigenvalue"
+    ]
+  },
+  "typos-17": {
+    "expectedConceptIds": [
+      "linear-transformation"
+    ]
+  },
+  "typos-18": {
+    "expectedConceptIds": [
+      "resonance"
+    ]
+  },
+  "typos-19": {
+    "expectedConceptIds": [
+      "maxwell-equations"
+    ]
+  },
+  "mixed-language-01": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "mixed-language-02": {
+    "expectedConceptIds": [
+      "ellipse"
+    ]
+  },
+  "mixed-language-03": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "mixed-language-05": {
+    "expectedConceptIds": [
+      "curl"
+    ]
+  },
+  "mixed-language-06": {
+    "expectedConceptIds": [
+      "divergence"
+    ]
+  },
+  "mixed-language-07": {
+    "expectedConceptIds": [
+      "gradient"
+    ]
+  },
+  "mixed-language-09": {
+    "expectedConceptIds": [
+      "damped-oscillation",
+      "simple-harmonic-motion"
+    ]
+  },
+  "mixed-language-10": {
+    "expectedConceptIds": [
+      "resonance"
+    ]
+  },
+  "mixed-language-11": {
+    "expectedConceptIds": [
+      "eigenvalue"
+    ]
+  },
+  "mixed-language-13": {
+    "expectedConceptIds": [
+      "vector"
+    ]
+  },
+  "mixed-language-14": {
+    "expectedConceptIds": [
+      "ordinary-differential-equation"
+    ]
+  },
+  "mixed-language-15": {
+    "expectedConceptIds": [
+      "partial-differential-equation"
+    ]
+  },
+  "mixed-language-17": {
+    "expectedConceptIds": [
+      "potential-energy"
+    ]
+  },
+  "mixed-language-18": {
+    "expectedConceptIds": [
+      "angular-momentum"
+    ]
+  },
+  "mixed-language-19": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "symbolic-01": {
+    "expectedConceptIds": [
+      "curl"
+    ]
+  },
+  "symbolic-02": {
+    "expectedConceptIds": [
+      "divergence"
+    ]
+  },
+  "symbolic-03": {
+    "expectedConceptIds": [
+      "gradient"
+    ]
+  },
+  "symbolic-05": {
+    "expectedConceptIds": [
+      "divergence"
+    ]
+  },
+  "symbolic-06": {
+    "expectedConceptIds": [
+      "gradient"
+    ]
+  },
+  "symbolic-07": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "symbolic-09": {
+    "expectedConceptIds": [
+      "partial-derivative"
+    ]
+  },
+  "symbolic-10": {
+    "expectedConceptIds": [
+      "derivative"
+    ]
+  },
+  "symbolic-11": {
+    "expectedConceptIds": [
+      "integral"
+    ]
+  },
+  "symbolic-13": {
+    "expectedConceptIds": [
+      "convergent-series"
+    ]
+  },
+  "symbolic-14": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "symbolic-15": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "symbolic-17": {
+    "expectedConceptIds": [
+      "ellipse"
+    ]
+  },
+  "symbolic-18": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "symbolic-19": {
+    "expectedConceptIds": [
+      "linear-system"
+    ]
+  },
+  "formula-like-01": {
+    "expectedConceptIds": [
+      "hookes-law"
+    ]
+  },
+  "formula-like-02": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "formula-like-03": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "formula-like-05": {
+    "expectedConceptIds": [
+      "mass-energy-equivalence"
+    ]
+  },
+  "formula-like-06": {
+    "expectedConceptIds": [
+      "newton-s-second-law"
+    ]
+  },
+  "formula-like-07": {
+    "expectedConceptIds": [
+      "momentum"
+    ]
+  },
+  "formula-like-09": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "formula-like-10": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "formula-like-11": {
+    "expectedConceptIds": [
+      "ellipse"
+    ]
+  },
+  "formula-like-13": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "formula-like-14": {
+    "expectedConceptIds": [
+      "determinant"
+    ]
+  },
+  "formula-like-15": {
+    "expectedConceptIds": [
+      "divergence",
+      "curl"
+    ]
+  },
+  "formula-like-17": {
+    "expectedConceptIds": [
+      "ordinary-differential-equation"
+    ]
+  },
+  "formula-like-18": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "formula-like-19": {
+    "expectedConceptIds": [
+      "simple-harmonic-motion"
+    ]
+  },
+  "ambiguous-short-01": {
+    "expectedConceptIds": [
+      "force"
+    ]
+  },
+  "ambiguous-short-02": {
+    "expectedConceptIds": [
+      "wave"
+    ]
+  },
+  "ambiguous-short-03": {
+    "expectedConceptIds": [
+      "phase"
+    ]
+  },
+  "ambiguous-short-05": {
+    "expectedConceptIds": []
+  },
+  "ambiguous-short-06": {
+    "expectedConceptIds": []
+  },
+  "ambiguous-short-07": {
+    "expectedConceptIds": []
+  },
+  "ambiguous-short-09": {
+    "expectedConceptIds": [
+      "trace"
+    ]
+  },
+  "ambiguous-short-10": {
+    "expectedConceptIds": [
+      "curl"
+    ]
+  },
+  "ambiguous-short-11": {
+    "expectedConceptIds": [
+      "divergence"
+    ]
+  },
+  "ambiguous-short-13": {
+    "expectedConceptIds": []
+  },
+  "ambiguous-short-14": {
+    "expectedConceptIds": [
+      "mass"
+    ]
+  },
+  "ambiguous-short-15": {
+    "expectedConceptIds": [
+      "energy"
+    ]
+  },
+  "ambiguous-short-17": {
+    "expectedConceptIds": []
+  },
+  "ambiguous-short-18": {
+    "expectedConceptIds": []
+  },
+  "ambiguous-short-19": {
+    "expectedConceptIds": []
+  },
+  "multi-concept-01": {
+    "expectedConceptIds": [
+      "curl",
+      "divergence"
+    ]
+  },
+  "multi-concept-02": {
+    "expectedConceptIds": [
+      "gradient",
+      "curl"
+    ]
+  },
+  "multi-concept-03": {
+    "expectedConceptIds": [
+      "ellipse",
+      "determinant"
+    ]
+  },
+  "multi-concept-05": {
+    "expectedConceptIds": [
+      "damped-oscillation",
+      "simple-harmonic-motion"
+    ]
+  },
+  "multi-concept-06": {
+    "expectedConceptIds": [
+      "force",
+      "acceleration"
+    ]
+  },
+  "multi-concept-07": {
+    "expectedConceptIds": [
+      "velocity",
+      "momentum"
+    ]
+  },
+  "multi-concept-09": {
+    "expectedConceptIds": [
+      "vector",
+      "matrix"
+    ]
+  },
+  "multi-concept-10": {
+    "expectedConceptIds": [
+      "eigenvalue",
+      "eigenvector"
+    ]
+  },
+  "multi-concept-11": {
+    "expectedConceptIds": [
+      "fourier-transform",
+      "fourier-series"
+    ]
+  },
+  "multi-concept-13": {
+    "expectedConceptIds": [
+      "electric-field",
+      "magnetic-field"
+    ]
+  },
+  "multi-concept-14": {
+    "expectedConceptIds": [
+      "ordinary-differential-equation",
+      "partial-differential-equation"
+    ]
+  },
+  "multi-concept-15": {
+    "expectedConceptIds": [
+      "momentum",
+      "angular-momentum"
+    ]
+  },
+  "multi-concept-17": {
+    "expectedConceptIds": [
+      "resonance",
+      "damped-oscillation"
+    ]
+  },
+  "multi-concept-18": {
+    "expectedConceptIds": [
+      "gradient",
+      "divergence",
+      "curl"
+    ]
+  },
+  "multi-concept-19": {
+    "expectedConceptIds": [
+      "vector-field",
+      "line-integral"
+    ]
+  },
+  "negative-01": {
+    "expectedConceptIds": []
+  },
+  "negative-02": {
+    "expectedConceptIds": []
+  },
+  "negative-03": {
+    "expectedConceptIds": []
+  },
+  "negative-05": {
+    "expectedConceptIds": []
+  },
+  "negative-06": {
+    "expectedConceptIds": []
+  },
+  "negative-07": {
+    "expectedConceptIds": []
+  },
+  "negative-09": {
+    "expectedConceptIds": []
+  },
+  "negative-10": {
+    "expectedConceptIds": []
+  },
+  "negative-11": {
+    "expectedConceptIds": []
+  },
+  "negative-13": {
+    "expectedConceptIds": []
+  },
+  "negative-14": {
+    "expectedConceptIds": []
+  },
+  "negative-15": {
+    "expectedConceptIds": []
+  },
+  "negative-17": {
+    "expectedConceptIds": []
+  },
+  "negative-18": {
+    "expectedConceptIds": []
+  },
+  "negative-19": {
+    "expectedConceptIds": []
+  },
+  "historical-01": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "historical-02": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "historical-03": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "historical-05": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "historical-06": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "historical-07": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "historical-09": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "historical-10": {
+    "expectedConceptIds": [
+      "spring-constant"
+    ]
+  },
+  "historical-11": {
+    "expectedConceptIds": [
+      "phase"
+    ]
+  },
+  "historical-13": {
+    "expectedConceptIds": [
+      "phase"
+    ]
+  },
+  "historical-14": {
+    "expectedConceptIds": [
+      "phase"
+    ]
+  },
+  "historical-15": {
+    "expectedConceptIds": [
+      "phase"
+    ]
+  },
+  "historical-17": {
+    "expectedConceptIds": [
+      "phase"
+    ]
+  },
+  "historical-18": {
+    "expectedConceptIds": [
+      "phase"
+    ]
+  },
+  "historical-19": {
+    "expectedConceptIds": [
+      "phase"
+    ]
+  }
+}

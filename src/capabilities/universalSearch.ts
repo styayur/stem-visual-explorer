@@ -18,13 +18,20 @@ export interface ObjectSearchEntry {
   visualizationId?: string;
   surface?: "overview" | "graph" | "visualize" | "resources";
 }
-/** Concept resolution is still the existing ontology resolver. No second matcher. */
+/** Ranked Resolver v2 concepts precede derived capabilities. Ambiguity requires explicit choice. */
 export function universalObjects(
   query: string,
   locale: UiLocale,
   resources: SearchResult[] = [],
 ): ObjectSearchEntry[] {
-  const ids = parseAndExpand(query).concept_ids;
+  const resolution = parseAndExpand(query).resolution;
+  const ids = resolution.candidates
+    .filter((c) =>
+      resolution.status === "ambiguous"
+        ? c.score >= 70
+        : resolution.conceptIds.includes(c.conceptId),
+    )
+    .map((c) => c.conceptId);
   const out: ObjectSearchEntry[] = [];
   for (const id of ids.slice(0, 4)) {
     const c = conceptById.get(id)!;
@@ -37,6 +44,7 @@ export function universalObjects(
       conceptId: id,
       surface: "overview",
     });
+    if (resolution.status === "ambiguous") continue;
     for (const cap of capabilitiesForConcept(id, resources).slice(0, 8))
       out.push({
         id: cap.id,

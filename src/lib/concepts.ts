@@ -1,5 +1,6 @@
 import data from "./concepts.json" with { type: "json" };
-import { historicalAliases } from "../learning/historicalAliases.ts";
+import { resolveQuery } from "../query/resolve.ts";
+import type { QueryResolution } from "../query/types.ts";
 
 export type MatchMode = "exact" | "phrase" | "token" | "cjk-substring";
 export type MatchTier = "direct" | "equivalent" | "exploratory";
@@ -79,27 +80,13 @@ export const conceptNames = (c: Concept) => [
   c.zh_tw,
   ...c.synonyms,
 ];
-const lookup = new Map<string, Concept>();
-for (const c of concepts)
-  for (const n of [
-    c.id,
-    ...conceptNames(c),
-    ...c.aliases.filter((a) => a.match !== "exact").map((a) => a.text),
-  ]) {
-    const key = normalizeTerm(n);
-    // Canonical labels take precedence over an ambiguous synonym. Validator reports collisions.
-    if (!lookup.has(key) || [c.en, c.zh_cn, c.zh_tw].includes(n))
-      lookup.set(key, c);
-  }
-// Opt-in historical query recognition is kept outside canonical labels and recall.
-for (const alias of historicalAliases) {
-  const concept = conceptById.get(alias.conceptId);
-  if (concept && !lookup.has(normalizeTerm(alias.text))) lookup.set(normalizeTerm(alias.text), concept);
-}
-const maxWords = Math.max(
-  ...[...lookup.keys()].map((n) => n.split(" ").length),
-);
 export function normalizeConcepts(terms: string[], phrases: string[] = []) {
+  return projectConceptResolution(
+    resolveQuery([...terms, ...phrases].join(" ")),
+  );
+}
+/** Compatibility projection only; Resolver v2 alone chooses concept semantics. */
+export function projectConceptResolution(resolution: QueryResolution) {
   const variants = new Map<string, QueryVariant>();
   const ids = new Set<string>();
   const add = (
@@ -121,22 +108,11 @@ export function normalizeConcepts(terms: string[], phrases: string[] = []) {
     if ((variants.get(key)?.weight ?? 0) < weight)
       variants.set(key, { text, concept_id, kind, weight, tier, match });
   };
-  const original = (text: string) => {
-    const c = lookup.get(normalizeTerm(text));
-    if (c) ids.add(c.id);
-    add(text, c?.id ?? null, "original", 1);
-  };
-  for (let start = 0; start < terms.length; ) {
-    let size = Math.min(maxWords, terms.length - start);
-    while (
-      size > 1 &&
-      !lookup.has(normalizeTerm(terms.slice(start, start + size).join(" ")))
-    )
-      size--;
-    original(terms.slice(start, start + size).join(" "));
-    start += size;
+  for (const id of resolution.conceptIds) ids.add(id);
+  for (const group of resolution.groups) {
+    for (const id of group.conceptIds) add(group.input, id, "original", 1);
   }
-  phrases.forEach(original);
+  for (const text of resolution.residualTerms) add(text, null, "original", 1);
   for (const id of [...ids].sort()) {
     const c = conceptById.get(id)!;
     [c.en, c.zh_cn, c.zh_tw].forEach((n) => add(n, id, "canonical", 0.95));
