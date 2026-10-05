@@ -83,6 +83,7 @@ jobs:
           SVE_INDEX_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
       - run: npm run benchmark
       - run: npm run benchmark:adversarial
+      - run: npm run benchmark:resolver
       - run: npm run test:parity
       - name: Retain retrieval measurements
         if: always()
@@ -94,3 +95,4 @@ jobs:
             artifacts/provider-quality.json
             artifacts/ontology-statistics.json
             artifacts/adversarial-query*.json
+            artifacts/query-resolver*.json

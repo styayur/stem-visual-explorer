@@ -21,19 +21,6 @@ pub struct Concept {
     pub related: Vec<String>,
     pub prerequisites: Vec<String>,
 }
-#[derive(Debug, Deserialize)]
-pub struct HistoricalAlias {
-    pub text: String,
-    #[serde(rename = "conceptId")]
-    pub concept_id: String,
-}
-pub fn historical_aliases() -> &'static [HistoricalAlias] {
-    static DATA: OnceLock<Vec<HistoricalAlias>> = OnceLock::new();
-    DATA.get_or_init(|| {
-        serde_json::from_str(include_str!("../../../src/learning/historicalAliases.json"))
-            .expect("validated historical query aliases")
-    })
-}
 pub fn concepts() -> &'static [Concept] {
     static DATA: OnceLock<Vec<Concept>> = OnceLock::new();
     DATA.get_or_init(|| {
@@ -91,38 +78,6 @@ pub fn names(c: &Concept) -> Vec<&str> {
         .map(String::as_str)
         .collect()
 }
-fn lookup(s: &str) -> Option<&'static Concept> {
-    static LOOKUP: OnceLock<BTreeMap<String, &'static Concept>> = OnceLock::new();
-    LOOKUP
-        .get_or_init(|| {
-            let mut out = BTreeMap::new();
-            for c in concepts() {
-                for n in std::iter::once(c.id.as_str()).chain(names(c)).chain(
-                    c.aliases
-                        .iter()
-                        .filter(|a| a.r#match != "exact")
-                        .map(|a| a.text.as_str()),
-                ) {
-                    let key = term(n);
-                    if !out.contains_key(&key)
-                        || [&c.en, &c.zh_cn, &c.zh_tw].iter().any(|v| v.as_str() == n)
-                    {
-                        out.insert(key, c);
-                    }
-                }
-            }
-            // Legacy spellings recognize queries without becoming canonical names
-            // or adding unrelated recall variants to provider resource annotations.
-            for alias in historical_aliases() {
-                if let Some(c) = concepts().iter().find(|c| c.id == alias.concept_id) {
-                    out.entry(term(&alias.text)).or_insert(c);
-                }
-            }
-            out
-        })
-        .get(&term(s))
-        .copied()
-}
 fn add(
     out: &mut BTreeMap<(String, String), QueryVariant>,
     text: &str,
@@ -158,50 +113,34 @@ fn add(
 pub fn expand(parsed: &ParsedQuery) -> NormalizedQuery {
     let mut out = BTreeMap::new();
     let mut ids = BTreeSet::new();
-    let mut originals = Vec::new();
-    let terms: Vec<_> = parsed
+    let raw = parsed
         .terms
         .iter()
         .filter(|t| t.to_lowercase() != "related:true")
+        .chain(&parsed.phrases)
         .cloned()
-        .collect();
-    let max_words = concepts()
-        .iter()
-        .flat_map(|c| {
-            std::iter::once(c.id.as_str()).chain(names(c)).chain(
-                c.aliases
-                    .iter()
-                    .filter(|a| a.r#match != "exact")
-                    .map(|a| a.text.as_str()),
-            )
-        })
-        .chain(historical_aliases().iter().map(|a| a.text.as_str()))
-        .map(|n| n.split_whitespace().count())
-        .max()
-        .unwrap_or(1);
-    let mut start = 0;
-    while start < terms.len() {
-        let mut size = max_words.min(terms.len() - start);
-        while size > 1 && lookup(&terms[start..start + size].join(" ")).is_none() {
-            size -= 1;
+        .collect::<Vec<_>>()
+        .join(" ");
+    let resolution = super::resolver::resolve(if parsed.raw.encode_utf16().count() > 512 {
+        &parsed.raw
+    } else {
+        &raw
+    });
+    ids.extend(resolution.concept_ids.clone());
+    for group in &resolution.groups {
+        for id in &group.concept_ids {
+            add(
+                &mut out,
+                &group.input,
+                Some(id),
+                "original",
+                1.0,
+                mode(&group.input),
+            );
         }
-        originals.push(terms[start..start + size].join(" "));
-        start += size;
     }
-    originals.extend(parsed.phrases.clone());
-    for original in originals {
-        let c = lookup(&original);
-        if let Some(c) = c {
-            ids.insert(c.id.clone());
-        }
-        add(
-            &mut out,
-            &original,
-            c.map(|c| c.id.as_str()),
-            "original",
-            1.0,
-            mode(&original),
-        );
+    for term in &resolution.residual_terms {
+        add(&mut out, term, None, "original", 1.0, mode(term));
     }
     for id in &ids {
         let c = concepts()

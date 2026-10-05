@@ -1,0 +1,350 @@
+{
+  "version": 2,
+  "cases": [
+    {
+      "query": "Ｆｏｕｒｉｅｒ",
+      "ids": [
+        "fourier"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "angular momentum",
+      "ids": [
+        "angular-momentum"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "角動量",
+      "ids": [
+        "angular-momentum"
+      ],
+      "status": "resolved",
+      "evidence": "script-normalization"
+    },
+    {
+      "query": "線性變換",
+      "ids": [
+        "linear-transformation"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "转动的动量",
+      "ids": [
+        "angular-momentum"
+      ],
+      "status": "resolved",
+      "evidence": "query-lexicon"
+    },
+    {
+      "query": "角动量怎么算",
+      "ids": [
+        "angular-momentum"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "弹簧来回振动",
+      "ids": [
+        "simple-harmonic-motion"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "线性变换面积怎么变",
+      "ids": [
+        "determinant",
+        "linear-transformation"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "面积怎么变",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "倔強係數",
+      "ids": [
+        "spring-constant"
+      ],
+      "status": "resolved",
+      "evidence": "historical-term"
+    },
+    {
+      "query": "振动的位相",
+      "ids": [
+        "phase"
+      ],
+      "status": "resolved",
+      "evidence": "historical-term"
+    },
+    {
+      "query": "SHM",
+      "ids": [
+        "simple-harmonic-motion"
+      ],
+      "status": "resolved",
+      "evidence": "abbreviation"
+    },
+    {
+      "query": "PDE",
+      "ids": [
+        "partial-differential-equation"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "SVD",
+      "ids": [
+        "singular-value-decomposition"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "FT",
+      "ids": [],
+      "status": "ambiguous"
+    },
+    {
+      "query": "momemtum",
+      "ids": [
+        "momentum"
+      ],
+      "status": "resolved",
+      "evidence": "bounded-typo"
+    },
+    {
+      "query": "momemtum conservation",
+      "ids": [
+        "conservation-of-momentum"
+      ],
+      "status": "resolved",
+      "evidence": "bounded-typo"
+    },
+    {
+      "query": "fourrier transform",
+      "ids": [
+        "fourier-transform"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "determinent",
+      "ids": [
+        "determinant"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "∇ × F",
+      "ids": [
+        "curl"
+      ],
+      "status": "resolved",
+      "evidence": "symbolic-operator"
+    },
+    {
+      "query": "nabla cross F",
+      "ids": [
+        "curl"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "∇·G",
+      "ids": [
+        "divergence"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "∇f",
+      "ids": [
+        "gradient"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "∂f/∂x",
+      "ids": [
+        "partial-derivative"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "dy/dx",
+      "ids": [
+        "derivative"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "det(A)",
+      "ids": [
+        "determinant"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "A v = λ v",
+      "ids": [
+        "eigenvalue",
+        "eigenvector"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "L = r × p",
+      "ids": [
+        "angular-momentum"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "F = −kx",
+      "ids": [
+        "hookes-law"
+      ],
+      "status": "resolved",
+      "evidence": "formula-pattern"
+    },
+    {
+      "query": "V=IR",
+      "ids": [
+        "ohm-s-law"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "E=mc²",
+      "ids": [
+        "mass-energy-equivalence"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "x²/a²+y²/b²=1",
+      "ids": [
+        "ellipse"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "d²x/dt²+ω²x=0",
+      "ids": [
+        "simple-harmonic-motion"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "curl 旋度",
+      "ids": [
+        "curl"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "Fourier 变换",
+      "ids": [
+        "fourier-transform"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "angular 动量",
+      "ids": [
+        "angular-momentum"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "gradient divergence curl",
+      "ids": [
+        "curl",
+        "divergence",
+        "gradient"
+      ],
+      "status": "resolved"
+    },
+    {
+      "query": "left",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "after",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "prototype",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "rotator",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "random prose",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "matrix movie tickets",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "∇×",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "(((((((((",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "det(",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "x^^^2",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "A v = λ u",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "x'' + omega^2 y = 0",
+      "ids": [],
+      "status": "unknown"
+    },
+    {
+      "query": "d²x/dt²",
+      "ids": [
+        "derivative"
+      ],
+      "status": "resolved",
+      "evidence": "symbolic-operator"
+    },
+    {
+      "query": "A v = 𝛌 v",
+      "ids": [
+        "eigenvalue",
+        "eigenvector"
+      ],
+      "status": "resolved",
+      "evidence": "symbolic-operator"
+    }
+  ]
+}

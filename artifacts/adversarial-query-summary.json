@@ -1,94 +1,769 @@
 {
-  "name": "Adversarial Query Robustness Benchmark",
-  "scope": "Reviewed lexical robustness of this ontology resolver; not general semantic understanding. PASS means the dataset and measurement completed, not perfect resolution.",
-  "cases": 220,
-  "exactResolution": 0.42272727272727273,
-  "topConceptAccuracy": 0.3958333333333333,
-  "negativePrecision": 0.6785714285714286,
-  "positiveCases": 192,
-  "negativeCases": 28,
-  "classes": {
-    "colloquial": {
-      "cases": 20,
-      "correct": 0,
-      "rate": 0
+  "name": "Adversarial Query Robustness Benchmark v2",
+  "methodology": "Frozen category-stratified split: every fourth original category case is holdout (165 development, 55 holdout). Original gold unchanged. Top-1 is the highest-ranked accepted candidate on positives; abstentions count as incorrect. Mechanisms are nonexclusive on exact successful positives. Difficulty is a fixed category-level rubric. Null means no independently labeled cases.",
+  "overall": {
+    "cases": 220,
+    "positiveCases": 192,
+    "negativeCases": 28,
+    "exactConceptSetAccuracy": 0.8863636363636364,
+    "top1ConceptAccuracy": 0.8697916666666666,
+    "negativeRejectionRate": 1,
+    "unknownAbstentionAccuracy": 1,
+    "ambiguousAbstentionAccuracy": 1,
+    "categories": {
+      "abbreviations": {
+        "cases": 20,
+        "correct": 18,
+        "rate": 0.9
+      },
+      "ambiguous-short": {
+        "cases": 20,
+        "correct": 20,
+        "rate": 1
+      },
+      "colloquial": {
+        "cases": 20,
+        "correct": 14,
+        "rate": 0.7
+      },
+      "formula-like": {
+        "cases": 20,
+        "correct": 15,
+        "rate": 0.75
+      },
+      "historical": {
+        "cases": 20,
+        "correct": 16,
+        "rate": 0.8
+      },
+      "mixed-language": {
+        "cases": 20,
+        "correct": 18,
+        "rate": 0.9
+      },
+      "multi-concept": {
+        "cases": 20,
+        "correct": 20,
+        "rate": 1
+      },
+      "negative": {
+        "cases": 20,
+        "correct": 20,
+        "rate": 1
+      },
+      "script-variants": {
+        "cases": 20,
+        "correct": 18,
+        "rate": 0.9
+      },
+      "symbolic": {
+        "cases": 20,
+        "correct": 17,
+        "rate": 0.85
+      },
+      "typos": {
+        "cases": 20,
+        "correct": 19,
+        "rate": 0.95
+      }
     },
-    "script-variants": {
-      "cases": 20,
-      "correct": 6,
-      "rate": 0.3
+    "languages": {
+      "en": {
+        "cases": 104,
+        "correct": 98,
+        "rate": 0.9423076923076923
+      },
+      "mixed": {
+        "cases": 20,
+        "correct": 18,
+        "rate": 0.9
+      },
+      "symbolic": {
+        "cases": 20,
+        "correct": 17,
+        "rate": 0.85
+      },
+      "zh-CN": {
+        "cases": 58,
+        "correct": 46,
+        "rate": 0.7931034482758621
+      },
+      "zh-TW": {
+        "cases": 18,
+        "correct": 16,
+        "rate": 0.8888888888888888
+      }
     },
-    "abbreviations": {
-      "cases": 20,
-      "correct": 14,
-      "rate": 0.7
+    "difficulty": {
+      "lexical-or-boundary": {
+        "cases": 140,
+        "correct": 130,
+        "rate": 0.9285714285714286
+      },
+      "structural-or-recovery": {
+        "cases": 80,
+        "correct": 65,
+        "rate": 0.8125
+      }
     },
-    "typos": {
-      "cases": 20,
-      "correct": 0,
-      "rate": 0
+    "mechanisms": {
+      "canonical-label": 65,
+      "ontology-alias": 18,
+      "query-lexicon": 19,
+      "historical-term": 17,
+      "script-normalization": 20,
+      "abbreviation": 5,
+      "bounded-typo": 18,
+      "symbolic-operator": 21,
+      "formula-pattern": 16,
+      "multi-token-composition": 0
     },
-    "mixed-language": {
-      "cases": 20,
-      "correct": 18,
-      "rate": 0.9
-    },
-    "symbolic": {
-      "cases": 20,
-      "correct": 0,
-      "rate": 0
-    },
-    "formula-like": {
-      "cases": 20,
-      "correct": 3,
-      "rate": 0.15
-    },
-    "ambiguous-short": {
-      "cases": 20,
-      "correct": 20,
-      "rate": 1
-    },
-    "multi-concept": {
-      "cases": 20,
-      "correct": 13,
-      "rate": 0.65
-    },
-    "negative": {
-      "cases": 20,
-      "correct": 11,
-      "rate": 0.55
-    },
-    "historical": {
-      "cases": 20,
-      "correct": 8,
-      "rate": 0.4
-    }
+    "ambiguousAbstentions": [],
+    "unknownAbstentions": [
+      "colloquial-09",
+      "colloquial-10",
+      "formula-like-17",
+      "ambiguous-short-05",
+      "ambiguous-short-06",
+      "ambiguous-short-07",
+      "ambiguous-short-13",
+      "ambiguous-short-17",
+      "ambiguous-short-18",
+      "ambiguous-short-19",
+      "negative-01",
+      "negative-02",
+      "negative-03",
+      "negative-05",
+      "negative-06",
+      "negative-07",
+      "negative-09",
+      "negative-10",
+      "negative-11",
+      "negative-13",
+      "negative-14",
+      "negative-15",
+      "negative-17",
+      "negative-18",
+      "negative-19",
+      "colloquial-08",
+      "colloquial-12",
+      "colloquial-16",
+      "colloquial-20",
+      "script-variants-04",
+      "abbreviations-12",
+      "typos-20",
+      "mixed-language-04",
+      "mixed-language-08",
+      "symbolic-08",
+      "symbolic-16",
+      "symbolic-20",
+      "formula-like-04",
+      "formula-like-12",
+      "formula-like-16",
+      "formula-like-20",
+      "ambiguous-short-04",
+      "negative-04",
+      "negative-08",
+      "negative-12",
+      "negative-16",
+      "negative-20"
+    ]
   },
-  "languages": {
-    "zh-CN": {
-      "cases": 58,
-      "correct": 16,
-      "rate": 0.27586206896551724
+  "development": {
+    "cases": 165,
+    "positiveCases": 143,
+    "negativeCases": 22,
+    "exactConceptSetAccuracy": 0.9515151515151515,
+    "top1ConceptAccuracy": 0.9440559440559441,
+    "negativeRejectionRate": 1,
+    "unknownAbstentionAccuracy": 1,
+    "ambiguousAbstentionAccuracy": null,
+    "categories": {
+      "abbreviations": {
+        "cases": 15,
+        "correct": 14,
+        "rate": 0.9333333333333333
+      },
+      "ambiguous-short": {
+        "cases": 15,
+        "correct": 15,
+        "rate": 1
+      },
+      "colloquial": {
+        "cases": 15,
+        "correct": 13,
+        "rate": 0.8666666666666667
+      },
+      "formula-like": {
+        "cases": 15,
+        "correct": 14,
+        "rate": 0.9333333333333333
+      },
+      "historical": {
+        "cases": 15,
+        "correct": 12,
+        "rate": 0.8
+      },
+      "mixed-language": {
+        "cases": 15,
+        "correct": 15,
+        "rate": 1
+      },
+      "multi-concept": {
+        "cases": 15,
+        "correct": 15,
+        "rate": 1
+      },
+      "negative": {
+        "cases": 15,
+        "correct": 15,
+        "rate": 1
+      },
+      "script-variants": {
+        "cases": 15,
+        "correct": 14,
+        "rate": 0.9333333333333333
+      },
+      "symbolic": {
+        "cases": 15,
+        "correct": 15,
+        "rate": 1
+      },
+      "typos": {
+        "cases": 15,
+        "correct": 15,
+        "rate": 1
+      }
     },
-    "zh-TW": {
-      "cases": 18,
-      "correct": 6,
-      "rate": 0.3333333333333333
+    "languages": {
+      "en": {
+        "cases": 79,
+        "correct": 78,
+        "rate": 0.9873417721518988
+      },
+      "mixed": {
+        "cases": 15,
+        "correct": 15,
+        "rate": 1
+      },
+      "symbolic": {
+        "cases": 15,
+        "correct": 15,
+        "rate": 1
+      },
+      "zh-CN": {
+        "cases": 43,
+        "correct": 37,
+        "rate": 0.8604651162790697
+      },
+      "zh-TW": {
+        "cases": 13,
+        "correct": 12,
+        "rate": 0.9230769230769231
+      }
     },
-    "en": {
-      "cases": 104,
-      "correct": 53,
-      "rate": 0.5096153846153846
+    "difficulty": {
+      "lexical-or-boundary": {
+        "cases": 105,
+        "correct": 100,
+        "rate": 0.9523809523809523
+      },
+      "structural-or-recovery": {
+        "cases": 60,
+        "correct": 57,
+        "rate": 0.95
+      }
     },
-    "mixed": {
-      "cases": 20,
-      "correct": 18,
-      "rate": 0.9
+    "mechanisms": {
+      "canonical-label": 50,
+      "ontology-alias": 14,
+      "query-lexicon": 18,
+      "historical-term": 12,
+      "script-normalization": 15,
+      "abbreviation": 4,
+      "bounded-typo": 14,
+      "symbolic-operator": 18,
+      "formula-pattern": 15,
+      "multi-token-composition": 0
     },
-    "symbolic": {
-      "cases": 20,
-      "correct": 0,
-      "rate": 0
+    "ambiguousAbstentions": [],
+    "unknownAbstentions": [
+      "colloquial-09",
+      "colloquial-10",
+      "formula-like-17",
+      "ambiguous-short-05",
+      "ambiguous-short-06",
+      "ambiguous-short-07",
+      "ambiguous-short-13",
+      "ambiguous-short-17",
+      "ambiguous-short-18",
+      "ambiguous-short-19",
+      "negative-01",
+      "negative-02",
+      "negative-03",
+      "negative-05",
+      "negative-06",
+      "negative-07",
+      "negative-09",
+      "negative-10",
+      "negative-11",
+      "negative-13",
+      "negative-14",
+      "negative-15",
+      "negative-17",
+      "negative-18",
+      "negative-19"
+    ]
+  },
+  "holdout": {
+    "cases": 55,
+    "positiveCases": 49,
+    "negativeCases": 6,
+    "exactConceptSetAccuracy": 0.6909090909090909,
+    "top1ConceptAccuracy": 0.6530612244897959,
+    "negativeRejectionRate": 1,
+    "unknownAbstentionAccuracy": 1,
+    "ambiguousAbstentionAccuracy": null,
+    "categories": {
+      "abbreviations": {
+        "cases": 5,
+        "correct": 4,
+        "rate": 0.8
+      },
+      "ambiguous-short": {
+        "cases": 5,
+        "correct": 5,
+        "rate": 1
+      },
+      "colloquial": {
+        "cases": 5,
+        "correct": 1,
+        "rate": 0.2
+      },
+      "formula-like": {
+        "cases": 5,
+        "correct": 1,
+        "rate": 0.2
+      },
+      "historical": {
+        "cases": 5,
+        "correct": 4,
+        "rate": 0.8
+      },
+      "mixed-language": {
+        "cases": 5,
+        "correct": 3,
+        "rate": 0.6
+      },
+      "multi-concept": {
+        "cases": 5,
+        "correct": 5,
+        "rate": 1
+      },
+      "negative": {
+        "cases": 5,
+        "correct": 5,
+        "rate": 1
+      },
+      "script-variants": {
+        "cases": 5,
+        "correct": 4,
+        "rate": 0.8
+      },
+      "symbolic": {
+        "cases": 5,
+        "correct": 2,
+        "rate": 0.4
+      },
+      "typos": {
+        "cases": 5,
+        "correct": 4,
+        "rate": 0.8
+      }
+    },
+    "languages": {
+      "en": {
+        "cases": 25,
+        "correct": 20,
+        "rate": 0.8
+      },
+      "mixed": {
+        "cases": 5,
+        "correct": 3,
+        "rate": 0.6
+      },
+      "symbolic": {
+        "cases": 5,
+        "correct": 2,
+        "rate": 0.4
+      },
+      "zh-CN": {
+        "cases": 15,
+        "correct": 9,
+        "rate": 0.6
+      },
+      "zh-TW": {
+        "cases": 5,
+        "correct": 4,
+        "rate": 0.8
+      }
+    },
+    "difficulty": {
+      "lexical-or-boundary": {
+        "cases": 35,
+        "correct": 30,
+        "rate": 0.8571428571428571
+      },
+      "structural-or-recovery": {
+        "cases": 20,
+        "correct": 8,
+        "rate": 0.4
+      }
+    },
+    "mechanisms": {
+      "canonical-label": 15,
+      "ontology-alias": 4,
+      "query-lexicon": 1,
+      "historical-term": 5,
+      "script-normalization": 5,
+      "abbreviation": 1,
+      "bounded-typo": 4,
+      "symbolic-operator": 3,
+      "formula-pattern": 1,
+      "multi-token-composition": 0
+    },
+    "ambiguousAbstentions": [],
+    "unknownAbstentions": [
+      "colloquial-08",
+      "colloquial-12",
+      "colloquial-16",
+      "colloquial-20",
+      "script-variants-04",
+      "abbreviations-12",
+      "typos-20",
+      "mixed-language-04",
+      "mixed-language-08",
+      "symbolic-08",
+      "symbolic-16",
+      "symbolic-20",
+      "formula-like-04",
+      "formula-like-12",
+      "formula-like-16",
+      "formula-like-20",
+      "ambiguous-short-04",
+      "negative-04",
+      "negative-08",
+      "negative-12",
+      "negative-16",
+      "negative-20"
+    ]
+  },
+  "integrity": {
+    "lexiconEntries": 37,
+    "candidateVocabularySize": 1603,
+    "ontologyConcepts": 494,
+    "ontologyAliasesAdded": 0,
+    "exactNormalizedQueryLexiconOverlap": [
+      "colloquial-01",
+      "colloquial-03",
+      "colloquial-05",
+      "colloquial-06",
+      "colloquial-11",
+      "colloquial-13",
+      "colloquial-14",
+      "colloquial-15",
+      "colloquial-17",
+      "colloquial-18",
+      "colloquial-19",
+      "abbreviations-01",
+      "abbreviations-02",
+      "abbreviations-03",
+      "abbreviations-05",
+      "abbreviations-18",
+      "abbreviations-19",
+      "formula-like-19",
+      "historical-01",
+      "historical-02",
+      "historical-11",
+      "colloquial-04",
+      "abbreviations-04",
+      "abbreviations-20",
+      "historical-12"
+    ]
+  },
+  "falsePositives": [],
+  "limitations": [
+    {
+      "id": "colloquial-09",
+      "query": "为什么过中点不停",
+      "expected": [
+        "simple-harmonic-motion"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "colloquial-10",
+      "query": "椭圆两根绳子的长度",
+      "expected": [
+        "ellipse"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "script-variants-02",
+      "query": "简谐振动怎么求周期",
+      "expected": [
+        "simple-harmonic-motion"
+      ],
+      "actual": [
+        "period",
+        "simple-harmonic-motion"
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "abbreviations-10",
+      "query": "SHM period",
+      "expected": [
+        "simple-harmonic-motion"
+      ],
+      "actual": [
+        "period",
+        "simple-harmonic-motion"
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "formula-like-17",
+      "query": "二阶常系数ODE",
+      "expected": [
+        "ordinary-differential-equation"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "historical-09",
+      "query": "倔强系数与振幅",
+      "expected": [
+        "spring-constant"
+      ],
+      "actual": [
+        "amplitude",
+        "spring-constant"
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "historical-10",
+      "query": "倔強係數與振幅",
+      "expected": [
+        "spring-constant"
+      ],
+      "actual": [
+        "amplitude",
+        "spring-constant"
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "historical-19",
+      "query": "振动的位相和周期",
+      "expected": [
+        "phase"
+      ],
+      "actual": [
+        "period",
+        "phase"
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "colloquial-08",
+      "query": "弹簧来回摆",
+      "expected": [
+        "simple-harmonic-motion"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "colloquial-12",
+      "query": "力等于质量乘加速度",
+      "expected": [
+        "newton-s-second-law"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "colloquial-16",
+      "query": "向量场流出去多少",
+      "expected": [
+        "divergence"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "colloquial-20",
+      "query": "一直损失能量的振动",
+      "expected": [
+        "damped-oscillation"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "script-variants-04",
+      "query": "线性变换的取向",
+      "expected": [
+        "linear-transformation"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "abbreviations-12",
+      "query": "PDE boundary",
+      "expected": [
+        "partial-differential-equation"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "typos-20",
+      "query": "驻拨",
+      "expected": [
+        "standing-wave"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "mixed-language-04",
+      "query": "linear transformation 面积",
+      "expected": [
+        "linear-transformation"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "mixed-language-08",
+      "query": "傅里叶 transform",
+      "expected": [
+        "fourier-transform"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "symbolic-08",
+      "query": "|A| 的几何意义",
+      "expected": [
+        "determinant"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "symbolic-16",
+      "query": "PF₁+PF₂=2a",
+      "expected": [
+        "ellipse"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "symbolic-20",
+      "query": "λv=Av",
+      "expected": [
+        "eigenvalue",
+        "eigenvector"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "formula-like-04",
+      "query": "K+U=constant",
+      "expected": [
+        "conservation-of-energy"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "formula-like-12",
+      "query": "a squared minus c squared equals b squared",
+      "expected": [
+        "ellipse"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "formula-like-16",
+      "query": "curl grad f = 0",
+      "expected": [
+        "curl",
+        "gradient"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "formula-like-20",
+      "query": "focal distance sum 2a",
+      "expected": [
+        "ellipse"
+      ],
+      "actual": [],
+      "status": "unknown"
+    },
+    {
+      "id": "historical-20",
+      "query": "振動的位相和週期",
+      "expected": [
+        "phase"
+      ],
+      "actual": [
+        "period",
+        "phase"
+      ],
+      "status": "resolved"
     }
+  ],
+  "ambiguityContract": {
+    "cases": 1,
+    "accuracy": 1
+  },
+  "hardNegativeCases": [
+    "面积怎么变",
+    "left",
+    "after",
+    "prototype",
+    "rotator",
+    "random prose",
+    "matrix movie tickets",
+    "∇×",
+    "(((((((((",
+    "det(",
+    "x^^^2",
+    "A v = λ u",
+    "x'' + omega^2 y = 0"
+  ],
+  "hardFalsePositiveRegressions": 0,
+  "qualityTargets": {
+    "overallExact75": true,
+    "positiveTop1_80": true,
+    "negativeRejection90": true,
+    "holdoutGapPoints": 26.060606060606062,
+    "holdoutWithin20Points": false
   }
 }

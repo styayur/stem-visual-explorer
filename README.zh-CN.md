@@ -6,7 +6,7 @@
 
 **面向数学与物理的概念驱动 STEM 学习工作台。**
 
-**Status:** 🟡 Alpha (0.4.0-alpha.2)
+**Status:** 🟡 Alpha (0.4.0-alpha.3)
 
 [Web 应用](https://styayur.github.io/stem-visual-explorer/) · [Windows](https://github.com/styayur/stem-visual-explorer/releases/latest) · [文档](docs/architecture.md) · [Releases](https://github.com/styayur/stem-visual-explorer/releases) · [Discussions](https://github.com/styayur/stem-visual-explorer/discussions)
 
@@ -22,6 +22,10 @@
 ![STEM Visual Explorer 中文界面](docs/screenshot-zh.png)
 
 </div>
+
+## 查询解析器 v2（0.4.0-alpha.3）
+
+独立查询层提供有限拼写纠错、符号与公式识别、确定性评分和歧义／拒答，不扩充规范本体。整体精确率为 88.64%，开发集 95.15%、holdout 69.09%；泛化差距仍明确保留，本次为草稿成熟度升级。参见[架构](docs/query-resolver-v2.md)与[实测限制](docs/audits/v0.4-query-resolver-report.md)。
 
 ## 概念工作台（0.4.0-alpha.2）
 

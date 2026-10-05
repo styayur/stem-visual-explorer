@@ -823,12 +823,9 @@
     },
     {
       "query": "FT",
-      "concept_ids": [
-        "fourier-transform"
-      ],
+      "concept_ids": [],
       "groups": 1,
       "must_include": [
-        "Fourier transform",
         "FT"
       ],
       "must_not_include": [
@@ -842,7 +839,8 @@
           "text": "ft",
           "match": "token"
         }
-      ]
+      ],
+      "resolution_status": "ambiguous"
     },
     {
       "query": "rot",

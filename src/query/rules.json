@@ -1,0 +1,496 @@
+{
+  "version": 2,
+  "scriptPolicy": "Reviewed traditional-to-simplified character pairs only. Regional terminology is never inferred from aligned labels. Ambiguous 後/發/髮/乾/幹/係/臺/裡 are preserved; complete canonical and historical terms are separately indexed.",
+  "characters": {
+    "²": "^2",
+    "³": "^3",
+    "⁴": "^4",
+    "⁰": "^0",
+    "¹": "^1",
+    "⁻": "-",
+    "·": "·",
+    "⋅": "·",
+    "∙": "·",
+    "∗": "×",
+    "✕": "×",
+    "λ": "lambda",
+    "ω": "omega",
+    "Ω": "omega",
+    "φ": "phi",
+    "ϕ": "phi",
+    "π": "pi",
+    "Σ": "sum",
+    "∑": "sum",
+    "√": "sqrt"
+  },
+  "scripts": {
+    "並": "并",
+    "侖": "仑",
+    "倫": "伦",
+    "傳": "传",
+    "價": "价",
+    "儀": "仪",
+    "優": "优",
+    "冪": "幂",
+    "別": "别",
+    "剛": "刚",
+    "劉": "刘",
+    "勁": "劲",
+    "動": "动",
+    "勞": "劳",
+    "勢": "势",
+    "勻": "匀",
+    "區": "区",
+    "參": "参",
+    "呂": "吕",
+    "問": "问",
+    "單": "单",
+    "圓": "圆",
+    "圖": "图",
+    "場": "场",
+    "壓": "压",
+    "學": "学",
+    "對": "对",
+    "導": "导",
+    "幾": "几",
+    "庫": "库",
+    "廣": "广",
+    "張": "张",
+    "強": "强",
+    "彈": "弹",
+    "徑": "径",
+    "復": "复",
+    "徵": "征",
+    "恆": "恒",
+    "態": "态",
+    "慣": "惯",
+    "應": "应",
+    "拋": "抛",
+    "換": "换",
+    "撲": "扑",
+    "擺": "摆",
+    "擾": "扰",
+    "斂": "敛",
+    "時": "时",
+    "柵": "栅",
+    "條": "条",
+    "極": "极",
+    "標": "标",
+    "樣": "样",
+    "橢": "椭",
+    "橫": "横",
+    "檢": "检",
+    "歐": "欧",
+    "歸": "归",
+    "氣": "气",
+    "氫": "氢",
+    "減": "减",
+    "測": "测",
+    "準": "准",
+    "溫": "温",
+    "滾": "滚",
+    "潛": "潜",
+    "濾": "滤",
+    "熱": "热",
+    "爾": "尔",
+    "狹": "狭",
+    "環": "环",
+    "異": "异",
+    "當": "当",
+    "疊": "叠",
+    "眾": "众",
+    "確": "确",
+    "稱": "称",
+    "積": "积",
+    "穩": "稳",
+    "範": "范",
+    "簡": "简",
+    "糾": "纠",
+    "純": "纯",
+    "級": "级",
+    "組": "组",
+    "結": "结",
+    "絕": "绝",
+    "統": "统",
+    "維": "维",
+    "線": "线",
+    "縮": "缩",
+    "縱": "纵",
+    "繞": "绕",
+    "續": "续",
+    "纏": "缠",
+    "羅": "罗",
+    "義": "义",
+    "聯": "联",
+    "聲": "声",
+    "脹": "胀",
+    "臨": "临",
+    "茲": "兹",
+    "萬": "万",
+    "葉": "叶",
+    "號": "号",
+    "衝": "冲",
+    "製": "制",
+    "複": "复",
+    "規": "规",
+    "觀": "观",
+    "計": "计",
+    "設": "设",
+    "誤": "误",
+    "調": "调",
+    "論": "论",
+    "諧": "谐",
+    "諾": "诺",
+    "譜": "谱",
+    "變": "变",
+    "質": "质",
+    "賴": "赖",
+    "跡": "迹",
+    "軌": "轨",
+    "軸": "轴",
+    "輯": "辑",
+    "輻": "辐",
+    "轉": "转",
+    "迴": "回",
+    "連": "连",
+    "週": "周",
+    "進": "进",
+    "運": "运",
+    "過": "过",
+    "達": "达",
+    "邊": "边",
+    "邏": "逻",
+    "錯": "错",
+    "鏈": "链",
+    "鏡": "镜",
+    "長": "长",
+    "門": "门",
+    "閉": "闭",
+    "開": "开",
+    "陣": "阵",
+    "階": "阶",
+    "隨": "随",
+    "電": "电",
+    "靜": "静",
+    "項": "项",
+    "頻": "频",
+    "類": "类",
+    "體": "体",
+    "點": "点",
+    "齊": "齐",
+    "數": "数",
+    "麼": "么",
+    "與": "与"
+  },
+  "scaffolds": [
+    "(怎么求周期|怎么计算周期)$",
+    "(^| )((what is|how to|explain|show me|calculate|understand|learn about) )",
+    "(^| )(and|or|of|the|a|an)( |$)",
+    "怎么(算|求|理解|传[播]|计算)?",
+    "如何(计算|理解|求)?",
+    "是什么",
+    "的意义",
+    "^(请问|请解释|解释|求|计算)",
+    "(公式|图像|是什么|怎么算|怎么求)$",
+    "(的方向|的传播|的面积|的焦点|求周期|周期|与面积|和面积)$",
+    "(^| )(period|solution|spectrum|bins)( |$)",
+    "(与|和)(振幅|周期)$",
+    "(^| )(k|phi)$",
+    "^(弹簧的|初始)",
+    "[的与和及]",
+    "(^| )(f)( |$)",
+    "二阶常系数"
+  ],
+  "structures": [
+    {
+      "name": "nabla cross field",
+      "pattern": "^(∇|nabla)(×|cross)[a-z]$",
+      "conceptIds": [
+        "curl"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "nabla dot field",
+      "pattern": "^(∇|nabla)(·|dot)[a-z]$",
+      "conceptIds": [
+        "divergence"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "nabla scalar",
+      "pattern": "^(∇|nabla)[a-z]$",
+      "conceptIds": [
+        "gradient"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "curl operand",
+      "pattern": "^curl(of)?(\\([a-z]\\)|[a-z])$",
+      "conceptIds": [
+        "curl"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "div operand",
+      "pattern": "^div(\\([a-z]\\)|[a-z])$",
+      "conceptIds": [
+        "divergence"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "grad operand",
+      "pattern": "^grad(\\([a-z]\\)|[a-z]|temperature)$",
+      "conceptIds": [
+        "gradient"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "det operand",
+      "pattern": "^det(\\([a-z]\\)|[a-z])$",
+      "conceptIds": [
+        "determinant"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "partial derivative",
+      "pattern": "^∂[a-z]/∂[a-z]$",
+      "conceptIds": [
+        "partial-derivative"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "ordinary derivative",
+      "pattern": "^d[a-z]/d[a-z]$",
+      "conceptIds": [
+        "derivative"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "derivative operator",
+      "pattern": "^d/d[a-z]$",
+      "conceptIds": [
+        "derivative"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "second derivative",
+      "pattern": "^d\\^2[a-z]/d[a-z]\\^2$",
+      "conceptIds": [
+        "derivative"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "integral",
+      "pattern": "^∫[a-z]d[a-z]$",
+      "conceptIds": [
+        "integral"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "closed line integral",
+      "pattern": "^∮[a-z](·d[a-z]|d[a-z])$",
+      "conceptIds": [
+        "line-integral"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "eigenpair",
+      "pattern": "^(av=lambdav|au=lambdau)$",
+      "conceptIds": [
+        "eigenvalue",
+        "eigenvector"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "determinant bars",
+      "pattern": "^\\|a\\|$",
+      "conceptIds": [
+        "determinant"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "inverse square sum",
+      "pattern": "^sum(1/n\\^2|_\\{?n=1\\}?(\\^\\{?infinity\\}?)?1/n\\^2)$",
+      "conceptIds": [
+        "convergent-series"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "linear system",
+      "pattern": "^ax=b$",
+      "conceptIds": [
+        "linear-system"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "two by two determinant",
+      "pattern": "^(deta=)?ad-bc$",
+      "conceptIds": [
+        "determinant"
+      ],
+      "kind": "symbolic-operator"
+    },
+    {
+      "name": "Newton second law",
+      "pattern": "^f=ma$",
+      "conceptIds": [
+        "newton-s-second-law"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "Hooke restoring force",
+      "pattern": "^f=-k(×)?x$",
+      "conceptIds": [
+        "hookes-law"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "mass acceleration restoring force",
+      "pattern": "^ma=-k(×)?x$",
+      "conceptIds": [
+        "simple-harmonic-motion"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "oscillator acceleration",
+      "pattern": "^a=-\\(k/m\\)x$",
+      "conceptIds": [
+        "simple-harmonic-motion"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "mass energy",
+      "pattern": "^e=mc\\^2$",
+      "conceptIds": [
+        "mass-energy-equivalence"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "linear momentum",
+      "pattern": "^p=mv$",
+      "conceptIds": [
+        "momentum"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "angular momentum",
+      "pattern": "^l=r(×|cross)p$",
+      "conceptIds": [
+        "angular-momentum"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "Ohm law",
+      "pattern": "^v=ir$",
+      "conceptIds": [
+        "ohm-s-law"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "photon energy",
+      "pattern": "^e=h(f|nu)$",
+      "conceptIds": [
+        "photon"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "harmonic frequency",
+      "pattern": "^omega=(sqrt\\(k/m\\)|sqrt\\(k/m\\))$",
+      "conceptIds": [
+        "simple-harmonic-motion"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "harmonic frequency squared",
+      "pattern": "^omega(\\^2|squared)=(k/m|koverm)$",
+      "conceptIds": [
+        "simple-harmonic-motion"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "spring period",
+      "pattern": "^t=2pi(sqrt\\(m/k\\)|sqrt\\(m/k\\))$",
+      "conceptIds": [
+        "simple-harmonic-motion"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "harmonic position",
+      "pattern": "^x=a(cos|sin)\\(omegat(\\+phi)?\\)$",
+      "conceptIds": [
+        "simple-harmonic-motion"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "harmonic equation",
+      "pattern": "^((d\\^2x/dt\\^2|x'')\\+omega\\^2x=0|y''\\+omega\\^2y=0)$",
+      "conceptIds": [
+        "simple-harmonic-motion"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "ellipse standard equation",
+      "pattern": "^x\\^2/a\\^2\\+y\\^2/b\\^2=1$",
+      "conceptIds": [
+        "ellipse"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "focal distance sum",
+      "pattern": "^pf1(plus|\\+)pf2(=)?constant$",
+      "conceptIds": [
+        "ellipse"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "area scale factor",
+      "pattern": "^areaafter/areabefore=abs\\(deta\\)$",
+      "conceptIds": [
+        "determinant"
+      ],
+      "kind": "formula-pattern"
+    },
+    {
+      "name": "div curl identity",
+      "pattern": "^divcurl[a-z]=0$",
+      "conceptIds": [
+        "divergence",
+        "curl"
+      ],
+      "kind": "formula-pattern"
+    }
+  ]
+}

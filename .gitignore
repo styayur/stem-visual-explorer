@@ -34,3 +34,6 @@ artifacts/*
 !artifacts/provider-quality.json
 !artifacts/ontology-statistics.json
 !artifacts/adversarial-query-summary.json
+
+!artifacts/query-resolver-v1-summary.json
+!artifacts/query-resolver-performance.json

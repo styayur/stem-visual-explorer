@@ -1,0 +1,332 @@
+[
+  {
+    "id": "colloquial-04",
+    "query": "傅里叶分析",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-08",
+    "query": "弹簧来回摆",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-12",
+    "query": "力等于质量乘加速度",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-16",
+    "query": "向量场流出去多少",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-20",
+    "query": "一直损失能量的振动",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-04",
+    "query": "线性变换的取向",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-08",
+    "query": "椭圆的焦点",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-12",
+    "query": "傅里叶变换",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-16",
+    "query": "动能与势能",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-20",
+    "query": "梯度的方向",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "abbreviations-04",
+    "query": "FFT",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-08",
+    "query": "grad f",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-12",
+    "query": "PDE boundary",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-16",
+    "query": "div vector field",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-20",
+    "query": "PE",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "typos-04",
+    "query": "determinent",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-08",
+    "query": "fourier transfrom",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-12",
+    "query": "divergance",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-16",
+    "query": "linera transformation",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-20",
+    "query": "驻拨",
+    "category": "typos",
+    "language": "zh-CN"
+  },
+  {
+    "id": "mixed-language-04",
+    "query": "linear transformation 面积",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-08",
+    "query": "傅里叶 transform",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-12",
+    "query": "矩阵 matrix",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-16",
+    "query": "kinetic energy 动能",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-20",
+    "query": "phase 振動的位相",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "symbolic-04",
+    "query": "curl(F)",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-08",
+    "query": "|A| 的几何意义",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-12",
+    "query": "∮ F·dr",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-16",
+    "query": "PF₁+PF₂=2a",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-20",
+    "query": "λv=Av",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "formula-like-04",
+    "query": "K+U=constant",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-08",
+    "query": "L=r cross p",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-12",
+    "query": "a squared minus c squared equals b squared",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-16",
+    "query": "curl grad f = 0",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-20",
+    "query": "focal distance sum 2a",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-04",
+    "query": "field",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-08",
+    "query": "rank",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-12",
+    "query": "grad",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-16",
+    "query": "work",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-20",
+    "query": "振动",
+    "category": "ambiguous-short",
+    "language": "zh-CN"
+  },
+  {
+    "id": "multi-concept-04",
+    "query": "simple harmonic motion and resonance",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-08",
+    "query": "kinetic energy and potential energy",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-12",
+    "query": "linear transformation and determinant",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-16",
+    "query": "位移速度加速度",
+    "category": "multi-concept",
+    "language": "zh-CN"
+  },
+  {
+    "id": "multi-concept-20",
+    "query": "弹簧劲度系数与相位",
+    "category": "multi-concept",
+    "language": "zh-CN"
+  },
+  {
+    "id": "negative-04",
+    "query": "determine a schedule",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-08",
+    "query": "wave hello",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-12",
+    "query": "rank a movie",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-16",
+    "query": "momentum marketing agency",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-20",
+    "query": "傅姓同学",
+    "category": "negative",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-04",
+    "query": "倔強係數怎麼算",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-08",
+    "query": "倔強係數 k",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-12",
+    "query": "振動的位相",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-16",
+    "query": "初始振動的位相",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-20",
+    "query": "振動的位相和週期",
+    "category": "historical",
+    "language": "zh-TW"
+  }
+]

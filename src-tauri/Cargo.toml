@@ -1,6 +1,6 @@
 [package]
 name = "stem-visual-explorer"
-version = "0.4.0-alpha.2"
+version = "0.4.0-alpha.3"
 description = "STEM Visual Explorer - visual search for mathematics and physics"
 authors = ["Yur Stya <yurstya@gmail.com>"]
 license = "AGPL-3.0-only"
@@ -28,6 +28,8 @@ rusqlite = { version = "0.32", features = ["bundled"] }
 chrono = { version = "0.4", features = ["serde"] }
 open = { version = "5", optional = true }
 log = "0.4"
+regex = "1"
+unicode-normalization = "0.1"
 
 [features]
 default = ["tauri"]

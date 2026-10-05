@@ -6,7 +6,7 @@
 
 **A concept-driven STEM learning workbench for mathematics and physics.**
 
-**Status:** 🟡 Alpha (0.4.0-alpha.2)
+**Status:** 🟡 Alpha (0.4.0-alpha.3)
 
 [Web App](https://styayur.github.io/stem-visual-explorer/) · [Windows](https://github.com/styayur/stem-visual-explorer/releases/latest) · [Documentation](docs/architecture.md) · [Releases](https://github.com/styayur/stem-visual-explorer/releases) · [Discussions](https://github.com/styayur/stem-visual-explorer/discussions)
 
@@ -22,6 +22,10 @@
 ![STEM Visual Explorer search interface](docs/screenshot.png)
 
 </div>
+
+## Query Resolver v2 (0.4.0-alpha.3)
+
+Deterministic multilingual query understanding adds bounded typo recovery, symbolic/formula patterns, ranked evidence and ambiguity/abstention without changing the canonical ontology. Overall exact accuracy is 88.64%, with a visible 95.15% development / 69.09% holdout gap; this remains a draft maturity step. [Architecture](docs/query-resolver-v2.md) · [Measured limitations](docs/audits/v0.4-query-resolver-report.md).
 
 ## Concept Workbench (0.4.0-alpha.2)
 

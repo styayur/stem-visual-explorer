@@ -1,0 +1,106 @@
+{
+  "name": "Adversarial Query Robustness Benchmark",
+  "scope": "Reviewed lexical robustness of this ontology resolver; not general semantic understanding. PASS means the dataset and measurement completed, not perfect resolution.",
+  "cases": 220,
+  "exactResolution": 0.42272727272727273,
+  "topConceptAccuracy": 0.3958333333333333,
+  "negativePrecision": 0.6785714285714286,
+  "positiveCases": 192,
+  "negativeCases": 28,
+  "classes": {
+    "colloquial": {
+      "cases": 20,
+      "correct": 0,
+      "rate": 0
+    },
+    "script-variants": {
+      "cases": 20,
+      "correct": 6,
+      "rate": 0.3
+    },
+    "abbreviations": {
+      "cases": 20,
+      "correct": 14,
+      "rate": 0.7
+    },
+    "typos": {
+      "cases": 20,
+      "correct": 0,
+      "rate": 0
+    },
+    "mixed-language": {
+      "cases": 20,
+      "correct": 18,
+      "rate": 0.9
+    },
+    "symbolic": {
+      "cases": 20,
+      "correct": 0,
+      "rate": 0
+    },
+    "formula-like": {
+      "cases": 20,
+      "correct": 3,
+      "rate": 0.15
+    },
+    "ambiguous-short": {
+      "cases": 20,
+      "correct": 20,
+      "rate": 1
+    },
+    "multi-concept": {
+      "cases": 20,
+      "correct": 13,
+      "rate": 0.65
+    },
+    "negative": {
+      "cases": 20,
+      "correct": 11,
+      "rate": 0.55
+    },
+    "historical": {
+      "cases": 20,
+      "correct": 8,
+      "rate": 0.4
+    }
+  },
+  "languages": {
+    "zh-CN": {
+      "cases": 58,
+      "correct": 16,
+      "rate": 0.27586206896551724
+    },
+    "zh-TW": {
+      "cases": 18,
+      "correct": 6,
+      "rate": 0.3333333333333333
+    },
+    "en": {
+      "cases": 104,
+      "correct": 53,
+      "rate": 0.5096153846153846
+    },
+    "mixed": {
+      "cases": 20,
+      "correct": 18,
+      "rate": 0.9
+    },
+    "symbolic": {
+      "cases": 20,
+      "correct": 0,
+      "rate": 0
+    }
+  },
+  "development": {
+    "cases": 165,
+    "exactConceptSetAccuracy": 0.4303030303030303,
+    "firstResolvedConceptAccuracy": 0.3986013986013986,
+    "negativeRejectionRate": 0.7272727272727273
+  },
+  "holdout": {
+    "cases": 55,
+    "exactConceptSetAccuracy": 0.4,
+    "firstResolvedConceptAccuracy": 0.3877551020408163,
+    "negativeRejectionRate": 0.5
+  }
+}
