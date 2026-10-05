@@ -1,0 +1,1322 @@
+[
+  {
+    "id": "colloquial-01",
+    "query": "转动的动量",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-02",
+    "query": "角动量怎么算",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-03",
+    "query": "傅里叶转换",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-04",
+    "query": "傅里叶分析",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-05",
+    "query": "高斯散度公式",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-06",
+    "query": "麦克斯韦四方程",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-07",
+    "query": "线性变换面积怎么变",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-08",
+    "query": "弹簧来回摆",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-09",
+    "query": "为什么过中点不停",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-10",
+    "query": "椭圆两根绳子的长度",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-11",
+    "query": "矩阵把面积放大几倍",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-12",
+    "query": "力等于质量乘加速度",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-13",
+    "query": "速度的变化率",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-14",
+    "query": "位移的变化率",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-15",
+    "query": "向量场绕圈程度",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-16",
+    "query": "向量场流出去多少",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-17",
+    "query": "函数最陡上升方向",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-18",
+    "query": "波叠起来不动",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-19",
+    "query": "弹簧硬不硬",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "colloquial-20",
+    "query": "一直损失能量的振动",
+    "category": "colloquial",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-01",
+    "query": "簡諧振動怎麼算",
+    "category": "script-variants",
+    "language": "zh-TW"
+  },
+  {
+    "id": "script-variants-02",
+    "query": "简谐振动怎么求周期",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-03",
+    "query": "線性變換的面積",
+    "category": "script-variants",
+    "language": "zh-TW"
+  },
+  {
+    "id": "script-variants-04",
+    "query": "线性变换的取向",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-05",
+    "query": "行列式與面積",
+    "category": "script-variants",
+    "language": "zh-TW"
+  },
+  {
+    "id": "script-variants-06",
+    "query": "行列式和面积",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-07",
+    "query": "橢圓的焦點",
+    "category": "script-variants",
+    "language": "zh-TW"
+  },
+  {
+    "id": "script-variants-08",
+    "query": "椭圆的焦点",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-09",
+    "query": "角動量守恆",
+    "category": "script-variants",
+    "language": "zh-TW"
+  },
+  {
+    "id": "script-variants-10",
+    "query": "角动量守恒",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-11",
+    "query": "傅里葉變換",
+    "category": "script-variants",
+    "language": "zh-TW"
+  },
+  {
+    "id": "script-variants-12",
+    "query": "傅里叶变换",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-13",
+    "query": "電磁波怎麼傳播",
+    "category": "script-variants",
+    "language": "zh-TW"
+  },
+  {
+    "id": "script-variants-14",
+    "query": "电磁波的传播",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-15",
+    "query": "動能與勢能",
+    "category": "script-variants",
+    "language": "zh-TW"
+  },
+  {
+    "id": "script-variants-16",
+    "query": "动能与势能",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-17",
+    "query": "偏微分方程",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-18",
+    "query": "常微分方程",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-19",
+    "query": "散度定理的意義",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "script-variants-20",
+    "query": "梯度的方向",
+    "category": "script-variants",
+    "language": "zh-CN"
+  },
+  {
+    "id": "abbreviations-01",
+    "query": "SHM",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-02",
+    "query": "ODE",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-03",
+    "query": "PDE",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-04",
+    "query": "FFT",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-05",
+    "query": "DFT",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-06",
+    "query": "det A",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-07",
+    "query": "div F",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-08",
+    "query": "grad f",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-09",
+    "query": "curl of F",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-10",
+    "query": "SHM period",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-11",
+    "query": "ODE solution",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-12",
+    "query": "PDE boundary",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-13",
+    "query": "FFT spectrum",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-14",
+    "query": "DFT bins",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-15",
+    "query": "grad temperature",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-16",
+    "query": "div vector field",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-17",
+    "query": "det matrix",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-18",
+    "query": "Newton II",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-19",
+    "query": "KE",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "abbreviations-20",
+    "query": "PE",
+    "category": "abbreviations",
+    "language": "en"
+  },
+  {
+    "id": "typos-01",
+    "query": "simple harmnic motion",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-02",
+    "query": "simple harmonic motoin",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-03",
+    "query": "harmonic oscilator",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-04",
+    "query": "determinent",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-05",
+    "query": "determinat",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-06",
+    "query": "ellpise",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-07",
+    "query": "elipse",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-08",
+    "query": "fourier transfrom",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-09",
+    "query": "Fourrier transform",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-10",
+    "query": "angluar momentum",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-11",
+    "query": "angular momemtum",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-12",
+    "query": "divergance",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-13",
+    "query": "gradiant",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-14",
+    "query": "curll",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-15",
+    "query": "eigenvlaue",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-16",
+    "query": "linera transformation",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-17",
+    "query": "linear transformaton",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-18",
+    "query": "resonence",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-19",
+    "query": "Maxwel equations",
+    "category": "typos",
+    "language": "en"
+  },
+  {
+    "id": "typos-20",
+    "query": "驻拨",
+    "category": "typos",
+    "language": "zh-CN"
+  },
+  {
+    "id": "mixed-language-01",
+    "query": "简谐振动 SHM",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-02",
+    "query": "橢圓 ellipse",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-03",
+    "query": "行列式 det A",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-04",
+    "query": "linear transformation 面积",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-05",
+    "query": "curl 的方向",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-06",
+    "query": "divergence 是什么",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-07",
+    "query": "gradient 梯度",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-08",
+    "query": "傅里叶 transform",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-09",
+    "query": "damped 简谐振动",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-10",
+    "query": "共振 resonance",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-11",
+    "query": "eigenvalue 特征值",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-12",
+    "query": "矩阵 matrix",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-13",
+    "query": "vector 向量",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-14",
+    "query": "ODE 常微分方程",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-15",
+    "query": "PDE 偏微分方程",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-16",
+    "query": "kinetic energy 动能",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-17",
+    "query": "potential energy 势能",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-18",
+    "query": "angular momentum 角動量",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-19",
+    "query": "spring constant 弹簧劲度系数",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "mixed-language-20",
+    "query": "phase 振動的位相",
+    "category": "mixed-language",
+    "language": "mixed"
+  },
+  {
+    "id": "symbolic-01",
+    "query": "∇×F",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-02",
+    "query": "∇·F",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-03",
+    "query": "∇f",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-04",
+    "query": "curl(F)",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-05",
+    "query": "div(F)",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-06",
+    "query": "grad(f)",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-07",
+    "query": "det(A)",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-08",
+    "query": "|A| 的几何意义",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-09",
+    "query": "∂f/∂x",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-10",
+    "query": "df/dx",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-11",
+    "query": "∫ f dx",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-12",
+    "query": "∮ F·dr",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-13",
+    "query": "Σ 1/n²",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-14",
+    "query": "ω=√(k/m)",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-15",
+    "query": "x=A cos(ωt+φ)",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-16",
+    "query": "PF₁+PF₂=2a",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-17",
+    "query": "x²/a²+y²/b²=1",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-18",
+    "query": "ad−bc",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-19",
+    "query": "Ax=b",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "symbolic-20",
+    "query": "λv=Av",
+    "category": "symbolic",
+    "language": "symbolic"
+  },
+  {
+    "id": "formula-like-01",
+    "query": "F=-kx",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-02",
+    "query": "ma=-kx",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-03",
+    "query": "a=-(k/m)x",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-04",
+    "query": "K+U=constant",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-05",
+    "query": "E=mc^2",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-06",
+    "query": "F=ma",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-07",
+    "query": "p=mv",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-08",
+    "query": "L=r cross p",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-09",
+    "query": "T=2pi sqrt(m/k)",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-10",
+    "query": "omega squared = k over m",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-11",
+    "query": "PF1 plus PF2 constant",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-12",
+    "query": "a squared minus c squared equals b squared",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-13",
+    "query": "area after / area before = abs(det A)",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-14",
+    "query": "det A = ad-bc",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-15",
+    "query": "div curl F = 0",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-16",
+    "query": "curl grad f = 0",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-17",
+    "query": "二阶常系数ODE",
+    "category": "formula-like",
+    "language": "zh-CN"
+  },
+  {
+    "id": "formula-like-18",
+    "query": "y'' + omega^2 y = 0",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-19",
+    "query": "force proportional to negative displacement",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "formula-like-20",
+    "query": "focal distance sum 2a",
+    "category": "formula-like",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-01",
+    "query": "force",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-02",
+    "query": "wave",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-03",
+    "query": "phase",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-04",
+    "query": "field",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-05",
+    "query": "rotation",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-06",
+    "query": "moment",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-07",
+    "query": "normal",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-08",
+    "query": "rank",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-09",
+    "query": "trace",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-10",
+    "query": "curl",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-11",
+    "query": "div",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-12",
+    "query": "grad",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-13",
+    "query": "spring",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-14",
+    "query": "mass",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-15",
+    "query": "energy",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-16",
+    "query": "work",
+    "category": "ambiguous-short",
+    "language": "en"
+  },
+  {
+    "id": "ambiguous-short-17",
+    "query": "线",
+    "category": "ambiguous-short",
+    "language": "zh-CN"
+  },
+  {
+    "id": "ambiguous-short-18",
+    "query": "场",
+    "category": "ambiguous-short",
+    "language": "zh-CN"
+  },
+  {
+    "id": "ambiguous-short-19",
+    "query": "变换",
+    "category": "ambiguous-short",
+    "language": "zh-CN"
+  },
+  {
+    "id": "ambiguous-short-20",
+    "query": "振动",
+    "category": "ambiguous-short",
+    "language": "zh-CN"
+  },
+  {
+    "id": "multi-concept-01",
+    "query": "curl and divergence",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-02",
+    "query": "gradient and curl",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-03",
+    "query": "ellipse and determinant",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-04",
+    "query": "simple harmonic motion and resonance",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-05",
+    "query": "damped SHM",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-06",
+    "query": "force and acceleration",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-07",
+    "query": "velocity and momentum",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-08",
+    "query": "kinetic energy and potential energy",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-09",
+    "query": "vector and matrix",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-10",
+    "query": "eigenvalue and eigenvector",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-11",
+    "query": "Fourier transform and Fourier series",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-12",
+    "query": "linear transformation and determinant",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-13",
+    "query": "electric field and magnetic field",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-14",
+    "query": "ordinary differential equation and partial differential equation",
+    "category": "multi-concept",
+    "language": "en"
+  },
+  {
+    "id": "multi-concept-15",
+    "query": "动量与角动量",
+    "category": "multi-concept",
+    "language": "zh-CN"
+  },
+  {
+    "id": "multi-concept-16",
+    "query": "位移速度加速度",
+    "category": "multi-concept",
+    "language": "zh-CN"
+  },
+  {
+    "id": "multi-concept-17",
+    "query": "共振和阻尼振动",
+    "category": "multi-concept",
+    "language": "zh-CN"
+  },
+  {
+    "id": "multi-concept-18",
+    "query": "梯度散度旋度",
+    "category": "multi-concept",
+    "language": "zh-CN"
+  },
+  {
+    "id": "multi-concept-19",
+    "query": "向量场与线积分",
+    "category": "multi-concept",
+    "language": "zh-CN"
+  },
+  {
+    "id": "multi-concept-20",
+    "query": "弹簧劲度系数与相位",
+    "category": "multi-concept",
+    "language": "zh-CN"
+  },
+  {
+    "id": "negative-01",
+    "query": "curling tournament",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-02",
+    "query": "gradual improvement",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-03",
+    "query": "dividend payment",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-04",
+    "query": "determine a schedule",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-05",
+    "query": "matrix movie tickets",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-06",
+    "query": "spring festival tickets",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-07",
+    "query": "phase out plastic",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-08",
+    "query": "wave hello",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-09",
+    "query": "force quit application",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-10",
+    "query": "normal restaurant",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-11",
+    "query": "integral part of the team",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-12",
+    "query": "rank a movie",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-13",
+    "query": "gradient lipstick",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-14",
+    "query": "rotation shift workers",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-15",
+    "query": "energy drink brand",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-16",
+    "query": "momentum marketing agency",
+    "category": "negative",
+    "language": "en"
+  },
+  {
+    "id": "negative-17",
+    "query": "椭圆形餐桌购买",
+    "category": "negative",
+    "language": "zh-CN"
+  },
+  {
+    "id": "negative-18",
+    "query": "波士顿天气",
+    "category": "negative",
+    "language": "zh-CN"
+  },
+  {
+    "id": "negative-19",
+    "query": "旋风游戏攻略",
+    "category": "negative",
+    "language": "zh-CN"
+  },
+  {
+    "id": "negative-20",
+    "query": "傅姓同学",
+    "category": "negative",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-01",
+    "query": "倔强系数",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-02",
+    "query": "倔強係數",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-03",
+    "query": "倔强系数怎么算",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-04",
+    "query": "倔強係數怎麼算",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-05",
+    "query": "弹簧的倔强系数",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-06",
+    "query": "彈簧的倔強係數",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-07",
+    "query": "倔强系数 k",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-08",
+    "query": "倔強係數 k",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-09",
+    "query": "倔强系数与振幅",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-10",
+    "query": "倔強係數與振幅",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-11",
+    "query": "振动的位相",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-12",
+    "query": "振動的位相",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-13",
+    "query": "振动的位相怎么求",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-14",
+    "query": "振動的位相怎麼求",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-15",
+    "query": "初始振动的位相",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-16",
+    "query": "初始振動的位相",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-17",
+    "query": "振动的位相 φ",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-18",
+    "query": "振動的位相 φ",
+    "category": "historical",
+    "language": "zh-TW"
+  },
+  {
+    "id": "historical-19",
+    "query": "振动的位相和周期",
+    "category": "historical",
+    "language": "zh-CN"
+  },
+  {
+    "id": "historical-20",
+    "query": "振動的位相和週期",
+    "category": "historical",
+    "language": "zh-TW"
+  }
+]

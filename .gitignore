@@ -33,3 +33,4 @@ artifacts/*
 !artifacts/retrieval-benchmark-summary.json
 !artifacts/provider-quality.json
 !artifacts/ontology-statistics.json
+!artifacts/adversarial-query-summary.json

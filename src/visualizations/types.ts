@@ -21,6 +21,19 @@ export interface GuidedStep {
   scene: SceneDefinition;
   controls: ControlDefinition[];
   highlights: string[];
+  misconception?: LocalizedText;
+  observation?: LocalizedText;
+  cause?: LocalizedText;
+  consequence?: LocalizedText;
+}
+export interface LessonContext {
+  definition: GuidedVisualizationDefinition;
+  step: GuidedStep;
+  stepIndex: number;
+  parameters: Record<string, number>;
+  status: "paused" | "playing" | "completed";
+  canPlay: boolean;
+  actions: { previous: () => void; next: () => void; play: () => void; pause: () => void; restart: () => void };
 }
 export interface VisualizationParameter {
   id: string;

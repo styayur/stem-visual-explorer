@@ -2,6 +2,7 @@ import { selectedResult, useSearchStore } from "../stores/searchStore";
 import * as cmd from "./commands";
 import { useSettingsStore } from "../stores/settingsStore";
 import { attempt } from "../stores/noticeStore";
+import { useWorkbenchStore } from "../workbench/workbenchStore";
 
 function isTyping(): boolean {
   const el = document.activeElement;
@@ -15,8 +16,21 @@ export function installShortcuts(): () => void {
     const mod = e.ctrlKey || e.metaKey;
     if (e.defaultPrevented || e.isComposing) return;
 
-    // Focus search.
-    if (mod && (e.key.toLowerCase() === "k" || e.key.toLowerCase() === "l")) {
+    if (mod && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      useSettingsStore.getState().setPage("search");
+      useWorkbenchStore.getState().setPalette(!useWorkbenchStore.getState().paletteOpen);
+      return;
+    }
+    if (useWorkbenchStore.getState().paletteOpen) return;
+    const workbench = useWorkbenchStore.getState();
+    if (workbench.session && e.altKey && !mod && !isTyping() && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+      const cursor = workbench.session.cursor + (e.key === "ArrowLeft" ? -1 : 1);
+      if(cursor >= 0 && cursor < workbench.session.trail.length){ e.preventDefault(); workbench.visit(cursor); }
+      return;
+    }
+    // Ctrl/Cmd+L retains direct search focus.
+    if (mod && e.key.toLowerCase() === "l") {
       e.preventDefault();
       useSettingsStore.getState().setPage("search");
       requestAnimationFrame(() => {

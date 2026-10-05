@@ -5,6 +5,7 @@ import { spawn } from "node:child_process";
 import { mkdir, readFile } from "node:fs/promises";
 import { chromium } from "playwright";
 import { visualLearningRegression } from "./visual_learning_regression.mjs";
+import { workbenchRegression } from "./workbench_regression.mjs";
 
 const base = process.env.SVE_BASE || "http://127.0.0.1:1421/";
 const server = process.env.SVE_BASE ? null : spawn(process.execPath,
@@ -66,7 +67,7 @@ try {
   await page.evaluate(async () => { const {useSettingsStore} = await import("/src/stores/settingsStore.ts"); await useSettingsStore.getState().update({page_translate_proxy:"https://proxy.example/?url={url}&lang={lang}"}); });
   await page.getByTitle("Translate page", {exact:true}).click();
   assert.equal(await page.locator("iframe").count(), 0);
-  assert.ok(!externalRequests.some((url) => url.startsWith("https://proxy.example")));
+  assert.ok(!externalRequests.some((url) => new URL(url).hostname === "proxy.example"));
   await page.getByTitle("Translate page", {exact:true}).click();
   await page.evaluate(async () => { const {useSettingsStore} = await import("/src/stores/settingsStore.ts"); await useSettingsStore.getState().update({page_translate_proxy:""}); });
   await search("site:maotian");
@@ -122,6 +123,8 @@ try {
   await page.getByText("No favorites yet", { exact: false }).waitFor();
   ok("favorites persist across reload and can be removed");
   await page.keyboard.press("Control+k");
+  await page.getByRole("dialog",{name:"Command Palette",exact:true}).waitFor();
+  await page.getByRole("option",{name:"Focus universal search",exact:true}).click();
   await page.locator("#search-input").waitFor();
   assert.equal(await page.locator("#search-input").evaluate((e) => e === document.activeElement), true);
   await search("curl");
@@ -186,7 +189,7 @@ try {
   await workspace.locator("textarea").fill("Saved workspace notes");
   await workspace.reload(); await workspace.waitForLoadState("networkidle");
   assert.equal(await workspace.locator("textarea").inputValue(), "Saved workspace notes");
-  await workspace.getByRole("link").click(); await workspace.locator("#search-input").waitFor();
+  await workspace.locator('[href="?route=search"]').click(); await workspace.locator("#search-input").waitFor();
   await workspace.close();
   ok("four-pane workspace, capacity, notes persistence and return to search");
   await page.getByRole("navigation").getByRole("button", { name: "Settings" }).click();
@@ -320,6 +323,7 @@ try {
   ok("desktop toolbar: complete long-text translation, restore and cancellation");
   assert.deepEqual(errors, []);
   await visualLearningRegression(browser, base);
+  await workbenchRegression(browser,base);
   process.stdout.write(`WEB REGRESSION: ${checks} groups passed; no uncaught page errors\n`);
 } finally {
   await browser?.close();

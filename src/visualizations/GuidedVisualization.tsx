@@ -2,7 +2,7 @@ import { useEffect, useMemo, useReducer, useState } from "react";
 import { useSettingsStore } from "../stores/settingsStore";
 import { learningText as ui } from "../learning/uiText";
 import { localize } from "../learning/types";
-import { getVisualization } from "./definitions";
+import type { GuidedVisualizationDefinition, LessonContext } from "./types";
 import { initialLessonState, reduceLesson } from "./stateMachine";
 import { buildScene, currentMatrix } from "./scenes";
 import { clamp, determinant, ellipseState, orientation, TAU } from "./math";
@@ -11,13 +11,14 @@ import Equation from "./Equation";
 import "./visualizations.css";
 
 export default function GuidedVisualization({
-  visualizationId,
+  definition,
   initialStepId,
+  onContext,
 }: {
-  visualizationId: string;
+  definition: GuidedVisualizationDefinition;
   initialStepId?: string;
+  onContext?: (context: LessonContext | null) => void;
 }) {
-  const definition = getVisualization(visualizationId);
   const locale = useSettingsStore((s) => s.settings.ui_locale);
   const [reducedMotion, setReducedMotion] = useState(
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
@@ -26,8 +27,6 @@ export default function GuidedVisualization({
     document.documentElement.classList.contains("dark"),
   );
   const t = (key: keyof typeof ui) => localize(ui[key], locale);
-  if (!definition)
-    throw new Error(`Unknown static visualization: ${visualizationId}`);
   const [state, dispatch] = useReducer(
     (
       state: ReturnType<typeof initialLessonState>,
@@ -42,6 +41,18 @@ export default function GuidedVisualization({
     ),
   );
   const step = definition.steps[state.stepIndex];
+  useEffect(() => {
+    onContext?.({ definition, step, stepIndex: state.stepIndex, parameters: state.parameters, status: state.status,
+      canPlay: !reducedMotion && step.scene.motion !== "none",
+      actions: {
+        previous: () => dispatch({ type: "seek", index: state.stepIndex - 1 }),
+        next: () => dispatch({ type: "seek", index: state.stepIndex + 1 }),
+        play: () => dispatch({ type: "play", reducedMotion }), pause: () => dispatch({ type: "pause" }),
+        restart: () => dispatch({ type: "restart" }),
+      },
+    });
+  }, [onContext, definition, step, state.stepIndex, state.parameters, state.status, reducedMotion]);
+  useEffect(() => () => onContext?.(null), [onContext]);
   const frame = useMemo(
     () => buildScene(definition, state),
     [definition, state],
@@ -159,6 +170,7 @@ export default function GuidedVisualization({
             <strong>{t("invariant")}</strong>
             <p>{localize(step.invariant, locale)}</p>
           </div>
+          {step.misconception && <p className="lesson-misconception">{localize(step.misconception, locale)}</p>}
           {step.equations.map((e) => (
             <Equation key={e} value={e} />
           ))}

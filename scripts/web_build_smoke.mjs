@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { chromium } from "playwright";
 import { visualLearningRegression } from "./visual_learning_regression.mjs";
+import { workbenchRegression } from "./workbench_regression.mjs";
+import { checkVisualBundle } from "./visual_bundle_security.mjs";
 
 const base = "http://127.0.0.1:1422/stem-visual-explorer/";
 const server = spawn(process.execPath, ["node_modules/vite/bin/vite.js", "preview", "--mode", "web", "--host", "127.0.0.1", "--port", "1422", "--strictPort"], { stdio: "pipe" });
@@ -32,8 +34,10 @@ try {
   await workspace.waitForLoadState("networkidle");
   assert.ok(workspace.url().startsWith(base));
   assert.equal(await workspace.locator("[data-preview-capability]").count(), 1);
-  await workspace.getByRole("link").click(); await workspace.locator("#search-input").waitFor();
+  await workspace.locator('[href="?route=search"]').click(); await workspace.locator("#search-input").waitFor();
   assert.deepEqual(errors, []);
   await visualLearningRegression(browser, base);
+  await workbenchRegression(browser,base);
+  await checkVisualBundle();
   process.stdout.write("PAGES BUILD: search, index URLs and workspace navigation passed\n");
 } finally { await browser?.close(); server.kill(); }

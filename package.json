@@ -1,7 +1,7 @@
 {
   "name": "stem-visual-explorer",
   "private": true,
-  "version": "0.4.0-alpha.1",
+  "version": "0.4.0-alpha.2",
   "type": "module",
   "engines": {
     "node": ">=22.12.0"
@@ -11,7 +11,7 @@
     "build": "tsc && vite build",
     "build:web": "tsc && vite build --mode web",
     "preview": "vite preview",
-    "test": "node --experimental-strip-types scripts/unit_test.mjs && node --experimental-strip-types scripts/retrieval_test.mjs && node --experimental-strip-types scripts/search_golden.mjs && node scripts/index_baseline_test.mjs && npm run test:learning",
+    "test": "node --experimental-strip-types scripts/unit_test.mjs && node --experimental-strip-types scripts/retrieval_test.mjs && node --experimental-strip-types scripts/search_golden.mjs && node scripts/index_baseline_test.mjs && npm run test:learning && npm run test:workbench",
     "test:learning": "node --experimental-strip-types scripts/learning_test.mjs",
     "test:web": "node scripts/web_regression.mjs",
     "test:web:build": "npm run build:web && node scripts/web_build_smoke.mjs",
@@ -23,7 +23,10 @@
     "ontology:validate": "node --experimental-strip-types scripts/ontology_validate.mjs",
     "ontology:audit": "node --experimental-strip-types scripts/ontology_audit.mjs",
     "index:enrich": "node --experimental-strip-types scripts/enrich_index.mjs",
-    "baseline": "node --experimental-strip-types scripts/retrieval_baseline.mjs"
+    "baseline": "node --experimental-strip-types scripts/retrieval_baseline.mjs",
+    "test:workbench": "node --experimental-strip-types scripts/workbench_test.mjs",
+    "benchmark:adversarial": "node --experimental-strip-types scripts/adversarial_benchmark.mjs",
+    "test:visual-bundle": "node scripts/visual_bundle_security.mjs"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.1.1",

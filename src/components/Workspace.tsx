@@ -46,7 +46,7 @@ export default function Workspace() {
   const gridClass = urls.length <= 1 ? "grid-cols-1 grid-rows-1" : urls.length <= 2 ? "grid-cols-2 grid-rows-1" : "grid-cols-2 grid-rows-2";
 
   return (
-    <div className="flex h-screen flex-col bg-zinc-900 text-zinc-100">
+      <div data-resource-workspace className="flex h-screen flex-col bg-zinc-900 text-zinc-100">
       <div className="flex items-center gap-3 border-b border-zinc-700 px-3 py-2">
         <span className="text-[13px] font-semibold">{t("workspace.title")}</span>
         <span className="text-[11px] text-zinc-400">{t("workspace.panes", { n: urls.length })}</span>

@@ -1,0 +1,415 @@
+/* Existing shell palette; restrained structure, task area receives the space. */
+.concept-workbench {
+  --wb-edge: #e4e4e7;
+  --wb-muted: #52525b;
+  --wb-surface: #fafafa;
+  --wb-accent: #4338ca;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  background: #fff;
+  color: #27272a;
+  font-size: 13px;
+}
+.dark .concept-workbench {
+  --wb-edge: #3f3f46;
+  --wb-muted: #a1a1aa;
+  --wb-surface: #1e1f23;
+  --wb-accent: #a5b4fc;
+  background: #18181b;
+  color: #e4e4e7;
+}
+.wb-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--wb-edge);
+}
+.wb-product {
+  font-size: 11px;
+  color: var(--wb-muted);
+}
+.wb-header h1 {
+  font-size: 19px;
+  font-weight: 600;
+}
+.wb-header-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.concept-workbench button,
+.concept-workbench a {
+  min-height: 36px;
+  border-radius: 5px;
+  padding: 7px 9px;
+  text-align: left;
+}
+.concept-workbench button:hover {
+  background: #6366f112;
+}
+.concept-workbench button:disabled {
+  opacity: 0.4;
+}
+.wb-header-actions button,
+.wb-resource-tools button,
+.wb-filters button {
+  border: 1px solid var(--wb-edge);
+}
+.wb-layout {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) 255px;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+.wb-navigation {
+  padding: 12px 9px;
+  background: var(--wb-surface);
+  border-right: 1px solid var(--wb-edge);
+  overflow: auto;
+}
+.wb-navigation > button {
+  display: block;
+  width: 100%;
+  margin-bottom: 3px;
+}
+.wb-navigation [aria-current="page"],
+.wb-filters [aria-pressed="true"] {
+  background: #6366f118;
+  color: var(--wb-accent);
+  font-weight: 600;
+}
+.wb-trail {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--wb-edge);
+}
+.wb-trail h2 {
+  font-size: 12px;
+  font-weight: 600;
+}
+.wb-trail-controls {
+  display: flex;
+  gap: 6px;
+}
+.wb-trail ol {
+  padding-left: 0;
+  list-style: none;
+}
+.wb-trail button {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.wb-trail [aria-current="step"] {
+  font-weight: 600;
+  color: var(--wb-accent);
+}
+.wb-main {
+  min-width: 0;
+  overflow: auto;
+  padding: 18px 22px;
+}
+.wb-surface-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.wb-main h3 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 22px 0 8px;
+}
+.wb-main p {
+  line-height: 1.6;
+}
+.wb-semantic,
+.wb-caption {
+  color: var(--wb-muted);
+}
+.wb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.wb-chips button {
+  border: 1px solid var(--wb-edge);
+}
+.wb-capabilities {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.wb-capabilities section {
+  min-width: 0;
+  max-width: 100%;
+  flex: 1 1 200px;
+}
+.wb-capabilities h4 {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.wb-capabilities button {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid var(--wb-edge);
+  border-radius: 0;
+  color: var(--wb-accent);
+}
+.concept-workbench .wb-primary {
+  background: #4f46e5;
+  color: white;
+  margin-top: 20px;
+  padding: 10px 15px;
+}
+.wb-path {
+  list-style: none;
+  padding: 0;
+  max-width: 650px;
+}
+.wb-path li {
+  border-bottom: 1px solid var(--wb-edge);
+}
+.wb-path button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 42px;
+}
+.wb-path span {
+  color: var(--wb-muted);
+  width: 20px;
+}
+.wb-main ul:not(.wb-resources) {
+  padding-left: 18px;
+  list-style: disc;
+  line-height: 1.8;
+}
+.wb-resource-tools,
+.wb-filters,
+.wb-lesson-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.wb-resources {
+  list-style: none;
+  padding: 0;
+}
+.wb-resources li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--wb-edge);
+}
+.wb-resource-title {
+  font-weight: 600;
+  color: var(--wb-accent);
+  overflow-wrap: anywhere;
+}
+.wb-resources p {
+  font-size: 12px;
+  color: var(--wb-muted);
+  margin: 3px 9px;
+}
+.wb-resources a {
+  display: inline-block;
+  color: var(--wb-accent);
+  text-decoration: underline;
+}
+.wb-resources [aria-pressed="true"] {
+  background: #6366f118;
+}
+.wb-inspector {
+  min-width: 0;
+  border-left: 1px solid var(--wb-edge);
+  background: var(--wb-surface);
+  padding: 18px 14px;
+  overflow: auto;
+  line-height: 1.65;
+}
+.wb-inspector h2 {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--wb-muted);
+  margin-bottom: 20px;
+}
+.wb-inspector h3 {
+  font-weight: 600;
+  margin: 16px 0 5px;
+}
+.wb-inspector button {
+  display: block;
+  color: var(--wb-accent);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.wb-inspector code {
+  display: block;
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 6px 0;
+}
+.wb-inspector dl > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+}
+.wb-inspector dt {
+  color: var(--wb-muted);
+}
+.wb-inspector dd {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.wb-graph {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.wb-graph section {
+  border-left: 3px solid var(--wb-edge);
+  padding: 0 14px 12px;
+}
+.wb-graph section:first-child {
+  border-color: #6366f1;
+}
+.wb-graph button {
+  border: 1px solid var(--wb-edge);
+  margin: 3px;
+}
+.wb-mobile-controls {
+  display: none;
+}
+.concept-workbench .guided-lesson {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.concept-workbench .lesson-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.concept-workbench .visual-board {
+  aspect-ratio: 1.45;
+  max-height: 480px;
+}
+.concept-workbench .lesson-reasoning fieldset {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 180px;
+  width: 48%;
+  padding-right: 16px;
+}
+.concept-workbench .lesson-reasoning h4 {
+  font-size: 16px;
+}
+.lesson-misconception {
+  border-left: 2px solid #6366f1;
+  padding-left: 10px;
+  margin: 12px 0;
+}
+.concept-workbench .lesson-controls {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: #fff;
+}
+.dark .concept-workbench .lesson-controls {
+  background: #18181b;
+}
+@media (min-width: 1200px) {
+  .concept-workbench .lesson-invariant,
+  .concept-workbench .lesson-misconception,
+  .concept-workbench .lesson-reasoning > .lesson-equation {
+    display: none;
+  }
+}
+@media (max-width: 1199px) {
+  .wb-layout {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+  .wb-inspector {
+    display: none;
+  }
+  .wb-inspector.is-open {
+    display: block;
+    grid-column: 1/-1;
+    max-height: 45vh;
+    border-top: 1px solid var(--wb-edge);
+  }
+  .wb-mobile-controls {
+    display: flex;
+    border-bottom: 1px solid var(--wb-edge);
+    gap: 8px;
+    padding: 4px 12px;
+  }
+  .wb-mobile-controls button {
+    border: 1px solid var(--wb-edge);
+  }
+  .wb-layout:has(.wb-inspector.is-open) {
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+}
+@media (max-width: 650px) {
+  .wb-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .wb-navigation {
+    display: none;
+    max-height: 35vh;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--wb-edge);
+  }
+  .wb-navigation.is-open {
+    display: block;
+  }
+  .wb-navigation > button {
+    display: inline-block;
+    width: auto;
+  }
+  .wb-trail {
+    margin-top: 10px;
+  }
+  .wb-trail ol {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .wb-main {
+    padding: 14px;
+    flex: 1;
+    min-height: 0;
+  }
+  .wb-header {
+    padding: 10px 12px;
+    align-items: flex-start;
+  }
+  .wb-header h1 {
+    font-size: 16px;
+  }
+  .wb-header-actions {
+    max-width: 145px;
+    justify-content: flex-end;
+  }
+  .wb-inspector.is-open {
+    flex-shrink: 0;
+    max-height: 40vh;
+  }
+  .concept-workbench button,
+  .concept-workbench a {
+    min-height: 40px;
+  }
+  .concept-workbench .lesson-reasoning fieldset {
+    width: 100%;
+    padding-right: 0;
+  }
+  .concept-workbench .visual-board {
+    aspect-ratio: 1.2;
+  }
+}
