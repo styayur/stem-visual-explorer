@@ -4,9 +4,9 @@
 
 # STEM Visual Explorer
 
-**数学与物理资源的可视化检索与比较。**
+**面向数学与物理的概念驱动 STEM 学习工作台。**
 
-**Status:** 🟡 Beta
+**Status:** 🟡 Alpha (0.4.0-alpha.2)
 
 [Web 应用](https://styayur.github.io/stem-visual-explorer/) · [Windows](https://github.com/styayur/stem-visual-explorer/releases/latest) · [文档](docs/architecture.md) · [Releases](https://github.com/styayur/stem-visual-explorer/releases) · [Discussions](https://github.com/styayur/stem-visual-explorer/discussions)
 
@@ -23,9 +23,13 @@
 
 </div>
 
+## 概念工作台（0.4.0-alpha.2）
+
+打开概念后，可在概览、学习、可视化、资源与概念图之间保持同一上下文。Inspector、概念轨迹和 Ctrl/Cmd+K 命令面板将现有三门课程与索引资源、教材引用连接起来。[架构与快捷键](docs/workbench-architecture.md)。
+
 ## 快速开始
 
-**原生可视化学习（v0.4.0-alpha.1）：** 搜索简谐振动、椭圆或行列式，点击概念上的“可视化学习”，即可查看先修概念、学习路径与引导课程。三套课程均提供英／简／繁内容，支持参数调整、逐步推演与减少动态效果；绘图和公式引擎按需加载。教材仅显示章节元数据与外部链接。参见[架构与扩展指南](docs/visual-learning.md)。
+**原生可视化学习：** 搜索简谐振动、椭圆或行列式，点击“可视化学习”进入概念工作台，再通过学习与可视化工作区打开课程。三套课程提供英／简／繁内容、参数调整、逐步推演与减少动态效果；教材仅显示章节元数据与外部链接。参见[课程与扩展指南](docs/visual-learning.md)。
 
 **直接使用网页版：** 打开[在线应用](https://styayur.github.io/stem-visual-explorer/)，输入 `梯度`、`curl` 或 `standing wave`。不需要注册、API Key 或部署服务。
 

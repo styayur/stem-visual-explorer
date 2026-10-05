@@ -4,9 +4,9 @@
 
 # STEM Visual Explorer
 
-**Visual search and comparison for mathematics and physics resources.**
+**A concept-driven STEM learning workbench for mathematics and physics.**
 
-**Status:** 🟡 Beta
+**Status:** 🟡 Alpha (0.4.0-alpha.2)
 
 [Web App](https://styayur.github.io/stem-visual-explorer/) · [Windows](https://github.com/styayur/stem-visual-explorer/releases/latest) · [Documentation](docs/architecture.md) · [Releases](https://github.com/styayur/stem-visual-explorer/releases) · [Discussions](https://github.com/styayur/stem-visual-explorer/discussions)
 
@@ -22,6 +22,10 @@
 ![STEM Visual Explorer search interface](docs/screenshot.png)
 
 </div>
+
+## Concept Workbench (0.4.0-alpha.2)
+
+Open a concept to stay in one session across Overview, Learn, Visualize, Resources and Graph. The contextual Inspector, bounded Concept Trail and Ctrl/Cmd+K Command Palette connect the three existing guided lessons with indexed resources and textbook references. [Architecture and shortcuts](docs/workbench-architecture.md).
 
 ## Live web version
 
@@ -47,10 +51,10 @@ depends on the browser's asset cache; this is not an installable offline PWA.
 
 ## Capability-aware previews and concept search
 
-### Native guided visual learning (v0.4.0-alpha.1)
+### Native guided visual learning
 
-Search a concept and choose **Learn visually** to follow its prerequisites,
-learning path and native interactive lesson. The MVP includes simple harmonic
+Search a concept and choose **Learn visually** to open its Workbench, then
+use Learn or Visualize for the path and native lesson. The examples include simple harmonic
 motion, ellipse geometry, and linear transformation / determinant, with complete
 English, simplified Chinese and traditional Chinese lessons. JSXGraph and KaTeX
 load only when a lesson is opened. Textbook paths are external metadata references.

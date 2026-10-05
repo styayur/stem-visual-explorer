@@ -1,5 +1,19 @@
 # Concept-driven visual learning
 
+## Workbench integration (0.4.0-alpha.2)
+
+The long learning panel is now a [Concept Workbench](workbench-architecture.md).
+ConceptSession is the canonical context; Learn owns the ordered path, Visualize
+gives the lesson the main area, Resources resolves direct Concept ID annotations,
+and Inspector follows the current step or resource. Ctrl/Cmd+K opens registered
+contextual commands; Ctrl/Cmd+L focuses search. The three lesson definitions are
+independent dynamic imports, while the numeric player and renderer are shared.
+GuidedStep additionally supports optional misconception, observation, cause and
+consequence fields. JSXGraph's JessieCode and Geonext expression boundaries both
+fail closed; final production assets have AST/provenance regression checks.
+
+The following sections document the retained v0.4 lesson model and mathematics.
+
 The v0.4.0-alpha.1 MVP adds native guided lessons to the existing Web and Tauri search client. It preserves provider search, ranking, preview policies, favorites, history, workspaces and translation. Search for **简谐振动 / simple harmonic motion**, **椭圆 / ellipse**, or **行列式 / determinant** and click the resolved concept's **Learn visually** action. A concept can be learned even when the current provider filter returns no resources.
 
 ## Architecture
