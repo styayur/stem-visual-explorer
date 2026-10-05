@@ -89,12 +89,15 @@ export async function visualLearningRegression(browser, base) {
       !requests.some((r) => /jsxgraph|GuidedVisualization|katex/i.test(r.url)),
       "overview must not request renderer assets",
     );
+    await panel.locator('nav [data-surface="resources"]').click();
+    await panel.getByText("External textbook reference",{exact:true}).first().waitFor();
     assert.equal(
       await panel
         .getByText("External textbook reference", { exact: true })
         .count(),
       4,
     );
+    await panel.locator('nav [data-surface="overview"]').click();
     // Exercise the actual adapter with dynamic execution blocked. All numeric
     // scene callbacks are pre-written; CDP function calls do not use these APIs.
     await page.evaluate(() => {
@@ -178,12 +181,16 @@ export async function visualLearningRegression(browser, base) {
       1,
     );
     await open("ellipse", "ellipse");
+    await panel.locator('nav [data-surface="resources"]').click();
+    await panel.getByText("External textbook reference",{exact:true}).first().waitFor();
     assert.equal(
       await panel
         .getByText("External textbook reference", { exact: true })
         .count(),
       3,
     );
+    await panel.locator('nav [data-surface="visualize"]').click();
+    await page.getByTestId("visual-board").locator("svg").waitFor();
     for (let i = 0; i < 3; i++)
       await lesson.getByRole("button", { name: "Next", exact: true }).click();
     const theta = await lesson

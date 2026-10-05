@@ -75,7 +75,7 @@ try {
   await workspace.locator("textarea").fill("Native workspace note");
   await workspace.reload(); await workspace.waitForLoadState("networkidle");
   assert.equal(await workspace.locator("textarea").inputValue(), "Native workspace note");
-  await workspace.getByRole("link").click(); await workspace.locator("#search-input").waitFor();
+  await workspace.locator('[href="?route=search"]').click(); await workspace.locator("#search-input").waitFor();
   await invoke("close_window", { label: workspaceLabel });
   await main.waitForFunction(async (label) => {
     try { await window.__TAURI_INTERNALS__.invoke("get_workspace_items", { label }); return false; } catch { return true; }
@@ -135,6 +135,12 @@ try {
   await main.locator("#search-input").press("Enter");
   await main.locator('[data-concept-id="simple-harmonic-motion"]').click();
   const learning = main.getByTestId("learning-panel");
+  await learning.locator('nav [data-surface="learn"]').click();
+  assert.equal(await learning.locator(".wb-path li").count(),10);
+  await learning.locator('nav [data-surface="resources"]').click();
+  await learning.getByText("External textbook reference",{exact:true}).first().waitFor();
+  assert.equal(await learning.getByText("External textbook reference",{exact:true}).count(),4);
+  await learning.locator('nav [data-surface="overview"]').click();
   await learning.getByRole("button", {name:"Open guided visualization",exact:true}).click();
   const lesson = learning.getByTestId("guided-lesson");
   await lesson.getByTestId("visual-board").locator("svg").waitFor();
@@ -145,15 +151,37 @@ try {
   assert.ok((await lesson.getByTestId("lesson-readouts").textContent()).includes("1.732"));
   await lesson.getByRole("button",{name:"Restart",exact:true}).click();
   assert.equal(await lesson.getAttribute("data-step-index"),"0");
+  await main.keyboard.press("Control+k");
+  await main.getByRole("dialog",{name:"Command Palette",exact:true}).getByRole("option",{name:"Next",exact:true}).click();
+  assert.equal(await lesson.getAttribute("data-step-index"),"1");
+  await main.keyboard.press("Control+k");await main.keyboard.press("Escape");
+  assert.equal(await main.getByRole("dialog",{name:"Command Palette",exact:true}).count(),0);
+  await learning.locator('nav [data-surface="graph"]').click();
+  await learning.locator('[data-graph-concept="resonance"]').click();
+  assert.equal(await learning.getAttribute("data-learning-concept"),"resonance");
+  await learning.locator('nav [data-surface="resources"]').click();
+  await main.waitForLoadState("networkidle");
+  assert.equal(await learning.locator("[data-resource-concept]").getAttribute("data-resource-concept"),"resonance");
+  await main.keyboard.press("Alt+ArrowLeft");
+  assert.equal(await learning.getAttribute("data-learning-concept"),"simple-harmonic-motion");
+  await learning.locator('nav [data-surface="resources"]').click();
+  await learning.locator(".wb-resource-title").first().click();
+  // Observe the real custom-protocol response; Tauri internals are immutable.
+  const externalResponse = main.waitForResponse(r=>r.url()==="http://ipc.localhost/open_external");
+  await learning.locator("#wb-inspector").getByRole("button",{name:"Open externally",exact:true}).click();
+  const openedExternal = await externalResponse;
+  assert.equal(openedExternal.status(),200);
+  assert.equal(await openedExternal.text(),"null");
+  assert.ok(openedExternal.request().postDataJSON().url.startsWith("https://github.com/tradecatlabs/"));
   await learning.getByRole("button",{name:"Back to search results",exact:true}).click();
-  ok("native concept learning: Rust search, lazy JSXGraph board, steps, play/pause, parameters and reset");
+  ok("native Workbench: surfaces, JSXGraph lesson controls, commands, graph/trail navigation, isolated resource context and actual safe external-link IPC");
   await invoke("clear_cache");
   assert.ok((await invoke("providers_info")).every((p) => p.indexed_items === null));
   await invoke("save_settings", { settings });
   assert.deepEqual(errors, []);
   await main.screenshot({ path: "dist-release/audit-native.png" });
   ok("URL validation, workspace bounds, cache clearing and settings persistence");
-  console.log(`DESKTOP REGRESSION: ${checks} groups passed on WebView2`);
+  process.stdout.write(`DESKTOP REGRESSION: ${checks} groups passed on WebView2\n`);
 } finally {
   if (verifiedProfile) {
     for (const label of children) { try { await invoke("close_window", { label }); } catch { /* already closed */ } }
