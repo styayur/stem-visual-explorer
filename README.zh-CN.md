@@ -151,7 +151,7 @@ cargo check --locked
 cargo run --no-default-features --example probe
 ```
 
-本轮已通过 36 项 JavaScript 测试、34 项 Rust 测试、22 组浏览器回归及 6 组实际 Windows WebView2 回归。桌面回归使用独立应用标识和测试数据，运行 `npm run test:desktop` 前请按[检查报告](docs/functional-audit.md)准备环境。外部网页和翻译响应在交互测试中使用固定数据；来源联网检查独立执行。
+工作台已通过检索、课程、会话与安全测试，以及 38 项 Rust 测试、23 组浏览器回归和 7 组实际 Windows WebView2 回归；完整命令与指标见[工作台验证报告](docs/audits/v0.4-workbench-report.md)。桌面回归使用独立应用标识和测试数据，运行 `npm run test:desktop` 前请按[环境准备说明](docs/functional-audit.md)操作。外部网页和翻译响应在交互测试中使用固定数据；来源联网检查独立执行。
 
 推送 `main` 会运行 CI 并部署 GitHub Pages；推送版本标签会构建 Windows 便携包和 NSIS 安装包，产物位于 GitHub Actions 的 `windows-release` artifact，经检查后附加到 Release。
 

@@ -154,8 +154,9 @@ test("source language guess", () => {
 });
 test("external translated URL is built", () => {
   const u = buildTranslatedPageUrl("https://mathinsight.org/gradient", "zh-CN");
-  assert.ok(u.includes("translate.google.com"));
-  assert.ok(u.includes(encodeURIComponent("https://mathinsight.org/gradient")));
+  const translated = new URL(u);
+  assert.equal(translated.origin, "https://translate.google.com");
+  assert.equal(translated.searchParams.get("u"), "https://mathinsight.org/gradient");
 });
 test("custom proxy template is honoured", () => {
   const u = buildTranslatedPageUrl("https://a.test/p?q=1", "ja", "https://p.test/?u={url}&l={lang}");
@@ -203,7 +204,7 @@ test("external URLs and workspace payloads are validated", () => {
 });
 test("unsafe translation proxies cannot be embedded", () => {
   assert.equal(buildEmbeddableTranslatedUrl("https://example.com", "en", "javascript:{url}"), null);
-  assert.ok(buildTranslatedPageUrl("https://example.com", "en", "data:{url}").startsWith("https://translate.google.com"));
+  assert.equal(new URL(buildTranslatedPageUrl("https://example.com", "en", "data:{url}")).origin, "https://translate.google.com");
 });
 test("Unicode translation chunks preserve code points and byte limits", () => {
   const input = "驻波🌊".repeat(180);

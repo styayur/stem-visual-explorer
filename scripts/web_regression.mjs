@@ -67,7 +67,7 @@ try {
   await page.evaluate(async () => { const {useSettingsStore} = await import("/src/stores/settingsStore.ts"); await useSettingsStore.getState().update({page_translate_proxy:"https://proxy.example/?url={url}&lang={lang}"}); });
   await page.getByTitle("Translate page", {exact:true}).click();
   assert.equal(await page.locator("iframe").count(), 0);
-  assert.ok(!externalRequests.some((url) => url.startsWith("https://proxy.example")));
+  assert.ok(!externalRequests.some((url) => new URL(url).hostname === "proxy.example"));
   await page.getByTitle("Translate page", {exact:true}).click();
   await page.evaluate(async () => { const {useSettingsStore} = await import("/src/stores/settingsStore.ts"); await useSettingsStore.getState().update({page_translate_proxy:""}); });
   await search("site:maotian");

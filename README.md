@@ -439,7 +439,7 @@ and `docs/screenshot-zh.png`.
 ### Logic unit tests
 
 ```bash
-npm test                                                    # offline (36 checks)
+npm test                                                    # offline search, learning and workbench checks
 node --experimental-strip-types scripts/unit_test.mjs --live  # + one real MyMemory call
 ```
 
@@ -463,7 +463,7 @@ cargo test --no-default-features                   # parser/query/ranking unit t
 ```
 
 `--no-default-features` disables the `tauri` feature so the test suite links only
-the pure logic (no GUI/webview runtime needed). The 34 tests cover every provider
+the pure logic (no GUI/webview runtime needed). The 38 tests cover every provider
 parser, query normalization/ranking, URL validation, database persistence, cache
 recovery and provider failure isolation. CI also checks desktop compilation on Windows.
 
