@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
@@ -35,6 +36,6 @@ const rust = JSON.parse(
 );
 for (let i = 0; i < queries.length; i++)
   assert.deepEqual(rust[i], resolveQuery(queries[i]), queries[i]);
-console.log(
+printReport(
   `Resolver v2 TS/Rust parity: ${queries.length} full contracts (normalization, groups, ranking, integer scores, evidence, status, confidence and residuals) PASS`,
 );

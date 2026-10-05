@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import assert from "node:assert/strict";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolveQuery } from "../src/query/resolve.ts";
@@ -193,7 +194,7 @@ await writeFile(
   `artifacts/adversarial-query-results${suffix}.json`,
   JSON.stringify({ summary, results: all }, null, 2) + "\n",
 );
-console.log(JSON.stringify(summary, null, 2));
+printReport(JSON.stringify(summary, null, 2));
 // Hard regression gate compares the untouched holdout against its measured v1 baseline.
 // The new dev/holdout generalization gap is a reported quality target, never concealed.
 if (!developmentOnly)
@@ -203,6 +204,6 @@ if (!developmentOnly)
     "holdout regressed >5 pp against v1",
   );
 if (summary.qualityTargets.holdoutWithin20Points === false)
-  console.warn(
-    `QUALITY TARGET MISSED: dev/holdout gap ${summary.qualityTargets.holdoutGapPoints.toFixed(2)} pp; see category report.`,
+  process.stderr.write(
+    `QUALITY TARGET MISSED: dev/holdout gap ${summary.qualityTargets.holdoutGapPoints.toFixed(2)} pp; see category report.\n`,
   );

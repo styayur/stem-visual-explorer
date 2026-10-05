@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import { performance } from "node:perf_hooks";
 import { readFileSync, writeFileSync } from "node:fs";
 const begin = performance.now();
@@ -43,4 +44,4 @@ writeFileSync(
   "artifacts/query-resolver-performance.json",
   JSON.stringify(report, null, 2) + "\n",
 );
-console.log(JSON.stringify(report, null, 2));
+printReport(JSON.stringify(report, null, 2));

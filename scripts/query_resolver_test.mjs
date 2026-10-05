@@ -1,3 +1,4 @@
+import { report as printReport } from "./cli_output.mjs";
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { resolveQuery } from "../src/query/resolve.ts";
@@ -121,6 +122,6 @@ for (const path of [...walk("src"), ...walk("src-tauri/src")].filter((p) =>
     `Runtime fixture contamination: ${path}`,
   );
 }
-console.log(
+printReport(
   `Resolver v2: ${fixture.cases.length} representative cases; ${concepts.length * 3} canonical invariants, safety, provenance, projection and fixture isolation PASS (${vocabulary.length} vocabulary entries)`,
 );

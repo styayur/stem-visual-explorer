@@ -60,4 +60,4 @@ with sync_playwright() as p:
     page.screenshot(path="artifacts/query-resolver-browser-mobile.png", full_page=True)
     assert not errors, errors
     browser.close()
-    print("RESOLVER BROWSER: EN/zh-CN/zh-TW ambiguity, explicit keyboard selection, Escape, recovery, resource fallback and 390px PASS")
+    sys.stdout.write("RESOLVER BROWSER: EN/zh-CN/zh-TW ambiguity, explicit keyboard selection, Escape, recovery, resource fallback and 390px PASS\n")
