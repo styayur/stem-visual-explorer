@@ -6,6 +6,8 @@ import { useSettingsStore } from "../stores/settingsStore";
 import { useT, typeLabelKey } from "../lib/i18n";
 import { attempt } from "../stores/noticeStore";
 import * as cmd from "../lib/commands";
+import { useWorkbenchStore } from "../workbench/workbenchStore";
+import { useSearchStore } from "../stores/searchStore";
 
 export default function ResourcePreview({ result, reloadKey = 0 }: { result: SearchResult; reloadKey?: string | number }) {
   const t = useT();
@@ -14,7 +16,10 @@ export default function ResourcePreview({ result, reloadKey = 0 }: { result: Sea
   const capability = previewCapability(result);
   const graph = resourceConcepts(result.title, result.tags);
   const label = (c: Concept) => locale === "zh-CN" ? c.zh_cn : locale === "zh-TW" ? c.zh_tw : c.en;
-  const showConcepts = (items: Concept[]) => items.length ? items.map(label).join(" · ") : t("resource.unmapped");
+  const showConcepts = (items: Concept[]) => items.length ? items.map(c=><a key={c.id} data-resource-concept-link={c.id} className="inline-block px-1 py-2 text-indigo-600 underline dark:text-indigo-300" href={`?route=search&concept=${encodeURIComponent(c.id)}`} onClick={e=>{
+    if(document.querySelector("[data-resource-workspace]"))return;
+    e.preventDefault();useSearchStore.getState().setQuickLook(null);useSettingsStore.getState().setPage("search");useWorkbenchStore.getState().open(c.id,{type:"resource"});
+  }}>{label(c)}</a>) : t("resource.unmapped");
   if (capability === "Embed" && !failed) return <div className="flex h-full min-h-0 flex-col" data-preview-capability="Embed">
     <iframe key={reloadKey} title={result.title} src={result.url} className="min-h-0 flex-1 border-0 bg-white"
       sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals" referrerPolicy="no-referrer" onError={() => setFailed(true)} />

@@ -13,8 +13,7 @@ export default function SearchContext({
 }: {
   onConcept: (id: string) => void;
 }) {
-  const response = useSearchStore((s) => s.response),
-    runSearch = useSearchStore((s) => s.runSearch);
+  const response = useSearchStore((s) => s.response);
   const explore = useSearchStore((s) => s.exploreRelated),
     setExplore = useSearchStore((s) => s.setExploreRelated);
   const locale = useSettingsStore((s) => s.settings.ui_locale);
@@ -117,7 +116,7 @@ export default function SearchContext({
               key={c.id}
               type="button"
               className="underline"
-              onClick={() => runSearch(label(c))}
+              onClick={() => onConcept(c.id)}
             >
               {label(c)}
             </button>
@@ -135,7 +134,7 @@ export default function SearchContext({
                 key={c.id}
                 type="button"
                 className="underline"
-                onClick={() => runSearch(label(c))}
+                onClick={() => onConcept(c.id)}
               >
                 {label(c)}
               </button>

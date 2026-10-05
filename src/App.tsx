@@ -22,6 +22,8 @@ import SearchPage from "./pages/SearchPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import SettingsPage from "./pages/SettingsPage";
 import { reportError, useNoticeStore } from "./stores/noticeStore";
+import { useWorkbenchStore } from "./workbench/workbenchStore";
+import { conceptById } from "./lib/concepts";
 
 export default function App() {
   const t = useT();
@@ -49,6 +51,8 @@ export default function App() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const concept=params.get("concept");
+    if(params.get("route")==="search"&&concept&&conceptById.has(concept))useWorkbenchStore.getState().open(concept,{type:"resource"});
     if (params.get("route") === "search") return;
     if (params.get("workspace") === "1" || params.get("route") === "workspace") {
       setIsWorkspace(true);

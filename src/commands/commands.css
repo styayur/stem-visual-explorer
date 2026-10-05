@@ -1,0 +1,70 @@
+.command-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: #0006;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12vh 12px 20px;
+}
+.command-dialog {
+  width: 560px;
+  max-width: 100%;
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  color: #27272a;
+  border: 1px solid #a1a1aa;
+  border-radius: 9px;
+  box-shadow: 0 12px 40px #0004;
+  overflow: hidden;
+}
+.dark .command-dialog {
+  background: #1e1f23;
+  color: #e4e4e7;
+  border-color: #52525b;
+}
+.command-dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 13px;
+}
+.command-dialog header button {
+  min-height: 36px;
+  min-width: 36px;
+}
+.command-dialog input {
+  padding: 12px 16px;
+  font-size: 15px;
+  background: transparent;
+  border-top: 1px solid #71717a55;
+  border-bottom: 1px solid #71717a55;
+  outline-offset: -3px;
+}
+.command-dialog [role="listbox"] {
+  overflow: auto;
+  padding: 7px;
+}
+.command-dialog [role="option"] {
+  display: block;
+  width: 100%;
+  text-align: left;
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+.command-dialog [aria-selected="true"] {
+  background: #6366f121;
+  color: #4338ca;
+}
+.dark .command-dialog [aria-selected="true"] {
+  color: #c7d2fe;
+}
+.command-dialog p {
+  padding: 12px;
+}

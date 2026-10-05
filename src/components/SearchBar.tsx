@@ -3,6 +3,10 @@ import { Search } from "lucide-react";
 import { useSearchStore } from "../stores/searchStore";
 import { useT } from "../lib/i18n";
 import { cn } from "../lib/cn";
+import { universalObjects } from "../capabilities/universalSearch";
+import { useSettingsStore } from "../stores/settingsStore";
+import { useWorkbenchStore } from "../workbench/workbenchStore";
+import { workbenchText } from "../workbench/uiText";
 
 const SUGGESTIONS = [
   "gradient",
@@ -29,6 +33,9 @@ export default function SearchBar() {
   const runSearch = useSearchStore((s) => s.runSearch);
   const history = useSearchStore((s) => s.history);
   const t = useT();
+  const locale = useSettingsStore(s=>s.settings.ui_locale);
+  const response = useSearchStore(s=>s.response);
+  const objects = useMemo(()=>universalObjects(query,locale,response?.query===query?response.results:[]),[query,locale,response]);
   const [focused, setFocused] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
@@ -56,6 +63,7 @@ export default function SearchBar() {
   useEffect(() => setActive(-1), [query]);
 
   const submit = (value = query) => {
+    useWorkbenchStore.getState().close();
     void runSearch(value); setOpen(false); setActive(-1); inputRef.current?.blur();
   };
 
@@ -75,7 +83,7 @@ export default function SearchBar() {
           role="combobox"
           aria-label={t("nav.search")}
           aria-autocomplete="list"
-          aria-expanded={open && suggestions.length > 0}
+          aria-expanded={open && (suggestions.length + objects.length) > 0}
           aria-controls="search-suggestions"
           aria-activedescendant={active >= 0 && open ? `suggestion-${active}` : undefined}
           ref={inputRef}
@@ -94,12 +102,15 @@ export default function SearchBar() {
           }}
           onKeyDown={(e) => {
             if (e.nativeEvent.isComposing) return;
-            if ((e.key === "ArrowDown" || e.key === "ArrowUp") && suggestions.length) {
+            if ((e.key === "ArrowDown" || e.key === "ArrowUp") && suggestions.length + objects.length) {
               e.preventDefault(); setOpen(true);
-              setActive((a) => (a + (e.key === "ArrowDown" ? 1 : -1) + suggestions.length) % suggestions.length);
+              setActive((a) => (a + (e.key === "ArrowDown" ? 1 : -1) + suggestions.length + objects.length) % (suggestions.length + objects.length));
             } else if (e.key === "Enter") {
               e.preventDefault();
-              submit(open && active >= 0 ? suggestions[active] : query);
+              if(open&&active>=suggestions.length&&objects[active-suggestions.length]) {
+                const o=objects[active-suggestions.length],s=useWorkbenchStore.getState();
+                s.open(o.conceptId,{type:o.group==="resource"?"resource":o.group==="textbook"?"learning-path":o.group==="command"?"command":"search",query});s.surface(o.surface??"overview");s.select(o.capabilityId,o.visualizationId);setOpen(false);inputRef.current?.blur();
+              }else submit(open && active >= 0 ? suggestions[active] : query);
             } else if (e.key === "Escape") {
               setOpen(false);
             }
@@ -110,8 +121,8 @@ export default function SearchBar() {
         />
       </div>
 
-      {open && suggestions.length > 0 && (
-        <div id="search-suggestions" role="listbox" className="absolute left-0 right-0 top-11 z-30 overflow-hidden rounded-lg border border-edge-light bg-white shadow-lg dark:border-edge-dark dark:bg-surface-dark">
+      {open && suggestions.length + objects.length > 0 && (
+        <div id="search-suggestions" role="listbox" className="absolute left-0 right-0 top-11 z-30 max-h-[60vh] overflow-y-auto rounded-lg border border-edge-light bg-white shadow-lg dark:border-edge-dark dark:bg-surface-dark">
           {suggestions.map((s, i) => (
             <button
               key={s}
@@ -128,6 +139,9 @@ export default function SearchBar() {
               {s}
             </button>
           ))}
+          {objects.map((o,i)=><button key={o.id} id={`suggestion-${i+suggestions.length}`} role="option" aria-selected={active===i+suggestions.length} type="button" data-object-group={o.group} onMouseDown={e=>e.preventDefault()} onClick={()=>{
+            const s=useWorkbenchStore.getState();s.open(o.conceptId,{type:o.group==="resource"?"resource":o.group==="textbook"?"learning-path":o.group==="command"?"command":"search",query});s.surface(o.surface??"overview");s.select(o.capabilityId,o.visualizationId);setOpen(false);inputRef.current?.blur();
+          }} className={cn("block w-full border-t border-edge-light px-3 py-2 text-left text-sm dark:border-edge-dark hover:bg-indigo-500/10",active===i+suggestions.length&&"bg-indigo-500/10")}><span className="block text-[10px] text-zinc-500">{workbenchText[o.group][locale]}</span>{o.title}</button>)}
         </div>
       )}
     </div>

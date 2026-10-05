@@ -18,7 +18,7 @@ const en: Dict = {
   "resource.nativeCard": "This provider uses a native resource card; no embedded page is requested.",
   "workspace.openViewers": "Open all in WebViewers",
 
-  "app.subtitle": "Visual search for mathematics and physics.",
+  "app.subtitle": "Concept-driven STEM learning workbench.",
   "nav.search": "Search",
   "nav.favorites": "Favorites",
   "nav.settings": "Settings",
@@ -145,7 +145,7 @@ const zhCN: Dict = {
   "resource.nativeCard": "此来源使用原生资源卡片，不请求嵌入网页。",
   "workspace.openViewers": "全部在独立窗口打开",
 
-  "app.subtitle": "数学与物理可视化搜索。",
+  "app.subtitle": "以概念为核心的 STEM 学习工作台。",
   "nav.search": "搜索",
   "nav.favorites": "收藏",
   "nav.settings": "设置",
@@ -271,7 +271,7 @@ const zhTW: Dict = {
   "resource.nativeCard": "此來源使用原生資源卡片，不請求嵌入網頁。",
   "workspace.openViewers": "全部在獨立視窗開啟",
 
-  "app.subtitle": "數學與物理視覺化搜尋。",
+  "app.subtitle": "以概念為核心的 STEM 學習工作臺。",
   "nav.search": "搜尋",
   "nav.favorites": "收藏",
   "nav.settings": "設定",

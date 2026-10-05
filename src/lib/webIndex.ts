@@ -10,6 +10,7 @@ import {
 import type { ProviderInfo, ProviderStatus, SearchResponse, SearchResult } from "./types";
 import { providerCapability } from "./previewPolicy";
 import { httpUrl } from "./urls";
+import { resourcesForConcept } from "../workbench/resourceResolver";
 
 export interface ManifestEntry {
   schema_version: number;
@@ -151,6 +152,16 @@ export async function webProviders(enabled: string[]): Promise<ProviderInfo[]> {
     last_updated: x.updated_at,
     enabled: enabled.includes(x.id),
   }));
+}
+
+/** Bundled known indexes on Web and Tauri; uses the same validation/cache loader.
+ * Provider search and enabled-provider preferences remain separate mechanisms. */
+export async function resolveConceptResources(conceptId: string) {
+  const entries = await loadManifest();
+  const outcomes = await Promise.allSettled(entries.map(p => loadProvider(p.id)));
+  const providers = outcomes.flatMap(r => r.status === "fulfilled" && r.value ? [r.value] : []);
+  return { conceptId, resources: resourcesForConcept(conceptId, providers),
+    errors: outcomes.flatMap((r, i) => r.status === "rejected" ? [entries[i].name] : []) };
 }
 
 export async function webSearch(

@@ -1,6 +1,6 @@
 import SearchContext from "../components/SearchContext";
 import { LayoutGrid } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import FilterBar from "../components/FilterBar";
 import SourceSidebar from "../components/SourceSidebar";
@@ -11,26 +11,32 @@ import { useSettingsStore } from "../stores/settingsStore";
 import { useWorkspaceStore } from "../stores/workspaceStore";
 import { cn } from "../lib/cn";
 import { useT } from "../lib/i18n";
-import ConceptLearningPanel from "../learning/ConceptLearningPanel";
+import { useWorkbenchStore } from "../workbench/workbenchStore";
+const ConceptWorkbench = lazy(() => import("../workbench/ConceptWorkbench"));
+const CommandPalette = lazy(() => import("../commands/CommandPalette"));
 import { useSearchStore } from "../stores/searchStore";
 
 export default function SearchPage() {
   const t = useT();
   const previewMode = useSettingsStore((s) => s.settings.preview_mode);
   const response = useSearchStore((s) => s.response);
-  const [learningConcept, setLearningConcept] = useState<string | null>(null);
+  const session = useWorkbenchStore(s=>s.session);
+  const paletteOpen = useWorkbenchStore(s=>s.paletteOpen);
+  const resume = useWorkbenchStore(s=>s.resume);
   const trigger = useRef<HTMLElement | null>(null);
   const openConcept = (id: string) => {
     trigger.current = document.activeElement as HTMLElement;
-    setLearningConcept(id);
+    useWorkbenchStore.getState().open(id, {type:"search",query:response?.query});
   };
   const closeConcept = () => {
-    setLearningConcept(null);
-    requestAnimationFrame(() => trigger.current?.focus());
+    const id=useWorkbenchStore.getState().session?.conceptId;
+    const originId=useWorkbenchStore.getState().session?.trail[0]?.conceptId;
+    useWorkbenchStore.getState().close();
+    requestAnimationFrame(() => {
+      const chip=document.querySelector<HTMLElement>(`[data-concept-id="${originId??id}"]`);
+      if(chip)chip.focus();else if(trigger.current?.isConnected)trigger.current.focus();else document.getElementById("search-input")?.focus();
+    });
   };
-  useEffect(() => {
-    setLearningConcept(null);
-  }, [response?.query]);
 
   const workspaceSelected = useWorkspaceStore((s) => s.selected);
   const openWorkspace = useWorkspaceStore((s) => s.open);
@@ -76,16 +82,13 @@ export default function SearchPage() {
         </button>
       </div>
 
-      <SearchContext onConcept={openConcept} />
+      {paletteOpen&&<Suspense fallback={null}><CommandPalette/></Suspense>}
+      {!session&&<SearchContext onConcept={openConcept} />}
+      {!session&&resume&&<button className="text-left text-xs px-3 py-1 text-indigo-600 dark:text-indigo-300" onClick={()=>useWorkbenchStore.getState().restore()}>{useSettingsStore.getState().settings.ui_locale==="en"?"Resume Concept Session":useSettingsStore.getState().settings.ui_locale==="zh-CN"?"继续概念会话":"繼續概念工作階段"}</button>}
 
-      {learningConcept ? (
+      {session ? (
         <div className="min-h-0 flex-1" data-learning-surface>
-          <ConceptLearningPanel
-            key={learningConcept}
-            conceptId={learningConcept}
-            onClose={closeConcept}
-            onConcept={setLearningConcept}
-          />
+          <Suspense fallback={<p role="status">{t("common.loading")}</p>}><ConceptWorkbench key={session.conceptId} onClose={closeConcept}/></Suspense>
         </div>
       ) : (
         <>

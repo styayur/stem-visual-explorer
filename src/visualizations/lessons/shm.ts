@@ -1,0 +1,235 @@
+import { L } from "../../learning/types.ts";
+import type { GuidedVisualizationDefinition } from "../types";
+import { step, parameter } from "./helpers.ts";
+const restoring = L(
+  "Force and acceleration always point toward equilibrium.",
+  "力与加速度始终指向平衡位置。",
+  "力與加速度始終指向平衡位置。",
+);
+export const guidedShm: GuidedVisualizationDefinition = {
+  id: "guided-shm",
+  title: L("Guided SHM Explorer", "简谐振动引导探索", "簡諧振動引導探索"),
+  conceptIds: ["simple-harmonic-motion"],
+  renderer: "jsxgraph",
+  kind: "guided-lesson",
+  parameters: [
+    parameter("A", L("Amplitude A", "振幅 A", "振幅 A"), 0.2, 2, 1.2, "m"),
+    parameter(
+      "k",
+      L("Spring constant k", "劲度系数 k", "勁度係數 k"),
+      0.5,
+      8,
+      2,
+      "N/m",
+    ),
+    parameter("m", L("Mass m", "质量 m", "質量 m"), 0.5, 4, 1, "kg"),
+    parameter(
+      "phi",
+      L("Initial phase φ", "初相位 φ", "初相位 φ"),
+      0,
+      6.28,
+      0,
+      "rad",
+      0.01,
+    ),
+  ],
+  presets: [],
+  steps: [
+    step(
+      "shm",
+      0,
+      "equilibrium",
+      L("Equilibrium", "平衡位置", "平衡位置"),
+      L(
+        "An unstretched horizontal spring exerts no force. A mass initially at rest here stays here. We assume a frictionless surface and an ideal spring.",
+        "水平弹簧未伸缩时，弹力为零。物块若在此静止，就保持静止。模型假设水平面无摩擦、弹簧理想。",
+        "水平彈簧未伸縮時，彈力為零。物塊若在此靜止，就保持靜止。模型假設水平面無摩擦、彈簧理想。",
+      ),
+      L(
+        "Equilibrium means zero net force, not necessarily zero velocity.",
+        "平衡表示合力为零，不一定表示速度为零。",
+        "平衡表示合力為零，不一定表示速度為零。",
+      ),
+      ["x=0,\\quad F=0"],
+      [],
+      ["equilibrium"],
+    ),
+    step(
+      "shm",
+      1,
+      "displacement",
+      L("Displace the mass", "移开物块", "移開物塊"),
+      L(
+        "Drag the mass or change A. The displacement x is measured from equilibrium; right is positive. Hold it at rest before releasing.",
+        "拖动物块或调整 A。位移 x 从平衡位置量起，向右为正。释放前，物块被保持在静止状态。",
+        "拖動物塊或調整 A。位移 x 從平衡位置量起，向右為正。釋放前，物塊被保持在靜止狀態。",
+      ),
+      L(
+        "Displacement is measured from equilibrium, not from the wall.",
+        "位移从平衡位置量起，而非从墙壁量起。",
+        "位移從平衡位置量起，而非從牆壁量起。",
+      ),
+      ["x=A>0"],
+      ["A"],
+      ["mass", "displacement"],
+    ),
+    step(
+      "shm",
+      2,
+      "restoring-force",
+      L("Restoring force", "回复力", "回復力"),
+      L(
+        "The force arrow points opposite to x. Stretching pulls left; compression pushes right. A larger k gives a larger force at the same displacement.",
+        "力箭头与 x 方向相反：拉长时向左拉，压缩时向右推。同样位移下，k 越大，弹力越大。",
+        "力箭頭與 x 方向相反：拉長時向左拉，壓縮時向右推。同樣位移下，k 越大，彈力越大。",
+      ),
+      restoring,
+      ["F=-kx"],
+      ["A", "k"],
+      ["force", "displacement"],
+    ),
+    step(
+      "shm",
+      3,
+      "acceleration",
+      L("Newton's second law", "牛顿第二定律", "牛頓第二定律"),
+      L(
+        "Divide the net force by m. Acceleration points toward equilibrium and grows with displacement. Acceleration is not the same as velocity.",
+        "合力除以 m 得到加速度。加速度指向平衡位置，其大小随位移增大。加速度与速度不是同一量。",
+        "合力除以 m 得到加速度。加速度指向平衡位置，其大小隨位移增大。加速度與速度不是同一量。",
+      ),
+      restoring,
+      ["ma=-kx", "a=-\\frac{k}{m}x=-\\omega^2x"],
+      ["A", "k", "m"],
+      ["force", "acceleration"],
+    ),
+    step(
+      "shm",
+      4,
+      "release",
+      L("Release", "释放", "釋放"),
+      L(
+        "Press Play. The force accelerates the mass toward equilibrium; speed increases while the force decreases. Playback stops at the first crossing so you can inspect it.",
+        "点击播放。回复力使物块向平衡位置加速：速度增大，弹力却减小。播放停在首次穿越平衡位置处，便于观察。",
+        "點擊播放。回復力使物塊向平衡位置加速：速度增大，彈力卻減小。播放停在首次穿越平衡位置處，便於觀察。",
+      ),
+      restoring,
+      ["\\omega=\\sqrt{\\frac{k}{m}}"],
+      ["A", "k", "m"],
+      ["force", "velocity"],
+      "once",
+    ),
+    step(
+      "shm",
+      5,
+      "crossing",
+      L("Cross equilibrium", "穿越平衡位置", "穿越平衡位置"),
+      L(
+        "At x = 0 the force and acceleration vanish, but the mass already has velocity. It passes through with maximum speed; zero force does not stop motion.",
+        "x = 0 时弹力和加速度为零，但物块已有速度。它以最大速率穿过平衡位置；零合力不会使运动停止。",
+        "x = 0 時彈力和加速度為零，但物塊已有速度。它以最大速率穿過平衡位置；零合力不會使運動停止。",
+      ),
+      L(
+        "Zero force changes no velocity instantaneously.",
+        "力为零时，速度不会瞬间改变。",
+        "力為零時，速度不會瞬間改變。",
+      ),
+      ["x=0,\\quad F=0,\\quad |v|=A\\omega"],
+      ["A", "k", "m"],
+      ["velocity", "equilibrium"],
+    ),
+    step(
+      "shm",
+      6,
+      "opposite",
+      L("Opposite displacement", "另一侧的位移", "另一側的位移"),
+      L(
+        "At the left turning point the mass momentarily stops. The spring is compressed, so the force has reversed and now points right.",
+        "在左侧转折点，物块瞬间停止。弹簧被压缩，回复力反向，指向右方。",
+        "在左側轉折點，物塊瞬間停止。彈簧被壓縮，回復力反向，指向右方。",
+      ),
+      restoring,
+      ["x=-A,\\quad v=0,\\quad F=+kA"],
+      ["A", "k"],
+      ["force", "displacement"],
+    ),
+    step(
+      "shm",
+      7,
+      "periodicity",
+      L("One full cycle", "一个完整周期", "一個完整週期"),
+      L(
+        "Play one full cycle. The same position and velocity return after T. Increase m or decrease k to lengthen the physical period; A does not change it.",
+        "播放一个完整周期。经过 T 后，位置和速度都恢复原值。增加 m 或减小 k 会延长实际周期；A 不改变周期。",
+        "播放一個完整週期。經過 T 後，位置和速度都恢復原值。增加 m 或減小 k 會延長實際週期；A 不改變週期。",
+      ),
+      L(
+        "An ideal spring's period is independent of amplitude.",
+        "理想弹簧的周期与振幅无关。",
+        "理想彈簧的週期與振幅無關。",
+      ),
+      ["T=\\frac{2\\pi}{\\omega}=2\\pi\\sqrt{\\frac{m}{k}}"],
+      ["A", "k", "m"],
+      ["plot", "mass"],
+      "once",
+    ),
+    step(
+      "shm",
+      8,
+      "equation",
+      L("Connect motion to the equation", "连接运动与方程", "連接運動與方程"),
+      L(
+        "A sets the excursion, ω sets the rate, and φ sets the initial phase. Compare the moving mass with its marker on x(t). This phase control now sets both initial position and velocity.",
+        "A 决定位移范围，ω 决定变化速率，φ 决定初相位。对照物块与 x(t) 上的标记。此时相位同时设置初始位置与速度。",
+        "A 決定位移範圍，ω 決定變化速率，φ 決定初相位。對照物塊與 x(t) 上的標記。此時相位同時設定初始位置與速度。",
+      ),
+      restoring,
+      ["x(t)=A\\cos(\\omega t+\\varphi)", "\\omega=\\sqrt{\\frac{k}{m}}"],
+      ["A", "k", "m", "phi"],
+      ["plot", "mass"],
+      "loop",
+    ),
+    step(
+      "shm",
+      9,
+      "energy",
+      L("Energy exchange", "能量交换", "能量交換"),
+      L(
+        "Potential energy is largest at the turning points; kinetic energy is largest at equilibrium. The bars exchange height while total energy stays fixed during motion. Changing A or k defines a new system with a new total energy.",
+        "转折点处势能最大，平衡位置处动能最大。运动中两根能量条此消彼长，总能量保持不变。改变 A 或 k 会定义总能量不同的新系统。",
+        "轉折點處勢能最大，平衡位置處動能最大。運動中兩根能量條此消彼長，總能量保持不變。改變 A 或 k 會定義總能量不同的新系統。",
+      ),
+      L(
+        "For fixed parameters, kinetic plus potential energy is constant.",
+        "参数固定时，动能与势能之和不变。",
+        "參數固定時，動能與勢能之和不變。",
+      ),
+      ["K=\\tfrac12mv^2,\\quad U=\\tfrac12kx^2", "E=K+U=\\tfrac12kA^2"],
+      ["A", "k", "m", "phi"],
+      ["kinetic", "potential", "total"],
+      "loop",
+    ),
+  ],
+};
+
+const teachingStep = guidedShm.steps.find((s) => s.id === "crossing")!;
+teachingStep.misconception = L(
+  "Zero displacement and zero force do not imply zero velocity.",
+  "零位移、零合力不代表速度为零。",
+  "零位移、零合力不代表速度為零。",
+);
+teachingStep.observation = L(
+  "The mass crosses equilibrium at maximum speed.",
+  "物块以最大速率穿越平衡位置。",
+  "物塊以最大速率穿越平衡位置。",
+);
+teachingStep.cause = L(
+  "The spring energy has become kinetic energy; zero acceleration means velocity is momentarily unchanged.",
+  "弹性势能已转化为动能；加速度为零意味着速度此刻不变。",
+  "彈性位能已轉化為動能；加速度為零意味著速度此刻不變。",
+);
+teachingStep.consequence = L(
+  "The mass continues past equilibrium; the restoring force then reverses.",
+  "物块继续越过平衡位置，随后回复力反向。",
+  "物塊繼續越過平衡位置，隨後回復力反向。",
+);
