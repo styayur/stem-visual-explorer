@@ -1,7 +1,3 @@
-<div align="center">
-
-<img src="docs/assets/brand/logo-mark.svg" width="84" alt="STEM Visual Explorer logo" />
-
 # STEM Visual Explorer
 
 **数学与物理资源的可视化检索与比较。**
@@ -15,13 +11,9 @@
 [![release](https://img.shields.io/github/v/release/styayur/stem-visual-explorer)](https://github.com/styayur/stem-visual-explorer/releases/latest)
 [![CI](https://github.com/styayur/stem-visual-explorer/actions/workflows/ci.yml/badge.svg)](https://github.com/styayur/stem-visual-explorer/actions/workflows/ci.yml)
 [![license: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)]()
-[![Rust](https://img.shields.io/badge/Rust-black?logo=rust&logoColor=white)]()
-[![Tauri](https://img.shields.io/badge/Tauri-24C8D8?logo=tauri&logoColor=white)]()
 
 ![STEM Visual Explorer 中文界面](docs/screenshot-zh.png)
 
-</div>
 
 ## 快速开始
 
