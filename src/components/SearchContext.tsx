@@ -5,7 +5,14 @@ import { parseAndExpand } from "../lib/searchEngine";
 import { conceptById, type Concept } from "../lib/concepts";
 import { IS_TAURI } from "../lib/commands";
 import { loadManifest } from "../lib/webIndex";
-export default function SearchContext() {
+import { getLearningProfile } from "../learning/registry";
+import { historicalAliases } from "../learning/historicalAliases";
+import { learningText } from "../learning/uiText";
+export default function SearchContext({
+  onConcept,
+}: {
+  onConcept: (id: string) => void;
+}) {
   const response = useSearchStore((s) => s.response),
     runSearch = useSearchStore((s) => s.runSearch);
   const explore = useSearchStore((s) => s.exploreRelated),
@@ -61,15 +68,22 @@ export default function SearchContext() {
       {resolved.length > 0 && (
         <div className="flex flex-wrap items-center gap-2">
           {resolved.map((c) => (
-            <span
+            <button
               key={c.id}
+              type="button"
+              onClick={() => onConcept(c.id)}
               data-concept-id={c.id}
               className="rounded-full bg-indigo-500/10 px-2 py-1 text-indigo-600 dark:text-indigo-300"
             >
               {locale === "en"
                 ? `${c.zh_cn} · ${c.en}`
                 : `${label(c)} · ${c.en}`}
-            </span>
+              {getLearningProfile(c.id) && (
+                <span className="ml-2 font-semibold">
+                  {learningText.learn[locale]}
+                </span>
+              )}
+            </button>
           ))}
           <label className="ml-auto flex items-center gap-1">
             <input
@@ -81,6 +95,20 @@ export default function SearchContext() {
           </label>
         </div>
       )}
+      {response &&
+        historicalAliases
+          .filter(
+            (a) =>
+              response.query.includes(a.text) &&
+              resolved.some((c) => c.id === a.conceptId),
+          )
+          .map((a) => (
+            <div key={a.text} className="text-zinc-600 dark:text-zinc-300">
+              {learningText.legacy[locale]}: {a.text} →{" "}
+              {label(conceptById.get(a.conceptId)!)} ·{" "}
+              {conceptById.get(a.conceptId)!.en}
+            </div>
+          ))}
       {related.length > 0 && (
         <div className="flex flex-wrap items-center gap-2 text-zinc-500">
           <span>{text("Related", "相关", "相關")}:</span>

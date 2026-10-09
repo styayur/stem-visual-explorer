@@ -1,6 +1,6 @@
 import SearchContext from "../components/SearchContext";
 import { LayoutGrid } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import FilterBar from "../components/FilterBar";
 import SourceSidebar from "../components/SourceSidebar";
@@ -11,14 +11,32 @@ import { useSettingsStore } from "../stores/settingsStore";
 import { useWorkspaceStore } from "../stores/workspaceStore";
 import { cn } from "../lib/cn";
 import { useT } from "../lib/i18n";
+import ConceptLearningPanel from "../learning/ConceptLearningPanel";
+import { useSearchStore } from "../stores/searchStore";
 
 export default function SearchPage() {
   const t = useT();
   const previewMode = useSettingsStore((s) => s.settings.preview_mode);
+  const response = useSearchStore((s) => s.response);
+  const [learningConcept, setLearningConcept] = useState<string | null>(null);
+  const trigger = useRef<HTMLElement | null>(null);
+  const openConcept = (id: string) => {
+    trigger.current = document.activeElement as HTMLElement;
+    setLearningConcept(id);
+  };
+  const closeConcept = () => {
+    setLearningConcept(null);
+    requestAnimationFrame(() => trigger.current?.focus());
+  };
+  useEffect(() => {
+    setLearningConcept(null);
+  }, [response?.query]);
 
   const workspaceSelected = useWorkspaceStore((s) => s.selected);
   const openWorkspace = useWorkspaceStore((s) => s.open);
-  const [wide, setWide] = useState(() => window.matchMedia("(min-width: 1024px)").matches);
+  const [wide, setWide] = useState(
+    () => window.matchMedia("(min-width: 1024px)").matches,
+  );
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1024px)");
     const update = () => setWide(media.matches);
@@ -45,7 +63,7 @@ export default function SearchPage() {
             "flex shrink-0 items-center gap-1.5 rounded-md border px-2.5 py-2 text-[12px] font-medium transition-colors",
             workspaceSelected.length === 0
               ? "cursor-not-allowed border-edge-light text-zinc-400 dark:border-edge-dark"
-              : "border-indigo-500/50 bg-indigo-500/10 text-indigo-600 hover:bg-indigo-500/20 dark:text-indigo-300"
+              : "border-indigo-500/50 bg-indigo-500/10 text-indigo-600 hover:bg-indigo-500/20 dark:text-indigo-300",
           )}
         >
           <LayoutGrid className="h-4 w-4" />
@@ -58,30 +76,47 @@ export default function SearchPage() {
         </button>
       </div>
 
-      <SearchContext />
+      <SearchContext onConcept={openConcept} />
 
-      <div className="flex min-h-0 flex-1">
-        <aside className="w-[130px] shrink-0 sm:w-[210px]">
-          <SourceSidebar />
-        </aside>
+      {learningConcept ? (
+        <div className="min-h-0 flex-1" data-learning-surface>
+          <ConceptLearningPanel
+            key={learningConcept}
+            conceptId={learningConcept}
+            onClose={closeConcept}
+            onConcept={setLearningConcept}
+          />
+        </div>
+      ) : (
+        <>
+          <div className="flex min-h-0 flex-1">
+            <aside className="w-[130px] shrink-0 sm:w-[210px]">
+              <SourceSidebar />
+            </aside>
 
-        <section className="flex min-w-0 flex-1 flex-col">
-          <FilterBar />
-          <div className="min-h-0 flex-1">
-            <SearchResults />
+            <section className="flex min-w-0 flex-1 flex-col">
+              <FilterBar />
+              <div className="min-h-0 flex-1">
+                <SearchResults />
+              </div>
+            </section>
+
+            {previewMode === "side" && wide && (
+              <aside className="hidden w-[38%] min-w-[320px] shrink-0 border-l border-edge-light bg-white dark:border-edge-dark dark:bg-surface-dark lg:block">
+                <PreviewPane />
+              </aside>
+            )}
           </div>
-        </section>
 
-        {previewMode === "side" && wide && (
-          <aside className="hidden w-[38%] min-w-[320px] shrink-0 border-l border-edge-light bg-white dark:border-edge-dark dark:bg-surface-dark lg:block">
-            <PreviewPane />
-          </aside>
-        )}
-      </div>
-
-      {previewMode === "inline" && <InlinePreview />}
-      {previewMode === "side" && !wide && <div className="h-[38%] min-h-0 border-t border-edge-light dark:border-edge-dark"><PreviewPane /></div>}
-      <QuickLook />
+          {previewMode === "inline" && <InlinePreview />}
+          {previewMode === "side" && !wide && (
+            <div className="h-[38%] min-h-0 border-t border-edge-light dark:border-edge-dark">
+              <PreviewPane />
+            </div>
+          )}
+          <QuickLook />
+        </>
+      )}
     </div>
   );
 }

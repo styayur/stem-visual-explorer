@@ -39,6 +39,15 @@ depends on the browser's asset cache; this is not an installable offline PWA.
 
 ## Capability-aware previews and concept search
 
+### Native guided visual learning (v0.4.0-alpha.1)
+
+Search a concept and choose **Learn visually** to follow its prerequisites,
+learning path and native interactive lesson. The MVP includes simple harmonic
+motion, ellipse geometry, and linear transformation / determinant, with complete
+English, simplified Chinese and traditional Chinese lessons. JSXGraph and KaTeX
+load only when a lesson is opened. Textbook paths are external metadata references.
+See [visual learning architecture and extension guide](docs/visual-learning.md).
+
 Providers declare `Embed`, `NativeCard` or `ExternalOnly` in the shared
 `src/lib/previewCapabilities.json`. Only Falstad currently opts into embedding;
 Math Insight, PhET, BetterExplained, Physics Fundamentals and PhysicStuff use
